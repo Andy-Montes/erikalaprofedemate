@@ -1,0 +1,8 @@
+{
+  "name": "Erika Meriño · La Profe de Mate",
+  "description": "Una plataforma premium para la excelencia académica en matemáticas, integrando tutorías personalizadas con un asistente inteligente de aprendizaje.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
