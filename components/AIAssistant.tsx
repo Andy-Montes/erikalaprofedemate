@@ -17,13 +17,6 @@ const AIAssistant: React.FC = () => {
     }
   }, [messages, isLoading]);
 
-  const handleOpenKeySelector = async () => {
-    if (window.aistudio && typeof window.aistudio.openSelectKey === 'function') {
-      await window.aistudio.openSelectKey();
-    } else {
-      alert("Para usar el chat, debes configurar una API Key de Google AI Studio.");
-    }
-  };
 
   const handleSend = async (textToSend?: string) => {
     const messageText = textToSend || input;
@@ -66,13 +59,6 @@ const AIAssistant: React.FC = () => {
               <h4 className="font-bold text-sm">Erika · La Profe</h4>
             </div>
             <div className="flex items-center gap-2">
-              <button 
-                onClick={handleOpenKeySelector}
-                title="Configurar Clave"
-                className="p-1.5 hover:bg-white/10 rounded-full transition-colors flex items-center justify-center"
-              >
-                <span className="material-symbols-outlined text-xl leading-none select-none">vpn_key</span>
-              </button>
               <button onClick={() => setIsOpen(false)} className="p-1.5 hover:bg-white/10 rounded-full transition-colors flex items-center justify-center">
                 <span className="material-symbols-outlined text-xl leading-none select-none">close</span>
               </button>
