@@ -1,36 +1,111 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Message } from '../types';
-import { getGeminiResponse } from '../services/geminiService';
+
+interface Message {
+  role: 'bot' | 'user';
+  text: string;
+  options?: string[];
+}
 
 const AIAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { role: 'model', text: '¡Hola! Soy Erika. He ayudado a cientos de alumnos a superar su miedo a las matemáticas. ¿Cómo puedo ayudarte hoy?' }
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([{
+    role: 'bot',
+    text: '¡Hola! Soy Erika Meriño, "La Profe de Mate". ¿En qué puedo ayudarte hoy?',
+    options: [
+      '¿Qué tutorías ofreces?',
+      '¿Cómo son las clases?',
+      '¿Cuál es el precio?',
+      'Quiero agendar una entrevista'
+    ]
+  }]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages, isLoading]);
+  }, [messages]);
 
+  const responses: { [key: string]: Message } = {
+    '¿Qué tutorías ofreces?': {
+      role: 'bot',
+      text: 'Ofrezco tres tipos de servicios:\n\n• Tutorías Individuales: Clases personalizadas según tus necesidades\n• Talleres Grupales: Aprendizaje colaborativo\n• Entrenamiento PAES (M1/M2): Preparación completa para la prueba\n\n¿Te gustaría saber más sobre alguna?',
+      options: ['Tutorías Individuales', 'Talleres Grupales', 'Entrenamiento PAES', 'Volver al menú']
+    },
+    'Tutorías Individuales': {
+      role: 'bot',
+      text: 'Las tutorías individuales son clases 100% personalizadas donde trabajamos a tu ritmo. Con 30 años de experiencia, he ayudado a cientos de alumnos a superar su miedo a las matemáticas.\n\n¿Quieres conocer los detalles y precios?',
+      options: ['¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
+    },
+    'Talleres Grupales': {
+      role: 'bot',
+      text: 'Los talleres grupales son perfectos para aprender junto a otros estudiantes en un ambiente colaborativo. Creamos grupos reducidos para mantener la calidad de la enseñanza.\n\n¿Te gustaría agendar una entrevista para conocer más?',
+      options: ['¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
+    },
+    'Entrenamiento PAES': {
+      role: 'bot',
+      text: 'El Entrenamiento PAES está diseñado específicamente para preparar las pruebas de Matemática 1 (M1) y Matemática 2 (M2). Metodología enfocada en resultados con ejercicios tipo prueba.\n\n¿Quieres conocer más detalles?',
+      options: ['¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
+    },
+    '¿Cómo son las clases?': {
+      role: 'bot',
+      text: 'Mis clases están diseñadas para eliminar el miedo y construir confianza. No se trata de pasar matemáticas, se trata de aprenderlas.\n\nUtilizo una metodología que se adapta a cada alumno, con ejercicios prácticos y explicaciones claras.',
+      options: ['¿Qué tutorías ofreces?', '¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
+    },
+    '¿Cuál es el precio?': {
+      role: 'bot',
+      text: 'Los valores varían según el tipo de tutoría y tus necesidades específicas. Por eso, ofrezco una entrevista de diagnóstico GRATUITA donde:\n\n• Evaluamos tu nivel actual\n• Definimos objetivos\n• Diseñamos un plan personalizado\n• Te entrego el valor exacto\n\n¿Agendamos la entrevista?',
+      options: ['Quiero agendar una entrevista', 'Contactar por WhatsApp', 'Volver al menú']
+    },
+    'Quiero agendar una entrevista': {
+      role: 'bot',
+      text: '¡Excelente decisión! Puedes agendar tu entrevista gratuita de las siguientes formas:',
+      options: ['Formulario de contacto', 'WhatsApp', 'Instagram', 'Volver al menú']
+    },
+    'Contactar por WhatsApp': {
+      role: 'bot',
+      text: '¡Perfecto! Voy a redirigirte a WhatsApp para que podamos conversar directamente.',
+      options: ['Volver al menú']
+    },
+    'Volver al menú': {
+      role: 'bot',
+      text: '¿En qué más puedo ayudarte?',
+      options: [
+        '¿Qué tutorías ofreces?',
+        '¿Cómo son las clases?',
+        '¿Cuál es el precio?',
+        'Quiero agendar una entrevista'
+      ]
+    }
+  };
 
-  const handleSend = async (textToSend?: string) => {
-    const messageText = textToSend || input;
-    if (!messageText.trim() || isLoading) return;
+  const handleOptionClick = (option: string) => {
+    // Agregar mensaje del usuario
+    setMessages(prev => [...prev, { role: 'user', text: option }]);
 
-    const userMsg: Message = { role: 'user', text: messageText };
-    setMessages(prev => [...prev, userMsg]);
-    setInput('');
-    setIsLoading(true);
+    // Manejar acciones especiales
+    if (option === 'Formulario de contacto') {
+      window.location.href = '#contacto';
+      return;
+    }
+    if (option === 'WhatsApp' || option === 'Contactar por WhatsApp') {
+      window.open('https://wa.me/56912345678?text=Hola%20Erika,%20quisiera%20agendar%20una%20entrevista', '_blank');
+      setMessages(prev => [...prev, responses['Contactar por WhatsApp']]);
+      return;
+    }
+    if (option === 'Instagram') {
+      window.open('https://www.instagram.com/erikalaprofedemate', '_blank');
+      setTimeout(() => {
+        setMessages(prev => [...prev, responses['Volver al menú']]);
+      }, 500);
+      return;
+    }
 
-    const response = await getGeminiResponse([...messages, userMsg], messageText);
-    
-    setMessages(prev => [...prev, { role: 'model', text: response }]);
-    setIsLoading(false);
+    // Agregar respuesta del bot
+    setTimeout(() => {
+      const response = responses[option] || responses['Volver al menú'];
+      setMessages(prev => [...prev, response]);
+    }, 600);
   };
 
   return (
@@ -48,59 +123,56 @@ const AIAssistant: React.FC = () => {
           </span>
         </button>
       )}
-
       {isOpen && (
         <div className="bg-white w-[350px] md:w-[400px] h-[550px] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-slate-100 animate-in slide-in-from-bottom-10 duration-300">
           <div className="bg-brandNavy p-4 flex items-center justify-between text-white">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden border border-white/20">
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
                 <img src="https://i.imgur.com/7RFOaAt.png" alt="Erika" className="w-full h-full object-cover object-top" />
               </div>
-              <h4 className="font-bold text-sm">Erika · La Profe</h4>
+              <div>
+                <h4 className="font-bold text-sm">Erika Meriño</h4>
+                <p className="text-xs text-white/80">La Profe de Mate</p>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button onClick={() => setIsOpen(false)} className="p-1.5 hover:bg-white/10 rounded-full transition-colors flex items-center justify-center">
-                <span className="material-symbols-outlined text-xl leading-none select-none">close</span>
-              </button>
-            </div>
+            <button onClick={() => setIsOpen(false)} className="p-1.5 hover:bg-white/10 rounded-full transition-colors">
+              <span className="material-symbols-outlined text-xl leading-none select-none">close</span>
+            </button>
           </div>
-
-          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 scrollbar-hide">
+          
+          <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
             {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-3 rounded-xl text-[13px] leading-relaxed shadow-sm
-                  ${msg.role === 'user' ? 'bg-brandNavy text-white rounded-tr-none' : 'bg-white text-slate-700 rounded-tl-none border border-slate-100'}
-                `}>
-                  {msg.text}
-                </div>
+              <div key={idx}>
+                {msg.role === 'user' ? (
+                  <div className="flex justify-end">
+                    <div className="bg-brandNavy text-white px-4 py-2 rounded-xl rounded-tr-none max-w-[85%] text-sm shadow-sm">
+                      {msg.text}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex justify-start">
+                      <div className="bg-white text-slate-700 px-4 py-3 rounded-xl rounded-tl-none max-w-[85%] text-sm shadow-sm border border-slate-100 whitespace-pre-line">
+                        {msg.text}
+                      </div>
+                    </div>
+                    {msg.options && (
+                      <div className="flex flex-wrap gap-2 pl-2">
+                        {msg.options.map((option, optIdx) => (
+                          <button
+                            key={optIdx}
+                            onClick={() => handleOptionClick(option)}
+                            className="bg-white hover:bg-brandRed hover:text-white text-brandNavy px-3 py-2 rounded-lg text-xs font-medium transition-all shadow-sm border border-slate-200 hover:border-brandRed hover:shadow-md"
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
-
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="bg-white px-3 py-2 rounded-xl shadow-sm border border-slate-100 flex gap-1">
-                  <span className="w-1.5 h-1.5 bg-brandRed rounded-full animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 bg-brandRed rounded-full animate-bounce delay-75"></span>
-                  <span className="w-1.5 h-1.5 bg-brandRed rounded-full animate-bounce delay-150"></span>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="p-4 bg-white border-t border-slate-100">
-            <div className="flex items-center gap-2 bg-slate-50 rounded-lg px-3 py-1 border border-slate-200 focus-within:border-brandRed transition-all">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Escribe tu duda..."
-                className="flex-1 bg-transparent border-0 focus:ring-0 text-sm py-2"
-              />
-              <button onClick={() => handleSend()} disabled={isLoading} className="text-brandRed p-1 flex items-center justify-center">
-                <span className="material-symbols-outlined leading-none select-none">send</span>
-              </button>
-            </div>
           </div>
         </div>
       )}
