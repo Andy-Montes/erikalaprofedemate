@@ -40,10 +40,8 @@ const MathBackground: React.FC = () => {
       id: i,
       symbol: symbols[i % symbols.length],
       angleOffset: (i / 10) * Math.PI * 2, // Distribución inicial uniforme en círculo
-      radius: 30 + (i * 8), // Radios crecientes pero compactos (30px a 110px)
-      size: 24 + (i % 3) * 6, // Tamaños variados pero controlados
-      speed: 0.008 + (i * 0.001), // Velocidades ligeramente distintas para dinamismo
-      color: i % 3 === 0 ? 'text-brandRed' : 'text-brandNavy',
+        radius: 80 + (i * 25) + Math.random() * 40, // Radios más dispersos y aleatorios (80px a 390px)      size: 24 + (i % 3) * 6, // Tamaños variados pero controlados
+        speed: 0.008 + (i * 0.001), // Velocidades ligeramente distintas para dinamismo      color: i % 3 === 0 ? 'text-brandRed' : 'text-brandNavy',
       // Más transparentes como se solicitó (0.15 a 0.3)
       opacity: 0.15 + (Math.random() * 0.15),
     }));
