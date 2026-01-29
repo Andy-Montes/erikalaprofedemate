@@ -1,5 +1,4 @@
-import { GoogleGenerativeAI } from '@google/genai';
-import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
+import { GoogleGenerativeAI } from '@google/generative-ai';import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
 
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   // Solo permitir POST requests
