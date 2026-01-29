@@ -96,7 +96,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenModal }) => {
         </div>
         
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-white/30 text-[10px] uppercase tracking-widest">© 2024 Erika Meriño · Todos los derechos reservados.</p>
+          <p className="text-white/30 text-[10px] uppercase tracking-widest">© 2026 Erika Meriño · Todos los derechos reservados.</p>
           <div className="flex items-center gap-3">
             <span className="text-[9px] uppercase tracking-widest text-white/30 italic">Educación Matemática de alto nivel</span>
             <div className="w-1.5 h-1.5 bg-brandRed rounded-full"></div>
