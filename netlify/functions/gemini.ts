@@ -35,8 +35,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     });
 
     // Construir el historial de chat
-    const chatHistory = history.slice(0, -1).map((msg: any) => ({
-      role: msg.role === 'user' ? 'user' : 'model',
+    const chatHistory = history.map((msg: any) => ({      role: msg.role === 'user' ? 'user' : 'model',
       parts: [{ text: msg.text }]
     }));
 
