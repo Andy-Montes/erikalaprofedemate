@@ -3,11 +3,8 @@ import React from 'react';
 
 const Methodology: React.FC = () => {
   return (
-    <section className="py-12 lg:py-16 bg-white relative z-10 scroll-mt-24" id="metodo">
-      <div className="max-w-7xl mx-auto px-8">
-        <div className="flex flex-col lg:flex-row items-end justify-between mb-12 gap-6 border-b border-slate-100 pb-8">
-          <div className="max-w-2xl">
-            <span className="text-brandRed font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Mi metodología</span>
+    <section className="py-6 lg:py-8 bg-white relative z-10 scroll-mt-24" id="metodo">      <div className="max-w-7xl mx-auto px-8">
+        <div className="flex flex-col lg:flex-row items-end justify-between mb-6 gap-6 border-b border-slate-100 pb-8">        <div className="max-w-7xl mx-auto px-8">            <span className="text-brandRed font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Mi metodología</span>
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">Mi Método de Confianza Académica</h2>
             <p className="text-base lg:text-lg text-slate-500 leading-relaxed font-light">
               Más que entregar fórmulas, brindo a tu hijo/a herramientas de gestión emocional y razonamiento crítico para transformar su relación con el aprendizaje.
@@ -16,8 +13,7 @@ const Methodology: React.FC = () => {
           <div className="h-[2px] w-full lg:w-24 bg-brandRed mb-2"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-          {/* Paso 01 */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-8">          {/* Paso 01 */}
           <div className="group">
             <div className="mb-6 overflow-hidden rounded-sm aspect-[16/10] shadow-xl border border-slate-100">
               <img 
