@@ -10,7 +10,7 @@ const AIAssistant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([{
     role: 'bot',
-    text: '¡Hola! Soy Erika Meriño, "La Profe de Mate". ¿En qué puedo ayudarte hoy?',
+    text: '¡Hola! Soy Erika Meriño, "La Profe de Mate". ¿En qué puedo ayudarte con las matemáticas de tu hijo/a?',
     options: [
       '¿Qué tutorías ofreces?',
       '¿Cómo son las clases?',
@@ -29,32 +29,32 @@ const AIAssistant: React.FC = () => {
   const responses: { [key: string]: Message } = {
     '¿Qué tutorías ofreces?': {
       role: 'bot',
-      text: 'Ofrezco tres tipos de servicios:\n\n• Tutorías Individuales: Clases personalizadas según tus necesidades\n• Talleres Grupales: Aprendizaje colaborativo\n• Entrenamiento PAES (M1/M2): Preparación completa para la prueba\n\n¿Te gustaría saber más sobre alguna?',
+      text: 'Te cuento que ofrezco tres modalidades online:\n\n• Tutorías Individuales: Clases personalizadas para tu hijo/a, adaptadas a su ritmo\n• Talleres Grupales: Aprendizaje colaborativo\n• Entrenamiento PAES (M1/M2): Preparación completa para la prueba\n\n¿Te gustaría saber más sobre alguna?',
       options: ['Tutorías Individuales', 'Talleres Grupales', 'Entrenamiento PAES', 'Volver al menú']
     },
     'Tutorías Individuales': {
       role: 'bot',
-      text: 'Las tutorías individuales son clases 100% personalizadas donde trabajamos a tu ritmo. Con 30 años de experiencia, he ayudado a cientos de alumnos a superar su miedo a las matemáticas.\n\n¿Quieres conocer los detalles y precios?',
+      text: 'Las tutorías individuales son clases 100% personalizadas donde trabajo al ritmo de tu hijo/a. Con 30 años de experiencia, he ayudado a cientos de alumnos a superar su miedo a las matemáticas.\n\n¿Quieres conocer los detalles y precios?',
       options: ['¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
     },
     'Talleres Grupales': {
       role: 'bot',
-      text: 'Los talleres grupales son perfectos para aprender junto a otros estudiantes en un ambiente colaborativo. Creamos grupos reducidos para mantener la calidad de la enseñanza.\n\n¿Te gustaría agendar una entrevista para conocer más?',
+      text: 'Los talleres grupales online son perfectos para aprender junto a otros estudiantes en un ambiente colaborativo. Creamos grupos reducidos para mantener la calidad de la enseñanza.\n\n¿Te gustaría agendar una entrevista para conocer más?',
       options: ['¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
     },
     'Entrenamiento PAES': {
       role: 'bot',
-      text: 'El Entrenamiento PAES está diseñado específicamente para preparar las pruebas de Matemática 1 (M1) y Matemática 2 (M2). Metodología enfocada en resultados con ejercicios tipo prueba.\n\n¿Quieres conocer más detalles?',
+      text: 'Mi entrenamiento PAES online está diseñado específicamente para preparar las pruebas de Matemática 1 (M1) y Matemática 2 (M2). Metodología enfocada en resultados con ejercicios tipo prueba.\n\n¿Quieres conocer más detalles?',
       options: ['¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
     },
     '¿Cómo son las clases?': {
       role: 'bot',
-      text: 'Mis clases están diseñadas para eliminar el miedo y construir confianza. No se trata de pasar matemáticas, se trata de aprenderlas.\n\nUtilizo una metodología que se adapta a cada alumno, con ejercicios prácticos y explicaciones claras.',
+      text: 'Mis clases online están diseñadas para eliminar el miedo y construir confianza. No se trata de pasar matemáticas, se trata de aprenderlas.\n\nUtilizo una metodología que se adapta a cada alumno, con ejercicios prácticos y explicaciones claras.',
       options: ['¿Qué tutorías ofreces?', '¿Cuál es el precio?', 'Quiero agendar una entrevista', 'Volver al menú']
     },
     '¿Cuál es el precio?': {
       role: 'bot',
-      text: 'Los valores varían según el tipo de tutoría y tus necesidades específicas. Por eso, ofrezco una entrevista de diagnóstico GRATUITA donde:\n\n• Evaluamos tu nivel actual\n• Definimos objetivos\n• Diseñamos un plan personalizado\n• Te entrego el valor exacto\n\n¿Agendamos la entrevista?',
+      text: 'Los valores varían según el tipo de tutoría y las necesidades de tu hijo/a. Por eso, ofrezco una entrevista de diagnóstico GRATUITA donde:\n\n• Evaluamos tu nivel actual\n• Definimos objetivos\n• Diseñamos un plan personalizado\n• Te entrego el valor exacto\n\n¿Agendamos la entrevista?',
       options: ['Quiero agendar una entrevista', 'Contactar por WhatsApp', 'Volver al menú']
     },
     'Quiero agendar una entrevista': {
