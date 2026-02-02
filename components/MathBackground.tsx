@@ -1,4 +1,3 @@
-
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 
 const MathBackground: React.FC = () => {
@@ -6,10 +5,10 @@ const MathBackground: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const requestRef = useRef<number>();
   const currentPos = useRef({ x: -500, y: -500 });
-
+  
   // Símbolos específicos solicitados
   const symbols = ['5', '7', '8', '3', 'π', '√'];
-  
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
@@ -32,25 +31,25 @@ const MathBackground: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [isVisible]);
+  }, []); // Dependencia vacía para evitar reinicios constantes
 
   // Partículas más armónicas y transparentes
   const particles = useMemo(() => {
-    return Array.from({ length: 10 }).map((_, i) => ({
+    return Array.from({ length: 12 }).map((_, i) => ({
       id: i,
       symbol: symbols[i % symbols.length],
-      angleOffset: (i / 10) * Math.PI * 2, // Distribución inicial uniforme en círculo
-        radius: 80 + (i * 25) + Math.random() * 40, // Radios más dispersos y aleatorios (80px a 390px)      size: 24 + (i % 3) * 6, // Tamaños variados pero controlados
-        speed: 0.008 + (i * 0.001), // Velocidades ligeramente distintas para dinamismo      color: i % 3 === 0 ? 'text-brandRed' : 'text-brandNavy',
-      // Más transparentes como se solicitó (0.15 a 0.3)
-      opacity: 0.15 + (Math.random() * 0.15),
+      angleOffset: (i / 12) * Math.PI * 2,
+      radius: 60 + (i * 20), 
+      size: 18 + (i % 3) * 6,
+      speed: 0.005 + (i * 0.001),
+      color: i % 3 === 0 ? 'text-brandRed' : 'text-brandNavy',
+      opacity: 0.2 + (Math.random() * 0.2),
     }));
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 bg-transparent">
       {isVisible && particles.map((p) => {
-        // Movimiento orbital suave pero manteniendo el símbolo "al derecho"
         const time = Date.now() * 0.001;
         const currentAngle = p.angleOffset + (time * p.speed);
         
@@ -60,15 +59,14 @@ const MathBackground: React.FC = () => {
         return (
           <div
             key={p.id}
-            className={`absolute font-mono font-bold ${p.color} select-none will-change-transform transition-opacity duration-1000`}
+            className={`absolute font-mono font-bold ${p.color} select-none will-change-transform`}
             style={{
               left: 0,
               top: 0,
               fontSize: `${p.size}px`,
               opacity: p.opacity,
-              // Eliminamos la rotación excesiva para que se lean "al derecho"
-              // Solo una mínima oscilación de 5 grados para dar vida sin perder legibilidad
-              transform: `translate3d(${x}px, ${y}px, 0) rotate(${Math.sin(time + p.id) * 5}deg)`,
+              transform: `translate3d(${x}px, ${y}px, 0) rotate(${Math.sin(time + p.id) * 10}deg)`,
+              pointerEvents: 'none',
             }}
           >
             {p.symbol}
