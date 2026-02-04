@@ -16,6 +16,11 @@ const App: React.FC = () => {
   });
 
   const openModal = (url: string) => {
+    if (url.includes("wa.me")) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      setModalState({ isOpen: false, url: '' });
+      return;
+    }
     setModalState({ isOpen: true, url });
   };
 
