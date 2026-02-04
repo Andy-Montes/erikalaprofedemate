@@ -7,10 +7,8 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onOpenModal }) => {
   const instagramUrl = "https://instagram.com/erikalaprofedemate";
-  const whatsappUrl = "https://wa.me/5697439227";
-  const emailAddress = "erikalaprofedemate@gmail.com";
-  const interviewUrl = "https://formulariogiftcard.fillout.com/reunin-con-erika-la-profe-de-mate";
-  const infoUrl = "https://formulariogiftcard.fillout.com/erikalaporofedemate";
+  const whatsappUrl = "https://wa.me/56997439227";  const emailAddress = "erikalaprofedemate@gmail.com";
+  const interviewUrl = whatsappUrl;  const infoUrl = "https://formulariogiftcard.fillout.com/erikalaporofedemate";
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
