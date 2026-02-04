@@ -6,8 +6,7 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ onOpenModal }) => {
-  const interviewUrl = "https://formulariogiftcard.fillout.com/reunin-con-erika-la-profe-de-mate";
-  
+  const interviewUrl = "https://wa.me/56997439227";  
   const availabilityMessages = [
     "Quedan 2 cupos este mes",
     "Queda solo un cupo este mes",
