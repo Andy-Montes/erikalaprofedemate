@@ -89,7 +89,7 @@ const AIAssistant: React.FC = () => {
       return;
     }
     if (option === 'WhatsApp' || option === 'Contactar por WhatsApp') {
-      window.open('https://wa.me/56912345678?text=Hola%20Erika,%20quisiera%20agendar%20una%20entrevista', '_blank');
+      window.open('https://wa.me/56997439227?text=Hola%20Erika,%20quisiera%20agendar%20una%20entrevista', '_blank');
       setMessages(prev => [...prev, responses['Contactar por WhatsApp']]);
       return;
     }
