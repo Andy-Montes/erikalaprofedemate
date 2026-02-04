@@ -6,8 +6,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
-  const interviewUrl = "https://formulariogiftcard.fillout.com/reunin-con-erika-la-profe-de-mate";
-  
+  const interviewUrl = "https://wa.me/56997439227";  
   const phrases = [
     "No se trata de pasar matemáticas. Se trata de aprenderlas.",
     "Matemáticas bien enseñadas cambian todo.",
