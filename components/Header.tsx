@@ -6,8 +6,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onOpenModal }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const interviewUrl = "https://formulariogiftcard.fillout.com/reunin-con-erika-la-profe-de-mate";
-
+  const interviewUrl = "https://wa.me/56997439227";
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id);
