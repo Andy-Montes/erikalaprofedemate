@@ -5,8 +5,7 @@ interface ProgramsProps {
 }
 
 const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
-  const interviewUrl = "https://formulariogiftcard.fillout.com/reunin-con-erika-la-profe-de-mate";
-  const infoUrl = "https://formulariogiftcard.fillout.com/erikalaporofedemate";
+  const interviewUrl = "https://wa.me/56997439227";  const infoUrl = "https://formulariogiftcard.fillout.com/erikalaporofedemate";
 
   return (
     <section className="py-12 lg:py-16 bg-white scroll-mt-24" id="programas">
