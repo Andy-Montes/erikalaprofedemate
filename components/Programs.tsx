@@ -47,7 +47,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           </div>
 
           {/* Entrenamiento PAES */}
-          <div className="bg-[#D32F2F] p-10 flex flex-col h-full shadow-xl rounded-sm transition-transform hover:-translate-y-1 duration-300">
+          <div className="bg-[#0086f2] p-10 flex flex-col h-full shadow-xl rounded-sm transition-transform hover:-translate-y-1 duration-300">
             <div className="mb-6 text-white flex items-center justify-start">
               <span className="material-symbols-outlined text-5xl leading-none select-none">school</span>
             </div>
