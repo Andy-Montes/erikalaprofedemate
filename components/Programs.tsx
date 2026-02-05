@@ -56,7 +56,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               Estrategia pura dictada por mí. Aplico técnicas avanzadas de resolución para optimizar el tiempo y la precisión de tu hijo/a en las pruebas M1 y M2, enfocándonos en alcanzar puntajes de excelencia nacional.
             </p>
             <div className="mt-auto space-y-3">
-              <button onClick={() => onOpenModal(interviewUrl)} className="block w-full text-center bg-[#1F3A5F] text-white font-bold text-[10px] uppercase tracking-widest py-4 rounded-sm hover:bg-slate-800 transition-all">Solicitar Entrevista</button>
+              <button onClick={() => onOpenModal(interviewUrl)} className="block w-full text-center bg-brandRed text-white font-bold text-[10px] uppercase tracking-widest py-4 rounded-sm hover:bg-slate-800 transition-all">Solicitar Entrevista</button>
               <button onClick={() => onOpenModal(infoUrl)} className="block w-full text-center border border-white/40 text-white font-bold text-[10px] uppercase tracking-widest py-4 rounded-sm hover:bg-white hover:text-brandRed transition-all">Más información</button>
             </div>
           </div>
