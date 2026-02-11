@@ -8,10 +8,10 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
   const interviewUrl = "https://wa.me/56997439227";  
   const phrases = [
-    "No se trata de pasar matemáticas. Se trata de aprenderlas.",
-    "Matemáticas bien enseñadas cambian todo.",
-    "Una base sólida hoy evita problemas mañana.",
-    "Cuando el proceso es claro, los resultados llegan."
+    "No se trata solo de aprobar Matemáticas. Se trata de aprender de verdad.",
+    "Matemáticas bien enseñada generan resultados reales.",
+    "Cerrar vacíos en Matemáticas hoy evita frustraciones mañana.",
+    "Cuando un estudiante entiende Matemáticas, la confianza vuelve."
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
