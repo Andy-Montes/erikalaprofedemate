@@ -5,14 +5,13 @@ const Methodology: React.FC = () => {
   return (
     <section className="py-6 lg:py-8 bg-white relative z-10 scroll-mt-24" id="metodo">      <div className="max-w-7xl mx-auto px-8">
         <div className="flex flex-col lg:flex-row items-end justify-between mb-6 gap-6 border-b border-slate-100 pb-8">        <div className="max-w-7xl mx-auto px-8">            <span className="text-brandRed font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Mi metodología</span>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Mi Método de Confianza Académica</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">Método de Confianza Matématica</h2>
             <p className="text-base lg:text-lg text-slate-500 leading-relaxed font-light">
-              Más que entregar fórmulas, brindo a tu hijo/a herramientas de gestión emocional y razonamiento crítico para transformar su relación con el aprendizaje.
+              Más que repetir ejercicios, ayudo a tu hijo/a a comprender las matemáticas desde la base, cerrar vacíos y recuperar la confianza para avanzar con seguridad.
             </p>
           </div>
           <div className="h-[2px] w-full lg:w-24 bg-brandRed mb-2"></div>
         </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-8">          {/* Paso 01 */}
           <div className="group">
             <div className="mb-6 overflow-hidden rounded-sm aspect-[16/10] shadow-xl border border-slate-100">
@@ -25,7 +24,7 @@ const Methodology: React.FC = () => {
             <div className="flex items-center gap-3 mb-3">
               <span className="text-brandRed font-bold text-xs uppercase tracking-widest">01</span>
               <div className="h-[1px] w-8 bg-brandRed/30"></div>
-              <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Mi Primer Paso</span>
+              <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Primer Paso</span>
             </div>
             <h3 className="text-xl font-bold mb-4">Diagnóstico Inicial</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
@@ -47,7 +46,7 @@ const Methodology: React.FC = () => {
             <div className="flex items-center gap-3 mb-3">
               <span className="text-brandRed font-bold text-xs uppercase tracking-widest">02</span>
               <div className="h-[1px] w-8 bg-brandRed/30"></div>
-              <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Mi Estrategia</span>
+              <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Estrategia</span>
             </div>
             <h3 className="text-xl font-bold mb-4">Plan a Medida</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
