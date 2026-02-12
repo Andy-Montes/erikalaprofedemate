@@ -16,7 +16,7 @@ const Methodology: React.FC = () => {
           <div className="group">
             <div className="mb-6 overflow-hidden rounded-sm aspect-[16/10] shadow-xl border border-slate-100">
               <img 
-                alt="Diagnóstico Inicial" 
+                alt="Diagnóstico Integral" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 src="https://i.imgur.com/iWAXFyM.png"
               />
@@ -26,10 +26,9 @@ const Methodology: React.FC = () => {
               <div className="h-[1px] w-8 bg-brandRed/30"></div>
               <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Primer Paso</span>
             </div>
-            <h3 className="text-xl font-bold mb-4">Diagnóstico Inicial</h3>
+            <h3 className="text-xl font-bold mb-4">Diagnóstico Integral</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-brandNavy">Entiendo qué le pasa a tu hijo antes de enseñarle.</p>
-              <p>Antes de comenzar, necesito <strong>entender a tu hijo de verdad</strong>. Reviso su nivel académico, pero también cómo se enfrenta a las matemáticas, <strong>qué lo bloquea y qué lo frustra</strong>.</p>
+            <p className="font-bold text-[#0086f2]">Antes de enseñar, identifico qué ocurre entre tu hijo y las matemáticas...</p>              <p>Antes de comenzar, necesito <strong>entender a tu hijo de verdad</strong>. Reviso su nivel académico, pero también cómo se enfrenta a las matemáticas, <strong>qué lo bloquea y qué lo frustra</strong>.</p>
               <p>Este primer diagnóstico permite <strong>avanzar con seguridad</strong>, sin presión innecesaria ni vacíos que después se transforman en problemas.</p>
             </div>
           </div>
@@ -50,7 +49,7 @@ const Methodology: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold mb-4">Plan a Medida</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-brandNavy">Un plan claro, pensado para tu hijo (no uno estándar).</p>
+              <p className="font-bold text-[#0086f2]">Un plan claro, pensado para tu hijo (no uno estándar).</p>
               <p>Cada estudiante aprende distinto, y yo trabajo en función de eso. Diseño un <strong>plan personalizado</strong> que <strong>refuerza las bases</strong>, <strong>respeta su ritmo</strong> y evita avanzar sin comprensión real.</p>
               <p>El objetivo no es cubrir materia rápido, sino lograr <strong>avances que se mantengan en el tiempo</strong>.</p>
             </div>
@@ -72,8 +71,7 @@ const Methodology: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold mb-4">Acompañamiento</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-brandNavy">No estás sola/o en este proceso.</p>
-              <p>No me limito a hacer clases. Hago <strong>seguimiento del progreso</strong> de tu hijo y mantengo <strong>comunicación contigo</strong> para que sepas cómo está avanzando y qué necesita reforzar.</p>
+            <p className="font-bold text-[#0086f2]">No estás sola/o en este proceso.</p>              <p>No me limito a hacer clases. Hago <strong>seguimiento del progreso</strong> de tu hijo y mantengo <strong>comunicación contigo</strong> para que sepas cómo está avanzando y qué necesita reforzar.</p>
               <p>Mi compromiso es <strong>acompañarlos durante todo el proceso</strong>, con <strong>claridad, cercanía y responsabilidad</strong>.</p>
             </div>
           </div>
