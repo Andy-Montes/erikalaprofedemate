@@ -82,7 +82,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
               </div>
 
               <p className="text-lg md:text-2xl text-slate-400 mt-8 mb-12 leading-relaxed font-light max-w-2xl">
-                Clases diseñadas para <span className="text-brandNavy font-medium">eliminar el miedo</span> y construir una mentalidad de éxito que dura toda la vida.
+               Clases diseñadas para <span className="text-brandNavy font-medium">eliminar el miedo</span> y construir una mentalidad de éxito que dura toda la vida.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-5">
