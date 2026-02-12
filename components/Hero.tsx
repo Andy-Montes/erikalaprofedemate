@@ -82,7 +82,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenModal }) => {
               </div>
 
               <p className="text-lg md:text-2xl text-slate-400 mt-8 mb-12 leading-relaxed font-light max-w-2xl">
-                <span className="text-brandNavy font-medium">Clases de Matemáticas y preparación PAES</span> <span className="text-brandNavy font-light">enfocadas en cerrar vacíos, eliminar miedo y recuperar la confianza.</span>              </p>
+                <span className="text-cyan-500 font-medium">Clases de Matemáticas y preparación PAES</span> <span className="text-brandNavy font-light">enfocadas en cerrar vacíos, eliminar miedo y recuperar la confianza.</span>              </p>
               
               <div className="flex flex-col sm:flex-row gap-5">
                 <button 
