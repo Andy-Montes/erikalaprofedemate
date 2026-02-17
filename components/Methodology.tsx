@@ -37,7 +37,7 @@ const Methodology: React.FC = () => {
           <div className="group">
             <div className="mb-6 overflow-hidden rounded-sm aspect-[16/10] shadow-xl border border-slate-100">
               <img 
-                alt="Plan a Medida" 
+                alt="Plan Personalizado" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 src="https://i.imgur.com/Guh0kgJ.png"
               />
@@ -47,10 +47,11 @@ const Methodology: React.FC = () => {
               <div className="h-[1px] w-8 bg-brandRed/30"></div>
               <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Estrategia</span>
             </div>
-            <h3 className="text-xl font-bold mb-4">Plan a Medida</h3>
+            <h3 className="text-xl font-bold mb-4">Plan Personalizado</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-[#0086f2]">Un plan claro, pensado para tu hijo (no uno estándar).</p>
-              <p>Cada estudiante aprende distinto, y yo trabajo en función de eso. Diseño un <strong>plan personalizado</strong> que <strong>refuerza las bases</strong>, <strong>respeta su ritmo</strong> y evita avanzar sin comprensión real.</p>
+              <p className="font-bold text-[#0086f2]"Un plan claro y personalizado, diseñado según las necesidades reales de tu hijo..</p>
+              <p>"Cada estudiante aprende de manera distinta. Por eso elaboro un plan que prioriza la comprensión, cierra los vacíos detectados en el diagnóstico y respeta su ritmo de aprendizaje..
+El objetivo no es avanzar rápido ni pasar contenidos, sino lograr progresos sólidos que se mantengan en el tiempo.".</p>
               <p>El objetivo no es cubrir materia rápido, sino lograr <strong>avances que se mantengan en el tiempo</strong>.</p>
             </div>
           </div>
@@ -67,7 +68,7 @@ const Methodology: React.FC = () => {
             <div className="flex items-center gap-3 mb-3">
               <span className="text-brandRed font-bold text-xs uppercase tracking-widest">03</span>
               <div className="h-[1px] w-8 bg-brandRed/30"></div>
-              <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Mi Compromiso</span>
+              <span className="text-brandNavy font-bold text-[10px] uppercase tracking-[0.2em]">Compromiso</span>
             </div>
             <h3 className="text-xl font-bold mb-4">Acompañamiento</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
