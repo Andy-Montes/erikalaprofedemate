@@ -6,7 +6,12 @@ interface ProgramsProps {
 
 const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
   const infoUrl = "https://formulariogiftcard.fillout.com/erikalaporofedemate";
-  const whatsappUrl = "https://wa.me/56997439227";
+
+  const whatsappBase = "https://wa.me/56997439227";
+  const waWithProgram = (programName: string) => {
+    const msg = `Hola Erika, quiero saber más sobre el programa: ${programName}.`;
+    return `${whatsappBase}?text=${encodeURIComponent(msg)}`;
+  };
 
   return (
     <section className="py-16 lg:py-24 bg-white scroll-mt-24" id="programas">
@@ -34,14 +39,11 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                 </span>
               </div>
 
-              {/* Wrapper para glow (sin iconos en el fondo de color) */}
+              {/* WRAPPER: el glow vive en el fondo ROJO, detrás de la card blanca */}
               <div className="relative">
-                {/* Glow premium detrás */}
-                <div className="absolute -inset-3 rounded-[2.25rem] bg-white/25 blur-2xl opacity-70 pointer-events-none" />
-
-                {/* CARD BLANCA */}
+                {/* Card blanca */}
                 <div
-                  className="group relative flex flex-col bg-white rounded-[2rem] border border-white/70
+                  className="group relative z-10 flex flex-col bg-white rounded-[2rem] border border-white/70
                              lg:h-[420px]
                              shadow-[0_28px_70px_-45px_rgba(0,0,0,0.40)]
                              transition-all duration-500 ease-out transform-gpu will-change-transform
@@ -49,10 +51,19 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                              hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.60)]
                              active:scale-[0.995] overflow-hidden"
                 >
+                  {/* GLOW PREMIUM EN FONDO (aparece al hover) */}
+                  <div
+                    className="absolute -inset-10 -z-10 rounded-[2.6rem]
+                               bg-white/30 blur-3xl opacity-0
+                               transition-all duration-700 ease-out
+                               group-hover:opacity-90 group-hover:scale-[1.03]
+                               mix-blend-screen pointer-events-none"
+                  />
+
                   {/* ring sutil */}
                   <div className="absolute inset-0 rounded-[2rem] ring-1 ring-black/5 pointer-events-none" />
 
-                  {/* shine diagonal (el brillo que corre) */}
+                  {/* shine diagonal (brillo que corre dentro de la card) */}
                   <div
                     className="absolute -inset-y-10 -left-52 w-52 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
                                group-hover:opacity-100 group-hover:translate-x-[640px]
@@ -75,11 +86,10 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                       </p>
                     </div>
 
-                    {/* Footer fijo (MISMA altura en las 3 cards) */}
+                    {/* Footer fijo */}
                     <div className="mt-auto pt-6">
-                      {/* CTA rojo (más pequeño + alineado) */}
                       <a
-                        href={whatsappUrl}
+                        href={waWithProgram("Comprensión más NEM")}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 text-brandRed font-semibold
@@ -91,7 +101,6 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                         <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                       </a>
 
-                      {/* Botón azul */}
                       <div className="pt-4">
                         <button
                           onClick={() => onOpenModal(infoUrl)}
@@ -124,21 +133,13 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                 </span>
               </div>
 
-              {/* Marca de agua del fondo azul (se mantiene, NO es icono del card) */}
-              <div className="absolute -bottom-16 -right-16 opacity-[0.10] pointer-events-none">
-                <span className="material-symbols-outlined text-[280px] text-white select-none">
-                  school
-                </span>
-              </div>
+              {/* IMPORTANTE: eliminamos el ícono del fondo azul (school). No va. */}
 
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
                 {/* ============ PAES GRUPAL ============ */}
                 <div className="relative">
-                  {/* Glow premium detrás */}
-                  <div className="absolute -inset-3 rounded-[2.25rem] bg-white/22 blur-2xl opacity-70 pointer-events-none" />
-
                   <div
-                    className="group relative flex flex-col bg-white rounded-[2rem] border border-white/70
+                    className="group relative z-10 flex flex-col bg-white rounded-[2rem] border border-white/70
                                lg:h-[420px]
                                shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
                                transition-all duration-500 ease-out transform-gpu will-change-transform
@@ -146,6 +147,15 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                                hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.55)]
                                active:scale-[0.995] overflow-hidden"
                   >
+                    {/* GLOW PREMIUM EN FONDO AZUL (aparece al hover) */}
+                    <div
+                      className="absolute -inset-10 -z-10 rounded-[2.6rem]
+                                 bg-white/26 blur-3xl opacity-0
+                                 transition-all duration-700 ease-out
+                                 group-hover:opacity-90 group-hover:scale-[1.03]
+                                 mix-blend-screen pointer-events-none"
+                    />
+
                     <div className="absolute inset-0 rounded-[2rem] ring-1 ring-black/5 pointer-events-none" />
 
                     {/* shine diagonal */}
@@ -174,10 +184,9 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                         </p>
                       </div>
 
-                      {/* Footer fijo */}
                       <div className="mt-auto pt-6">
                         <a
-                          href={whatsappUrl}
+                          href={waWithProgram("PAES Confianza Matemática (Grupal)")}
                           target="_blank"
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 text-brandRed font-semibold
@@ -208,11 +217,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                 {/* ============ PAES 1:1 ============ */}
                 <div className="relative">
-                  {/* Glow premium detrás */}
-                  <div className="absolute -inset-3 rounded-[2.25rem] bg-white/22 blur-2xl opacity-70 pointer-events-none" />
-
                   <div
-                    className="group relative flex flex-col bg-white rounded-[2rem] border border-white/70
+                    className="group relative z-10 flex flex-col bg-white rounded-[2rem] border border-white/70
                                lg:h-[420px]
                                shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
                                transition-all duration-500 ease-out transform-gpu will-change-transform
@@ -220,6 +226,15 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                                hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.55)]
                                active:scale-[0.995] overflow-hidden"
                   >
+                    {/* GLOW PREMIUM EN FONDO AZUL (aparece al hover) */}
+                    <div
+                      className="absolute -inset-10 -z-10 rounded-[2.6rem]
+                                 bg-white/26 blur-3xl opacity-0
+                                 transition-all duration-700 ease-out
+                                 group-hover:opacity-90 group-hover:scale-[1.03]
+                                 mix-blend-screen pointer-events-none"
+                    />
+
                     <div className="absolute inset-0 rounded-[2rem] ring-1 ring-black/5 pointer-events-none" />
 
                     {/* shine diagonal */}
@@ -248,10 +263,9 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                         </p>
                       </div>
 
-                      {/* Footer fijo */}
                       <div className="mt-auto pt-6">
                         <a
-                          href={whatsappUrl}
+                          href={waWithProgram("PAES Personalizado (1 a 1)")}
                           target="_blank"
                           rel="noreferrer"
                           className="inline-flex items-center gap-2 text-brandRed font-semibold
