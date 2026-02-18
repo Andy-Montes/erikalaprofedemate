@@ -28,47 +28,38 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
         <div className="flex flex-col lg:flex-row gap-10 items-stretch">
           {/* ================= CLASES PERSONALIZADAS ================= */}
-          <div className="lg:w-1/3 relative rounded-[3rem] bg-brandRed shadow-inner border-2 border-white/20">
-            {/* Glow del BLOQUE ROJO (no está en la tarjeta ni en el botón) */}
-            <div className="absolute inset-0 rounded-[3rem] pointer-events-none overflow-hidden">
-              <div className="redGlow absolute -top-24 -left-24 w-[380px] h-[620px] rounded-full opacity-0 blur-3xl transition-opacity duration-700 bg-white/35 mix-blend-screen" />
-              <div className="redGlow2 absolute -top-10 left-16 w-[220px] h-[640px] rounded-full opacity-0 blur-3xl transition-opacity duration-700 bg-white/45 mix-blend-screen -skew-x-12" />
+          <div className="lg:w-1/3 relative rounded-[3rem] bg-brandRed shadow-inner border-2 border-white/20 overflow-hidden group">
+            {/* Glow DIAGONAL (FONDO) */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <div
+                className="absolute -top-24 -left-40 h-[780px] w-[260px] rotate-[18deg]
+                           bg-gradient-to-b from-white/0 via-white/35 to-white/0
+                           blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              />
+              <div
+                className="absolute -top-10 left-10 h-[820px] w-[170px] rotate-[18deg]
+                           bg-gradient-to-b from-white/0 via-white/25 to-white/0
+                           blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              />
             </div>
 
-            <div className="px-8 pt-14 pb-10 relative">
+            <div className="px-8 pt-14 pb-10 relative z-10">
               {/* Etiqueta */}
-              <div className="absolute top-0 left-10 -translate-y-1/2 bg-white text-brandRed px-6 py-2.5 rounded-full border-2 border-brandRed shadow-xl z-30">
+              <div className="absolute top-0 left-10 -translate-y-1/2 bg-white text-brandRed px-6 py-2.5 rounded-full border-2 border-brandRed shadow-xl">
                 <span className="text-[12px] font-black uppercase tracking-[0.25em]">
                   Clases Personalizadas
                 </span>
               </div>
 
-              {/* Card blanca (hover activa el glow del fondo) */}
+              {/* Card blanca */}
               <div
-                className="group relative z-10 bg-white rounded-[2rem] lg:h-[420px]
+                className="relative bg-white rounded-[2rem] lg:h-[420px]
                            shadow-[0_30px_80px_-50px_rgba(0,0,0,0.45)]
                            transition-all duration-500 ease-out transform-gpu will-change-transform
                            hover:-translate-y-4 hover:scale-[1.03]
                            hover:shadow-[0_90px_180px_-100px_rgba(0,0,0,0.7)]
-                           overflow-hidden border border-white/70"
-                onMouseEnter={(e) => {
-                  const root = e.currentTarget.closest(".bg-brandRed");
-                  if (!root) return;
-                  root.querySelectorAll(".redGlow, .redGlow2").forEach((el) => el.classList.add("opacity-100"));
-                }}
-                onMouseLeave={(e) => {
-                  const root = e.currentTarget.closest(".bg-brandRed");
-                  if (!root) return;
-                  root.querySelectorAll(".redGlow, .redGlow2").forEach((el) => el.classList.remove("opacity-100"));
-                }}
+                           overflow-hidden border border-white/70 z-10"
               >
-                {/* Shine dentro de la tarjeta (este es el brillo “que corre”) */}
-                <div
-                  className="absolute -inset-y-10 -left-56 w-56 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
-                             group-hover:opacity-100 group-hover:translate-x-[680px]
-                             transition-all duration-700 ease-out"
-                />
-
                 <div className="p-7 flex flex-col h-full">
                   <div>
                     <h3 className="text-xl sm:text-[22px] font-black text-brandRed mb-2">
@@ -94,18 +85,17 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                       rel="noreferrer"
                       className="text-brandRed font-semibold text-[14px] hover:underline inline-flex items-center gap-2"
                     >
-                      Quiero hablar con Erika
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      Quiero hablar con Erika <span>→</span>
                     </a>
 
                     <div className="pt-4">
-                      {/* Botón MÁS CHICO (no ocupa todo el ancho) */}
+                      {/* Botón chico y SIN efectos de glow/scale */}
                       <button
                         onClick={() => onOpenModal(infoUrl)}
                         className="inline-flex items-center justify-center bg-[#0086f2] text-white font-bold
                                    text-[10px] sm:text-[11px] uppercase tracking-[0.14em]
-                                   py-3 px-6 rounded-xl hover:bg-blue-700 transition leading-tight
-                                   shadow-lg active:scale-95"
+                                   py-2.5 px-4 rounded-lg leading-tight
+                                   hover:bg-blue-700"
                       >
                         Quiero más información de este programa
                       </button>
@@ -118,16 +108,24 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           </div>
 
           {/* ================= PREPARACIÓN PAES ================= */}
-          <div className="lg:w-2/3 relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20">
-            {/* Glow del BLOQUE AZUL (no está en la tarjeta ni en el botón) */}
-            <div className="absolute inset-0 rounded-[3rem] pointer-events-none overflow-hidden">
-              <div className="blueGlow absolute -top-24 -left-24 w-[420px] h-[680px] rounded-full opacity-0 blur-3xl transition-opacity duration-700 bg-white/30 mix-blend-screen" />
-              <div className="blueGlow2 absolute -top-10 left-28 w-[240px] h-[720px] rounded-full opacity-0 blur-3xl transition-opacity duration-700 bg-white/45 mix-blend-screen -skew-x-12" />
+          <div className="lg:w-2/3 relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
+            {/* Glow DIAGONAL (FONDO) */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <div
+                className="absolute -top-24 -left-44 h-[860px] w-[280px] rotate-[18deg]
+                           bg-gradient-to-b from-white/0 via-white/30 to-white/0
+                           blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              />
+              <div
+                className="absolute -top-10 left-16 h-[900px] w-[180px] rotate-[18deg]
+                           bg-gradient-to-b from-white/0 via-white/22 to-white/0
+                           blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+              />
             </div>
 
-            <div className="px-8 pt-14 pb-10 relative">
+            <div className="px-8 pt-14 pb-10 relative z-10">
               {/* Etiqueta */}
-              <div className="absolute top-0 left-10 -translate-y-1/2 bg-white text-[#0086f2] px-6 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl z-30">
+              <div className="absolute top-0 left-10 -translate-y-1/2 bg-white text-[#0086f2] px-6 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
                 <span className="text-[12px] font-black uppercase tracking-[0.25em]">
                   Preparación PAES
                 </span>
@@ -136,29 +134,13 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* ===== PAES GRUPAL ===== */}
                 <div
-                  className="group relative z-10 bg-white rounded-[2rem] lg:h-[420px]
+                  className="relative bg-white rounded-[2rem] lg:h-[420px]
                              shadow-[0_30px_80px_-50px_rgba(0,0,0,0.4)]
                              transition-all duration-500 ease-out transform-gpu will-change-transform
                              hover:-translate-y-4 hover:scale-[1.03]
                              hover:shadow-[0_90px_180px_-100px_rgba(0,0,0,0.65)]
-                             overflow-hidden border border-white/70"
-                  onMouseEnter={(e) => {
-                    const root = e.currentTarget.closest(".bg-\\[\\#0086f2\\]");
-                    if (!root) return;
-                    root.querySelectorAll(".blueGlow, .blueGlow2").forEach((el) => el.classList.add("opacity-100"));
-                  }}
-                  onMouseLeave={(e) => {
-                    const root = e.currentTarget.closest(".bg-\\[\\#0086f2\\]");
-                    if (!root) return;
-                    root.querySelectorAll(".blueGlow, .blueGlow2").forEach((el) => el.classList.remove("opacity-100"));
-                  }}
+                             overflow-hidden border border-white/70 z-10"
                 >
-                  <div
-                    className="absolute -inset-y-10 -left-56 w-56 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
-                               group-hover:opacity-100 group-hover:translate-x-[680px]
-                               transition-all duration-700 ease-out"
-                  />
-
                   <div className="p-7 flex flex-col h-full">
                     <div>
                       <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2">
@@ -184,8 +166,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                         rel="noreferrer"
                         className="text-brandRed font-semibold text-[14px] hover:underline inline-flex items-center gap-2"
                       >
-                        Quiero hablar con Erika
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        Quiero hablar con Erika <span>→</span>
                       </a>
 
                       <div className="pt-4">
@@ -193,8 +174,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                           onClick={() => onOpenModal(infoUrl)}
                           className="inline-flex items-center justify-center bg-[#0086f2] text-white font-bold
                                      text-[10px] sm:text-[11px] uppercase tracking-[0.14em]
-                                     py-3 px-6 rounded-xl hover:bg-blue-700 transition leading-tight
-                                     shadow-lg active:scale-95"
+                                     py-2.5 px-4 rounded-lg leading-tight
+                                     hover:bg-blue-700"
                         >
                           Quiero más información de este programa
                         </button>
@@ -205,29 +186,13 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                 {/* ===== PAES PERSONALIZADO ===== */}
                 <div
-                  className="group relative z-10 bg-white rounded-[2rem] lg:h-[420px]
+                  className="relative bg-white rounded-[2rem] lg:h-[420px]
                              shadow-[0_30px_80px_-50px_rgba(0,0,0,0.4)]
                              transition-all duration-500 ease-out transform-gpu will-change-transform
                              hover:-translate-y-4 hover:scale-[1.03]
                              hover:shadow-[0_90px_180px_-100px_rgba(0,0,0,0.65)]
-                             overflow-hidden border border-white/70"
-                  onMouseEnter={(e) => {
-                    const root = e.currentTarget.closest(".bg-\\[\\#0086f2\\]");
-                    if (!root) return;
-                    root.querySelectorAll(".blueGlow, .blueGlow2").forEach((el) => el.classList.add("opacity-100"));
-                  }}
-                  onMouseLeave={(e) => {
-                    const root = e.currentTarget.closest(".bg-\\[\\#0086f2\\]");
-                    if (!root) return;
-                    root.querySelectorAll(".blueGlow, .blueGlow2").forEach((el) => el.classList.remove("opacity-100"));
-                  }}
+                             overflow-hidden border border-white/70 z-10"
                 >
-                  <div
-                    className="absolute -inset-y-10 -left-56 w-56 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
-                               group-hover:opacity-100 group-hover:translate-x-[680px]
-                               transition-all duration-700 ease-out"
-                  />
-
                   <div className="p-7 flex flex-col h-full">
                     <div>
                       <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2">
@@ -255,8 +220,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                         rel="noreferrer"
                         className="text-brandRed font-semibold text-[14px] hover:underline inline-flex items-center gap-2"
                       >
-                        Quiero hablar con Erika
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        Quiero hablar con Erika <span>→</span>
                       </a>
 
                       <div className="pt-4">
@@ -264,8 +228,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                           onClick={() => onOpenModal(infoUrl)}
                           className="inline-flex items-center justify-center bg-[#0086f2] text-white font-bold
                                      text-[10px] sm:text-[11px] uppercase tracking-[0.14em]
-                                     py-3 px-6 rounded-xl hover:bg-blue-700 transition leading-tight
-                                     shadow-lg active:scale-95"
+                                     py-2.5 px-4 rounded-lg leading-tight
+                                     hover:bg-blue-700"
                         >
                           Quiero más información de este programa
                         </button>
@@ -273,7 +237,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                     </div>
                   </div>
                 </div>
-                {/* fin cards PAES */}
+                {/* fin cards */}
               </div>
             </div>
           </div>
