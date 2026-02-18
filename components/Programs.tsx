@@ -24,9 +24,9 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
   // Botón compacto, sin “show”, sin glow, sin scale
   const infoBtn =
-    "inline-flex items-center justify-center bg-[#0086f2] text-white font-bold " +
-    "text-[10px] sm:text-[11px] uppercase tracking-[0.14em] " +
-    "py-2.5 px-4 rounded-lg leading-tight " +
+    "inline-flex flex-col items-center justify-center bg-[#0086f2] text-white font-bold " +
+    "text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-center " +
+    "py-2.5 px-3 rounded-lg leading-tight w-[220px] sm:w-[230px] " +
     "hover:bg-blue-700 active:opacity-95";
 
   return (
@@ -38,7 +38,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
             Programas y Modalidades
           </span>
           <h2 className="text-2xl md:text-3xl font-black text-brandNavy leading-tight">
-            Elije el programa ideal para que tu hijo aprenda matemáticas de verdad
+            Elije el <span className="text-brandRed">programa ideal</span> para que tu{" "}
+            <span className="text-brandRed">hijo aprenda</span> matemáticas de verdad
           </h2>
         </div>
 
@@ -46,43 +47,50 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =======================================================
               BLOQUE ROJO (wrapper overflow-visible para NO cortar pill)
           ======================================================= */}
-          <div className="lg:w-1/3 relative overflow-visible">
+          <div className="lg:w-1/3 relative overflow-visible pt-2">
+            {/* Pill superior */}
+            <div className="absolute -top-4 left-6 sm:left-10 z-30 bg-white text-brandRed px-7 py-2.5 rounded-full border-2 border-brandRed shadow-xl">
+              <span className="block text-[11px] sm:text-[12px] font-black uppercase tracking-[0.28em] whitespace-nowrap">
+                Clases Personalizadas
+              </span>
+            </div>
+
             {/* Panel de color (este sí recorta el glow por dentro) */}
             <div className="relative rounded-[3rem] bg-brandRed shadow-inner border-2 border-white/20 overflow-hidden group">
-              {/* Glow elegante: línea diagonal que cruza (NO mancha) */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                {/* Shine principal */}
+              {/* Glow shine elegante detrás de las cards blancas */}
+              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div
                   className="
-                    absolute -inset-y-10 -left-56 w-44 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/35 to-white/0
-                    blur-lg opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[680px]
-                    transition-all duration-700 ease-out
+                    absolute -top-20 -left-40 h-[170%] w-14 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
+                    blur-[3px] opacity-35
+                    group-hover:opacity-95 group-hover:translate-x-[660px]
+                    transition-all duration-1000 ease-out
                   "
                 />
-                {/* Shine secundario (más fino) */}
                 <div
                   className="
-                    absolute -inset-y-10 -left-72 w-24 rotate-12
+                    absolute -top-24 -left-52 h-[180%] w-24 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/45 to-white/0
+                    blur-xl opacity-25
+                    group-hover:opacity-80 group-hover:translate-x-[720px]
+                    transition-all duration-[1150ms] ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -top-16 -left-48 h-[150%] w-36 rotate-[18deg] rounded-full
                     bg-gradient-to-b from-white/0 via-white/22 to-white/0
-                    blur-md opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[720px]
-                    transition-all duration-700 ease-out
+                    blur-2xl opacity-20
+                    group-hover:opacity-60 group-hover:translate-x-[700px]
+                    transition-all duration-[1250ms] ease-out
                   "
                 />
-              </div>
-
-              {/* Pill (afuera visualmente, sin recorte) */}
-              <div className="absolute top-0 left-10 -translate-y-1/2 z-20 bg-white text-brandRed px-6 py-2.5 rounded-full border-2 border-brandRed shadow-xl">
-                <span className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em]">
-                  Clases Personalizadas
-                </span>
               </div>
 
               <div className="px-8 pt-14 pb-10 relative z-10">
                 {/* Card blanca */}
-                <div className={`${wowCard} lg:h-[420px] overflow-hidden`}>
+                <div className={`${wowCard} lg:min-h-[420px]`}>
                   <div className="p-7 flex flex-col h-full">
                     <div>
                       <h3 className="text-xl sm:text-[22px] font-black text-brandRed mb-2">
@@ -114,7 +122,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                       <div className="pt-4">
                         <button onClick={() => onOpenModal(infoUrl)} className={infoBtn}>
-                          Quiero más información de este programa
+                          <span className="block">Quiero más información</span>
+                            <span className="block">de este programa</span>
                         </button>
                       </div>
                     </div>
@@ -128,41 +137,50 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =======================================================
               BLOQUE AZUL (wrapper overflow-visible para NO cortar pill)
           ======================================================= */}
-          <div className="lg:w-2/3 relative overflow-visible">
-            <div className="relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
-              {/* Glow elegante: línea diagonal que cruza (NO mancha) */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <div
-                  className="
-                    absolute -inset-y-10 -left-56 w-44 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/32 to-white/0
-                    blur-lg opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[780px]
-                    transition-all duration-700 ease-out
-                  "
-                />
-                <div
-                  className="
-                    absolute -inset-y-10 -left-72 w-24 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/20 to-white/0
-                    blur-md opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[820px]
-                    transition-all duration-700 ease-out
-                  "
-                />
-              </div>
+          <div className="lg:w-2/3 relative overflow-visible pt-2">
+            {/* Pill superior */}
+            <div className="absolute -top-4 left-6 sm:left-10 z-30 bg-white text-[#0086f2] px-7 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
+              <span className="block text-[11px] sm:text-[12px] font-black uppercase tracking-[0.28em] whitespace-nowrap">
+                Preparación PAES
+              </span>
+            </div>
 
-              {/* Pill */}
-              <div className="absolute top-0 left-10 -translate-y-1/2 z-20 bg-white text-[#0086f2] px-6 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
-                <span className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em]">
-                  Preparación PAES
-                </span>
+            <div className="relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
+              {/* Glow shine elegante detrás de las cards blancas */}
+              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                <div
+                  className="
+                    absolute -top-20 -left-44 h-[170%] w-14 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
+                    blur-[3px] opacity-35
+                    group-hover:opacity-95 group-hover:translate-x-[880px]
+                    transition-all duration-1000 ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -top-24 -left-56 h-[180%] w-24 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/45 to-white/0
+                    blur-xl opacity-25
+                    group-hover:opacity-80 group-hover:translate-x-[940px]
+                    transition-all duration-[1150ms] ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -top-16 -left-52 h-[150%] w-36 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
+                    blur-2xl opacity-20
+                    group-hover:opacity-60 group-hover:translate-x-[920px]
+                    transition-all duration-[1250ms] ease-out
+                  "
+                />
               </div>
 
               <div className="px-8 pt-14 pb-10 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* PAES GRUPAL */}
-                  <div className={`${wowCard} lg:h-[420px] overflow-hidden`}>
+                  <div className={`${wowCard} lg:min-h-[420px]`}>
                     <div className="p-7 flex flex-col h-full">
                       <div>
                         <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2">
@@ -193,7 +211,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                         <div className="pt-4">
                           <button onClick={() => onOpenModal(infoUrl)} className={infoBtn}>
-                            Quiero más información de este programa
+                            <span className="block">Quiero más información</span>
+                            <span className="block">de este programa</span>
                           </button>
                         </div>
                       </div>
@@ -201,7 +220,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                   </div>
 
                   {/* PAES 1:1 */}
-                  <div className={`${wowCard} lg:h-[420px] overflow-hidden`}>
+                  <div className={`${wowCard} lg:min-h-[420px]`}>
                     <div className="p-7 flex flex-col h-full">
                       <div>
                         <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2">
@@ -234,7 +253,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                         <div className="pt-4">
                           <button onClick={() => onOpenModal(infoUrl)} className={infoBtn}>
-                            Quiero más información de este programa
+                            <span className="block">Quiero más información</span>
+                            <span className="block">de este programa</span>
                           </button>
                         </div>
                       </div>
