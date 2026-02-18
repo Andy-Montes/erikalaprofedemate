@@ -38,7 +38,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
             Programas y Modalidades
           </span>
           <h2 className="text-2xl md:text-3xl font-black text-brandNavy leading-tight">
-            Elije el programa ideal para que tu hijo aprenda matemáticas de verdad
+            Elije el <span className="text-brandRed">programa ideal</span> para que tu{" "}
+            <span className="text-brandRed">hijo aprenda</span> matemáticas de verdad
           </h2>
         </div>
 
@@ -46,43 +47,19 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =======================================================
               BLOQUE ROJO (wrapper overflow-visible para NO cortar pill)
           ======================================================= */}
-          <div className="lg:w-1/3 relative overflow-visible">
+          <div className="lg:w-1/3 relative overflow-visible pt-2">
+            {/* Pill superior */}
+            <div className="absolute -top-4 left-6 sm:left-10 z-30 bg-white text-brandRed px-7 py-2.5 rounded-full border-2 border-brandRed shadow-xl">
+              <span className="block text-[11px] sm:text-[12px] font-black uppercase tracking-[0.28em] whitespace-nowrap">
+                Clases Personalizadas
+              </span>
+            </div>
+
             {/* Panel de color (este sí recorta el glow por dentro) */}
             <div className="relative rounded-[3rem] bg-brandRed shadow-inner border-2 border-white/20 overflow-hidden group">
-              {/* Glow elegante: línea diagonal que cruza (NO mancha) */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                {/* Shine principal */}
-                <div
-                  className="
-                    absolute -inset-y-10 -left-56 w-44 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/35 to-white/0
-                    blur-lg opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[680px]
-                    transition-all duration-700 ease-out
-                  "
-                />
-                {/* Shine secundario (más fino) */}
-                <div
-                  className="
-                    absolute -inset-y-10 -left-72 w-24 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
-                    blur-md opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[720px]
-                    transition-all duration-700 ease-out
-                  "
-                />
-              </div>
-
-              {/* Pill (afuera visualmente, sin recorte) */}
-              <div className="absolute top-0 left-10 -translate-y-1/2 z-20 bg-white text-brandRed px-6 py-2.5 rounded-full border-2 border-brandRed shadow-xl">
-                <span className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em]">
-                  Clases Personalizadas
-                </span>
-              </div>
-
               <div className="px-8 pt-14 pb-10 relative z-10">
                 {/* Card blanca */}
-                <div className={`${wowCard} lg:h-[420px] overflow-hidden`}>
+                <div className={`${wowCard} lg:min-h-[420px]`}>
                   <div className="p-7 flex flex-col h-full">
                     <div>
                       <h3 className="text-xl sm:text-[22px] font-black text-brandRed mb-2">
@@ -128,41 +105,19 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =======================================================
               BLOQUE AZUL (wrapper overflow-visible para NO cortar pill)
           ======================================================= */}
-          <div className="lg:w-2/3 relative overflow-visible">
+          <div className="lg:w-2/3 relative overflow-visible pt-2">
+            {/* Pill superior */}
+            <div className="absolute -top-4 left-6 sm:left-10 z-30 bg-white text-[#0086f2] px-7 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
+              <span className="block text-[11px] sm:text-[12px] font-black uppercase tracking-[0.28em] whitespace-nowrap">
+                Preparación PAES
+              </span>
+            </div>
+
             <div className="relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
-              {/* Glow elegante: línea diagonal que cruza (NO mancha) */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <div
-                  className="
-                    absolute -inset-y-10 -left-56 w-44 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/32 to-white/0
-                    blur-lg opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[780px]
-                    transition-all duration-700 ease-out
-                  "
-                />
-                <div
-                  className="
-                    absolute -inset-y-10 -left-72 w-24 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/20 to-white/0
-                    blur-md opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[820px]
-                    transition-all duration-700 ease-out
-                  "
-                />
-              </div>
-
-              {/* Pill */}
-              <div className="absolute top-0 left-10 -translate-y-1/2 z-20 bg-white text-[#0086f2] px-6 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
-                <span className="text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em]">
-                  Preparación PAES
-                </span>
-              </div>
-
               <div className="px-8 pt-14 pb-10 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* PAES GRUPAL */}
-                  <div className={`${wowCard} lg:h-[420px] overflow-hidden`}>
+                  <div className={`${wowCard} lg:min-h-[420px]`}>
                     <div className="p-7 flex flex-col h-full">
                       <div>
                         <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2">
@@ -201,7 +156,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                   </div>
 
                   {/* PAES 1:1 */}
-                  <div className={`${wowCard} lg:h-[420px] overflow-hidden`}>
+                  <div className={`${wowCard} lg:min-h-[420px]`}>
                     <div className="p-7 flex flex-col h-full">
                       <div>
                         <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2">
