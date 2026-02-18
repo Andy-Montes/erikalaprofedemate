@@ -5,7 +5,6 @@ interface ProgramsProps {
 }
 
 const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
-  const interviewUrl = "https://wa.me/56997439227";
   const infoUrl = "https://formulariogiftcard.fillout.com/erikalaporofedemate";
 
   return (
@@ -26,18 +25,18 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* ========================= */}
           {/* CLASES PERSONALIZADAS */}
           {/* ========================= */}
-          <div className="lg:w-1/3 relative flex flex-col rounded-[3rem] border-2 border-white/20 shadow-inner bg-brandRed">
-            <div className="px-6 sm:px-8 lg:px-10 pt-14 pb-6 sm:pb-8 lg:pb-10 relative">
+          <div className="lg:w-1/3 relative flex flex-col rounded-[3rem] border-2 border-white/20 shadow-inner bg-brandRed lg:min-h-[640px]">
+            <div className="px-6 sm:px-8 lg:px-10 pt-14 pb-10 relative flex-1 flex flex-col justify-center">
 
               <div className="absolute top-0 left-8 sm:left-12 -translate-y-1/2 bg-white text-brandRed px-6 py-2.5 rounded-full shadow-xl z-20 border-2 border-brandRed">
-                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em]">
+                <span className="text-[11px] sm:text-[12px] font-black uppercase tracking-[0.25em]">
                   Clases Personalizadas
                 </span>
               </div>
 
-              {/* Card blanca (SIN min-height fijo) */}
               <div
                 className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70
+                           lg:min-h-[460px]
                            shadow-[0_28px_70px_-45px_rgba(0,0,0,0.40)]
                            transition-all duration-500 ease-out transform-gpu will-change-transform
                            hover:-translate-y-4 hover:scale-[1.03]
@@ -61,11 +60,13 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                   </p>
 
                   <p className="text-slate-600 leading-relaxed font-light text-sm sm:text-[15px] mb-8">
-                    Pensada para estudiantes de enseñanza media que necesitan comprender de verdad.
-                    Cerramos vacíos, ordenamos el aprendizaje y avanzamos con claridad para mejorar notas, NEM y base para la PAES.
+                    Pensada para estudiantes de enseñanza media que necesitan{" "}
+                    <strong className="font-semibold text-slate-800">comprender de verdad</strong>.
+                    <strong className="font-semibold text-slate-800"> Cerramos vacíos</strong>, ordenamos el aprendizaje y avanzamos con claridad
+                    para{" "}
+                    <strong className="font-semibold text-slate-800">mejorar notas, NEM y base para la PAES</strong>.
                   </p>
 
-                  {/* Botón siempre abajo, sin crear “desierto” */}
                   <div className="mt-auto">
                     <button
                       onClick={() => onOpenModal(infoUrl)}
@@ -86,11 +87,11 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* ========================= */}
           {/* ENTRENAMIENTO PAES */}
           {/* ========================= */}
-          <div className="lg:w-2/3 relative flex flex-col rounded-[3rem] border-2 border-white/20 shadow-inner bg-[#0086f2]">
-            <div className="px-6 sm:px-8 lg:px-10 pt-14 pb-6 sm:pb-8 lg:pb-10 relative">
+          <div className="lg:w-2/3 relative flex flex-col rounded-[3rem] border-2 border-white/20 shadow-inner bg-[#0086f2] lg:min-h-[640px]">
+            <div className="px-6 sm:px-8 lg:px-10 pt-14 pb-10 relative flex-1 flex flex-col justify-center">
 
               <div className="absolute top-0 left-8 sm:left-12 -translate-y-1/2 bg-white text-[#0086f2] px-6 py-2.5 rounded-full shadow-xl z-20 border-2 border-[#0086f2]">
-                <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em]">
+                <span className="text-[11px] sm:text-[12px] font-black uppercase tracking-[0.25em]">
                   Entrenamiento PAES
                 </span>
               </div>
@@ -99,12 +100,12 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                 <span className="material-symbols-outlined text-[280px] text-white select-none">school</span>
               </div>
 
-              {/* Importante: items-stretch para que ambas cards se igualen en altura ENTRE SÍ */}
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
                 {/* PAES GRUPAL */}
                 <div
                   className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70
+                             lg:min-h-[460px]
                              shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
                              transition-all duration-500 ease-out transform-gpu will-change-transform
                              hover:-translate-y-4 hover:scale-[1.03]
@@ -128,7 +129,12 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                     </p>
 
                     <p className="text-slate-600 leading-relaxed font-light text-sm sm:text-[15px] mb-8">
-                      Trabajamos comprensión y estrategia en formato PAES, con un método que permite avanzar con seguridad y mejorar puntaje
+                      Trabajamos{" "}
+                      <strong className="font-semibold text-slate-800">comprensión y estrategia</strong>{" "}
+                      en formato PAES, con un método que permite avanzar con{" "}
+                      <strong className="font-semibold text-slate-800">seguridad</strong>{" "}
+                      y{" "}
+                      <strong className="font-semibold text-slate-800">mejorar puntaje</strong>.
                     </p>
 
                     <div className="mt-auto">
@@ -148,6 +154,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                 {/* PAES 1:1 */}
                 <div
                   className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70
+                             lg:min-h-[460px]
                              shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
                              transition-all duration-500 ease-out transform-gpu will-change-transform
                              hover:-translate-y-4 hover:scale-[1.03]
@@ -171,7 +178,12 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                     </p>
 
                     <p className="text-slate-600 leading-relaxed font-light text-sm sm:text-[15px] mb-8">
-                      Acompañamiento completamente personalizado para preparar la PAES. Trabajo focalizado en vacíos, estrategia y precisión, ajustado al nivel real de tu hijo y con foco en mejorar puntaje.
+                      <strong className="font-semibold text-slate-800">Acompañamiento completamente personalizado</strong>{" "}
+                      para preparar la PAES. Trabajo focalizado en vacíos, estrategia y precisión,
+                      ajustado al{" "}
+                      <strong className="font-semibold text-slate-800">nivel real de tu hijo</strong>{" "}
+                      y con foco en{" "}
+                      <strong className="font-semibold text-slate-800">mejorar puntaje</strong>.
                     </p>
 
                     <div className="mt-auto">
@@ -190,19 +202,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
               </div>
 
-              {/* CTA único entrevista */}
-              <div className="mt-8 flex justify-center">
-                <button
-                  onClick={() => onOpenModal(interviewUrl)}
-                  className="text-center bg-brandRed text-white font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.15em]
-                             py-4 px-10 rounded-2xl transition-all shadow-lg whitespace-nowrap
-                             hover:bg-red-700 hover:-translate-y-0.5 hover:shadow-[0_22px_45px_-25px_rgba(220,38,38,0.85)]
-                             active:scale-95"
-                >
-                  Solicitar Entrevista
-                </button>
-              </div>
-
+              {/* Eliminado: Solicitar Entrevista */}
             </div>
           </div>
 
