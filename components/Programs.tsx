@@ -57,33 +57,33 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
             {/* Panel de color (este sí recorta el glow por dentro) */}
             <div className="relative rounded-[3rem] bg-brandRed shadow-inner border-2 border-white/20 overflow-hidden group">
-              {/* Glow shine detrás de las cards blancas */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
+              {/* Glow shine elegante detrás de las cards blancas */}
+              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div
                   className="
-                    absolute -inset-y-16 -left-64 w-52 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/75 to-white/0
-                    blur-md opacity-40
-                    group-hover:opacity-100 group-hover:translate-x-[720px]
-                    transition-all duration-900 ease-out
-                  "
-                />
-                <div
-                  className="
-                    absolute -inset-y-16 -left-80 w-32 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/55 to-white/0
-                    blur-sm opacity-30
-                    group-hover:opacity-95 group-hover:translate-x-[780px]
+                    absolute -top-20 -left-40 h-[170%] w-14 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
+                    blur-[3px] opacity-35
+                    group-hover:opacity-95 group-hover:translate-x-[660px]
                     transition-all duration-1000 ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -inset-y-16 -left-[22rem] w-20 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
-                    blur-sm opacity-20
-                    group-hover:opacity-90 group-hover:translate-x-[760px]
-                    transition-all duration-[1100ms] ease-out
+                    absolute -top-24 -left-52 h-[180%] w-24 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/45 to-white/0
+                    blur-xl opacity-25
+                    group-hover:opacity-80 group-hover:translate-x-[720px]
+                    transition-all duration-[1150ms] ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -top-16 -left-48 h-[150%] w-36 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
+                    blur-2xl opacity-20
+                    group-hover:opacity-60 group-hover:translate-x-[700px]
+                    transition-all duration-[1250ms] ease-out
                   "
                 />
               </div>
@@ -146,33 +146,33 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
             </div>
 
             <div className="relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
-              {/* Glow shine detrás de las cards blancas */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
+              {/* Glow shine elegante detrás de las cards blancas */}
+              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div
                   className="
-                    absolute -inset-y-16 -left-64 w-56 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/72 to-white/0
-                    blur-md opacity-35
-                    group-hover:opacity-100 group-hover:translate-x-[860px]
-                    transition-all duration-900 ease-out
-                  "
-                />
-                <div
-                  className="
-                    absolute -inset-y-16 -left-80 w-32 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/52 to-white/0
-                    blur-sm opacity-30
-                    group-hover:opacity-95 group-hover:translate-x-[900px]
+                    absolute -top-20 -left-44 h-[170%] w-14 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
+                    blur-[3px] opacity-35
+                    group-hover:opacity-95 group-hover:translate-x-[880px]
                     transition-all duration-1000 ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -inset-y-16 -left-[22rem] w-24 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/78 to-white/0
-                    blur-sm opacity-20
-                    group-hover:opacity-90 group-hover:translate-x-[920px]
-                    transition-all duration-[1100ms] ease-out
+                    absolute -top-24 -left-56 h-[180%] w-24 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/45 to-white/0
+                    blur-xl opacity-25
+                    group-hover:opacity-80 group-hover:translate-x-[940px]
+                    transition-all duration-[1150ms] ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -top-16 -left-52 h-[150%] w-36 rotate-[18deg] rounded-full
+                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
+                    blur-2xl opacity-20
+                    group-hover:opacity-60 group-hover:translate-x-[920px]
+                    transition-all duration-[1250ms] ease-out
                   "
                 />
               </div>
