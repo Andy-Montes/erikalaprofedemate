@@ -24,10 +24,10 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
   // Botón compacto, sin “show”, sin glow, sin scale
   const infoBtn =
-    "inline-flex flex-col items-center justify-center bg-[#0086f2] text-white font-bold " +
+    "inline-flex flex-col items-center justify-center mx-auto bg-[#0069cf] text-white font-bold " +
     "text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-center " +
     "py-2.5 px-3 rounded-lg leading-tight w-[220px] sm:w-[230px] " +
-    "hover:bg-blue-700 active:opacity-95";
+    "hover:bg-[#0057ad] active:opacity-95";
 
   return (
     <section className="py-16 lg:py-24 bg-white scroll-mt-24" id="programas">
@@ -61,27 +61,27 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div
                   className="
-                    absolute -top-20 -left-40 h-[170%] w-14 rotate-[18deg] rounded-full
-                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
-                    blur-[3px] opacity-35
+                    absolute -top-24 -left-44 h-[185%] w-20 rotate-[18deg]
+                    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.12)_24%,rgba(255,255,255,0.88)_50%,rgba(255,255,255,0.12)_76%,transparent_100%)]
+                    blur-md opacity-35
                     group-hover:opacity-95 group-hover:translate-x-[660px]
                     transition-all duration-1000 ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -top-24 -left-52 h-[180%] w-24 rotate-[18deg] rounded-full
-                    bg-gradient-to-b from-white/0 via-white/45 to-white/0
-                    blur-xl opacity-25
-                    group-hover:opacity-80 group-hover:translate-x-[720px]
+                    absolute -top-24 -left-56 h-[185%] w-32 rotate-[18deg]
+                    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_28%,rgba(255,255,255,0.40)_50%,rgba(255,255,255,0.06)_72%,transparent_100%)]
+                    blur-2xl opacity-30
+                    group-hover:opacity-75 group-hover:translate-x-[720px]
                     transition-all duration-[1150ms] ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -top-16 -left-48 h-[150%] w-36 rotate-[18deg] rounded-full
-                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
-                    blur-2xl opacity-20
+                    absolute -top-20 -left-52 h-[165%] w-44 rotate-[18deg]
+                    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.03)_30%,rgba(255,255,255,0.24)_50%,rgba(255,255,255,0.03)_70%,transparent_100%)]
+                    blur-3xl opacity-24
                     group-hover:opacity-60 group-hover:translate-x-[700px]
                     transition-all duration-[1250ms] ease-out
                   "
@@ -150,27 +150,27 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div
                   className="
-                    absolute -top-20 -left-44 h-[170%] w-14 rotate-[18deg] rounded-full
-                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
-                    blur-[3px] opacity-35
+                    absolute -top-24 -left-48 h-[185%] w-20 rotate-[18deg]
+                    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.12)_24%,rgba(255,255,255,0.88)_50%,rgba(255,255,255,0.12)_76%,transparent_100%)]
+                    blur-md opacity-35
                     group-hover:opacity-95 group-hover:translate-x-[880px]
                     transition-all duration-1000 ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -top-24 -left-56 h-[180%] w-24 rotate-[18deg] rounded-full
-                    bg-gradient-to-b from-white/0 via-white/45 to-white/0
-                    blur-xl opacity-25
-                    group-hover:opacity-80 group-hover:translate-x-[940px]
+                    absolute -top-24 -left-60 h-[185%] w-32 rotate-[18deg]
+                    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.06)_28%,rgba(255,255,255,0.40)_50%,rgba(255,255,255,0.06)_72%,transparent_100%)]
+                    blur-2xl opacity-30
+                    group-hover:opacity-75 group-hover:translate-x-[940px]
                     transition-all duration-[1150ms] ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -top-16 -left-52 h-[150%] w-36 rotate-[18deg] rounded-full
-                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
-                    blur-2xl opacity-20
+                    absolute -top-20 -left-56 h-[165%] w-44 rotate-[18deg]
+                    bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.03)_30%,rgba(255,255,255,0.24)_50%,rgba(255,255,255,0.03)_70%,transparent_100%)]
+                    blur-3xl opacity-24
                     group-hover:opacity-60 group-hover:translate-x-[920px]
                     transition-all duration-[1250ms] ease-out
                   "
