@@ -24,9 +24,9 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
   // Botón compacto, sin “show”, sin glow, sin scale
   const infoBtn =
-    "inline-flex items-center justify-center bg-[#0086f2] text-white font-bold " +
-    "text-[10px] sm:text-[11px] uppercase tracking-[0.14em] " +
-    "py-2.5 px-4 rounded-lg leading-tight " +
+    "inline-flex flex-col items-center justify-center bg-[#0086f2] text-white font-bold " +
+    "text-[10px] sm:text-[11px] uppercase tracking-[0.14em] text-center " +
+    "py-2.5 px-3 rounded-lg leading-tight w-[220px] sm:w-[230px] " +
     "hover:bg-blue-700 active:opacity-95";
 
   return (
@@ -57,6 +57,28 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
             {/* Panel de color (este sí recorta el glow por dentro) */}
             <div className="relative rounded-[3rem] bg-brandRed shadow-inner border-2 border-white/20 overflow-hidden group">
+              {/* Glow shine detrás de las cards blancas */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div
+                  className="
+                    absolute -inset-y-10 -left-56 w-44 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/35 to-white/0
+                    blur-lg opacity-0
+                    group-hover:opacity-100 group-hover:translate-x-[680px]
+                    transition-all duration-700 ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -inset-y-10 -left-72 w-24 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
+                    blur-md opacity-0
+                    group-hover:opacity-100 group-hover:translate-x-[720px]
+                    transition-all duration-700 ease-out
+                  "
+                />
+              </div>
+
               <div className="px-8 pt-14 pb-10 relative z-10">
                 {/* Card blanca */}
                 <div className={`${wowCard} lg:min-h-[420px]`}>
@@ -91,7 +113,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                       <div className="pt-4">
                         <button onClick={() => onOpenModal(infoUrl)} className={infoBtn}>
-                          Quiero más información de este programa
+                          <span className="block">Quiero más información</span>
+                            <span className="block">de este programa</span>
                         </button>
                       </div>
                     </div>
@@ -114,6 +137,28 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
             </div>
 
             <div className="relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
+              {/* Glow shine detrás de las cards blancas */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div
+                  className="
+                    absolute -inset-y-10 -left-56 w-44 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/32 to-white/0
+                    blur-lg opacity-0
+                    group-hover:opacity-100 group-hover:translate-x-[780px]
+                    transition-all duration-700 ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -inset-y-10 -left-72 w-24 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/20 to-white/0
+                    blur-md opacity-0
+                    group-hover:opacity-100 group-hover:translate-x-[820px]
+                    transition-all duration-700 ease-out
+                  "
+                />
+              </div>
+
               <div className="px-8 pt-14 pb-10 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* PAES GRUPAL */}
@@ -148,7 +193,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                         <div className="pt-4">
                           <button onClick={() => onOpenModal(infoUrl)} className={infoBtn}>
-                            Quiero más información de este programa
+                            <span className="block">Quiero más información</span>
+                            <span className="block">de este programa</span>
                           </button>
                         </div>
                       </div>
@@ -189,7 +235,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                         <div className="pt-4">
                           <button onClick={() => onOpenModal(infoUrl)} className={infoBtn}>
-                            Quiero más información de este programa
+                            <span className="block">Quiero más información</span>
+                            <span className="block">de este programa</span>
                           </button>
                         </div>
                       </div>
