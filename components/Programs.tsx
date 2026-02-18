@@ -29,26 +29,27 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           <div className="lg:w-1/3 relative flex flex-col rounded-[3rem] border-2 border-white/20 shadow-inner bg-brandRed">
             <div className="px-6 sm:px-8 lg:px-10 pt-14 pb-6 sm:pb-8 lg:pb-10 relative">
 
-              {/* Pill armonizado */}
               <div className="absolute top-0 left-8 sm:left-12 -translate-y-1/2 bg-white text-brandRed px-6 py-2.5 rounded-full shadow-xl z-20 border-2 border-brandRed">
                 <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em]">
                   Clases Personalizadas
                 </span>
               </div>
 
-              {/* Card blanca WOW (inline, sin variables) */}
-              <div className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70 min-h-[560px]
-                              shadow-[0_28px_70px_-45px_rgba(0,0,0,0.40)]
-                              transition-all duration-500 ease-out transform-gpu will-change-transform
-                              hover:-translate-y-4 hover:scale-[1.03]
-                              hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.60)]
-                              active:scale-[0.995]">
-                {/* ring sutil */}
+              {/* Card blanca (SIN min-height fijo) */}
+              <div
+                className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70
+                           shadow-[0_28px_70px_-45px_rgba(0,0,0,0.40)]
+                           transition-all duration-500 ease-out transform-gpu will-change-transform
+                           hover:-translate-y-4 hover:scale-[1.03]
+                           hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.60)]
+                           active:scale-[0.995]"
+              >
                 <div className="absolute inset-0 rounded-[2rem] ring-1 ring-black/5 pointer-events-none" />
-                {/* shine diagonal */}
-                <div className="absolute -inset-y-8 -left-44 w-44 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
-                                group-hover:opacity-100 group-hover:translate-x-[560px]
-                                transition-all duration-700 ease-out" />
+                <div
+                  className="absolute -inset-y-8 -left-44 w-44 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
+                             group-hover:opacity-100 group-hover:translate-x-[560px]
+                             transition-all duration-700 ease-out"
+                />
 
                 <div className="relative z-10 p-7 sm:p-9 flex flex-col h-full">
                   <h3 className="text-xl font-black mb-3 text-brandRed leading-tight">
@@ -64,7 +65,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                     Cerramos vacíos, ordenamos el aprendizaje y avanzamos con claridad para mejorar notas, NEM y base para la PAES.
                   </p>
 
-                  <div className="mt-auto space-y-3">
+                  {/* Botón siempre abajo, sin crear “desierto” */}
+                  <div className="mt-auto">
                     <button
                       onClick={() => onOpenModal(infoUrl)}
                       className="block w-full text-center border-2 border-slate-200 text-brandNavy font-bold text-[9px] sm:text-[10px] uppercase tracking-widest
@@ -97,19 +99,24 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                 <span className="material-symbols-outlined text-[280px] text-white select-none">school</span>
               </div>
 
+              {/* Importante: items-stretch para que ambas cards se igualen en altura ENTRE SÍ */}
               <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
 
                 {/* PAES GRUPAL */}
-                <div className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70 min-h-[560px]
-                                shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
-                                transition-all duration-500 ease-out transform-gpu will-change-transform
-                                hover:-translate-y-4 hover:scale-[1.03]
-                                hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.55)]
-                                active:scale-[0.995]">
+                <div
+                  className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70
+                             shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
+                             transition-all duration-500 ease-out transform-gpu will-change-transform
+                             hover:-translate-y-4 hover:scale-[1.03]
+                             hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.55)]
+                             active:scale-[0.995]"
+                >
                   <div className="absolute inset-0 rounded-[2rem] ring-1 ring-black/5 pointer-events-none" />
-                  <div className="absolute -inset-y-8 -left-44 w-44 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
-                                  group-hover:opacity-100 group-hover:translate-x-[560px]
-                                  transition-all duration-700 ease-out" />
+                  <div
+                    className="absolute -inset-y-8 -left-44 w-44 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
+                               group-hover:opacity-100 group-hover:translate-x-[560px]
+                               transition-all duration-700 ease-out"
+                  />
 
                   <div className="relative z-10 p-7 sm:p-9 flex flex-col h-full">
                     <h3 className="text-xl font-black mb-3 text-brandNavy leading-tight">
@@ -124,7 +131,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                       Trabajamos comprensión y estrategia en formato PAES, con un método que permite avanzar con seguridad y mejorar puntaje
                     </p>
 
-                    <div className="mt-auto space-y-3">
+                    <div className="mt-auto">
                       <button
                         onClick={() => onOpenModal(infoUrl)}
                         className="block w-full text-center border-2 border-slate-200 text-brandNavy font-bold text-[9px] sm:text-[10px] uppercase tracking-widest
@@ -139,16 +146,20 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                 </div>
 
                 {/* PAES 1:1 */}
-                <div className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70 min-h-[560px]
-                                shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
-                                transition-all duration-500 ease-out transform-gpu will-change-transform
-                                hover:-translate-y-4 hover:scale-[1.03]
-                                hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.55)]
-                                active:scale-[0.995]">
+                <div
+                  className="group relative flex flex-col h-full bg-white rounded-[2rem] border border-white/70
+                             shadow-[0_28px_70px_-45px_rgba(0,0,0,0.35)]
+                             transition-all duration-500 ease-out transform-gpu will-change-transform
+                             hover:-translate-y-4 hover:scale-[1.03]
+                             hover:shadow-[0_70px_160px_-90px_rgba(0,0,0,0.55)]
+                             active:scale-[0.995]"
+                >
                   <div className="absolute inset-0 rounded-[2rem] ring-1 ring-black/5 pointer-events-none" />
-                  <div className="absolute -inset-y-8 -left-44 w-44 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
-                                  group-hover:opacity-100 group-hover:translate-x-[560px]
-                                  transition-all duration-700 ease-out" />
+                  <div
+                    className="absolute -inset-y-8 -left-44 w-44 rotate-12 bg-white/40 blur-xl opacity-0 pointer-events-none
+                               group-hover:opacity-100 group-hover:translate-x-[560px]
+                               transition-all duration-700 ease-out"
+                  />
 
                   <div className="relative z-10 p-7 sm:p-9 flex flex-col h-full">
                     <h3 className="text-xl font-black mb-3 text-brandNavy leading-tight">
@@ -163,7 +174,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                       Acompañamiento completamente personalizado para preparar la PAES. Trabajo focalizado en vacíos, estrategia y precisión, ajustado al nivel real de tu hijo y con foco en mejorar puntaje.
                     </p>
 
-                    <div className="mt-auto space-y-3">
+                    <div className="mt-auto">
                       <button
                         onClick={() => onOpenModal(infoUrl)}
                         className="block w-full text-center border-2 border-slate-200 text-brandNavy font-bold text-[9px] sm:text-[10px] uppercase tracking-widest
