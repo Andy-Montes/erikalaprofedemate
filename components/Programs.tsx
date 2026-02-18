@@ -61,20 +61,29 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <div
                   className="
-                    absolute -inset-y-10 -left-56 w-44 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/35 to-white/0
-                    blur-lg opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[680px]
-                    transition-all duration-700 ease-out
+                    absolute -inset-y-16 -left-64 w-52 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/75 to-white/0
+                    blur-md opacity-40
+                    group-hover:opacity-100 group-hover:translate-x-[720px]
+                    transition-all duration-900 ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -inset-y-10 -left-72 w-24 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/22 to-white/0
-                    blur-md opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[720px]
-                    transition-all duration-700 ease-out
+                    absolute -inset-y-16 -left-80 w-32 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/55 to-white/0
+                    blur-sm opacity-30
+                    group-hover:opacity-95 group-hover:translate-x-[780px]
+                    transition-all duration-1000 ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -inset-y-16 -left-[22rem] w-20 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/80 to-white/0
+                    blur-sm opacity-20
+                    group-hover:opacity-90 group-hover:translate-x-[760px]
+                    transition-all duration-[1100ms] ease-out
                   "
                 />
               </div>
@@ -141,20 +150,29 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               <div className="absolute inset-0 z-0 pointer-events-none">
                 <div
                   className="
-                    absolute -inset-y-10 -left-56 w-44 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/32 to-white/0
-                    blur-lg opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[780px]
-                    transition-all duration-700 ease-out
+                    absolute -inset-y-16 -left-64 w-56 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/72 to-white/0
+                    blur-md opacity-35
+                    group-hover:opacity-100 group-hover:translate-x-[860px]
+                    transition-all duration-900 ease-out
                   "
                 />
                 <div
                   className="
-                    absolute -inset-y-10 -left-72 w-24 rotate-12
-                    bg-gradient-to-b from-white/0 via-white/20 to-white/0
-                    blur-md opacity-0
-                    group-hover:opacity-100 group-hover:translate-x-[820px]
-                    transition-all duration-700 ease-out
+                    absolute -inset-y-16 -left-80 w-32 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/52 to-white/0
+                    blur-sm opacity-30
+                    group-hover:opacity-95 group-hover:translate-x-[900px]
+                    transition-all duration-1000 ease-out
+                  "
+                />
+                <div
+                  className="
+                    absolute -inset-y-16 -left-[22rem] w-24 rotate-12
+                    bg-gradient-to-b from-white/0 via-white/78 to-white/0
+                    blur-sm opacity-20
+                    group-hover:opacity-90 group-hover:translate-x-[920px]
+                    transition-all duration-[1100ms] ease-out
                   "
                 />
               </div>
