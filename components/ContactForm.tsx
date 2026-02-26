@@ -85,7 +85,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onOpenModal }) => {
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <button 
                 onClick={() => onOpenModal(interviewUrl)}
-                className="w-full sm:w-auto bg-brandRed text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-red-700 transition-all shadow-xl shadow-red-500/20 text-center text-xs"
+                className="w-full sm:w-auto bg-brandRed text-white font-bold py-3 px-6 rounded-full uppercase tracking-[0.18em] hover:bg-red-700 transition-all shadow-lg shadow-red-500/20 text-center text-[11px]"
               >
                 Solicitar Mi Entrevista
               </button>
