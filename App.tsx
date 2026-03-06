@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Methodology from './components/Methodology';
 import Programs from './components/Programs';
+import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import AIAssistant from './components/AIAssistant';
@@ -36,6 +37,7 @@ const App: React.FC = () => {
         <Hero onOpenModal={openModal} />
         <Methodology />
         <Programs onOpenModal={openModal} />
+        <Testimonials />
         <ContactForm onOpenModal={openModal} />
       </main>
       <Footer onOpenModal={openModal} />
