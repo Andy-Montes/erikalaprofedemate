@@ -37,7 +37,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
     "hover:bg-[#162a4f] active:opacity-95";
 
   // Color cyan para la tarjeta destacada
-  const featuredColor = "#0891B2";
+  const featuredColor = "#0086f2";
 
   // Glow shine reutilizable
   const glowShine = (translateX: string) => (
