@@ -32,7 +32,7 @@ const testimonials: Testimonial[] = [
     text: "Contraté a Erika desesperado porque mi hija no entendía nada de matemáticas. En tres meses cambió completamente su actitud hacia la asignatura y logró entrar a la universidad. No tengo palabras.",
     stars: 5,
     initials: "JP",
-    color: "bg-[#38388d]",
+    color: "bg-[#0086f2]",
   },
   {
     name: "Sofía Muñoz",
@@ -56,7 +56,7 @@ const testimonials: Testimonial[] = [
     text: "Llegué a las clases de Erika con mucho miedo a la PAES. Ella me enseñó a perderle el miedo a los problemas y a tener estrategia. Obtuve un puntaje que nunca imaginé. ¡Gracias Erika!",
     stars: 5,
     initials: "VT",
-    color: "bg-[#38388d]",
+    color: "bg-[#0086f2]",
   },
 ];
 

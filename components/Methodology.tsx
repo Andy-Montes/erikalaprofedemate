@@ -38,7 +38,7 @@ const Methodology: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold mb-4">Diagnóstico Integral</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-[#38388d]">
+              <p className="font-bold text-[#0086f2]">
                 Antes de enseñar, identifico qué ocurre entre tu hijo y las matemáticas...
               </p>
               <p>
@@ -68,7 +68,7 @@ const Methodology: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold mb-4">Plan Personalizado</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-[#38388d]">
+              <p className="font-bold text-[#0086f2]">
                 Un plan claro y personalizado, diseñado según las necesidades reales de tu hijo.
               </p>
               <p>
@@ -98,7 +98,7 @@ const Methodology: React.FC = () => {
             </div>
             <h3 className="text-xl font-bold mb-4">Acompañamiento y Seguimiento</h3>
             <div className="text-slate-600 text-sm lg:text-base leading-relaxed font-light space-y-3">
-              <p className="font-bold text-[#38388d]">
+              <p className="font-bold text-[#0086f2]">
                 No están solos en este proceso.
               </p>
               <p>
