@@ -259,10 +259,10 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                     <div className="p-7 flex flex-col h-full relative z-10">
                       <div>
                         <h3 className="text-xl sm:text-[22px] font-black text-brandNavy mb-2 min-h-[52px]">
-                          PAES Confianza Matemática
+                          Preparación PAES
+                          <span className="block text-[16px] font-semibold text-[#0086f2] leading-tight mt-0.5">Modalidad Grupal</span>
                         </h3>
                         <p className="text-brandNavy font-semibold mb-3 text-[16px] min-h-[52px]">
-                          Modalidad: grupal
                           <span className="block text-[14px] font-semibold leading-tight">(máx. 14 estudiantes)</span>
                         </p>
 
@@ -278,7 +278,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
                       <div className="mt-auto pt-4">
                         <a
-                          href={waWithProgram("PAES Confianza Matemática (Grupal)")}
+                          href={waWithProgram("Preparación PAES Grupal")}
                           target="_blank"
                           rel="noreferrer"
                           className="text-brandRed font-semibold text-[15px] hover:underline inline-flex items-center gap-2"
