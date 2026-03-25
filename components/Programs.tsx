@@ -36,8 +36,8 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
     "py-3 px-4 rounded-xl leading-tight w-[240px] sm:w-[260px] " +
     "hover:bg-[#162a4f] active:opacity-95";
 
-  // Color ámbar para la tarjeta destacada
-  const amberColor = "#D97706";
+  // Color cyan para la tarjeta destacada
+  const featuredColor = "#0891B2";
 
   // Glow shine reutilizable
   const glowShine = (translateX: string) => (
@@ -73,7 +73,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =====================================================
               IZQUIERDA — Clases Personalizadas (Comprensión + NEM)
           ===================================================== */}
-          <div className="w-full lg:w-[28%] relative overflow-visible pt-2">
+          <div className="w-full lg:w-[32%] relative overflow-visible pt-2">
             {/* Pill */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 bg-white text-brandRed px-6 py-2.5 rounded-full border-2 border-brandRed shadow-xl">
               <span className="block text-[11px] sm:text-[13px] font-black uppercase tracking-[0.20em] whitespace-nowrap">
@@ -87,7 +87,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               </div>
 
               <div className="px-6 pt-14 pb-8 relative z-10">
-                <div className={`${wowCard} lg:h-[460px]`}>
+                <div className={`${wowCard} lg:h-[480px]`}>
                   <div aria-hidden className="pointer-events-none absolute -left-14 top-8 text-slate-200/40">
                     <svg viewBox="0 0 120 120" className="h-52 w-52" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M33 78c-9 0-16-7-16-16 0-8 5-14 12-16a15 15 0 0 1 26-12 14 14 0 0 1 22 5c9 0 16 7 16 16 0 8-6 15-14 16"/>
@@ -138,11 +138,11 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =====================================================
               CENTRO — PAES GRUPAL DESTACADO (más grande, ámbar)
           ===================================================== */}
-          <div className="w-full lg:w-[44%] relative overflow-visible pt-2 lg:-mt-4">
+          <div className="w-full lg:w-[36%] relative overflow-visible pt-2 lg:-mt-2">
             {/* Pill superior destacado */}
             <div
               className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 px-8 py-3 rounded-full shadow-2xl"
-              style={{ background: amberColor, border: `2px solid rgba(255,255,255,0.5)` }}
+              style={{ background: featuredColor, border: `2px solid rgba(255,255,255,0.5)` }}
             >
               <span className="block text-[12px] sm:text-[14px] font-black uppercase tracking-[0.22em] whitespace-nowrap text-white">
                 ★ Más Popular
@@ -151,7 +151,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
 
             <div
               className="relative rounded-[3rem] shadow-inner border-2 border-white/20 overflow-hidden group"
-              style={{ background: amberColor }}
+              style={{ background: featuredColor }}
             >
               {/* Glow shine */}
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -168,18 +168,10 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                     "transition-all duration-500 ease-out transform-gpu will-change-transform " +
                     "hover:-translate-y-3 hover:scale-[1.02] " +
                     "hover:shadow-[0_80px_160px_-60px_rgba(0,0,0,0.60)] " +
-                    "active:scale-[0.99] lg:h-[540px]"
+                    "active:scale-[0.99] lg:h-[500px]"
                   }
-                  style={{ borderColor: `${amberColor}60` }}
+                  style={{ borderColor: `${featuredColor}60` }}
                 >
-                  {/* Badge "Cupos Limitados" */}
-                  <div
-                    className="absolute top-5 right-5 z-20 px-3 py-1.5 rounded-full text-white font-black text-[11px] uppercase tracking-[0.18em] shadow-lg"
-                    style={{ background: amberColor }}
-                  >
-                    ¡Cupos Limitados!
-                  </div>
-
                   <div aria-hidden className="pointer-events-none absolute -left-14 top-8 text-slate-200/40">
                     <svg viewBox="0 0 120 120" className="h-52 w-52" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                       <circle cx="42" cy="42" r="12" />
@@ -193,13 +185,20 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                   <div className="p-8 flex flex-col h-full relative z-10">
                     <div>
                       <h3
-                        className="text-2xl sm:text-[26px] font-black mb-3 leading-tight"
-                        style={{ color: amberColor }}
+                        className="text-xl sm:text-[23px] font-black mb-2 leading-tight"
+                        style={{ color: featuredColor }}
                       >
                         PREPARACIÓN PAES
-                        <span className="block text-[20px] sm:text-[22px]">Modalidad Grupal</span>
+                        <span className="block text-[18px] sm:text-[20px]">Modalidad Grupal</span>
                       </h3>
-                      <p className="text-brandNavy font-semibold mb-4 text-[16px]">
+                      {/* Badge Cupos Limitados — en flujo, no tapa nada */}
+                      <span
+                        className="inline-block mb-3 px-3 py-1 rounded-full text-white font-bold text-[11px] uppercase tracking-[0.15em]"
+                        style={{ background: "#F59E0B" }}
+                      >
+                        ¡Cupos Limitados!
+                      </span>
+                      <p className="text-brandNavy font-semibold mb-3 text-[16px]">
                         Modalidad: grupal
                         <span className="block text-[14px] font-semibold leading-tight">(máx. 14 estudiantes)</span>
                       </p>
@@ -220,7 +219,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
                         target="_blank"
                         rel="noreferrer"
                         className="font-semibold text-[16px] hover:underline inline-flex items-center gap-2"
-                        style={{ color: amberColor }}
+                        style={{ color: featuredColor }}
                       >
                         Quiero hablar con Erika <span>→</span>
                       </a>
@@ -240,7 +239,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           {/* =====================================================
               DERECHA — PAES Personalizado (1 a 1)
           ===================================================== */}
-          <div className="w-full lg:w-[28%] relative overflow-visible pt-2">
+          <div className="w-full lg:w-[32%] relative overflow-visible pt-2">
             {/* Pill */}
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 bg-white text-[#0086f2] px-6 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
               <span className="block text-[11px] sm:text-[13px] font-black uppercase tracking-[0.20em] whitespace-nowrap">
@@ -254,7 +253,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
               </div>
 
               <div className="px-6 pt-14 pb-8 relative z-10">
-                <div className={`${wowCard} lg:h-[460px]`}>
+                <div className={`${wowCard} lg:h-[480px]`}>
                   <div aria-hidden className="pointer-events-none absolute -left-14 top-8 text-slate-200/40">
                     <svg viewBox="0 0 120 120" className="h-52 w-52" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M60 14v10" />
