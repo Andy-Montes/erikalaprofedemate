@@ -241,13 +241,13 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
           ===================================================== */}
           <div className="w-full lg:w-[32%] relative overflow-visible pt-2">
             {/* Pill */}
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 bg-white text-[#0086f2] px-6 py-2.5 rounded-full border-2 border-[#0086f2] shadow-xl">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 bg-white text-[#38388d] px-6 py-2.5 rounded-full border-2 border-[#38388d] shadow-xl">
               <span className="block text-[11px] sm:text-[13px] font-black uppercase tracking-[0.20em] whitespace-nowrap">
                 Preparación PAES
               </span>
             </div>
 
-            <div className="relative rounded-[3rem] bg-[#0086f2] shadow-inner border-2 border-white/20 overflow-hidden group">
+            <div className="relative rounded-[3rem] bg-[#38388d] shadow-inner border-2 border-white/20 overflow-hidden group">
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div className="absolute -top-24 -left-44 h-[185%] w-20 rotate-[18deg] bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.12)_24%,rgba(255,255,255,0.88)_50%,rgba(255,255,255,0.12)_76%,transparent_100%)] blur-md opacity-35 group-hover:opacity-95 group-hover:translate-x-[560px] transition-all duration-1000 ease-out" />
               </div>
