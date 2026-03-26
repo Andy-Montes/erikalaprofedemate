@@ -19,7 +19,7 @@ const testimonials: Testimonial[] = [
     color: "bg-brandRed",
   },
   {
-    name: "Catalina Rojas",
+    name: "Carla Romo",
     role: "Estudiante PAES 2024",
     text: "Gracias a las clases con Erika subí 120 puntos en la PAES de matemáticas. Ella tiene una forma muy clara de explicar y siempre estuvo disponible para resolver mis dudas. 100% recomendada.",
     stars: 5,
