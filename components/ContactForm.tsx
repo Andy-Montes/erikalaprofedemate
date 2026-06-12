@@ -49,7 +49,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onOpenModal }) => {
             <div className="relative mb-6">
               <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl relative z-10">
                 <img 
-                  src="https://i.imgur.com/7RFOaAt.png" 
+                  src="/images/erika-photo.png"
                   alt="Erika Meriño" 
                   className="w-full h-full object-cover object-top" 
                 />
@@ -85,9 +85,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onOpenModal }) => {
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <button 
                 onClick={() => onOpenModal(interviewUrl)}
-                className="w-full sm:w-auto bg-brandRed text-white font-bold py-3 px-6 rounded-full uppercase tracking-[0.18em] hover:bg-red-700 transition-all shadow-lg shadow-red-500/20 text-center text-[11px]"
+                className="w-full rounded-full bg-[#0086f2] px-6 py-3 text-center text-[11px] font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-[#0086f2]/25 transition-all hover:-translate-y-0.5 hover:bg-[#006fc9] hover:shadow-[#0086f2]/35 sm:w-auto"
               >
-                Solicitar Mi Entrevista
+                Agendar Mi Entrevista
               </button>
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-2">

@@ -128,7 +128,7 @@ const AIAssistant: React.FC = () => {
           <div className="bg-brandNavy p-4 flex items-center justify-between text-white">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/20">
-                <img src="https://i.imgur.com/7RFOaAt.png" alt="Erika" className="w-full h-full object-cover object-top" />
+                <img src="/images/erika-photo.png" alt="Erika" className="w-full h-full object-cover object-top" />
               </div>
               <div>
                 <h4 className="font-bold text-sm">Erika Meriño</h4>

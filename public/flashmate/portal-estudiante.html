@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlashMate · Mi Portal</title>
+<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#38388E;
+  --rojo:#ED3B62;
+  --celeste:#0187F3;
+  --verde:#10B981;
+  --amarillo:#F59E0B;
+  --bg:#F0F2F8;
+  --card:#fff;
+  --texto:#1a1a2e;
+  --suave:#6B7280;
+  --borde:#E5E7EB;
+  --bloqueado:#9CA3AF;
+}
+
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;}
+
+/* ── LOGIN ── */
+#pantalla-login{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:24px;
+  background:linear-gradient(135deg,#38388E 0%,#1a1a5e 100%);
+}
+.login-card{
+  background:#fff;border-radius:20px;padding:40px 36px;
+  max-width:420px;width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);text-align:center;
+}
+.login-logo{height:64px;margin-bottom:20px;}
+.login-titulo{font-size:22px;font-weight:700;color:var(--azul);margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--suave);margin-bottom:28px;line-height:1.5;}
+.login-input{
+  width:100%;padding:12px 16px;border:2px solid var(--borde);border-radius:10px;
+  font-family:'Poppins',sans-serif;font-size:14px;color:var(--texto);outline:none;
+  transition:border .15s;margin-bottom:10px;
+}
+.login-input:focus{border-color:var(--azul);}
+.login-btn{
+  width:100%;background:var(--rojo);color:#fff;border:none;border-radius:10px;
+  padding:13px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;transition:opacity .15s;margin-top:6px;
+}
+.login-btn:hover{opacity:.88;}
+.login-btn:disabled{opacity:.5;cursor:not-allowed;}
+.login-error{
+  background:#FEF2F2;color:#991B1B;border:1px solid #FECACA;
+  border-radius:8px;padding:10px 14px;font-size:12px;margin-top:10px;display:none;
+}
+.login-footer{font-size:11px;color:rgba(255,255,255,0.6);margin-top:20px;}
+
+/* ── PORTAL ── */
+#pantalla-portal{display:none;}
+
+.hdr{
+  background:var(--azul);padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(56,56,142,0.3);
+}
+.hdr-left{display:flex;align-items:center;gap:12px;}
+.hdr-logo{height:40px;border-radius:6px;}
+.hdr-nombre{font-size:14px;font-weight:600;color:#fff;}
+.hdr-correo{font-size:10px;color:rgba(255,255,255,0.6);}
+.hdr-right{display:flex;align-items:center;gap:10px;}
+.plan-badge{background:var(--rojo);color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;}
+.btn-salir{
+  background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:8px;
+  padding:6px 12px;font-family:'Poppins',sans-serif;font-size:11px;cursor:pointer;
+}
+.btn-salir:hover{background:rgba(255,255,255,0.25);}
+
+.contenido{max-width:880px;margin:0 auto;padding:24px 16px 60px;}
+
+/* ── SALUDO ── */
+.saludo-wrap{margin-bottom:20px;}
+.saludo-txt{font-size:20px;font-weight:700;color:var(--azul);}
+.saludo-fecha{font-size:12px;color:var(--suave);margin-top:2px;}
+
+/* ── CONTADORES ── */
+.contadores{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+  margin-bottom:20px;
+}
+.contador-card{
+  background:var(--card);border-radius:14px;padding:16px 12px;
+  border:1.5px solid var(--borde);text-align:center;
+}
+.contador-num{font-size:28px;font-weight:700;line-height:1;}
+.contador-label{font-size:10px;color:var(--suave);margin-top:4px;line-height:1.3;}
+.cnt-hoy .contador-num{color:var(--rojo);}
+.cnt-mes .contador-num{color:var(--azul);}
+.cnt-total .contador-num{color:var(--celeste);}
+
+/* ── BARRA 800 ── */
+.barra800-wrap{
+  background:var(--card);border-radius:14px;padding:16px 20px;
+  border:1.5px solid var(--borde);margin-bottom:20px;
+}
+.barra800-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.barra800-titulo{font-size:12px;font-weight:600;color:var(--texto);}
+.barra800-num{font-size:12px;font-weight:700;color:var(--azul);}
+.barra-bg{background:#E5E7EB;border-radius:20px;height:8px;overflow:hidden;}
+.barra-fill{height:8px;border-radius:20px;background:linear-gradient(90deg,var(--celeste),var(--azul));transition:width .6s ease;}
+.barra800-meta{font-size:10px;color:var(--suave);margin-top:6px;}
+
+/* ── GUÍA DE HOY ── */
+.guia-hoy-wrap{margin-bottom:24px;}
+.seccion-label{font-size:11px;font-weight:700;color:var(--suave);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+
+.guia-hoy-card{
+  background:var(--card);border-radius:16px;
+  border:2px solid var(--rojo);overflow:hidden;
+}
+.guia-hoy-top{padding:18px 18px 14px;}
+.guia-hoy-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#FEF2F2;color:var(--rojo);
+  font-size:10px;font-weight:700;
+  padding:3px 10px;border-radius:20px;margin-bottom:10px;
+}
+.dot-rojo{width:6px;height:6px;border-radius:50%;background:var(--rojo);}
+.guia-hoy-titulo{font-size:17px;font-weight:700;color:var(--texto);margin-bottom:3px;}
+.guia-hoy-cod{font-size:12px;color:var(--suave);margin-bottom:10px;}
+.guia-hoy-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.pill{font-size:10px;padding:3px 10px;border-radius:20px;border:1px solid var(--borde);color:var(--suave);}
+.guia-hoy-action{
+  padding:12px 18px;border-top:1px solid var(--borde);
+  display:flex;align-items:center;justify-content:space-between;
+  background:#FAFAFA;
+}
+.guia-hoy-hint{font-size:11px;color:var(--suave);}
+.btn-iniciar{
+  background:var(--rojo);color:#fff;border:none;border-radius:10px;
+  padding:10px 22px;font-family:'Poppins',sans-serif;
+  font-size:13px;font-weight:600;cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:opacity .15s;
+}
+.btn-iniciar:hover{opacity:.88;}
+
+/* Sin guía hoy */
+.sin-guia-card{
+  background:var(--card);border-radius:14px;border:1.5px dashed var(--borde);
+  padding:28px 20px;text-align:center;
+}
+.sin-guia-icon{font-size:32px;margin-bottom:10px;}
+.sin-guia-txt{font-size:13px;font-weight:600;color:var(--texto);margin-bottom:4px;}
+.sin-guia-sub{font-size:11px;color:var(--suave);line-height:1.5;}
+
+/* ── SEMANA ── */
+.semana-wrap{margin-bottom:28px;}
+.semana-lista{display:flex;flex-direction:column;gap:6px;}
+
+.semana-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-radius:10px;background:var(--card);
+  border:1.5px solid var(--borde);
+}
+.semana-left{display:flex;align-items:center;gap:10px;}
+.check-circle{
+  width:20px;height:20px;border-radius:50%;
+  background:#D1FAE5;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.check-circle svg{width:10px;height:10px;}
+.semana-cod{font-size:12px;font-weight:600;color:var(--texto);}
+.semana-sub{font-size:10px;color:var(--suave);}
+.semana-score{font-size:12px;color:var(--suave);}
+.semana-score.perfecto{color:var(--verde);font-weight:700;}
+
+.prox-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-radius:10px;
+  border:1px dashed var(--borde);
+}
+.prox-cod{font-size:12px;color:var(--bloqueado);}
+.prox-sub{font-size:10px;color:var(--bloqueado);}
+
+/* ── CATÁLOGO (secundario) ── */
+.catalogo-toggle{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;background:var(--card);border-radius:14px;
+  border:1.5px solid var(--borde);cursor:pointer;margin-bottom:4px;
+  transition:border-color .15s;
+}
+.catalogo-toggle:hover{border-color:var(--azul);}
+.catalogo-toggle-txt{font-size:13px;font-weight:600;color:var(--azul);}
+.catalogo-toggle-sub{font-size:11px;color:var(--suave);margin-top:1px;}
+.catalogo-arrow{font-size:16px;color:var(--suave);transition:transform .2s;}
+.catalogo-arrow.abierto{transform:rotate(180deg);}
+#catalogo-contenido{display:none;margin-top:12px;}
+
+/* SECCIONES CATÁLOGO */
+.seccion{margin-bottom:28px;}
+.seccion-hdr{
+  display:flex;align-items:center;gap:12px;margin-bottom:14px;
+  padding-bottom:10px;border-bottom:2px solid var(--borde);
+}
+.seccion-titulo{font-size:14px;font-weight:700;color:var(--azul);}
+.seccion-sub{font-size:11px;color:var(--suave);}
+.seccion-prog{margin-left:auto;font-size:11px;color:var(--suave);white-space:nowrap;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;}
+
+.guia-card{
+  border-radius:12px;padding:14px;border:1.5px solid var(--borde);
+  background:var(--card);position:relative;overflow:hidden;transition:all .2s;
+}
+.guia-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.guia-card.desbloqueada.nivel-a::before{background:var(--celeste);}
+.guia-card.desbloqueada.nivel-b::before{background:var(--verde);}
+.guia-card.desbloqueada.nivel-c::before{background:var(--rojo);}
+.guia-card.desbloqueada:hover{
+  border-color:var(--azul);box-shadow:0 4px 16px rgba(56,56,142,0.12);transform:translateY(-2px);
+}
+.guia-card.bloqueada{background:#F9FAFB;border-style:dashed;opacity:.75;}
+.guia-card.bloqueada::before{background:#D1D5DB;}
+.guia-card.completada{border-color:#D1FAE5;background:#F0FDF4;}
+.guia-card.completada::before{background:var(--verde);}
+.guia-card.es-hoy{border-color:var(--rojo);box-shadow:0 0 0 2px rgba(237,59,98,0.15);}
+
+.guia-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;}
+.guia-codigo{font-size:12px;font-weight:700;color:var(--azul);}
+.guia-card.bloqueada .guia-codigo{color:var(--bloqueado);}
+
+.nivel-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:8px;}
+.tag-a{background:#EFF6FF;color:#1D4ED8;}
+.tag-b{background:#ECFDF5;color:#065F46;}
+.tag-c{background:#FEF2F2;color:#991B1B;}
+.tag-bloq{background:#F3F4F6;color:#9CA3AF;}
+.tag-hoy{background:#FEF2F2;color:var(--rojo);}
+
+.guia-nombre{font-size:11px;font-weight:600;color:var(--texto);margin-bottom:2px;}
+.guia-card.bloqueada .guia-nombre{color:var(--bloqueado);}
+.guia-sub{font-size:10px;color:var(--suave);margin-bottom:10px;line-height:1.4;}
+
+.logro-wrap{margin-bottom:10px;}
+.logro-hdr{display:flex;justify-content:space-between;font-size:10px;color:var(--suave);margin-bottom:4px;}
+.logro-barra{background:#E5E7EB;border-radius:10px;height:5px;overflow:hidden;}
+.logro-fill{height:5px;border-radius:10px;background:var(--verde);transition:width .5s;}
+
+.btn-guia{
+  width:100%;background:var(--azul);color:#fff;border:none;border-radius:8px;
+  padding:8px;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;
+  cursor:pointer;transition:opacity .15s;text-decoration:none;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-guia:hover{opacity:.85;}
+.btn-guia.completada-btn{background:var(--verde);}
+.btn-guia.hoy-btn{background:var(--rojo);}
+
+.btn-bloqueada{
+  width:100%;background:#E5E7EB;color:#9CA3AF;border:none;border-radius:8px;
+  padding:8px;font-family:'Poppins',sans-serif;font-size:11px;cursor:not-allowed;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+.logro-badge{position:absolute;top:10px;right:10px;font-size:14px;}
+
+/* SPINNER */
+.spinner{
+  display:inline-block;width:18px;height:18px;
+  border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;
+  border-radius:50%;animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── ENSAYO ── */
+.ensayo-wrap{margin-bottom:28px;}
+.ensayo-card{
+  background:var(--card);border-radius:16px;
+  border:1.5px solid var(--borde);overflow:hidden;
+}
+.ensayo-card.tiene-fecha{border-color:#0187F3;}
+.ensayo-top{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.ensayo-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;padding:3px 10px;
+  border-radius:20px;margin-bottom:8px;
+}
+.ensayo-badge.pronto{background:#EEF2FF;color:#38388E;}
+.ensayo-badge.fecha{background:#e0f0fe;color:#0162b8;}
+.ensayo-badge.hoy{background:#fde8ed;color:#c0204a;}
+.ensayo-titulo{font-size:15px;font-weight:700;color:var(--texto);margin-bottom:2px;}
+.ensayo-sub{font-size:12px;color:var(--suave);}
+.ensayo-fecha-grande{
+  text-align:right;flex-shrink:0;
+}
+.ensayo-dia{font-size:26px;font-weight:800;color:#0187F3;line-height:1;}
+.ensayo-mes{font-size:11px;color:var(--suave);margin-top:2px;}
+.ensayo-action{
+  padding:12px 18px;border-top:1px solid var(--borde);
+  display:flex;align-items:center;justify-content:space-between;
+  background:#FAFAFA;
+}
+.ensayo-hint{font-size:11px;color:var(--suave);}
+.btn-ensayo{
+  background:#0187F3;color:#fff;border:none;border-radius:10px;
+  padding:9px 20px;font-family:'Poppins',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:opacity .15s;
+}
+.btn-ensayo:hover{opacity:.88;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="pantalla-login">
+  <div class="login-card">
+    <img class="login-logo" src="/flashmate/logo-erika.png" alt="FlashMate" onerror="this.style.display='none'">
+    <div class="login-titulo">FlashMate</div>
+    <div class="login-sub">Ingresa tu correo electrónico para acceder a tu guía de hoy.</div>
+    <input class="login-input" type="email" id="inp-correo-login"
+      placeholder="tucorreo@gmail.com"
+      onkeydown="if(event.key==='Enter')verificarAcceso()">
+    <button class="login-btn" id="btn-login" onclick="verificarAcceso()">Ingresar →</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+  <div class="login-footer">© 2026 Erika la Profe de Mate · www.erikalaprofedemate.com</div>
+</div>
+
+<!-- PORTAL -->
+<div id="pantalla-portal">
+
+  <div class="hdr">
+    <div class="hdr-left">
+      <img class="hdr-logo" src="/flashmate/logo-erika.png" alt="FM" onerror="this.style.display='none'">
+      <div>
+        <div class="hdr-nombre" id="hdr-nombre">Estudiante</div>
+        <div class="hdr-correo" id="hdr-correo"></div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <span class="plan-badge" id="hdr-plan">Plan</span>
+      <button class="btn-salir" onclick="salir()">Salir</button>
+    </div>
+  </div>
+
+  <div class="contenido">
+
+    <!-- SALUDO -->
+    <div class="saludo-wrap">
+      <div class="saludo-txt" id="saludo-txt">Hola</div>
+      <div class="saludo-fecha" id="saludo-fecha"></div>
+    </div>
+
+    <!-- CONTADORES -->
+    <div class="contadores">
+      <div class="contador-card cnt-hoy">
+        <div class="contador-num" id="cnt-hoy">8</div>
+        <div class="contador-label">ejercicios<br>hoy</div>
+      </div>
+      <div class="contador-card cnt-mes">
+        <div class="contador-num" id="cnt-mes">0</div>
+        <div class="contador-label">este<br>mes</div>
+      </div>
+      <div class="contador-card cnt-total">
+        <div class="contador-num" id="cnt-total">0</div>
+        <div class="contador-label">total<br>acumulado</div>
+      </div>
+    </div>
+
+    <!-- BARRA 800 -->
+    <div class="barra800-wrap">
+      <div class="barra800-hdr">
+        <span class="barra800-titulo">Camino a 800 ejercicios</span>
+        <span class="barra800-num" id="barra800-num">0 / 800</span>
+      </div>
+      <div class="barra-bg">
+        <div class="barra-fill" id="barra800-fill" style="width:0%"></div>
+      </div>
+      <div class="barra800-meta" id="barra800-meta"></div>
+    </div>
+
+    <!-- GUÍA DE HOY -->
+    <div class="guia-hoy-wrap">
+      <div class="seccion-label">Guía de hoy</div>
+      <div id="guia-hoy-contenido"></div>
+    </div>
+
+    <!-- SEMANA -->
+    <div class="semana-wrap">
+      <div class="seccion-label">Esta semana</div>
+      <div class="semana-lista" id="semana-lista"></div>
+    </div>
+
+
+    <!-- ENSAYO -->
+    <div class="ensayo-wrap">
+      <div class="seccion-label">Ensayo PAES</div>
+      <div id="ensayo-contenido"></div>
+    </div>
+
+    <!-- CATÁLOGO COLAPSABLE -->
+    <div class="seccion-label">Historial completo</div>
+    <div class="catalogo-toggle" onclick="toggleCatalogo()">
+      <div>
+        <div class="catalogo-toggle-txt">Ver todas mis guías</div>
+        <div class="catalogo-toggle-sub" id="catalogo-resumen">Cargando...</div>
+      </div>
+      <div class="catalogo-arrow" id="catalogo-arrow">▼</div>
+    </div>
+    <div id="catalogo-contenido">
+      <div id="contenedor-secciones"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec';
+const BASE_URL   = '/flashmate/';
+const META_EJERCICIOS = 800;
+
+const SECCIONES = [
+  {
+    id:'U01-A', titulo:'Unidad 01 · Números Reales',
+    sub:'Subunidad A: Conjuntos Numéricos',
+    guias:[
+      {cod:'U01.A.1a',nombre:'Conjuntos Numéricos',desc:'Pares/impares · Primos · MCD · mcm',nivel:'a'},
+      {cod:'U01.A.2b',nombre:'Conjuntos Numéricos',desc:'MCD · mcm · Divisibilidad avanzada',nivel:'b'},
+      {cod:'U01.A.3c',nombre:'Conjuntos Numéricos',desc:'Argumentación · Propiedades avanzadas',nivel:'c'},
+    ]
+  },
+  {
+    id:'U01-B', titulo:'Unidad 01 · Números Reales',
+    sub:'Subunidad B: Números Enteros',
+    guias:[
+      {cod:'U01.B.4a',nombre:'Números Enteros',desc:'Operaciones · Orden · Valor absoluto',nivel:'a'},
+      {cod:'U01.B.5b',nombre:'Números Enteros',desc:'Propiedades · Expresiones · Signos',nivel:'b'},
+      {cod:'U01.B.6c',nombre:'Números Enteros',desc:'Condiciones algebraicas · Contextos',nivel:'c'},
+      {cod:'U01.B.7c',nombre:'Números Enteros',desc:'Razonamiento algebraico · Recta numérica',nivel:'c'},
+    ]
+  },
+  {
+    id:'U01-C', titulo:'Unidad 01 · Números Reales',
+    sub:'Subunidad C: Números Racionales',
+    guias:[
+      {cod:'U01.C.8a',nombre:'Números Racionales',desc:'Fracciones · Decimales · Operatoria básica',nivel:'a'},
+      {cod:'U01.C.9b',nombre:'Números Racionales',desc:'Periódicos · Comparación · Conversiones',nivel:'b'},
+      {cod:'U01.C.10c',nombre:'Números Racionales',desc:'Operatoria avanzada · Racionales algebraicos',nivel:'c'},
+      {cod:'U01.C.11c',nombre:'Números Racionales',desc:'Semi-periódicos · Truncamiento · Densidad',nivel:'c'},
+      {cod:'U01.C.12c',nombre:'Números Racionales',desc:'Fracciones complejas · Argumentación',nivel:'c'},
+    ]
+  },
+  {
+    id:'U02-A', titulo:'Unidad 02 · Porcentajes',
+    sub:'Subunidad A: Porcentajes e Interés',
+    guias:[
+      {cod:'U02.A.1a',nombre:'Porcentajes',desc:'Concepto · Cálculo directo · Contextos',nivel:'a'},
+      {cod:'U02.A.2b',nombre:'Porcentajes',desc:'Aumentos · Descuentos · % del resto',nivel:'b'},
+      {cod:'U02.A.3b',nombre:'Porcentajes',desc:'% de % · Variaciones encadenadas',nivel:'b'},
+      {cod:'U02.A.4c',nombre:'Porcentajes',desc:'Algebraico · Problemas multi-paso',nivel:'c'},
+      {cod:'U02.A.5c',nombre:'Porcentajes + IS',desc:'Interés simple en contexto',nivel:'c'},
+      {cod:'U02.A.6c',nombre:'Porcentajes + IC',desc:'Interés compuesto · Comparaciones',nivel:'c'},
+    ]
+  },
+  {
+    id:'U03-A', titulo:'Unidad 03 · Potencias y Raíces',
+    sub:'Subunidad A: Potencias',
+    guias:[
+      {cod:'U03.A.1a',nombre:'Potencias',desc:'Exponente 0 · Negativos · Propiedades básicas',nivel:'a'},
+      {cod:'U03.A.2b',nombre:'Potencias',desc:'Suma de potencias · Propiedades combinadas',nivel:'b'},
+      {cod:'U03.A.3c',nombre:'Potencias',desc:'Simplificación algebraica · Notación científica',nivel:'c'},
+    ]
+  },
+  {
+    id:'U03-B', titulo:'Unidad 03 · Potencias y Raíces',
+    sub:'Subunidad B: Raíces Enésimas',
+    guias:[
+      {cod:'U03.B.4a',nombre:'Raíces Enésimas',desc:'Simplificación básica · Raíces semejantes',nivel:'a'},
+      {cod:'U03.B.5b',nombre:'Raíces Enésimas',desc:'Raíces de fracciones · Dominio real',nivel:'b'},
+      {cod:'U03.B.6c',nombre:'Raíces Enésimas',desc:'Racionalización · Conjugados',nivel:'c'},
+      {cod:'U03.B.7c',nombre:'Raíces Enésimas',desc:'Racionalización algebraica · Argumentación',nivel:'c'},
+    ]
+  },
+];
+
+// Catálogo plano para búsqueda rápida
+const CATALOGO = {};
+SECCIONES.forEach(s => s.guias.forEach(g => CATALOGO[g.cod] = g));
+
+let estudiante = null;
+
+// ══════════════════════════════════════════
+// LOGIN
+// ══════════════════════════════════════════
+async function verificarAcceso() {
+  const correo = document.getElementById('inp-correo-login').value.trim().toLowerCase();
+  const errDiv = document.getElementById('login-error');
+  const btn    = document.getElementById('btn-login');
+
+  if (!correo || !correo.includes('@')) {
+    mostrarError('Ingresa un correo electrónico válido.');
+    return;
+  }
+
+  errDiv.style.display = 'none';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>';
+
+  try {
+    const urlVerif = SCRIPT_URL + '?accion=verificar&correo=' + encodeURIComponent(correo);
+    const respVerif = await fetch(urlVerif);
+    const dataVerif = await respVerif.json();
+
+    if (!dataVerif.acceso) {
+      btn.disabled = false;
+      btn.textContent = 'Ingresar →';
+      const mensajes = {
+        'correo_no_registrado': 'Este correo no tiene acceso activo. Contacta a tu profesora.',
+        'cuenta_inactiva':      'Tu cuenta está inactiva. Contacta a tu profesora.',
+        'acceso_vencido':       'Tu acceso ha vencido. Contacta a tu profesora para renovarlo.',
+        'correo_vacio':         'Ingresa un correo electrónico válido.',
+        'hoja_no_encontrada':   'Error del sistema. Contacta a tu profesora.'
+      };
+      mostrarError(mensajes[dataVerif.motivo] || 'Acceso no autorizado.');
+      return;
+    }
+
+    const urlRes = SCRIPT_URL + '?accion=resultados&correo=' + encodeURIComponent(correo);
+    const respRes = await fetch(urlRes);
+    const dataRes = await respRes.json();
+
+    estudiante = {
+      nombre:           dataVerif.nombre,
+      correo:           dataVerif.correo,
+      plan:             dataVerif.plan,
+      vencimiento:      dataVerif.vencimiento,
+      guiasHabilitadas: dataVerif.guiasHabilitadas || [],
+      guiasDesbloqueadas: dataVerif.guiasDesbloqueadas || [],
+      guiaHoy:          dataVerif.guiaHoy   || null,
+      ensayoHoy:        dataVerif.ensayoHoy  || null,
+      semana:           dataVerif.semana    || [],
+      totalEjercicios:  dataVerif.totalEjercicios || 0,
+      resultados:       dataRes.resultados  || {}
+    };
+
+    mostrarPortal();
+
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Ingresar →';
+    mostrarError('Error de conexión. Verifica tu internet e intenta de nuevo.');
+  }
+}
+
+function mostrarError(msg) {
+  const e = document.getElementById('login-error');
+  e.textContent = msg;
+  e.style.display = 'block';
+}
+
+// ══════════════════════════════════════════
+// PORTAL
+// ══════════════════════════════════════════
+function mostrarPortal() {
+  document.getElementById('pantalla-login').style.display = 'none';
+  document.getElementById('pantalla-portal').style.display = 'block';
+
+  document.getElementById('hdr-nombre').textContent = estudiante.nombre;
+  document.getElementById('hdr-correo').textContent = estudiante.correo;
+  document.getElementById('hdr-plan').textContent   = estudiante.plan;
+
+  renderSaludo();
+  renderContadores();
+  renderBarra800();
+  renderGuiaHoy();
+  renderSemana();
+  renderEnsayo();
+  renderCatalogo();
+}
+
+// ── SALUDO ──
+function renderSaludo() {
+  const nombre = estudiante.nombre.split(' ')[0];
+  const ahora  = new Date();
+  const hora   = ahora.getHours();
+  const saludo = hora < 12 ? 'Buenos días' : hora < 19 ? 'Buenas tardes' : 'Buenas noches';
+
+  const dias   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const meses  = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const fecha  = `${dias[ahora.getDay()]} ${ahora.getDate()} de ${meses[ahora.getMonth()]}`;
+
+  document.getElementById('saludo-txt').textContent  = saludo + ', ' + nombre;
+  document.getElementById('saludo-fecha').textContent = fecha;
+}
+
+// ── CONTADORES ──
+function renderContadores() {
+  const total = estudiante.totalEjercicios || 0;
+
+  // Ejercicios del mes: guías completadas en el mes actual * 8
+  const ahora = new Date();
+  const mesActual = ahora.getMonth();
+  const anioActual = ahora.getFullYear();
+  const semana = estudiante.semana || [];
+
+  // Contar completadas este mes desde semana (aproximación con los datos disponibles)
+  const completadasSemana = semana.filter(s => s.estado === 'completada').length;
+  const ejerciciosSemana  = completadasSemana * 8;
+
+  // Para el mes usamos el total disponible en semana + histórico aproximado
+  // El dato exacto lo tiene totalEjercicios; el mes lo aproximamos
+  const ejerciciosMes = Math.min(total, ejerciciosSemana + (total - ejerciciosSemana > 0 ? total - ejerciciosSemana : 0));
+
+  // Ejercicios de hoy: si la guía de hoy está completada = 8, si no = 0
+  const guiaHoy = estudiante.guiaHoy;
+  const ejerciciosHoy = guiaHoy && guiaHoy.estado === 'completada' ? 8 : 0;
+
+  document.getElementById('cnt-hoy').textContent   = ejerciciosHoy;
+  document.getElementById('cnt-mes').textContent   = total; // usamos total como proxy del mes en esta versión
+  document.getElementById('cnt-total').textContent = total;
+}
+
+// ── BARRA 800 ──
+function renderBarra800() {
+  const total = estudiante.totalEjercicios || 0;
+  const pct   = Math.min(100, Math.round(total / META_EJERCICIOS * 100));
+  const resto = META_EJERCICIOS - total;
+
+  document.getElementById('barra800-fill').style.width = pct + '%';
+  document.getElementById('barra800-num').textContent  = total + ' / ' + META_EJERCICIOS;
+
+  let meta = '';
+  if (total >= META_EJERCICIOS) {
+    meta = '¡Lograste los 800 ejercicios! Eso es constancia real.';
+  } else if (resto > 0) {
+    // Calcular semanas restantes asumiendo 40 ejercicios/semana
+    const semanas = Math.ceil(resto / 40);
+    meta = 'Te faltan ' + resto + ' ejercicios · A este ritmo llegas en ~' + semanas + ' semanas';
+  }
+  document.getElementById('barra800-meta').textContent = meta;
+}
+
+// ── GUÍA DE HOY ──
+function renderGuiaHoy() {
+  const contenedor = document.getElementById('guia-hoy-contenido');
+  const guiaHoy    = estudiante.guiaHoy;
+
+  if (!guiaHoy) {
+    contenedor.innerHTML = `
+      <div class="sin-guia-card">
+        <div class="sin-guia-icon">📋</div>
+        <div class="sin-guia-txt">Sin guía asignada hoy</div>
+        <div class="sin-guia-sub">Tu profesora aún no ha asignado la guía de hoy.<br>Revisa más tarde o consulta por WhatsApp.</div>
+      </div>`;
+    document.getElementById('cnt-hoy').textContent = '0';
+    return;
+  }
+
+  const cod  = guiaHoy.guia;
+  const info = CATALOGO[cod] || { nombre: cod, desc: '', nivel: 'a' };
+  const completada = guiaHoy.estado === 'completada';
+  const urlGuia = BASE_URL + 'guia-' + cod + '.html?nombre=' +
+    encodeURIComponent(estudiante.nombre) + '&correo=' + encodeURIComponent(estudiante.correo);
+
+  if (completada) {
+    contenedor.innerHTML = `
+      <div class="guia-hoy-card" style="border-color:var(--verde);">
+        <div class="guia-hoy-top">
+          <div class="guia-hoy-badge" style="background:#D1FAE5;color:var(--verde);">
+            <div class="dot-rojo" style="background:var(--verde);"></div> completada hoy
+          </div>
+          <div class="guia-hoy-titulo">${info.nombre}</div>
+          <div class="guia-hoy-cod">${cod} · Eje 1 · Nivel ${info.nivel.toUpperCase()}</div>
+          <div class="guia-hoy-pills">
+            <span class="pill">8 ejercicios</span>
+            <span class="pill">selección múltiple</span>
+            <span class="pill">~15 min</span>
+          </div>
+        </div>
+        <div class="guia-hoy-action">
+          <span class="guia-hoy-hint">¡Excelente! Ya completaste la guía de hoy.</span>
+          <a class="btn-iniciar" style="background:var(--verde);" href="${urlGuia}" target="_blank">↗ Repetir</a>
+        </div>
+      </div>`;
+    document.getElementById('cnt-hoy').textContent = '8';
+  } else {
+    contenedor.innerHTML = `
+      <div class="guia-hoy-card">
+        <div class="guia-hoy-top">
+          <div class="guia-hoy-badge">
+            <div class="dot-rojo"></div> guía de hoy
+          </div>
+          <div class="guia-hoy-titulo">${info.nombre}</div>
+          <div class="guia-hoy-cod">${cod} · Eje 1 · Nivel ${info.nivel.toUpperCase()}</div>
+          <div class="guia-hoy-pills">
+            <span class="pill">8 ejercicios</span>
+            <span class="pill">selección múltiple</span>
+            <span class="pill">~15 min</span>
+          </div>
+        </div>
+        <div class="guia-hoy-action">
+          <span class="guia-hoy-hint">Registra tus respuestas al terminar</span>
+          <a class="btn-iniciar" href="${urlGuia}" target="_blank">Iniciar guía →</a>
+        </div>
+      </div>`;
+    document.getElementById('cnt-hoy').textContent = '0';
+  }
+}
+
+// ── SEMANA ──
+function renderSemana() {
+  const lista   = document.getElementById('semana-lista');
+  const semana  = estudiante.semana || [];
+  const guiaHoy = estudiante.guiaHoy;
+
+  lista.innerHTML = '';
+
+  if (semana.length === 0 && !guiaHoy) {
+    lista.innerHTML = '<div class="prox-item"><div><div class="prox-cod">Sin actividad esta semana</div><div class="prox-sub">Tu profesora asignará las guías de la semana</div></div></div>';
+    return;
+  }
+
+  // Ordenar por fecha descendente
+  const ordenada = [...semana].sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
+
+  const hoyStr = new Date().toISOString().split('T')[0];
+
+  ordenada.forEach(item => {
+    const esHoy     = item.fecha === hoyStr;
+    const completada = item.estado === 'completada';
+    const info      = CATALOGO[item.guia] || { nombre: item.guia, desc: '' };
+    const resultado = estudiante.resultados[item.guia];
+    const score     = resultado ? Math.round(resultado.logro * 100) + '%' : '';
+    const perfecta  = resultado && resultado.logro >= 1;
+
+    if (esHoy) return; // La guía de hoy ya aparece arriba
+
+    if (completada) {
+      const el = document.createElement('div');
+      el.className = 'semana-item';
+      el.innerHTML = `
+        <div class="semana-left">
+          <div class="check-circle">
+            <svg viewBox="0 0 10 10" fill="none">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="semana-cod">${item.guia} · ${formatFecha(item.fecha)}</div>
+            <div class="semana-sub">${info.nombre}</div>
+          </div>
+        </div>
+        <div class="semana-score ${perfecta?'perfecto':''}">${score}</div>`;
+      lista.appendChild(el);
+    }
+  });
+
+  // Mensaje de próxima semana al final
+  const prox = document.createElement('div');
+  prox.className = 'prox-item';
+  prox.innerHTML = `
+    <div>
+      <div class="prox-cod">Próxima semana</div>
+      <div class="prox-sub">Tu profesora asignará las guías del lunes</div>
+    </div>`;
+  lista.appendChild(prox);
+}
+
+function formatFecha(fechaStr) {
+  const dias  = ['dom','lun','mar','mié','jue','vie','sáb'];
+  const d = new Date(fechaStr + 'T12:00:00');
+  return dias[d.getDay()] + ' ' + d.getDate();
+}
+
+
+// ── ENSAYO ──
+function renderEnsayo() {
+  const contenedor = document.getElementById('ensayo-contenido');
+  const ensayo = estudiante.ensayoHoy;
+
+  if (!ensayo) {
+    // Sin ensayo asignado — mostrar "pronto"
+    contenedor.innerHTML = `
+      <div class="ensayo-card">
+        <div class="ensayo-top">
+          <div>
+            <div class="ensayo-badge pronto">Próximo ensayo</div>
+            <div class="ensayo-titulo">Ensayo PAES M1</div>
+            <div class="ensayo-sub">65 preguntas · 2 horas 20 minutos</div>
+          </div>
+          <div class="ensayo-fecha-grande">
+            <div class="ensayo-dia" style="color:var(--suave);font-size:18px;">Pronto</div>
+            <div class="ensayo-mes">sin fecha asignada</div>
+          </div>
+        </div>
+        <div class="ensayo-action">
+          <span class="ensayo-hint">Tu profesora asignará la fecha del próximo ensayo</span>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const esHoy = ensayo.fecha === new Date().toISOString().split('T')[0];
+  const completado = ensayo.estado === 'completada';
+  const fechaObj = new Date(ensayo.fecha + 'T12:00:00');
+  const dias = ['dom','lun','mar','mié','jue','vie','sáb'];
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const labelDia = dias[fechaObj.getDay()] + ' ' + fechaObj.getDate();
+  const labelMes = meses[fechaObj.getMonth()] + ' ' + fechaObj.getFullYear();
+
+  const urlEnsayo = '/flashmate/ensayo-' + ensayo.ensayo +
+    '.html?nombre=' + encodeURIComponent(estudiante.nombre) +
+    '&correo=' + encodeURIComponent(estudiante.correo);
+
+  if (completado) {
+    contenedor.innerHTML = `
+      <div class="ensayo-card" style="border-color:var(--verde);">
+        <div class="ensayo-top">
+          <div>
+            <div class="ensayo-badge" style="background:#D1FAE5;color:#065F46;">✓ Completado</div>
+            <div class="ensayo-titulo">${ensayo.ensayo_nombre || 'Ensayo PAES'}</div>
+            <div class="ensayo-sub">65 preguntas · ${labelDia} ${labelMes}</div>
+          </div>
+        </div>
+        <div class="ensayo-action">
+          <span class="ensayo-hint">¡Bien hecho! Tu profesora revisará los resultados.</span>
+          <a class="btn-ensayo" style="background:var(--verde);" href="${urlEnsayo}" target="_blank">↗ Ver ensayo</a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  if (esHoy) {
+    contenedor.innerHTML = `
+      <div class="ensayo-card" style="border-color:var(--rojo);border-width:2px;">
+        <div class="ensayo-top">
+          <div>
+            <div class="ensayo-badge hoy">Hoy es el ensayo</div>
+            <div class="ensayo-titulo">${ensayo.ensayo_nombre || 'Ensayo PAES M1'}</div>
+            <div class="ensayo-sub">65 preguntas · 2 horas 20 minutos</div>
+          </div>
+          <div class="ensayo-fecha-grande">
+            <div class="ensayo-dia" style="color:var(--rojo);">${fechaObj.getDate()}</div>
+            <div class="ensayo-mes">${labelMes}</div>
+          </div>
+        </div>
+        <div class="ensayo-action">
+          <span class="ensayo-hint">Cuando termines registra tus respuestas</span>
+          <a class="btn-ensayo" href="${urlEnsayo}" target="_blank">Iniciar ensayo →</a>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Fecha futura
+  contenedor.innerHTML = `
+    <div class="ensayo-card tiene-fecha">
+      <div class="ensayo-top">
+        <div>
+          <div class="ensayo-badge fecha">Próximo ensayo</div>
+          <div class="ensayo-titulo">${ensayo.ensayo_nombre || 'Ensayo PAES M1'}</div>
+          <div class="ensayo-sub">65 preguntas · 2 horas 20 minutos</div>
+        </div>
+        <div class="ensayo-fecha-grande">
+          <div class="ensayo-dia">${fechaObj.getDate()}</div>
+          <div class="ensayo-mes">${labelMes}</div>
+        </div>
+      </div>
+      <div class="ensayo-action">
+        <span class="ensayo-hint">Prepárate con tus guías diarias</span>
+      </div>
+    </div>`;
+}
+
+// ── CATÁLOGO ──
+function toggleCatalogo() {
+  const contenido = document.getElementById('catalogo-contenido');
+  const arrow     = document.getElementById('catalogo-arrow');
+  const abierto   = contenido.style.display !== 'none';
+  contenido.style.display = abierto ? 'none' : 'block';
+  arrow.classList.toggle('abierto', !abierto);
+}
+
+function renderCatalogo() {
+  // Guías desbloqueadas = las que han sido asignadas alguna vez (por Planificacion)
+  // Más las que ya tienen resultado registrado (por si vienen de versión anterior)
+  const resultados  = estudiante.resultados || {};
+  const guiaHoyCod  = estudiante.guiaHoy ? estudiante.guiaHoy.guia : null;
+
+  // Combinar guiasDesbloqueadas del servidor + las que tienen resultado
+  const desbloqueadasSet = new Set([
+    ...(estudiante.guiasDesbloqueadas || []),
+    ...Object.keys(resultados)
+  ]);
+  // Si hay guía de hoy, también está desbloqueada
+  if (guiaHoyCod) desbloqueadasSet.add(guiaHoyCod);
+
+  const completadas = Object.keys(resultados).filter(c => resultados[c].logro >= 0.6);
+  document.getElementById('catalogo-resumen').textContent =
+    completadas.length + ' de ' + desbloqueadasSet.size + ' guías desbloqueadas';
+
+  const contenedor = document.getElementById('contenedor-secciones');
+  contenedor.innerHTML = '';
+
+  SECCIONES.forEach(sec => {
+    const secDiv = document.createElement('div');
+    secDiv.className = 'seccion';
+
+    const habSec  = sec.guias.filter(g => desbloqueadasSet.has(g.cod)).length;
+    const compSec = sec.guias.filter(g => resultados[g.cod] && resultados[g.cod].logro >= 0.6).length;
+
+    secDiv.innerHTML = `
+      <div class="seccion-hdr">
+        <div>
+          <div class="seccion-titulo">${sec.titulo}</div>
+          <div class="seccion-sub">${sec.sub}</div>
+        </div>
+        <div class="seccion-prog">${compSec}/${habSec} completadas</div>
+      </div>
+      <div class="grid" id="grid-${sec.id}"></div>`;
+    contenedor.appendChild(secDiv);
+
+    const grid = secDiv.querySelector('.grid');
+
+    sec.guias.forEach(g => {
+      const estaHabilitada = desbloqueadasSet.has(g.cod);
+      const resultado      = resultados[g.cod];
+      const completada     = resultado && resultado.logro >= 0.6;
+      const logroPct       = resultado ? Math.round(resultado.logro * 100) : 0;
+      const esHoy          = g.cod === guiaHoyCod;
+
+      const urlGuia = BASE_URL + 'guia-' + g.cod + '.html?nombre=' +
+        encodeURIComponent(estudiante.nombre) + '&correo=' + encodeURIComponent(estudiante.correo);
+
+      if (estaHabilitada) {
+        const card = document.createElement('div');
+        card.className = `guia-card desbloqueada nivel-${g.nivel}${completada?' completada':''}${esHoy?' es-hoy':''}`;
+
+        let btnHTML = '';
+        if (esHoy && !completada) {
+          btnHTML = `<a class="btn-guia hoy-btn" href="${urlGuia}" target="_blank">▶ Guía de hoy</a>`;
+        } else if (completada) {
+          btnHTML = `<a class="btn-guia completada-btn" href="${urlGuia}" target="_blank">✓ Repetir guía</a>`;
+        } else if (resultado) {
+          btnHTML = `<a class="btn-guia" href="${urlGuia}" target="_blank">↗ Continuar</a>`;
+        } else {
+          btnHTML = `<a class="btn-guia" href="${urlGuia}" target="_blank">▶ Comenzar</a>`;
+        }
+
+        card.innerHTML = `
+          ${completada ? '<div class="logro-badge">✅</div>' : ''}
+          <div class="guia-top">
+            <div class="guia-codigo">${g.cod}</div>
+            <span class="nivel-tag ${esHoy?'tag-hoy':'tag-'+g.nivel}">${esHoy?'HOY':'Nivel '+g.nivel.toUpperCase()}</span>
+          </div>
+          <div class="guia-nombre">${g.nombre}</div>
+          <div class="guia-sub">${g.desc}</div>
+          ${resultado ? `
+          <div class="logro-wrap">
+            <div class="logro-hdr">
+              <span>Logro</span>
+              <span>${logroPct}% · ${resultado.intentos} intento${resultado.intentos!==1?'s':''}</span>
+            </div>
+            <div class="logro-barra">
+              <div class="logro-fill" style="width:${logroPct}%;background:${logroPct>=75?'var(--verde)':logroPct>=50?'var(--amarillo)':'var(--rojo)'}"></div>
+            </div>
+          </div>` : ''}
+          ${btnHTML}`;
+        grid.appendChild(card);
+      } else {
+        const card = document.createElement('div');
+        card.className = `guia-card bloqueada nivel-${g.nivel}`;
+        card.innerHTML = `
+          <div class="guia-top">
+            <div class="guia-codigo">${g.cod}</div>
+            <span class="nivel-tag tag-bloq">🔒 Bloqueada</span>
+          </div>
+          <div class="guia-nombre">${g.nombre}</div>
+          <div class="guia-sub">${g.desc}</div>
+          <button class="btn-bloqueada">🔒 Desbloqueará con tu avance</button>`;
+        grid.appendChild(card);
+      }
+    });
+  });
+}
+
+// ── SALIR ──
+function salir() {
+  estudiante = null;
+  document.getElementById('pantalla-portal').style.display  = 'none';
+  document.getElementById('pantalla-login').style.display   = 'flex';
+  document.getElementById('inp-correo-login').value = '';
+  document.getElementById('login-error').style.display      = 'none';
+  document.getElementById('btn-login').disabled    = false;
+  document.getElementById('btn-login').textContent = 'Ingresar →';
+}
+
+// Auto-login desde guía
+window.addEventListener('load', function(){
+  const params = new URLSearchParams(window.location.search);
+  const correo = params.get('correo');
+  const nombre = params.get('nombre');
+  if (correo && nombre) {
+    document.getElementById('inp-correo-login').value = correo;
+    verificarAcceso();
+  }
+});
+</script>
+</body>
+</html>
