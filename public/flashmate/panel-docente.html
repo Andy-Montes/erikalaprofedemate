@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlashMate · Panel Docente</title>
+<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#38388E;
+  --rojo:#ED3B62;
+  --celeste:#0187F3;
+  --verde:#10B981;
+  --amarillo:#F59E0B;
+  --bg:#F0F2F8;
+  --card:#fff;
+  --texto:#1a1a2e;
+  --suave:#6B7280;
+  --borde:#E5E7EB;
+}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;}
+
+/* ── HEADER ── */
+.hdr{
+  background:var(--azul);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 12px rgba(56,56,142,0.25);
+}
+.hdr-left{display:flex;align-items:center;gap:14px;}
+.hdr-logo{height:44px;border-radius:8px;}
+.hdr-title{font-size:18px;font-weight:700;color:#fff;line-height:1.2;}
+.hdr-sub{font-size:11px;color:rgba(255,255,255,0.65);margin-top:2px;}
+.hdr-badge{background:var(--rojo);color:#fff;font-size:11px;font-weight:600;padding:4px 14px;border-radius:20px;}
+
+/* ── TABS ── */
+.tabs-wrap{background:var(--azul);padding:0 24px;}
+.tabs{display:flex;gap:0;max-width:900px;margin:0 auto;}
+.tab{
+  padding:10px 20px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;
+  color:rgba(255,255,255,0.55);background:transparent;border:none;cursor:pointer;
+  border-bottom:3px solid transparent;transition:all .15s;white-space:nowrap;
+}
+.tab:hover{color:rgba(255,255,255,0.85);}
+.tab.activo{color:#fff;border-bottom-color:var(--rojo);}
+
+/* ── CONTENIDO ── */
+.contenido{max-width:900px;margin:0 auto;padding:24px 16px 60px;}
+.vista{display:none;}
+.vista.activa{display:block;}
+
+/* ── PLANIFICACIÓN ── */
+
+/* Navegación semana */
+.semana-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.semana-nav-centro{text-align:center;}
+.semana-titulo{font-size:15px;font-weight:700;color:var(--azul);}
+.semana-rango{font-size:11px;color:var(--suave);margin-top:2px;}
+.nav-btn{
+  background:var(--card);border:1.5px solid var(--borde);
+  color:var(--suave);font-family:'Poppins',sans-serif;
+  font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;
+  transition:all .15s;
+}
+.nav-btn:hover{border-color:var(--azul);color:var(--azul);}
+
+.btn-guardar{
+  background:var(--azul);color:#fff;border:none;
+  font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;
+  padding:9px 22px;border-radius:10px;cursor:pointer;
+  transition:opacity .15s;
+}
+.btn-guardar:hover{opacity:.88;}
+.btn-guardar:disabled{opacity:.5;cursor:not-allowed;}
+
+/* Bloque estudiante */
+.estudiante-bloque{
+  background:var(--card);border:1.5px solid var(--borde);
+  border-radius:14px;margin-bottom:12px;overflow:hidden;
+}
+.estudiante-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;border-bottom:1px solid var(--borde);
+}
+.estudiante-info{display:flex;align-items:center;gap:10px;}
+.avatar{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;
+}
+.av-0{background:#EEEDFE;color:#38388E;}
+.av-1{background:#fde8ed;color:#c0204a;}
+.av-2{background:#E1F5EE;color:#085041;}
+.av-3{background:#e0f0fe;color:#0162b8;}
+.av-4{background:#FAEEDA;color:#633806;}
+.est-nombre{font-size:13px;font-weight:700;color:var(--texto);}
+.est-meta{font-size:11px;color:var(--suave);}
+.est-stats{display:flex;gap:20px;}
+.est-stat{text-align:right;}
+.est-stat-num{font-size:16px;font-weight:700;color:var(--azul);}
+.est-stat-lbl{font-size:10px;color:var(--suave);}
+
+/* Grid días */
+.dias-grid{
+  display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:8px;padding:12px 16px;
+}
+.dia-col{display:flex;flex-direction:column;gap:4px;}
+.dia-label{font-size:10px;color:var(--suave);text-align:center;padding-bottom:2px;}
+.dia-label.hoy{color:var(--rojo);font-weight:700;}
+
+/* Celda de guía */
+.dia-celda{
+  border-radius:8px;padding:6px 8px;min-height:54px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border:1.5px solid var(--borde);background:#F9FAFB;
+  cursor:pointer;transition:border-color .15s;position:relative;
+}
+.dia-celda:hover{border-color:var(--azul);}
+.dia-celda.completada{background:#F0FDF4;border-color:#86EFAC;}
+.dia-celda.asignada{background:#EFF6FF;border-color:#93C5FD;}
+.dia-celda.hoy-asignada{background:#FEF2F2;border-color:var(--rojo);}
+.dia-celda.vacia{border-style:dashed;}
+
+.celda-cod{font-size:10px;font-weight:700;}
+.dia-celda.completada .celda-cod{color:#15803D;}
+.dia-celda.asignada .celda-cod{color:#1D4ED8;}
+.dia-celda.hoy-asignada .celda-cod{color:var(--rojo);}
+.dia-celda.vacia .celda-cod{color:var(--suave);}
+
+.celda-nombre{font-size:9px;line-height:1.3;margin-top:2px;}
+.dia-celda.completada .celda-nombre{color:#15803D;opacity:.8;}
+.dia-celda.asignada .celda-nombre{color:#1D4ED8;opacity:.8;}
+.dia-celda.hoy-asignada .celda-nombre{color:var(--rojo);opacity:.8;}
+.dia-celda.vacia .celda-nombre{color:var(--suave);}
+
+.celda-badge{
+  font-size:9px;padding:1px 5px;border-radius:4px;
+  align-self:flex-start;margin-top:3px;font-weight:600;
+}
+.badge-completada{background:#D1FAE5;color:#065F46;}
+.badge-hoy{background:#FEF2F2;color:var(--rojo);}
+
+.celda-mas{font-size:11px;color:var(--suave);text-align:center;width:100%;}
+
+/* ── LEYENDA ── */
+.leyenda{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px;}
+.ley-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--suave);}
+.ley-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+/* ── MODAL SELECTOR ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.45);z-index:200;
+  align-items:center;justify-content:center;
+}
+.modal-overlay.abierto{display:flex;}
+.modal{
+  background:var(--card);border-radius:16px;
+  padding:24px;width:90%;max-width:480px;
+  max-height:85vh;display:flex;flex-direction:column;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);
+}
+.modal-titulo{font-size:15px;font-weight:700;color:var(--azul);margin-bottom:2px;}
+.modal-sub{font-size:11px;color:var(--suave);margin-bottom:14px;}
+
+/* Paso 1 — Unidades */
+.modal-paso1{flex:1;overflow-y:auto;}
+.unidades-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
+}
+.unidad-btn{
+  background:#F9FAFB;border:1.5px solid var(--borde);
+  border-radius:10px;padding:12px 14px;cursor:pointer;
+  text-align:left;transition:all .15s;font-family:'Poppins',sans-serif;
+}
+.unidad-btn:hover{border-color:var(--azul);background:#EFF6FF;}
+.unidad-cod{font-size:12px;font-weight:700;color:var(--azul);}
+.unidad-nombre{font-size:10px;color:var(--suave);margin-top:2px;line-height:1.3;}
+.unidad-count{font-size:9px;color:var(--suave);margin-top:4px;}
+
+/* Paso 2 — Guías de la unidad */
+.modal-paso2{flex:1;display:flex;flex-direction:column;min-height:0;}
+.modal-paso2-hdr{
+  display:flex;align-items:center;gap:10px;margin-bottom:12px;
+}
+.btn-volver{
+  background:transparent;border:1.5px solid var(--borde);
+  border-radius:8px;padding:5px 12px;
+  font-family:'Poppins',sans-serif;font-size:11px;
+  color:var(--suave);cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.btn-volver:hover{border-color:var(--azul);color:var(--azul);}
+.paso2-unidad-label{font-size:13px;font-weight:700;color:var(--azul);}
+
+.modal-lista{overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:4px;}
+.modal-item{
+  padding:10px 12px;border-radius:8px;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  border:1.5px solid transparent;transition:all .15s;
+}
+.modal-item:hover{background:#F0F2F8;border-color:var(--borde);}
+.modal-item.seleccionado{background:#EFF6FF;border-color:#93C5FD;}
+.modal-cod{font-size:12px;font-weight:700;color:var(--azul);}
+.modal-nombre{font-size:11px;color:var(--suave);margin-top:1px;}
+.modal-nivel{font-size:10px;padding:2px 7px;border-radius:8px;flex-shrink:0;}
+
+.modal-acciones{display:flex;gap:8px;margin-top:14px;}
+.modal-btn-cancel{
+  flex:1;padding:9px;border:1.5px solid var(--borde);
+  border-radius:8px;background:transparent;
+  font-family:'Poppins',sans-serif;font-size:13px;cursor:pointer;color:var(--suave);
+}
+.modal-btn-ok{
+  flex:2;padding:9px;border:none;border-radius:8px;
+  background:var(--azul);color:#fff;
+  font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;
+}
+.modal-btn-ok:disabled{opacity:.4;cursor:not-allowed;}
+.modal-btn-limpiar{
+  padding:9px 14px;border:1.5px solid #FECACA;border-radius:8px;
+  background:transparent;color:#991B1B;
+  font-family:'Poppins',sans-serif;font-size:12px;cursor:pointer;
+}
+
+
+/* ── ENSAYOS ── */
+.ensayo-bloque{
+  background:var(--card);border:1.5px solid var(--borde);
+  border-radius:14px;margin-bottom:12px;overflow:hidden;
+}
+.ensayo-est-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;border-bottom:1px solid var(--borde);
+}
+.ensayo-est-info{display:flex;align-items:center;gap:10px;}
+.ensayo-asignado{
+  background:#e0f0fe;border:1.5px solid #0187F3;
+  border-radius:10px;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin:12px 16px;
+}
+.ensayo-asignado.completado{background:#EAF3DE;border-color:#97C459;}
+.ensayo-asignado.hoy{background:#fde8ed;border-color:#ED3B62;}
+.ensayo-asignado-info{flex:1;}
+.ensayo-asignado-cod{font-size:12px;font-weight:700;color:#0162b8;}
+.ensayo-asignado.hoy .ensayo-asignado-cod{color:#c0204a;}
+.ensayo-asignado.completado .ensayo-asignado-cod{color:#3B6D11;}
+.ensayo-asignado-fecha{font-size:11px;color:#0162b8;margin-top:2px;}
+.ensayo-asignado.hoy .ensayo-asignado-fecha{color:#c0204a;}
+.ensayo-asignado.completado .ensayo-asignado-fecha{color:#3B6D11;}
+.btn-quitar-ensayo{
+  background:transparent;border:none;
+  font-size:16px;cursor:pointer;opacity:.5;
+  padding:4px;
+}
+.btn-quitar-ensayo:hover{opacity:1;}
+.ensayo-form{
+  padding:12px 16px;display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;
+}
+.ensayo-form label{font-size:11px;color:var(--suave);display:block;margin-bottom:4px;}
+.ensayo-select,.ensayo-date{
+  padding:8px 12px;border:1.5px solid var(--borde);border-radius:8px;
+  font-family:'Poppins',sans-serif;font-size:12px;color:var(--texto);
+  outline:none;background:#fff;
+}
+.ensayo-select:focus,.ensayo-date:focus{border-color:var(--celeste);}
+.btn-asignar-ensayo{
+  background:#0187F3;color:#fff;border:none;border-radius:8px;
+  padding:9px 16px;font-family:'Poppins',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;
+}
+.btn-asignar-ensayo:hover{opacity:.88;}
+.sin-ensayo{
+  padding:12px 16px;font-size:12px;color:var(--suave);font-style:italic;
+}
+.btn-guardar-ensayos{
+  background:var(--azul);color:#fff;border:none;
+  font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;
+  padding:9px 22px;border-radius:10px;cursor:pointer;
+  transition:opacity .15s;
+}
+.btn-guardar-ensayos:hover{opacity:.88;}
+
+/* ── CATÁLOGO (existente, sin cambios) ── */
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.btn-filtro{
+  background:#fff;border:1.5px solid var(--borde);color:var(--suave);
+  font-family:'Poppins',sans-serif;font-size:12px;font-weight:500;
+  padding:6px 16px;border-radius:20px;cursor:pointer;transition:all .15s;
+}
+.btn-filtro:hover{border-color:var(--azul);color:var(--azul);}
+.btn-filtro.activo{background:var(--azul);border-color:var(--azul);color:#fff;}
+
+.seccion{margin-bottom:32px;}
+.seccion-titulo{
+  font-size:13px;font-weight:700;color:var(--azul);
+  letter-spacing:.8px;text-transform:uppercase;
+  margin-bottom:12px;padding-bottom:8px;
+  border-bottom:2px solid var(--azul);
+  display:flex;align-items:center;gap:10px;
+}
+.seccion-count{
+  background:var(--azul);color:#fff;font-size:10px;font-weight:600;
+  padding:2px 8px;border-radius:10px;letter-spacing:0;text-transform:none;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+
+.guia-card{
+  background:var(--card);border:1.5px solid var(--borde);
+  border-radius:12px;padding:14px 16px;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.guia-card:hover{border-color:var(--azul);box-shadow:0 4px 16px rgba(56,56,142,0.12);transform:translateY(-1px);}
+.guia-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.nivel-a::before{background:var(--celeste);}
+.nivel-b::before{background:var(--verde);}
+.nivel-c::before{background:var(--rojo);}
+
+.guia-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.guia-codigo{font-size:13px;font-weight:700;color:var(--azul);}
+.nivel-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;}
+.tag-a{background:#EFF6FF;color:#1D4ED8;}
+.tag-b{background:#ECFDF5;color:#065F46;}
+.tag-c{background:#FEF2F2;color:#991B1B;}
+.guia-nombre{font-size:12px;color:var(--suave);margin-bottom:10px;line-height:1.4;}
+.guia-acciones{display:flex;gap:8px;}
+.btn-copiar{
+  flex:1;background:var(--azul);color:#fff;border:none;border-radius:7px;
+  padding:7px 10px;font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;
+  cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-copiar:hover{opacity:.88;}
+.btn-copiar.copiado{background:var(--verde);}
+.btn-abrir{
+  background:transparent;border:1.5px solid var(--borde);border-radius:7px;
+  padding:7px 10px;font-family:'Poppins',sans-serif;font-size:11px;font-weight:500;
+  color:var(--suave);cursor:pointer;transition:all .15s;text-decoration:none;
+  display:flex;align-items:center;gap:5px;
+}
+.btn-abrir:hover{border-color:var(--azul);color:var(--azul);}
+
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
+.stat{
+  background:var(--card);border:1.5px solid var(--borde);
+  border-radius:10px;padding:12px 18px;
+  display:flex;align-items:center;gap:10px;
+}
+.stat-num{font-size:22px;font-weight:700;color:var(--azul);}
+.stat-label{font-size:11px;color:var(--suave);line-height:1.3;}
+
+.buscador-wrap{position:relative;margin-bottom:16px;}
+.buscador{
+  width:100%;padding:10px 16px 10px 40px;
+  border:1.5px solid var(--borde);border-radius:10px;
+  font-family:'Poppins',sans-serif;font-size:13px;
+  background:#fff;color:var(--texto);outline:none;transition:border .15s;
+}
+.buscador:focus{border-color:var(--azul);}
+.buscador-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--suave);font-size:15px;}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--texto);color:#fff;font-size:13px;font-weight:500;
+  padding:10px 20px;border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  transition:transform .3s;z-index:999;white-space:nowrap;
+}
+.toast.show{transform:translateX(-50%) translateY(0);}
+
+/* SPINNER */
+.spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;
+  border-radius:50%;animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<!-- ══════ LOGIN DOCENTE ══════ -->
+<div id="pantalla-clave" style="min-height:100vh;background:linear-gradient(135deg,#38388E 0%,#1a1a5e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;">
+  <div style="background:#fff;border-radius:20px;padding:40px 36px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);">
+    <img style="height:56px;margin-bottom:16px;" src="/flashmate/logo-erika.png" alt="FlashMate" onerror="this.style.display='none'">
+    <div style="font-size:18px;font-weight:700;color:#38388E;margin-bottom:4px;">Panel Docente</div>
+    <div style="font-size:12px;color:#6B7280;margin-bottom:24px;">Ingresa la clave de acceso para continuar</div>
+    <input id="inp-clave" type="password" placeholder="Clave de acceso"
+      style="width:100%;padding:11px 14px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;outline:none;margin-bottom:8px;"
+      onkeydown="if(event.key==='Enter')verificarClave()">
+    <button onclick="verificarClave()"
+      style="width:100%;background:#ED3B62;color:#fff;border:none;border-radius:10px;padding:12px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;">
+      Ingresar →
+    </button>
+    <div id="clave-error" style="display:none;background:#FEF2F2;color:#991B1B;border:1px solid #FECACA;border-radius:8px;padding:10px;font-size:12px;margin-top:10px;">
+      Clave incorrecta. Intenta nuevamente.
+    </div>
+  </div>
+  <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:20px;">© 2026 Erika la Profe de Mate</div>
+</div>
+
+<div id="panel-contenido" style="display:none;">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <img class="hdr-logo" src="/flashmate/logo-erika.png" alt="Logo" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-title">FlashMate</div>
+      <div class="hdr-sub">Panel Docente · Erika la Profe de Mate</div>
+    </div>
+  </div>
+  <div class="hdr-badge">Panel privado</div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab activo" onclick="cambiarTab('planificacion',this)">Planificación semanal</button>
+    <button class="tab" onclick="cambiarTab('ensayos',this)">Ensayos</button>
+    <button class="tab" onclick="cambiarTab('catalogo',this)">Catálogo de guías</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VISTA: PLANIFICACIÓN
+══════════════════════════════════════ -->
+<div class="contenido">
+<div class="vista activa" id="vista-planificacion">
+
+  <!-- Nav semana + guardar -->
+  <div class="semana-nav">
+    <button class="nav-btn" onclick="cambiarSemana(-1)">← anterior</button>
+    <div class="semana-nav-centro">
+      <div class="semana-titulo" id="semana-titulo">Cargando...</div>
+      <div class="semana-rango" id="semana-rango"></div>
+    </div>
+    <button class="nav-btn" onclick="cambiarSemana(1)">siguiente →</button>
+  </div>
+
+  <!-- BUSCADOR Y RESUMEN -->
+
+  <!-- BUSCADOR -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+    <div class="search-plan-wrap">
+      <span class="search-plan-icon">🔍</span>
+      <input class="search-plan-input" id="buscador-plan" type="text"
+        placeholder="Buscar estudiante..."
+        oninput="filtrarEstudiantes(this.value)">
+    </div>
+    <div style="font-size:11px;color:var(--suave);" id="search-count-plan"></div>
+  </div>
+
+  <!-- Leyenda -->
+  <div class="leyenda">
+    <div class="ley-item"><div class="ley-dot" style="background:#D1FAE5;border:1.5px solid #86EFAC;"></div>completada</div>
+    <div class="ley-item"><div class="ley-dot" style="background:#FEF2F2;border:1.5px solid var(--rojo);"></div>hoy</div>
+    <div class="ley-item"><div class="ley-dot" style="background:#EFF6FF;border:1.5px solid #93C5FD;"></div>asignada</div>
+    <div class="ley-item"><div class="ley-dot" style="background:#F9FAFB;border:1.5px dashed var(--borde);"></div>sin asignar</div>
+  </div>
+
+  <!-- Bloques de estudiantes -->
+  <div id="bloques-estudiantes"></div>
+
+  <!-- Botón guardar -->
+  <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+    <button class="btn-guardar" id="btn-guardar" onclick="guardarPlanificacion()">Guardar semana</button>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════
+     VISTA: ENSAYOS
+══════════════════════════════════════ -->
+<div class="vista" id="vista-ensayos">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+    <div>
+      <div style="font-size:15px;font-weight:700;color:var(--azul);">Asignación de ensayos</div>
+      <div style="font-size:12px;color:var(--suave);margin-top:2px;">Asigna cualquier fecha, incluyendo sábado y domingo</div>
+    </div>
+    <button class="btn-guardar-ensayos" onclick="guardarEnsayos()">Guardar ensayos</button>
+  </div>
+
+  <div id="bloques-ensayos"></div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     VISTA: CATÁLOGO
+══════════════════════════════════════ -->
+<div class="vista" id="vista-catalogo">
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num" id="total-disp">0</div>
+      <div class="stat-label">Guías<br>disponibles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="total-pronto">0</div>
+      <div class="stat-label">Próximas<br>guías</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">25</div>
+      <div class="stat-label">Guías en<br>GitHub</div>
+    </div>
+  </div>
+
+  <div class="buscador-wrap">
+    <span class="buscador-icon">🔍</span>
+    <input class="buscador" id="buscador" type="text" placeholder="Buscar guía por código, unidad o tema...">
+  </div>
+
+  <div class="filtros">
+    <button class="btn-filtro activo" onclick="filtrar('todos',this)">Todas</button>
+    <button class="btn-filtro" onclick="filtrar('U01',this)">U01 · Números Reales</button>
+    <button class="btn-filtro" onclick="filtrar('U02',this)">U02 · Porcentajes</button>
+    <button class="btn-filtro" onclick="filtrar('U03',this)">U03 · Potencias y Raíces</button>
+    <button class="btn-filtro" onclick="filtrar('nivel-a',this)">Nivel a</button>
+    <button class="btn-filtro" onclick="filtrar('nivel-b',this)">Nivel b</button>
+    <button class="btn-filtro" onclick="filtrar('nivel-c',this)">Nivel c</button>
+  </div>
+
+  <div id="contenedor-guias"></div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MODAL SELECTOR DE GUÍA
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-titulo" id="modal-titulo">Asignar guía</div>
+    <div class="modal-sub" id="modal-sub">Selecciona una unidad</div>
+
+    <!-- PASO 1: Selector de unidad -->
+    <div class="modal-paso1" id="modal-paso1">
+      <div class="unidades-grid" id="unidades-grid"></div>
+    </div>
+
+    <!-- PASO 2: Guías de la unidad -->
+    <div class="modal-paso2" id="modal-paso2" style="display:none;">
+      <div class="modal-paso2-hdr">
+        <button class="btn-volver" onclick="volverPaso1()">← volver</button>
+        <span class="paso2-unidad-label" id="paso2-label"></span>
+      </div>
+      <div class="modal-lista" id="modal-lista"></div>
+    </div>
+
+    <div class="modal-acciones">
+      <button class="modal-btn-limpiar" onclick="limpiarCelda()">✕ Quitar</button>
+      <button class="modal-btn-cancel" onclick="cerrarModal()">Cancelar</button>
+      <button class="modal-btn-ok" id="modal-btn-ok" onclick="confirmarModal()" disabled>Asignar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec';
+const BASE = 'https://flashmate.netlify.app/';
+
+// ── CATÁLOGO COMPLETO ──
+const GUIAS = [
+  {cod:'U01.A.1a',nombre:'Conjuntos Numéricos',sub:'Pares/impares · Primos · MCD · mcm',nivel:'a',unidad:'U01',subunidad:'A',disp:true},
+  {cod:'U01.A.2b',nombre:'Conjuntos Numéricos',sub:'MCD · mcm · Divisibilidad avanzada',nivel:'b',unidad:'U01',subunidad:'A',disp:true},
+  {cod:'U01.A.3c',nombre:'Conjuntos Numéricos',sub:'Argumentación · Propiedades avanzadas',nivel:'c',unidad:'U01',subunidad:'A',disp:true},
+  {cod:'U01.B.4a',nombre:'Números Enteros',sub:'Operaciones · Orden · Valor absoluto',nivel:'a',unidad:'U01',subunidad:'B',disp:true},
+  {cod:'U01.B.5b',nombre:'Números Enteros',sub:'Propiedades · Expresiones · Signos',nivel:'b',unidad:'U01',subunidad:'B',disp:true},
+  {cod:'U01.B.6c',nombre:'Números Enteros',sub:'Condiciones algebraicas · Contextos',nivel:'c',unidad:'U01',subunidad:'B',disp:true},
+  {cod:'U01.B.7c',nombre:'Números Enteros',sub:'Razonamiento algebraico · Recta numérica',nivel:'c',unidad:'U01',subunidad:'B',disp:true},
+  {cod:'U01.C.8a',nombre:'Números Racionales',sub:'Fracciones · Decimales · Operatoria básica',nivel:'a',unidad:'U01',subunidad:'C',disp:true},
+  {cod:'U01.C.9b',nombre:'Números Racionales',sub:'Periódicos · Comparación · Conversiones',nivel:'b',unidad:'U01',subunidad:'C',disp:true},
+  {cod:'U01.C.10c',nombre:'Números Racionales',sub:'Operatoria avanzada · Racionales algebraicos',nivel:'c',unidad:'U01',subunidad:'C',disp:true},
+  {cod:'U01.C.11c',nombre:'Números Racionales',sub:'Semi-periódicos · Truncamiento · Densidad',nivel:'c',unidad:'U01',subunidad:'C',disp:true},
+  {cod:'U01.C.12c',nombre:'Números Racionales',sub:'Fracciones complejas · Argumentación',nivel:'c',unidad:'U01',subunidad:'C',disp:true},
+  {cod:'U02.A.1a',nombre:'Porcentajes',sub:'Concepto · Cálculo directo · Contextos',nivel:'a',unidad:'U02',subunidad:'A',disp:true},
+  {cod:'U02.A.2b',nombre:'Porcentajes',sub:'Aumentos · Descuentos · % del resto',nivel:'b',unidad:'U02',subunidad:'A',disp:true},
+  {cod:'U02.A.3b',nombre:'Porcentajes',sub:'% de % · Variaciones encadenadas',nivel:'b',unidad:'U02',subunidad:'A',disp:true},
+  {cod:'U02.A.4c',nombre:'Porcentajes',sub:'Algebraico · Problemas multi-paso',nivel:'c',unidad:'U02',subunidad:'A',disp:true},
+  {cod:'U02.A.5c',nombre:'Porcentajes + IS',sub:'Comisión · Interés simple · IS compuesto',nivel:'c',unidad:'U02',subunidad:'A',disp:true},
+  {cod:'U02.A.6c',nombre:'Porcentajes + IC',sub:'IS e IC · Comparaciones · Contextos financieros',nivel:'c',unidad:'U02',subunidad:'A',disp:true},
+  {cod:'U03.A.1a',nombre:'Potencias',sub:'Exponente 0 · Negativos · Propiedades básicas',nivel:'a',unidad:'U03',subunidad:'A',disp:true},
+  {cod:'U03.A.2b',nombre:'Potencias',sub:'Suma de potencias · Propiedades combinadas',nivel:'b',unidad:'U03',subunidad:'A',disp:true},
+  {cod:'U03.A.3c',nombre:'Potencias',sub:'Simplificación algebraica · Notación científica',nivel:'c',unidad:'U03',subunidad:'A',disp:true},
+  {cod:'U03.B.4a',nombre:'Raíces Enésimas',sub:'Simplificación básica · Raíces semejantes',nivel:'a',unidad:'U03',subunidad:'B',disp:true},
+  {cod:'U03.B.5b',nombre:'Raíces Enésimas',sub:'Raíces de fracciones · Dominio real',nivel:'b',unidad:'U03',subunidad:'B',disp:true},
+  {cod:'U03.B.6c',nombre:'Raíces Enésimas',sub:'Racionalización · Conjugados',nivel:'c',unidad:'U03',subunidad:'B',disp:true},
+  {cod:'U03.B.7c',nombre:'Raíces Enésimas',sub:'Racionalización algebraica · Argumentación',nivel:'c',unidad:'U03',subunidad:'B',disp:true},
+];
+
+const CATALOGO = {};
+GUIAS.forEach(g => CATALOGO[g.cod] = g);
+
+// ── ESTUDIANTES — se cargan dinámicamente desde Sheets ──
+let ESTUDIANTES = [];
+
+// ── ESTADO PLANIFICACIÓN ──
+// planSemana[correo][fechaStr] = { guia, estado }
+let planSemana   = {};
+let semanaOffset = 0; // 0 = semana actual, -1 = anterior, +1 = siguiente
+let modalCtx     = null; // { correo, fecha }
+let modalSel     = null; // cod seleccionado en modal
+
+
+// ── FECHAS ──
+function getLunes(offset) {
+  const hoy = new Date();
+  const dia  = hoy.getDay() === 0 ? 6 : hoy.getDay() - 1;
+  const lunes = new Date(hoy);
+  lunes.setDate(hoy.getDate() - dia + offset * 7);
+  lunes.setHours(0,0,0,0);
+  return lunes;
+}
+
+function fechaStr(d) {
+  return d.toISOString().split('T')[0];
+}
+
+function diasSemana(offset) {
+  const lunes = getLunes(offset);
+  return Array.from({length:7}, (_,i) => {
+    const d = new Date(lunes);
+    d.setDate(lunes.getDate() + i);
+    return d;
+  });
+}
+
+function formatDia(d) {
+  const nombres = ['lun','mar','mié','jue','vie','sáb','dom'];
+  return nombres[d.getDay() === 0 ? 6 : d.getDay()-1] + ' ' + d.getDate();
+}
+
+function formatRango(dias) {
+  const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  const ini = dias[0], fin = dias[4];
+  return ini.getDate() + ' al ' + fin.getDate() + ' de ' + meses[fin.getMonth()] + ' ' + fin.getFullYear();
+}
+
+function esHoy(d) {
+  return fechaStr(d) === fechaStr(new Date());
+}
+
+// ── TABS ──
+function cambiarTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('activo'));
+  document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
+  btn.classList.add('activo');
+  document.getElementById('vista-' + id).classList.add('activa');
+}
+
+// ── PLANIFICACIÓN ──
+function cambiarSemana(dir) {
+  semanaOffset += dir;
+  renderPlanificacion();
+}
+
+function renderPlanificacion() {
+  const dias = diasSemana(semanaOffset);
+  const hoyStr = fechaStr(new Date());
+
+  // Título
+  const semNum = getSemanaNumero(dias[0]);
+  document.getElementById('semana-titulo').textContent = 'Semana ' + semNum;
+  document.getElementById('semana-rango').textContent  = formatRango(dias);
+
+  const contenedor = document.getElementById('bloques-estudiantes');
+  contenedor.innerHTML = '';
+
+  const estudiantesFiltrados = filtroBusqueda
+    ? ESTUDIANTES.filter(e => e.nombre.toLowerCase().includes(filtroBusqueda))
+    : ESTUDIANTES;
+
+  const countEl = document.getElementById('search-count-plan');
+  if (countEl) {
+    countEl.textContent = filtroBusqueda
+      ? estudiantesFiltrados.length + ' resultado' + (estudiantesFiltrados.length !== 1 ? 's' : '') + ' para "' + document.getElementById('buscador-plan').value + '"'
+      : '';
+  }
+
+  estudiantesFiltrados.forEach((est, idx) => {
+    if (!planSemana[est.correo]) planSemana[est.correo] = {};
+
+    // Contar ejercicios totales del estudiante
+    const totalCompletadas = Object.values(planSemana[est.correo])
+      .filter(c => c.estado === 'completada').length;
+    const semanaCompletadas = dias.filter(d => {
+      const fs = fechaStr(d);
+      return planSemana[est.correo][fs] && planSemana[est.correo][fs].estado === 'completada';
+    }).length;
+
+    const bloque = document.createElement('div');
+    bloque.className = 'estudiante-bloque';
+    bloque.id = 'bloque-est-' + ESTUDIANTES.indexOf(est);
+    bloque.innerHTML = `
+      <div class="estudiante-hdr">
+        <div class="estudiante-info">
+          <div class="avatar av-${est.avIdx % 5}">${est.iniciales}</div>
+          <div>
+            <div class="est-nombre">${est.nombre}</div>
+            <div class="est-meta">${est.correo}</div>
+          </div>
+        </div>
+        <div class="est-stats">
+          <div class="est-stat">
+            <div class="est-stat-num">${semanaCompletadas * 8}</div>
+            <div class="est-stat-lbl">ejercicios<br>semana</div>
+          </div>
+          <div class="est-stat">
+            <div class="est-stat-num">${totalCompletadas * 8}</div>
+            <div class="est-stat-lbl">total<br>acumulado</div>
+          </div>
+        </div>
+      </div>
+      <div class="dias-grid" id="dias-${idx}"></div>`;
+    contenedor.appendChild(bloque);
+
+    const diasGrid = bloque.querySelector('.dias-grid');
+    dias.forEach(dia => {
+      const fs   = fechaStr(dia);
+      const dato = planSemana[est.correo][fs];
+      const hoyDia = fs === hoyStr;
+
+      const col = document.createElement('div');
+      col.className = 'dia-col';
+
+      const label = document.createElement('div');
+      label.className = 'dia-label' + (hoyDia ? ' hoy' : '');
+      label.textContent = formatDia(dia);
+      col.appendChild(label);
+
+      const celda = document.createElement('div');
+      if (!dato) {
+        celda.className = 'dia-celda vacia';
+        celda.innerHTML = '<span class="celda-mas">+ asignar</span>';
+      } else if (dato.estado === 'completada') {
+        celda.className = 'dia-celda completada';
+        const info = CATALOGO[dato.guia] || {nombre: dato.guia};
+        celda.innerHTML = `
+          <div class="celda-cod">${dato.guia}</div>
+          <div class="celda-nombre">${info.nombre}</div>
+          <span class="celda-badge badge-completada">✓</span>`;
+      } else if (hoyDia) {
+        celda.className = 'dia-celda hoy-asignada';
+        const info = CATALOGO[dato.guia] || {nombre: dato.guia};
+        celda.innerHTML = `
+          <div class="celda-cod">${dato.guia}</div>
+          <div class="celda-nombre">${info.nombre}</div>
+          <span class="celda-badge badge-hoy">hoy</span>`;
+      } else {
+        celda.className = 'dia-celda asignada';
+        const info = CATALOGO[dato.guia] || {nombre: dato.guia};
+        celda.innerHTML = `
+          <div class="celda-cod">${dato.guia}</div>
+          <div class="celda-nombre">${info.nombre}</div>`;
+      }
+
+      // Solo celdas no completadas son editables
+      if (!dato || dato.estado !== 'completada') {
+        celda.onclick = () => abrirModal(est.correo, fs, est.nombre, formatDia(dia));
+      }
+
+      col.appendChild(celda);
+      diasGrid.appendChild(col);
+    });
+  });
+}
+
+function getSemanaNumero(lunes) {
+  const ini = new Date(lunes.getFullYear(), 0, 1);
+  const diff = lunes - ini;
+  return Math.ceil((diff / 86400000 + ini.getDay() + 1) / 7);
+}
+
+
+// ── BUSCADOR DE ESTUDIANTES ──────────────────────────────
+let filtroBusqueda = '';
+
+function filtrarEstudiantes(valor) {
+  filtroBusqueda = valor.toLowerCase().trim();
+  renderPlanificacion();
+}
+
+
+// ── MODAL DOS PASOS ──
+
+function nombreUnidad(cod) {
+  const nombres = {
+    'U01':'Números Reales',        'U02':'Porcentajes',
+    'U03':'Potencias y Raíces',    'U04':'Expresiones Algebraicas',
+    'U05':'Proporcionalidad',      'U06':'Ecuaciones e Inecuaciones',
+    'U07':'Sistemas de Ecuaciones','U08':'Función Lineal y Afín',
+    'U09':'Función Cuadrática',    'U10':'Figuras Geométricas',
+    'U11':'Cuerpos Geométricos',   'U12':'Transformaciones Isométricas',
+    'U13':'Semejanza',             'U14':'Representación de Datos',
+    'U15':'Medidas de Posición',   'U16':'Reglas de Probabilidad',
+  };
+  return nombres[cod] || cod;
+}
+
+function getUnidades() {
+  const mapa = {};
+  GUIAS.forEach(g => {
+    if (!mapa[g.unidad]) mapa[g.unidad] = { cod: g.unidad, nombre: nombreUnidad(g.unidad), guias: [] };
+    mapa[g.unidad].guias.push(g);
+  });
+  return Object.values(mapa).sort((a,b) => a.cod.localeCompare(b.cod));
+}
+
+function abrirModal(correo, fecha, nombreEst, labelDia) {
+  modalCtx = { correo, fecha, labelDia };
+  const dato = planSemana[correo] && planSemana[correo][fecha];
+  modalSel  = dato ? dato.guia : null;
+
+  document.getElementById('modal-titulo').textContent  = nombreEst;
+  document.getElementById('modal-btn-ok').disabled     = true;
+  document.getElementById('modal-overlay').classList.add('abierto');
+
+  mostrarPaso1(labelDia);
+}
+
+function mostrarPaso1(labelDia) {
+  document.getElementById('modal-paso1').style.display = 'block';
+  document.getElementById('modal-paso2').style.display = 'none';
+  document.getElementById('modal-sub').textContent     = 'Selecciona una unidad · ' + (labelDia || '');
+  if (!document.getElementById('modal-btn-ok').disabled && !modalSel) {
+    document.getElementById('modal-btn-ok').disabled = true;
+  }
+
+  const grid = document.getElementById('unidades-grid');
+  grid.innerHTML = '';
+  getUnidades().forEach(u => {
+    const btn = document.createElement('button');
+    btn.className = 'unidad-btn';
+    btn.innerHTML = `
+      <div class="unidad-cod">${u.cod}</div>
+      <div class="unidad-nombre">${u.nombre}</div>
+      <div class="unidad-count">${u.guias.length} guía${u.guias.length !== 1 ? 's' : ''}</div>`;
+    btn.onclick = () => mostrarPaso2(u);
+    grid.appendChild(btn);
+  });
+}
+
+function mostrarPaso2(unidad) {
+  document.getElementById('modal-paso1').style.display = 'none';
+  document.getElementById('modal-paso2').style.display = 'flex';
+  document.getElementById('paso2-label').textContent   = unidad.cod + ' · ' + unidad.nombre;
+  document.getElementById('modal-sub').textContent     = 'Elige la guía para este día';
+
+  const lista = document.getElementById('modal-lista');
+  lista.innerHTML = '';
+
+  const subunidades = {};
+  unidad.guias.forEach(g => {
+    const key = g.subunidad || 'A';
+    if (!subunidades[key]) subunidades[key] = [];
+    subunidades[key].push(g);
+  });
+
+  Object.entries(subunidades).forEach(([sub, guias]) => {
+    const sep = document.createElement('div');
+    sep.style.cssText = 'font-size:10px;font-weight:700;color:var(--suave);padding:8px 4px 3px;letter-spacing:.05em;text-transform:uppercase;';
+    sep.textContent = 'Subunidad ' + sub;
+    lista.appendChild(sep);
+
+    guias.forEach(g => {
+      const item = document.createElement('div');
+      item.className = 'modal-item' + (modalSel === g.cod ? ' seleccionado' : '');
+      item.innerHTML = `
+        <div>
+          <div class="modal-cod">${g.cod}</div>
+          <div class="modal-nombre">${g.nombre} · ${g.sub}</div>
+        </div>
+        <span class="modal-nivel nivel-tag tag-${g.nivel}">Nivel ${g.nivel.toUpperCase()}</span>`;
+      item.onclick = () => {
+        modalSel = g.cod;
+        document.getElementById('modal-btn-ok').disabled = false;
+        lista.querySelectorAll('.modal-item').forEach(i => i.classList.remove('seleccionado'));
+        item.classList.add('seleccionado');
+      };
+      lista.appendChild(item);
+    });
+  });
+
+  if (modalSel) document.getElementById('modal-btn-ok').disabled = false;
+}
+
+function volverPaso1() {
+  mostrarPaso1(modalCtx ? modalCtx.labelDia : '');
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('abierto');
+  modalCtx = null;
+  modalSel = null;
+}
+
+function confirmarModal() {
+  if (!modalSel || !modalCtx) { cerrarModal(); return; }
+  if (!planSemana[modalCtx.correo]) planSemana[modalCtx.correo] = {};
+  planSemana[modalCtx.correo][modalCtx.fecha] = { guia: modalSel, estado: 'asignada' };
+  cerrarModal();
+  renderPlanificacion();
+}
+
+function limpiarCelda() {
+  if (!modalCtx) { cerrarModal(); return; }
+  if (planSemana[modalCtx.correo]) delete planSemana[modalCtx.correo][modalCtx.fecha];
+  cerrarModal();
+  renderPlanificacion();
+}
+
+// ── GUARDAR ──
+async function guardarPlanificacion() {
+  const btn = document.getElementById('btn-guardar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Guardando...';
+
+  const asignaciones = [];
+  Object.entries(planSemana).forEach(([correo, dias]) => {
+    Object.entries(dias).forEach(([fecha, dato]) => {
+      if (dato.estado !== 'completada') {
+        asignaciones.push({ correo, fecha, guia: dato.guia });
+      }
+    });
+  });
+
+  try {
+    const url = SCRIPT_URL +
+      '?accion=guardar_plan&datos=' +
+      encodeURIComponent(JSON.stringify(asignaciones));
+    const resp = await fetch(url);
+    const data = await resp.json();
+
+    if (data.ok) {
+      mostrarToast('Planificación guardada correctamente');
+    } else {
+      mostrarToast('Error al guardar. Intenta de nuevo.');
+    }
+  } catch(e) {
+    mostrarToast('Error de conexión.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Guardar semana';
+}
+
+// ── CARGAR ESTUDIANTES DESDE SHEETS ──
+async function cargarEstudiantes() {
+  const contenedor = document.getElementById('bloques-estudiantes');
+  contenedor.innerHTML = '<div style="padding:24px;text-align:center;color:var(--suave);font-size:13px;">Cargando estudiantes...</div>';
+
+  try {
+    const url  = SCRIPT_URL + '?accion=estudiantes';
+    const resp = await fetch(url);
+    const data = await resp.json();
+
+    if (data.estudiantes && data.estudiantes.length > 0) {
+      ESTUDIANTES = data.estudiantes.map(function(est, idx) {
+        return {
+          correo:    est.correo,
+          nombre:    est.nombre,
+          plan:      est.plan,
+          iniciales: est.iniciales,
+          avIdx:     idx % 5
+        };
+      });
+    } else {
+      ESTUDIANTES = [];
+      contenedor.innerHTML = '<div style="padding:24px;text-align:center;color:var(--suave);font-size:13px;">No hay estudiantes activos registrados en Sheets.</div>';
+      return;
+    }
+  } catch(e) {
+    contenedor.innerHTML = '<div style="padding:24px;text-align:center;color:#991B1B;font-size:13px;">Error al cargar estudiantes. Verifica la conexión.</div>';
+    return;
+  }
+
+  // Una vez cargados los estudiantes, carga el plan existente
+  await cargarPlanExistente();
+  renderEnsayos();
+}
+
+// ── CARGAR PLAN EXISTENTE ──
+async function cargarPlanExistente() {
+  try {
+    const url  = SCRIPT_URL + '?accion=plan_semana_docente';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (data.plan) {
+      data.plan.forEach(item => {
+        if (!planSemana[item.correo]) planSemana[item.correo] = {};
+        planSemana[item.correo][item.fecha] = { guia: item.guia, estado: item.estado };
+      });
+    }
+  } catch(e) {
+    // Silencioso — si falla el plan, igual muestra estudiantes
+  }
+
+  renderPlanificacion();
+}
+
+// ── CATÁLOGO ──
+const SECCIONES_CAT = [
+  {id:'U01-A',titulo:'U01 · Números Reales — Subunidad A: Conjuntos Numéricos',unidad:'U01',sub:'A'},
+  {id:'U01-B',titulo:'U01 · Números Reales — Subunidad B: Números Enteros',unidad:'U01',sub:'B'},
+  {id:'U01-C',titulo:'U01 · Números Reales — Subunidad C: Números Racionales',unidad:'U01',sub:'C'},
+  {id:'U02-A',titulo:'U02 · Porcentajes — Subunidad A: Porcentajes e IS/IC',unidad:'U02',sub:'A'},
+  {id:'U03-A',titulo:'U03 · Potencias y Raíces — Subunidad A: Potencias',unidad:'U03',sub:'A'},
+  {id:'U03-B',titulo:'U03 · Potencias y Raíces — Subunidad B: Raíces Enésimas',unidad:'U03',sub:'B'},
+];
+
+let filtroActivo = 'todos';
+let busqueda = '';
+
+function urlGuia(cod) { return BASE + 'guia-' + cod + '.html'; }
+
+function copiarLink(cod, btn) {
+  const url = urlGuia(cod);
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copiado');
+    setTimeout(() => { btn.textContent = '⎘ Copiar link'; btn.classList.remove('copiado'); }, 2000);
+    mostrarToast('Link copiado: ' + url);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+    btn.textContent = '✓ Copiado'; btn.classList.add('copiado');
+    setTimeout(() => { btn.textContent = '⎘ Copiar link'; btn.classList.remove('copiado'); }, 2000);
+    mostrarToast('Link copiado');
+  });
+}
+
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ' + msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function filtrar(val, btn) {
+  filtroActivo = val;
+  document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+  btn.classList.add('activo');
+  renderizarCatalogo();
+}
+
+function guiaVisible(g) {
+  const q = busqueda.toLowerCase();
+  const matchBusq = !q ||
+    g.cod.toLowerCase().includes(q) ||
+    g.nombre.toLowerCase().includes(q) ||
+    g.sub.toLowerCase().includes(q) ||
+    g.unidad.toLowerCase().includes(q);
+  const matchFiltro =
+    filtroActivo === 'todos' ||
+    (filtroActivo === 'nivel-a' && g.nivel === 'a') ||
+    (filtroActivo === 'nivel-b' && g.nivel === 'b') ||
+    (filtroActivo === 'nivel-c' && g.nivel === 'c') ||
+    g.unidad === filtroActivo;
+  return matchBusq && matchFiltro;
+}
+
+function renderizarCatalogo() {
+  const contenedor = document.getElementById('contenedor-guias');
+  contenedor.innerHTML = '';
+  let totalDisp = 0, totalProx = 0;
+
+  SECCIONES_CAT.forEach(sec => {
+    const guiasSec = GUIAS.filter(g =>
+      g.unidad === sec.unidad && g.subunidad === sec.sub && guiaVisible(g)
+    );
+    if (guiasSec.length === 0) return;
+    const dispSec = guiasSec.filter(g => g.disp).length;
+    totalDisp += dispSec;
+    totalProx += guiasSec.filter(g => !g.disp).length;
+
+    const secDiv = document.createElement('div');
+    secDiv.className = 'seccion';
+    secDiv.innerHTML = `
+      <div class="seccion-titulo">
+        ${sec.titulo}
+        <span class="seccion-count">${dispSec}/${guiasSec.length}</span>
+      </div>
+      <div class="grid" id="grid-${sec.id}"></div>`;
+    contenedor.appendChild(secDiv);
+
+    const grid = secDiv.querySelector('.grid');
+    guiasSec.forEach(g => {
+      const card = document.createElement('div');
+      card.className = `guia-card nivel-${g.nivel}`;
+      card.innerHTML = `
+        <div class="guia-top">
+          <div class="guia-codigo">${g.cod}</div>
+          <span class="nivel-tag tag-${g.nivel}">Nivel ${g.nivel.toUpperCase()}</span>
+        </div>
+        <div class="guia-nombre"><strong>${g.nombre}</strong><br>${g.sub}</div>
+        <div class="guia-acciones">
+          <button class="btn-copiar" id="btn-${g.cod.replace(/\./g,'-')}"
+            onclick="copiarLink('${g.cod}',this)">⎘ Copiar link</button>
+          <a class="btn-abrir" href="${urlGuia(g.cod)}?modo=docente" target="_blank">↗ Abrir</a>
+        </div>`;
+      grid.appendChild(card);
+    });
+  });
+
+  document.getElementById('total-disp').textContent  = totalDisp;
+  document.getElementById('total-pronto').textContent = totalProx;
+}
+
+// Buscador catálogo
+document.getElementById('buscador').addEventListener('input', e => {
+  busqueda = e.target.value;
+  renderizarCatalogo();
+});
+
+// Cerrar modal al hacer clic fuera
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay')) cerrarModal();
+});
+
+
+// ══════════════════════════════════════════
+// ENSAYOS
+// ══════════════════════════════════════════
+const ENSAYOS_CATALOGO = [
+  {cod:'E01', nombre:'Diagnóstico PAES-2016 D2601'},
+  {cod:'E02', nombre:'Ensayo PAES 2017'},
+  {cod:'E03', nombre:'Ensayo PAES 2018'},
+  {cod:'E04', nombre:'Ensayo PAES 2019'},
+  {cod:'E05', nombre:'Ensayo PAES 2020'},
+  {cod:'E06', nombre:'Ensayo PAES 2021'},
+  {cod:'E07', nombre:'Ensayo PAES 2022'},
+  {cod:'E08', nombre:'Ensayo PAES 2023'},
+  {cod:'E09', nombre:'Ensayo PAES 2024'},
+  {cod:'E10', nombre:'Ensayo PAES 2025'},
+];
+
+// planEnsayos[correo] = { ensayo, fecha, estado }
+let planEnsayos = {};
+
+function renderEnsayos() {
+  const contenedor = document.getElementById('bloques-ensayos');
+  if (!contenedor) return;
+  contenedor.innerHTML = '';
+  const hoyStr = new Date().toISOString().split('T')[0];
+
+  ESTUDIANTES.forEach((est, idx) => {
+    const asignado = planEnsayos[est.correo] || null;
+
+    const bloque = document.createElement('div');
+    bloque.className = 'ensayo-bloque';
+
+    // Opciones del select de ensayos
+    const optsEnsayo = ENSAYOS_CATALOGO.map(e =>
+      `<option value="${e.cod}">${e.cod} · ${e.nombre}</option>`
+    ).join('');
+
+    // Estado del ensayo asignado
+    let asignadoHTML = '';
+    if (asignado) {
+      const esHoy = asignado.fecha === hoyStr;
+      const cls = asignado.estado === 'completada' ? 'completado' : esHoy ? 'hoy' : '';
+      const label = asignado.estado === 'completada' ? '✓ Completado' : esHoy ? 'Hoy' : asignado.fecha;
+      asignadoHTML = `
+        <div class="ensayo-asignado ${cls}">
+          <div class="ensayo-asignado-info">
+            <div class="ensayo-asignado-cod">${asignado.ensayo} · ${asignado.ensayo_nombre || ''}</div>
+            <div class="ensayo-asignado-fecha">${label}</div>
+          </div>
+          ${asignado.estado !== 'completada' ? `<button class="btn-quitar-ensayo" onclick="quitarEnsayo('${est.correo}')">✕</button>` : ''}
+        </div>`;
+    } else {
+      asignadoHTML = `<div class="sin-ensayo">Sin ensayo asignado</div>`;
+    }
+
+    const fechaMin = new Date().toISOString().split('T')[0];
+
+    bloque.innerHTML = `
+      <div class="ensayo-est-hdr">
+        <div class="estudiante-info">
+          <div class="avatar av-${est.avIdx % 5}">${est.iniciales}</div>
+          <div>
+            <div class="est-nombre">${est.nombre}</div>
+            <div class="est-meta">${est.correo}</div>
+          </div>
+        </div>
+      </div>
+      ${asignadoHTML}
+      ${asignado && asignado.estado === 'completada' ? '' : `
+      <div class="ensayo-form">
+        <div>
+          <label>Ensayo</label>
+          <select class="ensayo-select" id="sel-ensayo-${idx}">${optsEnsayo}</select>
+        </div>
+        <div>
+          <label>Fecha</label>
+          <input type="date" class="ensayo-date" id="fecha-ensayo-${idx}" min="${fechaMin}">
+        </div>
+        <button class="btn-asignar-ensayo" onclick="asignarEnsayo('${est.correo}',${idx})">
+          Asignar
+        </button>
+      </div>`}`;
+
+    contenedor.appendChild(bloque);
+  });
+}
+
+function asignarEnsayo(correo, idx) {
+  const sel   = document.getElementById(`sel-ensayo-${idx}`);
+  const fecha = document.getElementById(`fecha-ensayo-${idx}`);
+  if (!fecha.value) { mostrarToast('Selecciona una fecha para el ensayo'); return; }
+
+  const ensayoObj = ENSAYOS_CATALOGO.find(e => e.cod === sel.value);
+  planEnsayos[correo] = {
+    ensayo:       sel.value,
+    ensayo_nombre: ensayoObj ? ensayoObj.nombre : sel.value,
+    fecha:        fecha.value,
+    estado:       'asignado'
+  };
+  renderEnsayos();
+}
+
+function quitarEnsayo(correo) {
+  delete planEnsayos[correo];
+  renderEnsayos();
+}
+
+async function guardarEnsayos() {
+  const asignaciones = Object.entries(planEnsayos)
+    .filter(([_, v]) => v.estado !== 'completada')
+    .map(([correo, v]) => ({
+      correo,
+      fecha:        v.fecha,
+      guia:         v.ensayo,
+      ensayo_nombre: v.ensayo_nombre,
+      tipo:         'ensayo'
+    }));
+
+  if (asignaciones.length === 0) {
+    mostrarToast('No hay ensayos para guardar');
+    return;
+  }
+
+  try {
+    const url = SCRIPT_URL +
+      '?accion=guardar_plan&datos=' +
+      encodeURIComponent(JSON.stringify(asignaciones));
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (data.ok) mostrarToast('Ensayos guardados correctamente');
+    else mostrarToast('Error al guardar. Intenta de nuevo.');
+  } catch(e) {
+    mostrarToast('Error de conexión.');
+  }
+}
+
+async function cargarEnsayosExistentes() {
+  try {
+    const url  = SCRIPT_URL + '?accion=plan_semana_docente';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (data.plan) {
+      data.plan.forEach(item => {
+        if (item.tipo === 'ensayo') {
+          planEnsayos[item.correo] = {
+            ensayo:        item.guia,
+            ensayo_nombre: item.ensayo_nombre || item.guia,
+            fecha:         item.fecha,
+            estado:        item.estado
+          };
+        }
+      });
+      renderEnsayos();
+    }
+  } catch(e) {}
+}
+
+// ── INIT: controlado por chequearAcceso() ──
+
+// ── CONTROL DE ACCESO ────────────────────────────────────
+const CLAVE_HASH = 'MateFlash_1976';
+const DIAS_SESSION = 30;
+
+function verificarClave() {
+  const val = document.getElementById('inp-clave').value;
+  const err = document.getElementById('clave-error');
+  if (val === CLAVE_HASH) {
+    const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
+    localStorage.setItem('fm_doc_auth', expira);
+    mostrarPanel();
+  } else {
+    err.style.display = 'block';
+    document.getElementById('inp-clave').value = '';
+    document.getElementById('inp-clave').focus();
+  }
+}
+
+function mostrarPanel() {
+  document.getElementById('pantalla-clave').style.display = 'none';
+  document.getElementById('panel-contenido').style.display = 'block';
+  cargarEstudiantes();
+  renderizarCatalogo();
+  cargarEnsayosExistentes();
+}
+
+function chequearAcceso() {
+  const auth = localStorage.getItem('fm_doc_auth');
+  if (auth && parseInt(auth) > Date.now()) {
+    mostrarPanel();
+  } else {
+    localStorage.removeItem('fm_doc_auth');
+    document.getElementById('pantalla-clave').style.display = 'flex';
+  }
+}
+
+window.addEventListener('load', chequearAcceso);
+
+</script>
+</div><!-- /panel-contenido -->
+</body>
+</html>

@@ -9,12 +9,14 @@ import Footer from './components/Footer';
 import AIAssistant from './components/AIAssistant';
 import MathBackground from './components/MathBackground';
 import FormModal from './components/FormModal';
+import FlashmatePage from './components/FlashmatePage';
 
 const App: React.FC = () => {
   const [modalState, setModalState] = useState<{ isOpen: boolean; url: string }>({
     isOpen: false,
     url: '',
   });
+  const [currentView, setCurrentView] = useState<'home' | 'flashmate'>('home');
 
   const openModal = (url: string) => {
     if (url.includes("wa.me")) {
@@ -29,12 +31,26 @@ const App: React.FC = () => {
     setModalState(prev => ({ ...prev, isOpen: false }));
   };
 
+  const showHome = () => {
+    setCurrentView('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const showFlashmate = () => {
+    setCurrentView('flashmate');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (currentView === 'flashmate') {
+    return <FlashmatePage onBack={showHome} />;
+  }
+
   return (
     <div className="relative min-h-screen">
       <MathBackground />
-      <Header onOpenModal={openModal} />
+      <Header onOpenModal={openModal} onOpenFlashmate={showFlashmate} />
       <main className="relative z-10">
-        <Hero onOpenModal={openModal} />
+        <Hero onOpenModal={openModal} onOpenFlashmate={showFlashmate} />
         <Methodology />
         <Programs onOpenModal={openModal} />
         <Testimonials />

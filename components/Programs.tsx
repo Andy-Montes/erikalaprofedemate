@@ -63,7 +63,7 @@ const Programs: React.FC<ProgramsProps> = ({ onOpenModal }) => {
             Programas y Modalidades
           </span>
           <h2 className="text-2xl md:text-3xl font-black text-brandNavy leading-tight">
-            Elije el <span className="text-brandRed">programa ideal</span> para que tu{" "}
+            Elige el <span className="text-brandRed">programa ideal</span> para que tu{" "}
             <span className="text-brandRed">hijo aprenda</span> matemáticas de verdad
           </h2>
         </div>

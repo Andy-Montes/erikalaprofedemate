@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · Guía U01.A.3c · Conjuntos numéricos</title>
+<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:100vh;padding:16px 12px 80px}
+.fm-wrap{position:relative;max-width:540px;margin:0 auto}
+.fm-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.fm-hdr{background:#38388E;padding:14px 16px}
+.fm-hdr-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fm-hdr-left{flex:1}
+.fm-badge{background:#ED3B62;color:#fff;font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;display:inline-block;margin-bottom:6px}
+.fm-eje{font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:.5px;margin-bottom:2px}
+.fm-titulo{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
+.fm-sub{font-size:11px;color:rgba(255,255,255,0.65)}
+.fm-hdr-logo{height:52px;width:auto;flex-shrink:0;border-radius:6px}
+.prog-bg{background:rgba(255,255,255,0.2);border-radius:4px;height:4px;margin-top:10px}
+.prog-bar{background:#0187F3;height:4px;border-radius:4px;transition:width .4s}
+.fm-ident{padding:16px 16px 14px;border-bottom:0.5px solid #eee}
+.fm-ident-titulo{font-size:10px;font-weight:600;color:#38388E;margin-bottom:8px;letter-spacing:.4px}
+.fm-input{width:100%;padding:9px 12px;border:0.5px solid #ddd;border-radius:8px;font-family:'Poppins',sans-serif;font-size:13px;color:#222;margin-bottom:6px;outline:none}
+.fm-input:focus{border-color:#38388E}
+.fm-btn-start{width:100%;background:#ED3B62;color:#fff;border:none;border-radius:8px;padding:11px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:2px}
+.fm-btn-start:hover{opacity:.9}
+.fm-body{padding:16px;display:none}
+.fm-qnum{font-size:10px;color:#888;font-weight:600;letter-spacing:.5px;margin-bottom:5px}
+.hab-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.hab-rp{background:#E6F1FB;color:#0C447C}
+.hab-m{background:#EAF3DE;color:#27500A}
+.hab-r{background:#EEEDFE;color:#3C3489}
+.hab-a{background:#FAEEDA;color:#633806}
+.fm-qtxt{font-size:15px;color:#1a1a1a;line-height:1.6;margin-bottom:14px}
+.opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border:0.5px solid #e0e0e0;border-radius:8px;margin-bottom:7px;cursor:pointer;background:#fff;transition:all .15s}
+.opt:hover{border-color:#0187F3;background:#EBF4FE}
+.opt.sel{border-color:#38388E;background:#EEEDFE}
+.opt.ok{border-color:#1D9E75;background:#E1F5EE;pointer-events:none}
+.opt.mal{border-color:#E24B4A;background:#FCEBEB;pointer-events:none}
+.opt.show{border-color:#1D9E75;background:#E1F5EE;pointer-events:none}
+.opt.dis{pointer-events:none;opacity:.65}
+.opt.nls{border-style:dashed}
+.opt.nls:hover{border-color:#888;background:#f5f5f7}
+.opt.nls.sel{border-color:#888;background:#f5f5f7}
+.letra{width:26px;height:26px;border-radius:50%;border:0.5px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#888;flex-shrink:0}
+.opt.ok .letra{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.opt.mal .letra{background:#E24B4A;color:#fff;border-color:#E24B4A}
+.opt.show .letra{background:#1D9E75;color:#fff;border-color:#1D9E75}
+.otxt{font-size:14px;color:#1a1a1a;line-height:1.4}
+.opt.nls .otxt{color:#aaa;font-style:italic}
+.fb{border-radius:8px;padding:12px 14px;margin-top:10px;font-size:13px;line-height:1.7;display:none}
+.fb.ok{background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5}
+.fb.mal{background:#FCEBEB;color:#791F1F;border:0.5px solid #F09595}
+.fb.nls{background:#f5f5f7;color:#5F5E5A;border:0.5px solid #ddd}
+.btns{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.btn-p{background:#38388E;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .15s}
+.btn-p:disabled{opacity:.35;cursor:not-allowed}
+.btn-p:hover:not(:disabled){opacity:.85}
+.btn-s{background:transparent;color:#38388E;border:0.5px solid #38388E;border-radius:8px;padding:10px 22px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:500;cursor:pointer;display:none}
+.btn-s:hover{background:#EEEDFE}
+.pje-big{font-size:38px;font-weight:600;color:#38388E;text-align:center}
+.pje-sub{font-size:14px;color:#888;margin:4px 0 14px;text-align:center}
+.alerta{border-radius:10px;padding:14px 16px;margin-bottom:16px;font-size:13px;line-height:1.6}
+.alerta.rep{background:#FAEEDA;border:0.5px solid #EF9F27;color:#412402}
+.alerta.bien{background:#E1F5EE;border:0.5px solid #5DCAA5;color:#04342C}
+.dots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.dot{width:12px;height:12px;border-radius:50%;background:#ddd}
+.dot.ok{background:#1D9E75}
+.dot.mal{background:#E24B4A}
+.dot.nls{background:#888780}
+.resumen{background:#f5f5f7;border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.res-titulo{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:8px}
+.res-fila{font-size:12px;line-height:2.1}
+.fm-footer{background:#38388E;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fm-footer-copy{font-size:11px;color:rgba(255,255,255,0.7)}
+.fm-footer-link{font-size:11px;color:rgba(255,255,255,0.75);text-decoration:none}
+.fm-footer-link:hover{color:#fff}
+.fm-wa{position:fixed;bottom:24px;right:24px;width:48px;height:48px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,0.25);cursor:pointer;z-index:100;text-decoration:none}
+.fm-wa svg{width:26px;height:26px;fill:#fff}
+</style>
+</head>
+<body>
+<div class="fm-wrap">
+<div class="fm-card">
+
+  <div class="fm-hdr">
+    <div class="fm-hdr-top">
+      <div class="fm-hdr-left">
+        <span class="fm-badge">Flash Mate · Guía U01.A.3c</span>
+        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01</div>
+        <div class="fm-titulo">Conjuntos numéricos</div>
+        <div class="fm-sub">MCD · mcm · Divisibilidad · Razonamiento avanzado</div>
+      </div>
+      <img class="fm-hdr-logo"
+        src="/flashmate/logo-erika.png"
+        alt="Erika la Profe de Mate"
+        onerror="this.style.display='none'">
+    </div>
+    <div class="prog-bg"><div class="prog-bar" id="barra" style="width:0%"></div></div>
+  </div>
+
+  <div class="fm-ident" id="zona-ident">
+    <div class="fm-ident-titulo">ANTES DE COMENZAR</div>
+    <input class="fm-input" type="text" id="inp-nombre" placeholder="Tu nombre completo">
+    <input class="fm-input" type="email" id="inp-correo" placeholder="Tu correo electrónico">
+    <div id="error-ident" style="font-size:12px;color:#E24B4A;margin-bottom:6px;display:none">Por favor completa tu nombre y correo.</div>
+    <button class="fm-btn-start" onclick="iniciar()">Comenzar guía →</button>
+  </div>
+
+  <div class="fm-body" id="zona-q">
+    <div class="fm-qnum" id="qnum">Pregunta 1 de 8</div>
+    <div id="htag"></div>
+    <div class="fm-qtxt" id="qtxt"></div>
+    <div id="opts"></div>
+    <div class="fb" id="fb"></div>
+    <div class="btns">
+      <button class="btn-p" id="btnc" onclick="confirmar()" disabled>Confirmar</button>
+      <button class="btn-s" id="btns" onclick="siguiente()">Siguiente →</button>
+    </div>
+  </div>
+
+  <div class="fm-body" id="zona-final" style="display:none;padding:16px">
+    <div class="pje-big" id="pje"></div>
+    <div class="pje-sub" id="pmsg"></div>
+    <div class="alerta" id="alerta"></div>
+    <div class="dots" id="dots"></div>
+    <div class="resumen">
+      <div class="res-titulo">Detalle por pregunta</div>
+      <div id="reslista" class="res-fila"></div>
+    </div>
+    <div class="btns" style="justify-content:center">
+      <button class="btn-p" id="btn-rep" onclick="reiniciar()">Repetir con valores nuevos</button>
+    </div>
+  </div>
+
+  <div class="fm-footer">
+    <span class="fm-footer-copy">© 2026 Erika la Profe de Mate</span>
+    <a href="https://www.erikalaprofedemate.com" class="fm-footer-link" target="_blank">www.erikalaprofedemate.com</a>
+  </div>
+
+</div>
+</div>
+
+<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.A.3c%20(Conjuntos%20Num%C3%A9ricos%2C%20Nivel%20c)" class="fm-wa" target="_blank" title="Contactar a Erika">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+const NLS=4;
+const LETRAS=['A','B','C','D','E'];
+let nombreEstudiante='',EJ=[],actual=0,resp=[],sel=null;
+
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
+function hcss(h){
+  if(h==='Resolver problemas')return 'hab-rp';
+  if(h==='Modelar')return 'hab-m';
+  if(h==='Representar')return 'hab-r';
+  return 'hab-a';
+}
+
+function generarEjercicios(){
+  const EJ=[];
+
+  // P1 — Deducir dos números dado MCD, mcm y su suma (Resolver problemas)
+  const casos1=[
+    {mcd:6,mcm:60,suma:26,a:6,b:20},
+    {mcd:4,mcm:48,suma:28,a:12,b:16},
+    {mcd:5,mcm:60,suma:25,a:15,b:10},  // nota: 10+15=25
+    {mcd:3,mcm:36,suma:21,a:9,b:12},
+    {mcd:6,mcm:72,suma:42,a:18,b:24}
+  ];
+  const c1=rnd(casos1);
+  const w1=shuffle([[c1.a+2,c1.b-2],[c1.a-3,c1.b+3],[c1.a*2,c1.b/2],[c1.a+5,c1.b-5]]
+    .filter(([x,y])=>x>0&&y>0&&x!==c1.a)).slice(0,3)
+    .map(([x,y])=>`${x} y ${y}`);
+  const ops1=shuffle([`${c1.a} y ${c1.b}`,...w1]);
+  EJ.push({hab:'Resolver problemas',
+    txt:`Dos números tienen MCD=${c1.mcd}, mcm=${c1.mcm} y su suma es ${c1.a+c1.b}. ¿Cuáles son los dos números?`,
+    ops:ops1,ok:ops1.indexOf(`${c1.a} y ${c1.b}`),
+    fb_ok:`Correcto. Los pares de múltiplos de ${c1.mcd} que cumplen MCD×mcm=a×b: ${c1.mcd}×${c1.mcm}=${c1.mcd*c1.mcm}=${c1.a}×${c1.b}. Y su suma: ${c1.a}+${c1.b}=${c1.a+c1.b}. ✓`,
+    fb_mal:`Usa MCD×mcm=a×b: ${c1.mcd}×${c1.mcm}=${c1.mcd*c1.mcm}. Busca pares (múltiplos de ${c1.mcd}) cuyo producto sea ${c1.mcd*c1.mcm} y suma ${c1.a+c1.b}. Son ${c1.a} y ${c1.b}.`
+  });
+
+  // P2 — Contar enteros con dos condiciones simultáneas (Representar)
+  const casos2=[
+    {desde:1,hasta:100,d1:3,d2:5,mcm:15,count:6,lista:'15,30,45,60,75,90'},
+    {desde:1,hasta:120,d1:4,d2:6,mcm:12,count:10,lista:'12,24,36,...,120'},
+    {desde:1,hasta:100,d1:6,d2:9,mcm:18,count:5,lista:'18,36,54,72,90'},
+    {desde:1,hasta:200,d1:8,d2:12,mcm:24,count:8,lista:'24,48,...,192'}
+  ];
+  const c2=rnd(casos2);
+  const w2=shuffle([c2.count-1,c2.count+1,c2.count+2,c2.count-2].filter(x=>x>0&&x!==c2.count)).slice(0,3).map(String);
+  const ops2=shuffle([String(c2.count),...w2]);
+  EJ.push({hab:'Representar',
+    txt:`¿Cuántos números entre ${c2.desde} y ${c2.hasta} son divisibles por ${c2.d1} y por ${c2.d2} simultáneamente?`,
+    ops:ops2,ok:ops2.indexOf(String(c2.count)),
+    fb_ok:`Correcto. Un número divisible por ${c2.d1} y por ${c2.d2} es divisible por mcm(${c2.d1},${c2.d2})=${c2.mcm}. Entre ${c2.desde} y ${c2.hasta}: ${c2.lista}. Total: ${c2.count}.`,
+    fb_mal:`Divisible por ${c2.d1} y ${c2.d2} significa divisible por mcm(${c2.d1},${c2.d2})=${c2.mcm}. Entre ${c2.desde} y ${c2.hasta} hay ${c2.count} múltiplos de ${c2.mcm}.`
+  });
+
+  // P3 — Detectar error en procedimiento ajeno (Argumentar)
+  const errores3=[
+    {
+      txt:'Camila calcula el MCD(24,36) así: "24=2³×3 y 36=2²×3². MCD=2³×3²=72". ¿Cuál es su error?',
+      ok:'Tomó los exponentes mayores en vez de los menores',
+      w:['No factorizó correctamente el 36','No factorizó correctamente el 24','El MCD de 24 y 36 sí es 72'],
+      expl:'Para el MCD se toman los factores comunes con el exponente MENOR: 2²×3=12, no 72. El 72 es el mcm.'
+    },
+    {
+      txt:'Pedro calcula mcm(12,18) así: "12=2²×3 y 18=2×3². mcm=2×3=6". ¿Cuál es su error?',
+      ok:'Tomó los exponentes menores en vez de los mayores',
+      w:['No factorizó correctamente el 18','El mcm de 12 y 18 sí es 6','Confundió mcm con suma'],
+      expl:'Para el mcm se toman los factores comunes y no comunes con el exponente MAYOR: 2²×3²=36, no 6. El 6 es el MCD.'
+    },
+    {
+      txt:'Ana dice: "MCD(15,25)=5 y mcm(15,25)=75, entonces MCD×mcm=5×75=375, pero 15×25=375 también". ¿Está en lo correcto?',
+      ok:'Sí, aplicó correctamente la propiedad MCD×mcm=a×b',
+      w:['No, el mcm de 15 y 25 no es 75','No, 5×75 no es 375','No, la propiedad no aplica aquí'],
+      expl:'MCD(15,25)=5 y mcm(15,25)=75. Comprobación: 5×75=375=15×25. La propiedad se cumple perfectamente.'
+    }
+  ];
+  const c3=rnd(errores3);
+  const ops3=shuffle([c3.ok,...c3.w]);
+  EJ.push({hab:'Argumentar',
+    txt:c3.txt,
+    ops:ops3,ok:ops3.indexOf(c3.ok),
+    fb_ok:`Correcto. ${c3.expl}`,
+    fb_mal:`${c3.expl}`
+  });
+
+  // P4 — mcm con conversión de unidades (Modelar)
+  const casos4=[
+    {t1:90,t2:60,u1:'segundos',u2:'1 minuto',mcm:180,res:'cada 3 minutos',expl:'mcm(90,60)=180 segundos=3 minutos'},
+    {t1:45,t2:30,u1:'segundos',u2:'30 segundos',mcm:90,res:'cada 1 min 30 seg',expl:'mcm(45,30)=90 segundos=1 min 30 seg'},
+    {t1:120,t2:80,u1:'segundos',u2:'2 minutos',mcm:240,res:'cada 4 minutos',expl:'mcm(120,80)=240 segundos=4 minutos'}
+  ];
+  const c4=rnd(casos4);
+  const w4=shuffle([
+    'cada 2 minutos','cada 5 minutos','cada 6 minutos','cada 8 minutos',
+    'cada 2 min 30 seg','cada 3 min 30 seg'
+  ].filter(x=>x!==c4.res)).slice(0,3);
+  const ops4=shuffle([c4.res,...w4]);
+  EJ.push({hab:'Modelar',
+    txt:`Dos máquinas emiten una señal. La primera cada ${c4.t1} ${c4.u1} y la segunda cada ${c4.t2} ${c4.u1}. ¿Cada cuánto tiempo coinciden las señales?`,
+    ops:ops4,ok:ops4.indexOf(c4.res),
+    fb_ok:`Correcto. ${c4.expl}.`,
+    fb_mal:`${c4.expl}. Hay que calcular el mcm y luego convertir a minutos.`
+  });
+
+  // P5 — Fórmula de divisores aplicada a potencias grandes (Representar)
+  const casos5=[
+    {n:'2⁵×3²',nd:18,expl:'(5+1)(2+1)=6×3=18'},
+    {n:'2³×5²×7',nd:24,expl:'(3+1)(2+1)(1+1)=4×3×2=24'},
+    {n:'2⁴×3×11',nd:20,expl:'(4+1)(1+1)(1+1)=5×2×2=20'},
+    {n:'3³×5²',nd:12,expl:'(3+1)(2+1)=4×3=12'},
+    {n:'2²×3²×5²',nd:27,expl:'(2+1)(2+1)(2+1)=3×3×3=27'}
+  ];
+  const c5=rnd(casos5);
+  const w5=shuffle([c5.nd-3,c5.nd+4,c5.nd-6,c5.nd+6].filter(x=>x>0&&x!==c5.nd)).slice(0,3).map(String);
+  const ops5=shuffle([String(c5.nd),...w5]);
+  EJ.push({hab:'Representar',
+    txt:`Un número tiene factorización prima ${c5.n}. ¿Cuántos divisores positivos tiene?`,
+    ops:ops5,ok:ops5.indexOf(String(c5.nd)),
+    fb_ok:`Correcto. Fórmula: si n=p₁ᵃ×p₂ᵇ×..., tiene (a+1)(b+1)×... divisores. ${c5.n}: ${c5.expl}=${c5.nd} divisores.`,
+    fb_mal:`Fórmula de divisores: si n=p₁ᵃ×p₂ᵇ×..., tiene (a+1)(b+1)×... divisores. Para ${c5.n}: ${c5.expl}=${c5.nd}.`
+  });
+
+  // P6 — Par que cumple MCD y mcm dados (Resolver problemas)
+  const casos6=[
+    {mcd:6,mcm:60,pares:[[12,30],[6,60],[20,18]],ok:[12,30],w:['6 y 60','20 y 18','15 y 24'],expl:'12=6×2 y 30=6×5. MCD(12,30)=6 ✓ mcm(12,30)=60 ✓'},
+    {mcd:4,mcm:48,pares:[[8,24],[4,48],[16,12]],ok:[8,24],w:['4 y 48','16 y 12','6 y 32'],expl:'8=4×2 y 24=4×6. MCD(8,24)=8... verifica: mcm(8,24)=24. Prueba 8 y 24: MCD=8, mcm=24. Intenta con los valores correctos.'},
+    {mcd:5,mcm:60,pares:[[15,20],[5,60],[10,30]],ok:[15,20],w:['5 y 60','10 y 30','20 y 15'],expl:'MCD(15,20)=5 ✓ mcm(15,20)=60 ✓ El par 15 y 20 cumple ambas condiciones.'},
+    {mcd:3,mcm:36,pares:[[9,12],[3,36],[6,18]],ok:[9,12],w:['3 y 36','6 y 18','12 y 9'],expl:'MCD(9,12)=3 ✓ mcm(9,12)=36 ✓'}
+  ];
+  const c6=rnd(casos6);
+  const okStr=`${c6.ok[0]} y ${c6.ok[1]}`;
+  const ops6=shuffle([okStr,...c6.w.slice(0,3)]);
+  EJ.push({hab:'Resolver problemas',
+    txt:`¿Cuál de los siguientes pares de números tiene MCD=${c6.mcd} y mcm=${c6.mcm}?`,
+    ops:ops6,ok:ops6.indexOf(okStr),
+    fb_ok:`Correcto. ${c6.expl}`,
+    fb_mal:`${c6.expl} La clave es verificar que MCD×mcm=${c6.mcd}×${c6.mcm}=${c6.mcd*c6.mcm}=a×b.`
+  });
+
+  // P7 — Consecuencias encadenadas de divisibilidad (Argumentar)
+  const casos7=[
+    {
+      txt:'Si n es divisible por 2 y por 3, ¿cuál de estas afirmaciones es SIEMPRE verdadera?',
+      ok:'n es divisible por 6',
+      w:['n es divisible por 12','n es divisible por 18','n es un número par mayor que 6'],
+      expl:'Si n es divisible por 2 y por 3, y MCD(2,3)=1 (coprimos), entonces n es divisible por 2×3=6. Pero no necesariamente por 12 o 18.'
+    },
+    {
+      txt:'Si n es divisible por 4 y por 6, ¿cuál es la menor garantía de divisibilidad?',
+      ok:'n es divisible por 12',
+      w:['n es divisible por 24','n es divisible por 48','n es divisible por 8'],
+      expl:'MCD(4,6)=2, por lo que mcm(4,6)=12. Todo múltiplo de 4 y de 6 es múltiplo de 12, pero no necesariamente de 24.'
+    },
+    {
+      txt:'Si n es divisible por 6 y por 10, ¿cuál es la menor garantía de divisibilidad?',
+      ok:'n es divisible por 30',
+      w:['n es divisible por 60','n es divisible por 15','n es divisible por 20'],
+      expl:'mcm(6,10)=30. Todo número divisible por 6 y por 10 es divisible por 30, que es el mínimo garantizado.'
+    }
+  ];
+  const c7=rnd(casos7);
+  const ops7=shuffle([c7.ok,...c7.w]);
+  EJ.push({hab:'Argumentar',
+    txt:c7.txt,
+    ops:ops7,ok:ops7.indexOf(c7.ok),
+    fb_ok:`Correcto. ${c7.expl}`,
+    fb_mal:`${c7.expl}`
+  });
+
+  // P8 — Problema complejo de tres personas y períodos (Modelar)
+  const casos8=[
+    {p:['Valentina','Camila','Sofía'],d:[6,8,12],mcm:24,ctx:'visitan a su abuela',u:'días',extra:'Se vieron hoy. ¿En cuántos días volverán a coincidir las tres?'},
+    {p:['el bus A','el bus B','el bus C'],d:[10,15,20],mcm:60,ctx:'pasan por la misma parada',u:'minutos',extra:'A las 8:00 pasaron juntos. ¿Cuántos minutos después volverán a coincidir?'},
+    {p:['Rodrigo','Matías','Diego'],d:[4,6,10],mcm:60,ctx:'entrenan en el gimnasio',u:'días',extra:'Hoy entrenaron juntos. ¿En cuántos días volverán a coincidir?'}
+  ];
+  const c8=rnd(casos8);
+  const w8=shuffle([c8.mcm+c8.d[0],c8.mcm-c8.d[1],c8.mcm*2,c8.mcm/2].filter(x=>x>0&&x!==c8.mcm&&Number.isInteger(x))).slice(0,3);
+  const ops8=shuffle([c8.mcm,...w8]).map(x=>`${x} ${c8.u}`);
+  EJ.push({hab:'Modelar',
+    txt:`${c8.p[0]} ${c8.ctx} cada ${c8.d[0]} ${c8.u}, ${c8.p[1]} cada ${c8.d[1]} y ${c8.p[2]} cada ${c8.d[2]}. ${c8.extra}`,
+    ops:ops8,ok:ops8.indexOf(`${c8.mcm} ${c8.u}`),
+    fb_ok:`Correcto. mcm(${c8.d[0]},${c8.d[1]},${c8.d[2]})=${c8.mcm} ${c8.u}. Es el menor tiempo en que los tres períodos coinciden.`,
+    fb_mal:`Se necesita el mcm de los tres períodos. mcm(${c8.d[0]},${c8.d[1]},${c8.d[2]})=${c8.mcm} ${c8.u}.`
+  });
+
+  return EJ;
+}
+
+function validarCorreo(correo){
+  if(correo.indexOf('@')===-1) return false;
+  var partes=correo.split('@');
+  if(partes.length!==2) return false;
+  if(partes[0].length===0) return false;
+  if(partes[1].indexOf('.')===-1) return false;
+  var dominio=partes[1].split('.');
+  if(dominio[0].length===0) return false;
+  if(dominio[dominio.length-1].length<2) return false;
+  return true;
+}
+function iniciar(){
+  const nom=document.getElementById('inp-nombre').value.trim();
+  const cor=document.getElementById('inp-correo').value.trim();
+  if(!nom||!cor){document.getElementById('error-ident').style.display='block';return;}
+  if(!validarCorreo(cor)){document.getElementById('error-ident').textContent='Por favor ingresa un correo válido. Ejemplo: nombre@gmail.com';document.getElementById('error-ident').style.display='block';return;}
+  document.getElementById('error-ident').textContent='Por favor completa tu nombre y correo.';
+  nombreEstudiante=nom;
+  document.getElementById('zona-ident').style.display='none';
+  document.getElementById('zona-q').style.display='block';
+  EJ=generarEjercicios();
+  resp=new Array(8).fill(null);
+  actual=0;sel=null;
+  render();
+}
+
+function render(){
+  const e=EJ[actual];
+  document.getElementById('qnum').textContent=`Pregunta ${actual+1} de 8`;
+  document.getElementById('barra').style.width=((actual+1)/8*100)+'%';
+  document.getElementById('htag').innerHTML=`<span class="hab-tag ${hcss(e.hab)}">${e.hab}</span>`;
+  document.getElementById('qtxt').textContent=e.txt;
+  sel=null;
+  const od=document.getElementById('opts');
+  od.innerHTML='';
+  e.ops.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='opt';d.id='op'+i;
+    d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${o}</span>`;
+    d.onclick=()=>elegir(i);
+    od.appendChild(d);
+  });
+  const nls=document.createElement('div');
+  nls.className='opt nls';nls.id='op4';
+  nls.innerHTML=`<div class="letra" style="border-style:dashed">E</div><span class="otxt">No lo sé</span>`;
+  nls.onclick=()=>elegir(4);
+  od.appendChild(nls);
+  document.getElementById('fb').style.display='none';
+  document.getElementById('btnc').style.display='inline-block';
+  document.getElementById('btnc').disabled=true;
+  document.getElementById('btns').style.display='none';
+}
+
+function elegir(i){
+  if(document.getElementById('btnc').style.display==='none')return;
+  document.querySelectorAll('.opt').forEach(d=>d.classList.remove('sel'));
+  document.getElementById('op'+i).classList.add('sel');
+  sel=i;document.getElementById('btnc').disabled=false;
+}
+
+function confirmar(){
+  if(sel===null)return;
+  const e=EJ[actual];resp[actual]=sel;
+  const esNls=sel===NLS;
+  const esOk=!esNls&&sel===e.ok;
+  document.querySelectorAll('.opt').forEach((d,i)=>{
+    d.onclick=null;
+    if(i===NLS){d.className='opt nls dis';return;}
+    if(i===e.ok)d.className='opt '+(esOk?'ok':'show');
+    else if(i===sel&&!esOk&&!esNls)d.className='opt mal';
+    else d.className='opt dis';
+  });
+  const fb=document.getElementById('fb');
+  if(esNls){
+    fb.className='fb nls';
+    fb.textContent=`La respuesta correcta es ${LETRAS[e.ok]}: ${e.ops[e.ok]}. ${e.fb_mal}`;
+  } else {
+    fb.className='fb '+(esOk?'ok':'mal');
+    fb.textContent=esOk?e.fb_ok:e.fb_mal;
+  }
+  fb.style.display='block';
+  document.getElementById('btnc').style.display='none';
+  const bs=document.getElementById('btns');
+  bs.style.display='inline-block';
+  bs.textContent=actual<7?'Siguiente →':'Ver resultados →';
+}
+
+function siguiente(){
+  if(actual<7){actual++;render();}
+  else mostrarFinal();
+}
+
+function mostrarFinal(){
+  document.getElementById('zona-q').style.display='none';
+  document.getElementById('zona-final').style.display='block';
+  document.getElementById('zona-final').style.visibility='visible';
+  document.getElementById('zona-final').style.opacity='1';
+  document.getElementById('barra').style.width='100%';
+  const corr=resp.filter((r,i)=>r===EJ[i].ok).length;
+  const nlsC=resp.filter(r=>r===NLS).length;
+  const incorrectas=8-corr-nlsC;
+  const pct=Math.round(corr/8*100);
+  document.getElementById('pje').textContent=corr+' / 8 correctas';
+  registrar(corr,incorrectas,nlsC,pct);
+  document.getElementById('pmsg').textContent=pct+'% de logro'+(nlsC>0?` · ${nlsC} sin responder`:'');
+  const al=document.getElementById('alerta');
+  // Frases por nivel — rotan aleatoriamente
+  const MSGS = {
+    alto: [
+      {titulo:'🔥 ¡Dominaste esta guía!', txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},
+      {titulo:'⚡ ¡Excelente nivel!', txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},
+      {titulo:'🎯 ¡Puntazo!', txt:'Cada guía así te acerca más al puntaje que quieres.'},
+      {titulo:'🚀 ¡Así se hace!', txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},
+      {titulo:'🌟 ¡Brillante!', txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}
+    ],
+    medio: [
+      {titulo:'💪 ¡Vas bien!', txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},
+      {titulo:'📈 Buen avance', txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},
+      {titulo:'✨ ¡Ya casi!', txt:'Con un intento más lo dominas. El progreso ya es visible.'},
+      {titulo:'🎯 En camino', txt:'Cada intento te acerca más. Repite sin presión, con foco.'},
+      {titulo:'⚡ Sigue sumando', txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}
+    ],
+    bajo: [
+      {titulo:'💡 Esta guía te está enseñando algo importante', txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},
+      {titulo:'🧠 Así funciona el aprendizaje real', txt:'Los errores son parte del proceso. Repite antes de avanzar.'},
+      {titulo:'🔄 No te rindas', txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelta a intentarlo!'},
+      {titulo:'💪 El desafío es parte del camino', txt:'Repite esta guía. Con práctica constante lo lograrás.'},
+      {titulo:'🌱 Aquí es donde más se aprende', txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}
+    ]
+  };
+  const nivel_msg = pct >= 75 ? 'alto' : pct >= 50 ? 'medio' : 'bajo';
+  const lista = MSGS[nivel_msg];
+  const msg = lista[Math.floor(Math.random()*lista.length)];
+  if(nivel_msg === 'alto'){
+    al.className='alerta bien';
+    al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;
+    document.getElementById('btn-rep').textContent='Repetir para afianzar';
+  } else if(nivel_msg === 'medio'){
+    al.className='alerta bien';
+    al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;
+    document.getElementById('btn-rep').textContent='Repetir con valores nuevos';
+  } else {
+    al.className='alerta rep';
+    al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}.</strong><br>${msg.txt}`;
+    document.getElementById('btn-rep').textContent='Repetir con valores nuevos';
+  }
+  const dots=document.getElementById('dots');
+  dots.innerHTML='';
+  resp.forEach((r,i)=>{
+    const d=document.createElement('div');
+    const ok=r===EJ[i].ok,nls=r===NLS;
+    d.className='dot '+(ok?'ok':nls?'nls':'mal');
+    dots.appendChild(d);
+  });
+  document.getElementById('reslista').innerHTML=resp.map((r,i)=>{
+    const ok=r===EJ[i].ok,nls=r===NLS;
+    const color=ok?'#085041':nls?'#5F5E5A':'#791F1F';
+    const icono=ok?'✓':nls?'?':'✗';
+    const txt=ok?'Correcta':nls?`No lo sé — correcta: ${LETRAS[EJ[i].ok]}`:`Incorrecta — correcta: ${LETRAS[EJ[i].ok]}`;
+    return `<div style="color:${color}">${icono} P${i+1} (${EJ[i].hab}): ${txt}</div>`;
+  }).join('');
+}
+
+function registrar(corr,incorr,nls,pct){
+  if (window._modoDocente) return;
+  var fecha=new Date().toLocaleDateString('es-CL',{timeZone:'America/Santiago'});
+  var correo=document.getElementById('inp-correo').value.trim();
+  var HAB_E=["Resolver problemas", "Representar", "Argumentar", "Modelar", "Representar", "Resolver problemas", "Argumentar", "Modelar"];
+  var ejercicios=resp.map(function(r,i){
+    if(r===4) return 2;
+    return (r===EJ[i].ok)?1:0;
+  });
+  var falladas=[];
+  resp.forEach(function(r,i){
+    if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1) falladas.push(EJ[i].hab);
+  });
+  // ── CÁLCULO LOGRO POR HABILIDAD ──────────────────────
+  var HAB_MAP={e1:HAB_E[0],e2:HAB_E[1],e3:HAB_E[2],e4:HAB_E[3],e5:HAB_E[4],e6:HAB_E[5],e7:HAB_E[6],e8:HAB_E[7]};
+  var habCorr={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
+  var habTot={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
+  ['e1','e2','e3','e4','e5','e6','e7','e8'].forEach(function(k,i){
+    var h=HAB_MAP[k];
+    habTot[h]=(habTot[h]||0)+1;
+    if(ejercicios[i]===1) habCorr[h]=(habCorr[h]||0)+1;
+  });
+  var logroResolver=habTot['Resolver problemas']>0?Math.round(habCorr['Resolver problemas']/habTot['Resolver problemas']*100)/100:null;
+  var logroModelar=habTot['Modelar']>0?Math.round(habCorr['Modelar']/habTot['Modelar']*100)/100:null;
+  var logroRepresentar=habTot['Representar']>0?Math.round(habCorr['Representar']/habTot['Representar']*100)/100:null;
+  var logroArgumentar=habTot['Argumentar']>0?Math.round(habCorr['Argumentar']/habTot['Argumentar']*100)/100:null;
+  var params=[
+    'fecha='+encodeURIComponent(fecha),
+    'nombre='+encodeURIComponent(nombreEstudiante),
+    'correo='+encodeURIComponent(correo),
+    'tipo=individual',
+    'grupo=NA',
+    'guia=guia-U01.A.3c',
+    'eje=E1',
+    'unidad=U01',
+    'subunidad=A',
+    'nivel=c',
+    'correctas='+corr,
+    'incorrectas='+incorr,
+    'nls='+nls,
+    'logro='+(pct/100),
+    'e1='+ejercicios[0],
+    'e2='+ejercicios[1],
+    'e3='+ejercicios[2],
+    'e4='+ejercicios[3],
+    'e5='+ejercicios[4],
+    'e6='+ejercicios[5],
+    'e7='+ejercicios[6],
+    'e8='+ejercicios[7],
+    'habilidades='+encodeURIComponent(falladas.join('|')),
+    'logro_resolver='+(logroResolver!==null?logroResolver:''),'logro_modelar='+(logroModelar!==null?logroModelar:''),'logro_representar='+(logroRepresentar!==null?logroRepresentar:''),'logro_argumentar='+(logroArgumentar!==null?logroArgumentar:'')
+  ].join('&');
+  var img=new Image();
+  img.src='https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec?'+params;
+}
+
+function volverPortal(){
+  const params=new URLSearchParams(window.location.search);
+  const nombre=params.get('nombre');
+  const correo=params.get('correo');
+  if(nombre&&correo){
+    window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);
+  } else {
+    window.location.href='portal-estudiante.html';
+  }
+}
+function reiniciar(){
+  EJ=generarEjercicios();actual=0;resp=new Array(8).fill(null);sel=null;
+  document.getElementById('zona-final').style.display='none';
+  document.getElementById('zona-q').style.display='block';
+  render();
+}
+
+// ── AUTO-IDENTIFICACIÓN DESDE PORTAL ──────────────────
+// Si el estudiante llega desde el portal, nombre y correo
+// vienen en la URL y se saltan el formulario
+function autoIdentificar() {
+  const params = new URLSearchParams(window.location.search);
+  const nombre = params.get('nombre');
+  const correo = params.get('correo');
+  if (nombre && correo) {
+    document.getElementById('inp-nombre').value = nombre;
+    document.getElementById('inp-correo').value = correo;
+    // Ocultar formulario y arrancar directo
+    document.getElementById('zona-ident').style.display = 'none';
+    document.getElementById('zona-q').style.display = 'block';
+    nombreEstudiante = nombre;
+    EJ = generarEjercicios();
+    resp = new Array(8).fill(null);
+    actual = 0; sel = null;
+    render();
+  }
+}
+
+// ── AUTO-LOGIN Y MODO DOCENTE ──────────────────────────
+window.addEventListener('load', function() {
+  const params = new URLSearchParams(window.location.search);
+  const modo   = params.get('modo');
+  const nombre = params.get('nombre');
+  const correo = params.get('correo');
+
+  if (modo === 'docente') {
+    // Modo docente: saltar formulario, no registrar
+    window._modoDocente = true;
+    nombreEstudiante = 'Vista docente';
+    document.getElementById('zona-ident').style.display = 'none';
+    document.getElementById('zona-q').style.display = 'block';
+    EJ = generarEjercicios();
+    resp = new Array(8).fill(null);
+    actual = 0; sel = null;
+    render();
+    return; // no continuar con autoIdentificar
+  }
+
+  if (nombre && correo) {
+    // Auto-login desde portal: saltar formulario con datos reales
+    document.getElementById('inp-nombre').value = nombre;
+    document.getElementById('inp-correo').value = correo;
+    document.getElementById('zona-ident').style.display = 'none';
+    document.getElementById('zona-q').style.display = 'block';
+    nombreEstudiante = nombre;
+    EJ = generarEjercicios();
+    resp = new Array(8).fill(null);
+    actual = 0; sel = null;
+    render();
+  }
+});
+
+</script>
+</body>
+</html>

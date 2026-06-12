@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlashMate · Seguimiento Docente</title>
+<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --azul:#38388E;--rojo:#ED3B62;--celeste:#0187F3;
+  --verde:#10B981;--amarillo:#F59E0B;--naranja:#F97316;
+  --bg:#F0F2F8;--card:#fff;--texto:#1a1a2e;--suave:#6B7280;--borde:#E5E7EB;
+}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;}
+
+/* HEADER */
+.hdr{background:var(--azul);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(56,56,142,0.3);}
+.hdr-left{display:flex;align-items:center;gap:12px;}
+.hdr-logo{height:42px;border-radius:6px;}
+.hdr-title{font-size:16px;font-weight:700;color:#fff;}
+.hdr-sub{font-size:10px;color:rgba(255,255,255,0.6);margin-top:1px;}
+.btn-cargar{background:var(--rojo);color:#fff;border:none;border-radius:8px;
+  padding:8px 18px;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .15s;}
+.btn-cargar:hover{opacity:.88;}
+.btn-cargar:disabled{opacity:.5;cursor:not-allowed;}
+
+/* TABS */
+.tabs{background:#fff;border-bottom:2px solid var(--borde);
+  display:flex;gap:0;padding:0 24px;position:sticky;top:70px;z-index:99;}
+.tab{padding:14px 20px;font-size:13px;font-weight:500;color:var(--suave);
+  cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;
+  transition:all .15s;white-space:nowrap;}
+.tab:hover{color:var(--azul);}
+.tab.activo{color:var(--azul);border-bottom-color:var(--azul);font-weight:600;}
+
+/* CONTENIDO */
+.contenido{max-width:1000px;margin:0 auto;padding:24px 16px 60px;}
+
+/* ESTADO CARGA */
+.estado{text-align:center;padding:60px 20px;color:var(--suave);}
+.estado-icon{font-size:40px;margin-bottom:12px;}
+.estado-txt{font-size:14px;}
+.spinner-grande{width:36px;height:36px;border:3px solid var(--borde);
+  border-top-color:var(--azul);border-radius:50%;
+  animation:spin .7s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* STATS GLOBALES */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.stat-card{background:var(--card);border-radius:12px;padding:16px;border:1.5px solid var(--borde);}
+.stat-num{font-size:28px;font-weight:700;}
+.stat-label{font-size:11px;color:var(--suave);margin-top:2px;}
+.c-azul{color:var(--azul);} .c-verde{color:var(--verde);} .c-rojo{color:var(--rojo);} .c-amarillo{color:var(--amarillo);}
+
+/* ALERTAS REFUERZO */
+.alerta-seccion{margin-bottom:24px;}
+.alerta-titulo{font-size:13px;font-weight:700;color:var(--rojo);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;}
+.alerta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;}
+.alerta-card{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;
+  padding:12px 14px;}
+.alerta-nombre{font-size:13px;font-weight:600;color:var(--texto);}
+.alerta-detalle{font-size:11px;color:var(--suave);margin-top:3px;}
+.alerta-hab{display:inline-block;background:#FCA5A5;color:#7F1D1D;
+  font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;margin-top:4px;margin-right:3px;}
+
+/* TABLA ESTUDIANTES */
+.tabla-wrap{background:var(--card);border-radius:12px;border:1.5px solid var(--borde);overflow:hidden;margin-bottom:20px;}
+.tabla-header{padding:14px 16px;border-bottom:1px solid var(--borde);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.tabla-titulo{font-size:13px;font-weight:600;}
+.buscador-mini{padding:6px 12px;border:1px solid var(--borde);border-radius:8px;
+  font-family:'Poppins',sans-serif;font-size:12px;outline:none;width:200px;}
+.buscador-mini:focus{border-color:var(--azul);}
+table{width:100%;border-collapse:collapse;}
+th{background:#F8FAFC;font-size:11px;font-weight:600;color:var(--suave);
+  padding:10px 14px;text-align:left;border-bottom:1px solid var(--borde);}
+td{font-size:12px;padding:10px 14px;border-bottom:0.5px solid var(--borde);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#FAFBFF;}
+.logro-chip{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.logro-alto{background:#D1FAE5;color:#065F46;}
+.logro-medio{background:#FEF3C7;color:#92400E;}
+.logro-bajo{background:#FEE2E2;color:#991B1B;}
+.hab-chip{display:inline-block;padding:2px 7px;border-radius:8px;font-size:9px;font-weight:600;margin:1px;}
+.hab-rp{background:#E6F1FB;color:#0C447C;}
+.hab-m{background:#EAF3DE;color:#27500A;}
+.hab-r{background:#EEEDFE;color:#3C3489;}
+.hab-a{background:#FAEEDA;color:#633806;}
+.hab-mal{background:#FEE2E2;color:#991B1B;}
+.btn-ver{background:var(--azul);color:#fff;border:none;border-radius:6px;
+  padding:4px 10px;font-family:'Poppins',sans-serif;font-size:10px;cursor:pointer;}
+
+/* MODAL ESTUDIANTE */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  z-index:200;display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.show{display:flex;}
+.modal{background:#fff;border-radius:16px;max-width:640px;width:100%;
+  max-height:85vh;overflow-y:auto;padding:24px;}
+.modal-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.modal-nombre{font-size:18px;font-weight:700;color:var(--azul);}
+.modal-correo{font-size:12px;color:var(--suave);}
+.btn-cerrar{background:none;border:none;font-size:20px;cursor:pointer;color:var(--suave);}
+.modal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;}
+.modal-stat{background:#F8FAFC;border-radius:10px;padding:12px;text-align:center;}
+.modal-stat-num{font-size:22px;font-weight:700;color:var(--azul);}
+.modal-stat-lbl{font-size:10px;color:var(--suave);}
+.guia-fila{display:flex;align-items:center;gap:10px;padding:8px 0;
+  border-bottom:0.5px solid var(--borde);}
+.guia-fila:last-child{border-bottom:none;}
+.guia-cod{font-size:12px;font-weight:600;color:var(--azul);min-width:120px;}
+.guia-logro-bar{flex:1;background:#E5E7EB;border-radius:10px;height:8px;overflow:hidden;}
+.guia-logro-fill{height:8px;border-radius:10px;transition:width .5s;}
+.guia-pct{font-size:11px;font-weight:600;min-width:40px;text-align:right;}
+.seccion-modal{font-size:12px;font-weight:700;color:var(--azul);
+  margin:16px 0 8px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* HABILIDADES */
+.hab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+.hab-card{background:var(--card);border-radius:12px;border:1.5px solid var(--borde);padding:16px;}
+.hab-nombre{font-size:13px;font-weight:600;margin-bottom:12px;}
+.hab-barra-wrap{margin-bottom:8px;}
+.hab-barra-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--suave);margin-bottom:4px;}
+.hab-barra-bg{background:#E5E7EB;border-radius:10px;height:8px;overflow:hidden;}
+.hab-barra-fill{height:8px;border-radius:10px;}
+.necesitan-refuerzo{margin-top:10px;}
+.refuerzo-lbl{font-size:10px;font-weight:600;color:var(--rojo);margin-bottom:6px;}
+.refuerzo-chip{display:inline-block;background:#FEE2E2;color:#991B1B;
+  font-size:10px;padding:2px 8px;border-radius:8px;margin:2px;}
+
+/* GUÍAS */
+.guia-analisis{background:var(--card);border-radius:12px;border:1.5px solid var(--borde);
+  margin-bottom:12px;overflow:hidden;}
+.guia-analisis-hdr{padding:14px 16px;display:flex;align-items:center;
+  justify-content:space-between;cursor:pointer;gap:10px;}
+.guia-analisis-hdr:hover{background:#FAFBFF;}
+.guia-analisis-titulo{font-size:13px;font-weight:600;}
+.guia-analisis-info{font-size:11px;color:var(--suave);}
+.guia-analisis-body{padding:0 16px 16px;display:none;}
+.guia-analisis-body.open{display:block;}
+.preguntas-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;margin-top:12px;}
+.preg-col{text-align:center;}
+.preg-num{font-size:10px;font-weight:600;color:var(--suave);margin-bottom:4px;}
+.preg-barra{background:#E5E7EB;border-radius:4px;height:60px;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.preg-fill{width:100%;border-radius:4px 4px 0 0;transition:height .5s;}
+.preg-pct{font-size:10px;font-weight:600;margin-top:3px;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <img class="hdr-logo" src="/flashmate/logo-erika.png" alt="FM" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-title">FlashMate · Seguimiento Docente</div>
+      <div class="hdr-sub">Panel de análisis · Erika la Profe de Mate</div>
+    </div>
+  </div>
+  <button class="btn-cargar" id="btn-cargar" onclick="cargarDatos()">
+    ↻ Cargar datos
+  </button>
+</div>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab activo" onclick="mostrarTab('resumen',this)">📊 Resumen</div>
+  <div class="tab" onclick="mostrarTab('estudiantes',this)">👥 Por estudiante</div>
+  <div class="tab" onclick="mostrarTab('guias',this)">📚 Por guía</div>
+  <div class="tab" onclick="mostrarTab('habilidades',this)">🎯 Por habilidad</div>
+</div>
+
+<div class="contenido">
+  <!-- ESTADO INICIAL -->
+  <div class="estado" id="estado-inicial">
+    <div class="estado-icon">📥</div>
+    <div class="estado-txt">Haz clic en <strong>"Cargar datos"</strong> para ver el seguimiento de tus estudiantes.</div>
+  </div>
+  <div class="estado" id="estado-cargando" style="display:none">
+    <div class="spinner-grande"></div>
+    <div class="estado-txt">Cargando datos desde Google Sheets...</div>
+  </div>
+
+  <!-- VISTAS -->
+  <div id="vista-resumen" style="display:none"></div>
+  <div id="vista-estudiantes" style="display:none"></div>
+  <div id="vista-guias" style="display:none"></div>
+  <div id="vista-habilidades" style="display:none"></div>
+</div>
+
+<!-- MODAL DETALLE ESTUDIANTE -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal" id="modal-contenido"></div>
+</div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec';
+
+const HABILIDADES = ['Resolver problemas','Modelar','Representar','Argumentar'];
+const HAB_CSS = {'Resolver problemas':'hab-rp','Modelar':'hab-m','Representar':'hab-r','Argumentar':'hab-a'};
+
+let DATOS = []; // Todos los registros
+let tabActiva = 'resumen';
+
+// ══════════════════════════════════════════
+// CARGAR DATOS
+// ══════════════════════════════════════════
+async function cargarDatos() {
+  const btn = document.getElementById('btn-cargar');
+  btn.disabled = true; btn.textContent = 'Cargando...';
+  document.getElementById('estado-inicial').style.display = 'none';
+  document.getElementById('estado-cargando').style.display = 'block';
+  ocultarVistas();
+
+  try {
+    const url = SCRIPT_URL + '?accion=todos_resultados';
+    const resp = await fetch(url);
+    const data = await resp.json();
+    DATOS = data.registros || [];
+    renderizarTodo();
+  } catch(e) {
+    // Si el script aún no tiene la ruta todos_resultados, usar datos de demostración
+    DATOS = generarDatosDemo();
+    renderizarTodo();
+  } finally {
+    btn.disabled = false; btn.textContent = '↻ Actualizar';
+    document.getElementById('estado-cargando').style.display = 'none';
+  }
+}
+
+// ── DATOS DEMO (mientras se configura el script) ──────
+function generarDatosDemo() {
+  const guias = [
+    'guia-U01.A.1a','guia-U01.A.2b','guia-U01.A.3c',
+    'guia-U01.B.4a','guia-U01.B.5b','guia-U01.B.6c',
+    'guia-U01.C.8a','guia-U01.C.9b','guia-U02.A.1a'
+  ];
+  const estudiantes = [
+    {nombre:'Valentina Torres',correo:'vtorres@mail.com'},
+    {nombre:'Matías Rojas',correo:'mrojas@mail.com'},
+    {nombre:'Camila Soto',correo:'csoto@mail.com'},
+    {nombre:'Diego Fuentes',correo:'dfuentes@mail.com'},
+    {nombre:'Sofía Muñoz',correo:'smunoz@mail.com'}
+  ];
+  const habs = ['Resolver problemas','Modelar','Representar','Argumentar'];
+  const registros = [];
+  estudiantes.forEach(est => {
+    const nguias = 2 + Math.floor(Math.random()*5);
+    guias.slice(0,nguias).forEach(guia => {
+      const correctas = Math.floor(Math.random()*8)+1;
+      const incorrectas = 8-correctas;
+      const logro = correctas/8;
+      const falladas = habs.filter(()=>Math.random()<0.4).join('|');
+      const ej = Array.from({length:8},()=>Math.random()<logro?1:Math.random()<0.2?2:0);
+      registros.push({
+        fecha: '17/04/2026', nombre: est.nombre, correo: est.correo,
+        tipo:'individual', grupo:'NA', guia,
+        eje:'E1', unidad: guia.split('-')[1].split('.')[0],
+        subunidad: guia.split('.')[1], nivel: guia.split('.')[2],
+        correctas, incorrectas, nls: 0, logro,
+        e1:ej[0],e2:ej[1],e3:ej[2],e4:ej[3],e5:ej[4],e6:ej[5],e7:ej[6],e8:ej[7],
+        habilidades: falladas
+      });
+    });
+  });
+  return registros;
+}
+
+// ══════════════════════════════════════════
+// RENDERIZAR TODO
+// ══════════════════════════════════════════
+function renderizarTodo() {
+  renderResumen();
+  renderEstudiantes();
+  renderGuias();
+  renderHabilidades();
+  mostrarVista(tabActiva);
+}
+
+// ── HELPERS ───────────────────────────────
+// Logro por habilidad acumulado para un conjunto de registros
+function logroHabilidades(registros) {
+  const HAB_KEYS = {
+    'Resolver problemas': 'logro_resolver',
+    'Modelar':            'logro_modelar',
+    'Representar':        'logro_representar',
+    'Argumentar':         'logro_argumentar'
+  };
+  const result = {};
+  HABILIDADES.forEach(h => {
+    const key = HAB_KEYS[h];
+    const vals = registros.map(r => r[key]).filter(v => v !== null && v !== undefined && !isNaN(v));
+    result[h] = vals.length > 0 ? promedio(vals) : null;
+  });
+  return result;
+}
+
+function promedio(arr) { return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0; }
+function pct(v) { return Math.round(v*100); }
+function colorLogro(v) { return v>=0.75?'var(--verde)':v>=0.5?'var(--amarillo)':'var(--rojo)'; }
+function chipLogro(v) { const p=pct(v); return `<span class="logro-chip ${p>=75?'logro-alto':p>=50?'logro-medio':'logro-bajo'}">${p}%</span>`; }
+
+// Agrupar registros por estudiante
+function porEstudiante() {
+  const m = {};
+  DATOS.forEach(r => {
+    const k = r.correo;
+    if (!m[k]) m[k] = {nombre:r.nombre,correo:r.correo,registros:[]};
+    m[k].registros.push(r);
+  });
+  return Object.values(m);
+}
+
+// Agrupar por guía (mejor intento por estudiante)
+function porGuia() {
+  const m = {};
+  DATOS.forEach(r => {
+    const k = r.guia;
+    if (!m[k]) m[k] = {guia:k,registros:[]};
+    m[k].registros.push(r);
+  });
+  return Object.values(m).sort((a,b)=>a.guia.localeCompare(b.guia));
+}
+
+// Habilidades falladas de un conjunto de registros
+function habilidadesFalladas(registros) {
+  const cnt = {};
+  HABILIDADES.forEach(h => cnt[h]=0);
+  registros.forEach(r => {
+    if (r.habilidades) {
+      r.habilidades.split('|').forEach(h => {
+        h = h.trim();
+        if (cnt[h] !== undefined) cnt[h]++;
+      });
+    }
+  });
+  return cnt;
+}
+
+// ══════════════════════════════════════════
+// VISTA RESUMEN
+// ══════════════════════════════════════════
+function renderResumen() {
+  const ests = porEstudiante();
+  const totalRegistros = DATOS.length;
+  const logroPromedio = promedio(DATOS.map(r=>r.logro));
+  const habFalladas = habilidadesFalladas(DATOS);
+  const habMasFallada = Object.entries(habFalladas).sort((a,b)=>b[1]-a[1])[0];
+
+  // Estudiantes que necesitan refuerzo (logro promedio < 50%)
+  const necesitanRefuerzo = ests.filter(e => {
+    const avg = promedio(e.registros.map(r=>r.logro));
+    return avg < 0.5;
+  });
+
+  let html = `
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num c-azul">${ests.length}</div><div class="stat-label">Estudiantes activos</div></div>
+      <div class="stat-card"><div class="stat-num c-verde">${totalRegistros}</div><div class="stat-label">Guías completadas</div></div>
+      <div class="stat-card"><div class="stat-num c-amarillo">${pct(logroPromedio)}%</div><div class="stat-label">Logro promedio general</div></div>
+      <div class="stat-card"><div class="stat-num c-rojo">${necesitanRefuerzo.length}</div><div class="stat-label">Estudiantes con logro &lt; 50%</div></div>
+    </div>`;
+
+  if (necesitanRefuerzo.length > 0) {
+    html += `<div class="alerta-seccion">
+      <div class="alerta-titulo">⚠️ Estudiantes que necesitan refuerzo urgente</div>
+      <div class="alerta-grid">`;
+    necesitanRefuerzo.forEach(e => {
+      const avg = promedio(e.registros.map(r=>r.logro));
+      const hf = habilidadesFalladas(e.registros);
+      const top = Object.entries(hf).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,2);
+      html += `<div class="alerta-card">
+        <div class="alerta-nombre">${e.nombre}</div>
+        <div class="alerta-detalle">Logro promedio: ${pct(avg)}% · ${e.registros.length} guía${e.registros.length!==1?'s':''}</div>
+        <div>${top.map(h=>`<span class="alerta-hab">${h[0]}</span>`).join('')}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Habilidad más fallada
+  if (habMasFallada && habMasFallada[1] > 0) {
+    const estudiantesHab = ests.filter(e => {
+      const hf = habilidadesFalladas(e.registros);
+      return hf[habMasFallada[0]] > 0;
+    });
+    html += `<div class="tabla-wrap">
+      <div class="tabla-header">
+        <div class="tabla-titulo">🎯 Habilidad con más errores: <strong>${habMasFallada[0]}</strong> (${habMasFallada[1]} errores en total)</div>
+      </div>
+      <table><thead><tr><th>Estudiante</th><th>Errores en esta habilidad</th><th>Logro promedio</th></tr></thead><tbody>`;
+    estudiantesHab.forEach(e => {
+      const hf = habilidadesFalladas(e.registros);
+      const avg = promedio(e.registros.map(r=>r.logro));
+      html += `<tr>
+        <td><strong>${e.nombre}</strong></td>
+        <td>${hf[habMasFallada[0]]} error${hf[habMasFallada[0]]!==1?'es':''}</td>
+        <td>${chipLogro(avg)}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+  }
+
+  document.getElementById('vista-resumen').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// VISTA ESTUDIANTES
+// ══════════════════════════════════════════
+function renderEstudiantes(filtro='') {
+  const ests = porEstudiante().filter(e =>
+    !filtro || e.nombre.toLowerCase().includes(filtro) || e.correo.toLowerCase().includes(filtro)
+  );
+
+  let html = `<div class="tabla-wrap">
+    <div class="tabla-header">
+      <div class="tabla-titulo">👥 Todos los estudiantes (${ests.length})</div>
+      <input class="buscador-mini" placeholder="Buscar estudiante..." oninput="renderEstudiantes(this.value.toLowerCase())">
+    </div>
+    <table><thead><tr>
+      <th>Estudiante</th><th>Guías</th><th>Logro promedio</th><th>Habilidades débiles</th><th></th>
+    </tr></thead><tbody>`;
+
+  ests.forEach(e => {
+    const avg = promedio(e.registros.map(r=>r.logro));
+    const hf = habilidadesFalladas(e.registros);
+    const debiles = Object.entries(hf).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]).slice(0,2);
+    html += `<tr>
+      <td><strong>${e.nombre}</strong><br><span style="font-size:10px;color:var(--suave)">${e.correo}</span></td>
+      <td>${e.registros.length} guía${e.registros.length!==1?'s':''}</td>
+      <td>${chipLogro(avg)}</td>
+      <td>${debiles.map(h=>`<span class="hab-chip ${hf[h[0]]>2?'hab-mal':HAB_CSS[h[0]]}">${h[0]} (${h[1]})</span>`).join('')||'<span style="color:var(--verde);font-size:11px">Sin errores destacados</span>'}</td>
+      <td><button class="btn-ver" onclick="verEstudiante('${e.correo}')">Ver detalle</button></td>
+    </tr>`;
+  });
+
+  html += `</tbody></table></div>`;
+  document.getElementById('vista-estudiantes').innerHTML = html;
+}
+
+// ── MODAL DETALLE ESTUDIANTE ──────────────
+function verEstudiante(correo) {
+  const ests = porEstudiante();
+  const e = ests.find(x=>x.correo===correo);
+  if (!e) return;
+
+  const avg = promedio(e.registros.map(r=>r.logro));
+  const hf = habilidadesFalladas(e.registros);
+
+  // Mejor logro por guía
+  const porGuiaEst = {};
+  e.registros.forEach(r => {
+    if (!porGuiaEst[r.guia] || r.logro > porGuiaEst[r.guia].logro) porGuiaEst[r.guia] = r;
+  });
+
+  let html = `
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-nombre">${e.nombre}</div>
+        <div class="modal-correo">${e.correo}</div>
+      </div>
+      <button class="btn-cerrar" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="modal-stats">
+      <div class="modal-stat"><div class="modal-stat-num">${e.registros.length}</div><div class="modal-stat-lbl">Guías completadas</div></div>
+      <div class="modal-stat"><div class="modal-stat-num" style="color:${colorLogro(avg)}">${pct(avg)}%</div><div class="modal-stat-lbl">Logro promedio</div></div>
+      <div class="modal-stat"><div class="modal-stat-num">${Object.values(porGuiaEst).filter(r=>r.logro>=0.75).length}</div><div class="modal-stat-lbl">Guías dominadas (≥75%)</div></div>
+    </div>
+    <div class="seccion-modal">Progreso por guía</div>`;
+
+  Object.entries(porGuiaEst).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([guia,r]) => {
+    const cod = guia.replace('guia-','');
+    html += `<div class="guia-fila">
+      <div class="guia-cod">${cod}</div>
+      <div class="guia-logro-bar"><div class="guia-logro-fill" style="width:${pct(r.logro)}%;background:${colorLogro(r.logro)}"></div></div>
+      <div class="guia-pct" style="color:${colorLogro(r.logro)}">${pct(r.logro)}%</div>
+    </div>`;
+  });
+
+  // Logro real por habilidad
+  const lh = logroHabilidades(e.registros);
+  html += `<div class="seccion-modal">Habilidades — logro por habilidad PAES</div>`;
+  HABILIDADES.forEach(h => {
+    const v = lh[h];
+    const vPct = v !== null ? pct(v) : null;
+    const color = v === null ? 'var(--suave)' : v>=0.75?'var(--verde)':v>=0.5?'var(--amarillo)':'var(--rojo)';
+    html += `<div class="hab-barra-wrap">
+      <div class="hab-barra-lbl">
+        <span>${h}</span>
+        <span style="color:${color};font-weight:600">${vPct !== null ? vPct+'%' : 'Sin datos aún'}</span>
+      </div>
+      <div class="hab-barra-bg">
+        <div class="hab-barra-fill" style="width:${vPct||0}%;background:${color}"></div>
+      </div>
+    </div>`;
+  });
+
+  // Sugerencia pedagógica basada en habilidad más débil con datos reales
+  const habConDatos = HABILIDADES.map(h=>({h,v:lh[h]})).filter(x=>x.v!==null);
+  const masDebilReal = habConDatos.sort((a,b)=>a.v-b.v)[0];
+  const masDebil = masDebilReal ? {0:masDebilReal.h, 1:masDebilReal.v} : null;
+  if (masDebil && masDebil[1] < 0.75) {
+    const sugerencias = {
+      'Resolver problemas': 'Practicar resolución paso a paso, identificar qué se pide antes de operar.',
+      'Modelar': 'Trabajar la traducción de enunciados verbales a expresiones matemáticas.',
+      'Representar': 'Reforzar con recta numérica, tablas y distintas formas de expresar un mismo concepto.',
+      'Argumentar': 'Practicar la justificación de respuestas y el análisis de afirmaciones verdaderas/falsas.'
+    };
+    html += `<div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:12px 14px;margin-top:16px;">
+      <div style="font-size:11px;font-weight:700;color:var(--azul);margin-bottom:4px;">💡 Sugerencia pedagógica</div>
+      <div style="font-size:12px;color:#1e3a5f;">Habilidad más débil: <strong>${masDebil[0]}</strong>.<br>${sugerencias[masDebil[0]]||''}</div>
+    </div>`;
+  }
+
+  document.getElementById('modal-contenido').innerHTML = html;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('show');
+}
+
+// ══════════════════════════════════════════
+// VISTA GUÍAS
+// ══════════════════════════════════════════
+function renderGuias() {
+  const guias = porGuia();
+  let html = '';
+
+  guias.forEach(g => {
+    const cod = g.guia.replace('guia-','');
+    const logros = g.registros.map(r=>r.logro);
+    const avg = promedio(logros);
+    const estudiantes = new Set(g.registros.map(r=>r.correo)).size;
+
+    // Tasa de error por pregunta (E1-E8)
+    const errPorPreg = Array(8).fill(0);
+    const totPorPreg = Array(8).fill(0);
+    g.registros.forEach(r => {
+      for(let i=0;i<8;i++){
+        const v = r['e'+(i+1)];
+        totPorPreg[i]++;
+        if(v===0||v==='0') errPorPreg[i]++;
+      }
+    });
+    const pctError = errPorPreg.map((e,i)=>totPorPreg[i]?Math.round(e/totPorPreg[i]*100):0);
+    const pregMasDificil = pctError.indexOf(Math.max(...pctError))+1;
+
+    html += `<div class="guia-analisis">
+      <div class="guia-analisis-hdr" onclick="toggleGuia('g-${cod.replace(/\./g,'-')}')">
+        <div>
+          <div class="guia-analisis-titulo">${cod}</div>
+          <div class="guia-analisis-info">${estudiantes} estudiante${estudiantes!==1?'s':''} · Logro promedio: <strong style="color:${colorLogro(avg)}">${pct(avg)}%</strong> · Pregunta más difícil: P${pregMasDificil}</div>
+        </div>
+        <span style="color:var(--suave);font-size:18px">›</span>
+      </div>
+      <div class="guia-analisis-body" id="g-${cod.replace(/\./g,'-')}">
+        <div style="font-size:12px;font-weight:600;color:var(--suave);margin-bottom:8px;">% de error por pregunta</div>
+        <div class="preguntas-grid">`;
+
+    pctError.forEach((err,i) => {
+      html += `<div class="preg-col">
+        <div class="preg-num">P${i+1}</div>
+        <div class="preg-barra">
+          <div class="preg-fill" style="height:${err}%;background:${err>=70?'var(--rojo)':err>=40?'var(--amarillo)':'var(--verde)'}"></div>
+        </div>
+        <div class="preg-pct" style="color:${err>=70?'var(--rojo)':err>=40?'var(--amarillo)':'var(--suave)'}">${err}%</div>
+      </div>`;
+    });
+
+    html += `</div>
+        <div style="font-size:11px;color:var(--suave);margin-top:8px;">
+          ${pctError.filter(e=>e>=70).length>0?`⚠️ Las preguntas con más del 70% de error pueden necesitar revisión pedagógica o de redacción.`:'✓ Ninguna pregunta supera el 70% de error.'}
+        </div>
+      </div>
+    </div>`;
+  });
+
+  document.getElementById('vista-guias').innerHTML = html || '<div class="estado"><div class="estado-icon">📭</div><div class="estado-txt">No hay datos de guías aún.</div></div>';
+}
+
+function toggleGuia(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// ══════════════════════════════════════════
+// VISTA HABILIDADES
+// ══════════════════════════════════════════
+function renderHabilidades() {
+  const ests = porEstudiante();
+  let html = '<div class="hab-grid">';
+
+  HABILIDADES.forEach(h => {
+    // Logro promedio de todos los estudiantes en esta habilidad
+    const logrosHab = ests.map(e => {
+      const lh = logroHabilidades(e.registros);
+      return lh[h];
+    }).filter(v => v !== null && v !== undefined);
+
+    const promedioHab = logrosHab.length > 0 ? promedio(logrosHab) : null;
+    const pctHab = promedioHab !== null ? pct(promedioHab) : null;
+
+    // Estudiantes con logro bajo en esta habilidad (< 60%)
+    const necesitanRefuerzo = ests.map(e => {
+      const lh = logroHabilidades(e.registros);
+      return { nombre: e.nombre, correo: e.correo, logro: lh[h] };
+    }).filter(x => x.logro !== null && x.logro < 0.6)
+      .sort((a,b) => a.logro - b.logro)
+      .slice(0, 5);
+
+    const color = pctHab === null ? 'var(--suave)' : pctHab >= 75 ? 'var(--verde)' : pctHab >= 50 ? 'var(--amarillo)' : 'var(--rojo)';
+
+    html += `<div class="hab-card">
+      <div class="hab-nombre">${h}</div>
+      <div class="hab-barra-wrap">
+        <div class="hab-barra-lbl">
+          <span>Logro promedio del grupo</span>
+          <span style="color:${color};font-weight:600">${pctHab !== null ? pctHab+'%' : 'Sin datos'}</span>
+        </div>
+        <div class="hab-barra-bg">
+          <div class="hab-barra-fill" style="width:${pctHab||0}%;background:${color}"></div>
+        </div>
+      </div>
+      ${necesitanRefuerzo.length>0?`<div class="necesitan-refuerzo">
+        <div class="refuerzo-lbl">Necesitan refuerzo (logro &lt; 60%):</div>
+        ${necesitanRefuerzo.map(r=>`<span class="refuerzo-chip" style="cursor:pointer" onclick="verEstudiante('${r.correo}')">${r.nombre} — ${pct(r.logro)}%</span>`).join('')}
+      </div>`:'<div style="font-size:11px;color:var(--verde);margin-top:8px;">✓ Todos los estudiantes superan el 60%</div>'}
+    </div>`;
+  });
+
+  html += '</div>';
+  document.getElementById('vista-habilidades').innerHTML = html;
+}
+
+// ══════════════════════════════════════════
+// NAVEGACIÓN
+// ══════════════════════════════════════════
+function mostrarTab(tab, btn) {
+  tabActiva = tab;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('activo'));
+  if(btn) btn.classList.add('activo');
+  if (DATOS.length > 0) mostrarVista(tab);
+}
+
+function mostrarVista(tab) {
+  ['resumen','estudiantes','guias','habilidades'].forEach(v => {
+    document.getElementById('vista-'+v).style.display = v===tab?'block':'none';
+  });
+}
+
+function ocultarVistas() {
+  ['resumen','estudiantes','guias','habilidades'].forEach(v => {
+    document.getElementById('vista-'+v).style.display = 'none';
+  });
+}
+</script>
+</body>
+</html>
