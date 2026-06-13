@@ -422,6 +422,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 }
 .curso-chip:hover{background:rgba(255,255,255,0.28);}
 </style>
+<script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 <body>
 
@@ -430,16 +431,28 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
   <div style="background:#fff;border-radius:20px;padding:40px 36px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);">
     <img style="height:56px;margin-bottom:16px;" src="/flashmate/logo-erika.png" alt="FlashMate" onerror="this.style.display='none'">
     <div style="font-size:18px;font-weight:700;color:#38388E;margin-bottom:4px;">Panel Docente</div>
-    <div style="font-size:12px;color:#6B7280;margin-bottom:24px;">Ingresa la clave de acceso para continuar</div>
-    <input id="inp-clave" type="password" placeholder="Clave de acceso"
-      style="width:100%;padding:11px 14px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;outline:none;margin-bottom:8px;"
-      onkeydown="if(event.key==='Enter')verificarClave()">
-    <button onclick="verificarClave()"
-      style="width:100%;background:#ED3B62;color:#fff;border:none;border-radius:10px;padding:12px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;">
-      Ingresar →
-    </button>
-    <div id="clave-error" style="display:none;background:#FEF2F2;color:#991B1B;border:1px solid #FECACA;border-radius:8px;padding:10px;font-size:12px;margin-top:10px;">
-      Clave incorrecta. Intenta nuevamente.
+    <div id="login-subtitulo" style="font-size:12px;color:#6B7280;margin-bottom:20px;">Ingresa la clave de acceso para continuar</div>
+
+    <!-- Login con Google (se activa solo si GOOGLE_CLIENT_ID está configurado) -->
+    <div id="g-login-wrap" style="display:none;">
+      <div id="g_id_onload"></div>
+      <div class="g_id_signin" data-type="standard" data-size="large" data-text="signin_with" data-shape="pill" data-logo_alignment="left" style="display:flex;justify-content:center;"></div>
+      <div id="g-login-error" style="display:none;background:#FEF2F2;color:#991B1B;border:1px solid #FECACA;border-radius:8px;padding:10px;font-size:12px;margin-top:12px;"></div>
+    </div>
+
+    <!-- Respaldo: clave de acceso (mientras se termina de configurar Google) -->
+    <div id="clave-wrap">
+      <div id="clave-sep" style="display:none;font-size:11px;color:#9CA3AF;margin:16px 0 8px;">o ingresa con la clave de acceso</div>
+      <input id="inp-clave" type="password" placeholder="Clave de acceso"
+        style="width:100%;padding:11px 14px;border:2px solid #E5E7EB;border-radius:10px;font-family:'Poppins',sans-serif;font-size:14px;outline:none;margin-bottom:8px;"
+        onkeydown="if(event.key==='Enter')verificarClave()">
+      <button onclick="verificarClave()"
+        style="width:100%;background:#ED3B62;color:#fff;border:none;border-radius:10px;padding:12px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-top:4px;">
+        Ingresar →
+      </button>
+      <div id="clave-error" style="display:none;background:#FEF2F2;color:#991B1B;border:1px solid #FECACA;border-radius:8px;padding:10px;font-size:12px;margin-top:10px;">
+        Clave incorrecta. Intenta nuevamente.
+      </div>
     </div>
   </div>
   <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:20px;">© 2026 Erika la Profe de Mate</div>
@@ -1452,6 +1465,65 @@ async function cargarEnsayosExistentes() {
 const CLAVE_HASH = 'MateFlash_1976';
 const DIAS_SESSION = 30;
 
+// ── LOGIN CON GOOGLE ─────────────────────────────────────
+// PEGAR AQUÍ el OAuth Client ID que crea Erika en Google Cloud
+// (termina en .apps.googleusercontent.com). Mientras tenga el texto
+// "PEGAR_", el botón de Google no se muestra y se usa la clave.
+const GOOGLE_CLIENT_ID = 'PEGAR_CLIENT_ID_AQUI.apps.googleusercontent.com';
+
+function googleConfigurado() {
+  return GOOGLE_CLIENT_ID && GOOGLE_CLIENT_ID.indexOf('PEGAR_') === -1;
+}
+
+function initGoogleLogin() {
+  const wrap = document.getElementById('g-login-wrap');
+  const sep  = document.getElementById('clave-sep');
+  const sub  = document.getElementById('login-subtitulo');
+  if (!googleConfigurado()) {
+    // Sin Client ID: ocultar Google, dejar solo la clave de respaldo
+    if (wrap) wrap.style.display = 'none';
+    if (sep)  sep.style.display  = 'none';
+    if (sub)  sub.textContent = 'Ingresa la clave de acceso para continuar';
+    return;
+  }
+  if (wrap) wrap.style.display = 'block';
+  if (sep)  sep.style.display  = 'block';
+  if (sub)  sub.textContent = 'Inicia sesión con tu cuenta de Google';
+  (function render() {
+    if (!(window.google && google.accounts && google.accounts.id)) {
+      return setTimeout(render, 300); // GIS aún cargando
+    }
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: onGoogleLoginDocente });
+    google.accounts.id.renderButton(
+      document.querySelector('.g_id_signin'),
+      { type: 'standard', size: 'large', text: 'signin_with', shape: 'pill', logo_alignment: 'left' }
+    );
+  })();
+}
+
+async function onGoogleLoginDocente(resp) {
+  const errEl = document.getElementById('g-login-error');
+  if (errEl) errEl.style.display = 'none';
+  try {
+    const r = await fetch('/.netlify/functions/verificar-docente', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ credential: resp.credential })
+    });
+    const data = await r.json();
+    if (data.ok) {
+      const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
+      localStorage.setItem('fm_doc_auth', expira);
+      localStorage.setItem('fm_doc_email', data.email || '');
+      mostrarPanel();
+    } else {
+      if (errEl) { errEl.textContent = data.error || 'No se pudo iniciar sesión.'; errEl.style.display = 'block'; }
+    }
+  } catch (e) {
+    if (errEl) { errEl.textContent = 'Error de conexión al verificar el acceso.'; errEl.style.display = 'block'; }
+  }
+}
+
 function verificarClave() {
   const val = document.getElementById('inp-clave').value;
   const err = document.getElementById('clave-error');
@@ -1482,6 +1554,7 @@ function chequearAcceso() {
   } else {
     localStorage.removeItem('fm_doc_auth');
     document.getElementById('pantalla-clave').style.display = 'flex';
+    initGoogleLogin();
   }
 }
 
