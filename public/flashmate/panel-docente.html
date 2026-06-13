@@ -572,7 +572,7 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUw
 const BASE = 'https://flashmate.netlify.app/';
 
 // ── CATÁLOGO COMPLETO ──
-const GUIAS = [
+let GUIAS = [
   {cod:'U01.A.1a',nombre:'Conjuntos Numéricos',sub:'Pares/impares · Primos · MCD · mcm',nivel:'a',unidad:'U01',subunidad:'A',disp:true},
   {cod:'U01.A.2b',nombre:'Conjuntos Numéricos',sub:'MCD · mcm · Divisibilidad avanzada',nivel:'b',unidad:'U01',subunidad:'A',disp:true},
   {cod:'U01.A.3c',nombre:'Conjuntos Numéricos',sub:'Argumentación · Propiedades avanzadas',nivel:'c',unidad:'U01',subunidad:'A',disp:true},
@@ -600,7 +600,7 @@ const GUIAS = [
   {cod:'U03.B.7c',nombre:'Raíces Enésimas',sub:'Racionalización algebraica · Argumentación',nivel:'c',unidad:'U03',subunidad:'B',disp:true},
 ];
 
-const CATALOGO = {};
+let CATALOGO = {};
 GUIAS.forEach(g => CATALOGO[g.cod] = g);
 
 // ── ESTUDIANTES — se cargan dinámicamente desde Sheets ──
@@ -1011,7 +1011,7 @@ async function cargarPlanExistente() {
 }
 
 // ── CATÁLOGO ──
-const SECCIONES_CAT = [
+let SECCIONES_CAT = [
   {id:'U01-A',titulo:'U01 · Números Reales — Subunidad A: Conjuntos Numéricos',unidad:'U01',sub:'A'},
   {id:'U01-B',titulo:'U01 · Números Reales — Subunidad B: Números Enteros',unidad:'U01',sub:'B'},
   {id:'U01-C',titulo:'U01 · Números Reales — Subunidad C: Números Racionales',unidad:'U01',sub:'C'},
@@ -1019,6 +1019,28 @@ const SECCIONES_CAT = [
   {id:'U03-A',titulo:'U03 · Potencias y Raíces — Subunidad A: Potencias',unidad:'U03',sub:'A'},
   {id:'U03-B',titulo:'U03 · Potencias y Raíces — Subunidad B: Raíces Enésimas',unidad:'U03',sub:'B'},
 ];
+
+// Carga el catálogo único (guias.json). Si falla, quedan las listas de arriba como respaldo.
+async function cargarCatalogoRemoto(){
+  try{
+    const r = await fetch('/flashmate/guias.json?t=' + Date.now());
+    if(!r.ok) return;
+    const data = await r.json();
+    if(!data.guias || !data.guias.length) return;
+    GUIAS = data.guias.map(g => ({
+      cod:g.cod, nombre:g.nombre, sub:g.desc, nivel:g.nivel,
+      unidad:g.unidad, subunidad:g.subunidad, disp:g.disp !== false
+    }));
+    CATALOGO = {};
+    GUIAS.forEach(g => CATALOGO[g.cod] = g);
+    const secs = {};
+    data.guias.forEach(g => {
+      const id = g.unidad + '-' + g.subunidad;
+      if(!secs[id]) secs[id] = { id, titulo:((g.unidadTitulo||g.unidad)+' — '+(g.subunidadTitulo||('Subunidad '+g.subunidad))), unidad:g.unidad, sub:g.subunidad };
+    });
+    SECCIONES_CAT = Object.values(secs);
+  }catch(e){ /* respaldo: listas embebidas */ }
+}
 
 let filtroActivo = 'todos';
 let busqueda = '';
@@ -1325,7 +1347,10 @@ function chequearAcceso() {
   }
 }
 
-window.addEventListener('load', chequearAcceso);
+window.addEventListener('load', async function(){
+  await cargarCatalogoRemoto();
+  chequearAcceso();
+});
 
 </script>
 </div><!-- /panel-contenido -->

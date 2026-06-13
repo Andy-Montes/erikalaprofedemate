@@ -424,7 +424,7 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUw
 const BASE_URL   = '/flashmate/';
 const META_EJERCICIOS = 800;
 
-const SECCIONES = [
+let SECCIONES = [
   {
     id:'U01-A', titulo:'Unidad 01 · Números Reales',
     sub:'Subunidad A: Conjuntos Numéricos',
@@ -489,8 +489,27 @@ const SECCIONES = [
 ];
 
 // Catálogo plano para búsqueda rápida
-const CATALOGO = {};
+let CATALOGO = {};
 SECCIONES.forEach(s => s.guias.forEach(g => CATALOGO[g.cod] = g));
+
+// Carga el catálogo único (guias.json). Si falla, queda el catálogo de arriba como respaldo.
+async function cargarCatalogoRemoto(){
+  try{
+    const r = await fetch('/flashmate/guias.json?t=' + Date.now());
+    if(!r.ok) return;
+    const data = await r.json();
+    if(!data.guias || !data.guias.length) return;
+    const grupos = {};
+    data.guias.filter(g => g.disp !== false).forEach(g => {
+      const key = g.unidad + '-' + g.subunidad;
+      if(!grupos[key]) grupos[key] = { id:key, titulo:g.unidadTitulo||g.unidad, sub:g.subunidadTitulo||('Subunidad '+g.subunidad), guias:[] };
+      grupos[key].guias.push({ cod:g.cod, nombre:g.nombre, desc:g.desc, nivel:g.nivel });
+    });
+    SECCIONES = Object.values(grupos);
+    CATALOGO = {};
+    SECCIONES.forEach(s => s.guias.forEach(g => CATALOGO[g.cod] = g));
+  }catch(e){ /* respaldo: catálogo embebido */ }
+}
 
 let estudiante = null;
 
@@ -1001,7 +1020,8 @@ function salir() {
 }
 
 // Auto-login desde guía
-window.addEventListener('load', function(){
+window.addEventListener('load', async function(){
+  await cargarCatalogoRemoto();
   const params = new URLSearchParams(window.location.search);
   const correo = params.get('correo');
   const nombre = params.get('nombre');
