@@ -275,17 +275,6 @@
       "unidadTitulo": "Unidad 03 · Potencias y Raíces",
       "subunidadTitulo": "Subunidad B: Raíces Enésimas",
       "disp": true
-    },
-    {
-      "cod": "U99.A.1a",
-      "nombre": "DEMO - Prueba de subida (borrar)",
-      "desc": "Guia de prueba para verificar el subidor en vivo.",
-      "nivel": "a",
-      "unidad": "U99",
-      "subunidad": "A",
-      "unidadTitulo": "Demostracion",
-      "subunidadTitulo": "Prueba",
-      "disp": true
     }
   ]
 }
