@@ -375,8 +375,8 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
     <!-- BARRA 800 -->
     <div class="barra800-wrap">
       <div class="barra800-hdr">
-        <span class="barra800-titulo">Camino a 800 ejercicios</span>
-        <span class="barra800-num" id="barra800-num">0 / 800</span>
+        <span class="barra800-titulo">Camino a 1000 ejercicios</span>
+        <span class="barra800-num" id="barra800-num">0 / 1000</span>
       </div>
       <div class="barra-bg">
         <div class="barra-fill" id="barra800-fill" style="width:0%"></div>
@@ -422,7 +422,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec';
 const BASE_URL   = '/flashmate/';
-const META_EJERCICIOS = 800;
+const META_EJERCICIOS = 1000;
 
 let SECCIONES = [
   {
@@ -655,7 +655,7 @@ function renderBarra800() {
 
   let meta = '';
   if (total >= META_EJERCICIOS) {
-    meta = '¡Lograste los 800 ejercicios! Eso es constancia real.';
+    meta = '¡Lograste los 1000 ejercicios! Eso es constancia real.';
   } else if (resto > 0) {
     // Calcular semanas restantes asumiendo 40 ejercicios/semana
     const semanas = Math.ceil(resto / 40);

@@ -57,7 +57,7 @@ const accessCards = [
 
 const topStats = [
   { value: '100', label: 'guias activas' },
-  { value: '800', label: 'ejercicios meta' },
+  { value: '1000', label: 'ejercicios meta' },
   { value: '4', label: 'ejes de aprendizaje' },
   { value: '16', label: 'unidades' },
 ];
