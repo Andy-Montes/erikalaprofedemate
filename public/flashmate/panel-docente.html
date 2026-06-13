@@ -647,7 +647,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 <div class="toast" id="toast"></div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec';
 const BASE = 'https://flashmate.netlify.app/';
 
 // ── CATÁLOGO COMPLETO ──
@@ -694,6 +694,11 @@ const ALUMNOS_3M = [
 ];
 
 function cursoDe(est) {
+  // Preferir el curso que viene del Sheet (columna C: "3° Medio" / "4° Medio")
+  const c = (est.curso || '').toString().trim().toLowerCase();
+  if (c.indexOf('3') !== -1) return '3° medio';
+  if (c.indexOf('4') !== -1) return '4° medio';
+  // Respaldo: lista de correos (por si el Sheet no trae curso para ese alumno)
   const correo = (est.correo || '').trim().toLowerCase();
   return ALUMNOS_3M.indexOf(correo) !== -1 ? '3° medio' : '4° medio';
 }
@@ -1117,6 +1122,7 @@ async function cargarEstudiantes() {
           correo:    est.correo,
           nombre:    est.nombre,
           plan:      est.plan,
+          curso:     est.curso,
           iniciales: est.iniciales,
           avIdx:     idx % 5
         };

@@ -321,7 +321,7 @@ function registrar(corr,incorr,nls,pct){
   var logroRepresentar=habTot['Representar']>0?Math.round(habCorr['Representar']/habTot['Representar']*100)/100:null;
   var logroArgumentar=habTot['Argumentar']>0?Math.round(habCorr['Argumentar']/habTot['Argumentar']*100)/100:null;
   var params=['fecha='+encodeURIComponent(fecha),'nombre='+encodeURIComponent(nombreEstudiante),'correo='+encodeURIComponent(correo),'tipo=individual','grupo=NA','guia=guia-U02.A.5c','eje=E1','unidad=U02','subunidad=A','nivel=c','correctas='+corr,'incorrectas='+incorr,'nls='+nls,'logro='+(pct/100),'e1='+ejercicios[0],'e2='+ejercicios[1],'e3='+ejercicios[2],'e4='+ejercicios[3],'e5='+ejercicios[4],'e6='+ejercicios[5],'e7='+ejercicios[6],'e8='+ejercicios[7],'habilidades='+encodeURIComponent(falladas.join('|'))].join('&');
-  var img=new Image();img.src='https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec?'+params;
+  var img=new Image();img.src='https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec?'+params;
 }
 
 function volverPortal(){
