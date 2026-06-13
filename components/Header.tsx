@@ -33,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenFlashmate }) => {
           <a className="hover:text-brandRed transition-colors cursor-pointer" href="#metodo" onClick={(e) => scrollToSection(e, 'metodo')}>Mi metodología</a>
           <a className="hover:text-brandRed transition-colors cursor-pointer" href="#programas" onClick={(e) => scrollToSection(e, 'programas')}>Mis programas</a>
           <a className="hover:text-brandRed transition-colors cursor-pointer" href="#sobre-mi" onClick={(e) => scrollToSection(e, 'sobre-mi')}>Quién Soy</a>
+          <a className="hover:text-brandRed transition-colors cursor-pointer" href="#pagos" onClick={(e) => scrollToSection(e, 'pagos')}>Pagos</a>
           <button
             className="group flex items-center gap-2 rounded-full border border-[#38388E]/25 bg-[#EEF0F8] px-5 py-3 transition-all hover:-translate-y-0.5 hover:border-[#ED3B62]/45 hover:bg-white hover:shadow-lg hover:shadow-[#38388E]/15"
             onClick={onOpenFlashmate}
@@ -66,6 +67,7 @@ const Header: React.FC<HeaderProps> = ({ onOpenModal, onOpenFlashmate }) => {
           <a className="hover:text-brandRed cursor-pointer" href="#metodo" onClick={(e) => scrollToSection(e, 'metodo')}>Mi metodología</a>
           <a className="hover:text-brandRed cursor-pointer" href="#programas" onClick={(e) => scrollToSection(e, 'programas')}>Mis programas</a>
           <a className="hover:text-brandRed cursor-pointer" href="#sobre-mi" onClick={(e) => scrollToSection(e, 'sobre-mi')}>Quién Soy</a>
+          <a className="hover:text-brandRed cursor-pointer" href="#pagos" onClick={(e) => scrollToSection(e, 'pagos')}>Pagos</a>
           <button
             className="flex items-center justify-center gap-2 rounded-full border border-[#38388E]/25 bg-[#EEF0F8] px-8 py-4 uppercase tracking-[0.2em]"
             onClick={() => {
