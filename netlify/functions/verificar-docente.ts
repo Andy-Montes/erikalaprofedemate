@@ -12,6 +12,10 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 //                         se usa la lista por defecto de abajo.
 // ──────────────────────────────────────────────────────────────
 
+// El Client ID OAuth es público (va también en el frontend), por eso va fijo
+// aquí y NO como variable de entorno (marcarlo secreto rompe el build de Netlify).
+const GOOGLE_CLIENT_ID = '568804580001-snpipfnntq0u828f8fdjjfqov2l36rq1.apps.googleusercontent.com';
+
 const DOCENTES_DEFAULT = ['erikalaprofedemate@gmail.com'];
 
 function docentesAutorizados(): string[] {
@@ -25,10 +29,7 @@ const handler: Handler = async (event: HandlerEvent) => {
     return { statusCode: 405, body: JSON.stringify({ error: 'Método no permitido' }) };
   }
 
-  const clientId = process.env.GOOGLE_CLIENT_ID;
-  if (!clientId) {
-    return { statusCode: 500, body: JSON.stringify({ error: 'Login no configurado (falta GOOGLE_CLIENT_ID).' }) };
-  }
+  const clientId = GOOGLE_CLIENT_ID;
 
   let payload: any;
   try {
