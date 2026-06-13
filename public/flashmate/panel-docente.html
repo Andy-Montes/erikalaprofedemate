@@ -382,6 +382,19 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
   border-radius:50%;animation:spin .7s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
+/* Separador por curso (3° / 4° medio) */
+.curso-sep{
+  display:flex;align-items:center;gap:10px;
+  margin:18px 2px 10px;font-weight:700;font-size:13px;
+  color:var(--azul);text-transform:uppercase;letter-spacing:.5px;
+}
+.curso-sep::after{content:"";flex:1;height:1px;background:rgba(56,56,142,0.18);}
+.curso-sep:first-child{margin-top:4px;}
+.curso-sep-count{
+  font-size:11px;font-weight:600;color:var(--celeste);
+  background:rgba(1,135,243,0.10);border-radius:20px;
+  padding:1px 9px;letter-spacing:0;
+}
 </style>
 </head>
 <body>
@@ -606,6 +619,31 @@ GUIAS.forEach(g => CATALOGO[g.cod] = g);
 // ── ESTUDIANTES — se cargan dinámicamente desde Sheets ──
 let ESTUDIANTES = [];
 
+// ── SEPARACIÓN POR CURSO (3° / 4° medio) ──
+// Alumnos cuyo correo o nombre contenga alguno de estos términos → 3° medio.
+// Todos los demás → 4° medio. Editar esta lista cuando cambien los alumnos.
+const ALUMNOS_3M = ['erika', 'ericlass'];
+
+function cursoDe(est) {
+  const id = ((est.correo || '') + ' ' + (est.nombre || '')).toLowerCase();
+  return ALUMNOS_3M.some(t => id.includes(t)) ? '3° medio' : '4° medio';
+}
+
+// Devuelve [{curso, alumnos:[...]}] en orden 3° → 4°, omitiendo grupos vacíos.
+function gruposPorCurso(lista) {
+  return ['3° medio', '4° medio']
+    .map(curso => ({ curso, alumnos: lista.filter(e => cursoDe(e) === curso) }))
+    .filter(g => g.alumnos.length > 0);
+}
+
+function crearSeparadorCurso(grupo) {
+  const sep = document.createElement('div');
+  sep.className = 'curso-sep';
+  sep.innerHTML = '<span>' + grupo.curso + '</span>' +
+    '<span class="curso-sep-count">' + grupo.alumnos.length + '</span>';
+  return sep;
+}
+
 // ── ESTADO PLANIFICACIÓN ──
 // planSemana[correo][fechaStr] = { guia, estado }
 let planSemana   = {};
@@ -689,7 +727,9 @@ function renderPlanificacion() {
       : '';
   }
 
-  estudiantesFiltrados.forEach((est, idx) => {
+  gruposPorCurso(estudiantesFiltrados).forEach(grupo => {
+    contenedor.appendChild(crearSeparadorCurso(grupo));
+    grupo.alumnos.forEach((est, idx) => {
     if (!planSemana[est.correo]) planSemana[est.correo] = {};
 
     // Contar ejercicios totales del estudiante
@@ -773,6 +813,7 @@ function renderPlanificacion() {
 
       col.appendChild(celda);
       diasGrid.appendChild(col);
+    });
     });
   });
 }
@@ -1178,7 +1219,10 @@ function renderEnsayos() {
   contenedor.innerHTML = '';
   const hoyStr = new Date().toISOString().split('T')[0];
 
-  ESTUDIANTES.forEach((est, idx) => {
+  gruposPorCurso(ESTUDIANTES).forEach(grupo => {
+    contenedor.appendChild(crearSeparadorCurso(grupo));
+    grupo.alumnos.forEach((est) => {
+    const idx = ESTUDIANTES.indexOf(est);
     const asignado = planEnsayos[est.correo] || null;
 
     const bloque = document.createElement('div');
@@ -1236,6 +1280,7 @@ function renderEnsayos() {
       </div>`}`;
 
     contenedor.appendChild(bloque);
+    });
   });
 }
 
