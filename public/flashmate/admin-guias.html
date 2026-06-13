@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlashMate · Subir guía</title>
+<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--azul:#38388E;--rojo:#ED3B62;--celeste:#0187F3;--verde:#10B981;--texto:#1a1a2e;--suave:#6B7280;--borde:#E5E7EB;--bg:#EEF0F8}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh}
+.hdr{background:var(--azul);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.hdr-left{display:flex;align-items:center;gap:12px}
+.hdr-logo{height:42px;border-radius:6px}
+.hdr-marca{font-size:11px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.04em}
+.hdr-titulo{font-size:15px;font-weight:700;color:#fff}
+.btn-volver{background:rgba(255,255,255,.12);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background .15s}
+.btn-volver:hover{background:rgba(255,255,255,.22)}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 64px}
+
+/* LOGIN */
+.login-box{max-width:380px;margin:80px auto;background:#fff;border-radius:20px;padding:36px 32px;box-shadow:0 12px 40px rgba(56,56,142,.12);text-align:center}
+.login-box img{height:54px;margin-bottom:18px}
+.login-box h1{font-size:20px;margin-bottom:6px}
+.login-box p{font-size:13px;color:var(--suave);margin-bottom:22px;line-height:1.5}
+.inp{width:100%;border:1.5px solid var(--borde);border-radius:10px;padding:12px 14px;font-family:inherit;font-size:14px;outline:none;transition:border-color .15s}
+.inp:focus{border-color:var(--celeste)}
+.btn{width:100%;background:var(--rojo);color:#fff;border:none;border-radius:10px;padding:13px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s,transform .1s;margin-top:14px}
+.btn:hover{background:#d12d52}
+.btn:active{transform:scale(.99)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.err{display:none;background:#FEF2F2;color:#991B1B;border:1px solid #FECACA;border-radius:8px;padding:10px 12px;font-size:12.5px;margin-top:12px;text-align:left;line-height:1.5}
+
+/* PANEL */
+#panel{display:none}
+.card{background:#fff;border-radius:18px;padding:26px;box-shadow:0 6px 24px rgba(56,56,142,.07);margin-bottom:18px}
+.card h2{font-size:16px;margin-bottom:4px}
+.card .hint{font-size:12.5px;color:var(--suave);line-height:1.55;margin-bottom:18px}
+.drop{border:2px dashed #C7CEE8;border-radius:14px;padding:34px 20px;text-align:center;cursor:pointer;transition:all .15s;background:#F7F8FD}
+.drop:hover,.drop.over{border-color:var(--celeste);background:#EEF6FF}
+.drop .ic{font-size:38px;margin-bottom:8px}
+.drop .t{font-size:14px;font-weight:600}
+.drop .s{font-size:12px;color:var(--suave);margin-top:4px}
+.file-ok{display:none;align-items:center;gap:10px;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:13px;font-weight:600;color:#065F46}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1 / -1}
+label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--suave)}
+.foot{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+.estado{font-size:13px;font-weight:600}
+.estado.ok{color:var(--verde)}
+.estado.bad{color:var(--rojo)}
+.spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:7px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.exito{display:none;background:#ECFDF5;border:1px solid #A7F3D0;border-radius:14px;padding:18px;margin-top:16px}
+.exito a{color:var(--azul);font-weight:700}
+.lista-guias{font-size:12.5px;color:var(--suave);line-height:1.7;max-height:200px;overflow:auto;border:1px solid var(--borde);border-radius:10px;padding:12px 14px;margin-top:6px}
+.lista-guias b{color:var(--texto)}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <img class="hdr-logo" src="/flashmate/logo-erika.png" alt="Erika la Profe de Mate" onerror="this.style.display='none'">
+    <div>
+      <div class="hdr-marca">Sistema FlashMate</div>
+      <div class="hdr-titulo">Subir guía</div>
+    </div>
+  </div>
+  <a class="btn-volver" href="/flashmate/panel-docente.html">← Panel docente</a>
+</div>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="login-box">
+    <img src="/flashmate/logo-erika.png" alt="FlashMate" onerror="this.style.display='none'">
+    <h1>Subir guía</h1>
+    <p>Ingresa tu clave para publicar guías nuevas en el sitio.</p>
+    <input id="clave" class="inp" type="password" placeholder="Clave de publicación" onkeydown="if(event.key==='Enter')entrar()">
+    <button class="btn" onclick="entrar()">Entrar</button>
+    <div id="login-err" class="err"></div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div id="panel">
+  <div class="wrap">
+
+    <div class="card">
+      <h2>1 · El archivo de la guía</h2>
+      <p class="hint">Arrastra aquí el archivo HTML de tu guía (o haz clic para buscarlo). El código se detecta solo desde el nombre del archivo.</p>
+      <div id="drop" class="drop">
+        <div class="ic">📄</div>
+        <div class="t">Arrastra el archivo .html aquí</div>
+        <div class="s">o haz clic para seleccionarlo</div>
+      </div>
+      <input id="file" type="file" accept=".html,text/html" style="display:none">
+      <div id="file-ok" class="file-ok"><span>✓</span><span id="file-name"></span></div>
+    </div>
+
+    <div class="card">
+      <h2>2 · Datos de la guía</h2>
+      <p class="hint">Revisa que estén correctos. Lo que ya existe en tu catálogo se autocompleta.</p>
+      <div class="grid">
+        <div class="field">
+          <label>Código</label>
+          <input id="f-cod" class="inp" placeholder="U04.A.1a" oninput="onCod()">
+        </div>
+        <div class="field">
+          <label>Nivel</label>
+          <input id="f-nivel" class="inp" placeholder="a">
+        </div>
+        <div class="field">
+          <label>Unidad</label>
+          <input id="f-unidad" class="inp" placeholder="U04">
+        </div>
+        <div class="field">
+          <label>Subunidad</label>
+          <input id="f-subunidad" class="inp" placeholder="A">
+        </div>
+        <div class="field full">
+          <label>Tema (lo ve el alumno)</label>
+          <input id="f-nombre" class="inp" placeholder="Ej: Ecuaciones de primer grado">
+        </div>
+        <div class="field full">
+          <label>Descripción corta</label>
+          <input id="f-desc" class="inp" placeholder="Ej: Despeje · Verificación · Contextos">
+        </div>
+        <div class="field full">
+          <label>Título de la unidad</label>
+          <input id="f-unidadTitulo" class="inp" placeholder="Ej: Unidad 04 · Álgebra y Funciones">
+        </div>
+        <div class="field full">
+          <label>Título de la subunidad</label>
+          <input id="f-subunidadTitulo" class="inp" placeholder="Ej: Subunidad A: Ecuaciones">
+        </div>
+      </div>
+
+      <div class="foot">
+        <button id="btn-pub" class="btn" style="width:auto;padding:13px 28px;margin-top:0" onclick="publicar()">Publicar guía</button>
+        <span id="estado" class="estado"></span>
+      </div>
+
+      <div id="exito" class="exito"></div>
+    </div>
+
+    <div class="card">
+      <h2>Guías ya publicadas</h2>
+      <p class="hint" id="cuenta-guias">Cargando…</p>
+      <div id="lista-guias" class="lista-guias"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let CLAVE = '';
+let CATALOGO = [];
+
+// ── LOGIN (la clave real la valida el servidor al publicar; aquí solo guardamos) ──
+function entrar(){
+  const v = document.getElementById('clave').value.trim();
+  if(!v){ mostrarErr('Escribe tu clave.'); return; }
+  CLAVE = v;
+  document.getElementById('login').style.display='none';
+  document.getElementById('panel').style.display='block';
+  cargarCatalogo();
+}
+function mostrarErr(m){
+  const e=document.getElementById('login-err'); e.textContent=m; e.style.display='block';
+}
+
+// ── Cargar catálogo actual ──
+async function cargarCatalogo(){
+  try{
+    const r = await fetch('/flashmate/guias.json?t='+Date.now());
+    const data = await r.json();
+    CATALOGO = data.guias || [];
+  }catch{ CATALOGO = []; }
+  renderLista();
+}
+function renderLista(){
+  document.getElementById('cuenta-guias').textContent = CATALOGO.length + ' guías en el catálogo.';
+  const cont = {};
+  CATALOGO.forEach(g => { (cont[g.unidadTitulo||g.unidad] = cont[g.unidadTitulo||g.unidad] || []).push(g); });
+  let html = '';
+  Object.keys(cont).sort().forEach(u => {
+    html += '<div><b>'+u+'</b> — '+cont[u].map(g=>g.cod).join(', ')+'</div>';
+  });
+  document.getElementById('lista-guias').innerHTML = html || 'Sin guías todavía.';
+}
+
+// ── Drag & drop ──
+const drop = document.getElementById('drop');
+const fileInput = document.getElementById('file');
+drop.addEventListener('click', ()=>fileInput.click());
+drop.addEventListener('dragover', e=>{e.preventDefault();drop.classList.add('over');});
+drop.addEventListener('dragleave', ()=>drop.classList.remove('over'));
+drop.addEventListener('drop', e=>{
+  e.preventDefault(); drop.classList.remove('over');
+  if(e.dataTransfer.files.length) leerArchivo(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e=>{ if(e.target.files.length) leerArchivo(e.target.files[0]); });
+
+let HTML_GUIA = '';
+function leerArchivo(file){
+  if(!/\.html?$/i.test(file.name)){ alert('Debe ser un archivo .html'); return; }
+  const reader = new FileReader();
+  reader.onload = ev => {
+    HTML_GUIA = ev.target.result;
+    document.getElementById('file-name').textContent = file.name + ' (' + Math.round(file.size/1024) + ' KB)';
+    document.getElementById('file-ok').style.display='flex';
+    // Autodetectar código desde el nombre: guia-U04.A.1a.html
+    const m = file.name.match(/U\d{2}\.[A-C]\.\d{1,2}[a-c]/i);
+    if(m){ document.getElementById('f-cod').value = m[0].toUpperCase(); onCod(); }
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+// ── Autocompletar campos desde el código ──
+function onCod(){
+  const cod = document.getElementById('f-cod').value.trim().toUpperCase();
+  const m = cod.match(/^U(\d{2})\.([A-C])\.(\d{1,2})([a-c])$/);
+  if(!m) return;
+  const [,uu,sub,,niv] = m;
+  setIfEmpty('f-unidad','U'+uu);
+  setIfEmpty('f-subunidad',sub);
+  setIfEmpty('f-nivel',niv);
+  // Si la unidad/subunidad ya existe en el catálogo, reusar títulos y tema
+  const hermana = CATALOGO.find(g => g.cod.startsWith('U'+uu+'.'+sub+'.')) || CATALOGO.find(g => g.unidad==='U'+uu);
+  if(hermana){
+    setIfEmpty('f-unidadTitulo', hermana.unidadTitulo||'');
+    const sameSub = CATALOGO.find(g => g.unidad==='U'+uu && g.subunidad===sub);
+    if(sameSub){ setIfEmpty('f-subunidadTitulo', sameSub.subunidadTitulo||''); setIfEmpty('f-nombre', sameSub.nombre||''); }
+  }
+}
+function setIfEmpty(id,val){ const el=document.getElementById(id); if(el && !el.value) el.value=val; }
+
+// ── Publicar ──
+async function publicar(){
+  const estado = document.getElementById('estado');
+  const btn = document.getElementById('btn-pub');
+  const exito = document.getElementById('exito');
+  exito.style.display='none';
+  estado.className='estado'; estado.textContent='';
+
+  const cod = document.getElementById('f-cod').value.trim().toUpperCase();
+  if(!HTML_GUIA){ estado.className='estado bad'; estado.textContent='Falta el archivo de la guía.'; return; }
+  if(!/^U\d{2}\.[A-C]\.\d{1,2}[a-c]$/.test(cod)){ estado.className='estado bad'; estado.textContent='Código inválido (ej: U04.A.1a).'; return; }
+
+  const payload = {
+    clave: CLAVE,
+    cod,
+    html: HTML_GUIA,
+    nombre: val('f-nombre'),
+    desc: val('f-desc'),
+    nivel: val('f-nivel') || cod.slice(-1),
+    unidad: val('f-unidad') || cod.slice(0,3),
+    subunidad: val('f-subunidad') || cod.split('.')[1],
+    unidadTitulo: val('f-unidadTitulo'),
+    subunidadTitulo: val('f-subunidadTitulo'),
+    disp: true
+  };
+
+  btn.disabled = true;
+  estado.className='estado'; estado.innerHTML='<span class="spinner"></span>Publicando…';
+
+  try{
+    const r = await fetch('/.netlify/functions/subir-guia', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    });
+    const data = await r.json();
+    if(!r.ok || !data.ok){ throw new Error(data.error || 'No se pudo publicar.'); }
+    estado.className='estado ok'; estado.textContent='✓ Listo';
+    exito.style.display='block';
+    exito.innerHTML = '<b>'+data.mensaje+'</b><br>La guía '+data.cod+' quedará disponible en: '
+      + '<a href="'+data.url+'" target="_blank">'+data.url+'</a><br>'
+      + 'Catálogo: '+data.total+' guías. Espera 1-2 minutos y refresca el portal.';
+    // refrescar catálogo local
+    setTimeout(cargarCatalogo, 1500);
+  }catch(err){
+    estado.className='estado bad'; estado.textContent='✕ '+err.message;
+  }finally{
+    btn.disabled = false;
+  }
+}
+function val(id){ return document.getElementById(id).value.trim(); }
+</script>
+</body>
+</html>
