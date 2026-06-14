@@ -37,11 +37,25 @@ const FlashmatePage: React.FC<FlashmatePageProps> = ({ onBack }) => {
   const [mostrarLoginErika, setMostrarLoginErika] = useState(false);
   const [loginError, setLoginError] = useState('');
 
-  // Sesión de Erika (persistida) — desbloquea el portal docente
+  // Sesión de Erika o modo revisión (de Andrea) — desbloquean el portal docente
   useEffect(() => {
     const exp = localStorage.getItem(ERIKA_SESSION_KEY);
-    if (exp && parseInt(exp) > Date.now()) setErikaAuth(true);
+    const rev = localStorage.getItem('fm_review');
+    if ((exp && parseInt(exp) > Date.now()) || (rev && parseInt(rev) > Date.now())) setErikaAuth(true);
   }, []);
+
+  // Modo revisión (TEMPORAL): link discreto "admin" → clave → entra a todo sin cuenta
+  function activarRevision() {
+    const k = window.prompt('PIN de revisión (4 dígitos):');
+    if (k === null) return;
+    if (k === '1976') {
+      localStorage.setItem('fm_review', String(Date.now() + 12 * 60 * 60 * 1000));
+      setErikaAuth(true);
+      window.alert('Modo revisión activado por 12 h. Ya puedes entrar a todo (portal alumno, docente y gestión) sin cuenta.');
+    } else {
+      window.alert('PIN incorrecto.');
+    }
+  }
 
   // Render del botón de Google cuando Erika pide iniciar sesión
   useEffect(() => {
@@ -216,6 +230,11 @@ const FlashmatePage: React.FC<FlashmatePageProps> = ({ onBack }) => {
             </div>
           </div>
         </section>
+
+        {/* Acceso de revisión (TEMPORAL, discreto) */}
+        <div className="py-8 text-center">
+          <button onClick={activarRevision} className="text-[10px] text-slate-300 transition-colors hover:text-slate-400">admin</button>
+        </div>
       </main>
     </div>
   );

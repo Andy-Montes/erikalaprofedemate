@@ -1079,9 +1079,27 @@ function salir() {
 }
 
 // Auto-login desde guía
+// Modo revisión (TEMPORAL): entra con el primer alumno activo, sin cuenta
+async function entrarModoRevisionEstudiante() {
+  try {
+    const r = await fetch(SCRIPT_URL + '?accion=estudiantes');
+    const data = await r.json();
+    const primero = (data.estudiantes || [])[0];
+    if (!primero) { mostrarError('No hay estudiantes para revisar.'); return; }
+    const rv = await fetch(SCRIPT_URL + '?accion=verificar&correo=' + encodeURIComponent(primero.correo));
+    const dataVerif = await rv.json();
+    if (dataVerif.acceso) await entrarConDatos(dataVerif);
+    else mostrarError('No se pudo entrar en modo revisión.');
+  } catch (e) {
+    mostrarError('Error en modo revisión.');
+  }
+}
+
 window.addEventListener('load', async function(){
   initGoogleLoginEstudiante();
   await cargarCatalogoRemoto();
+  const rev = localStorage.getItem('fm_review');
+  if (rev && parseInt(rev) > Date.now()) { entrarModoRevisionEstudiante(); return; }
   const params = new URLSearchParams(window.location.search);
   const correo = params.get('correo');
   const nombre = params.get('nombre');

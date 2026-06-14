@@ -1669,7 +1669,8 @@ function mostrarPanel() {
 function chequearAcceso() {
   const auth = localStorage.getItem('fm_doc_auth');
   const erika = localStorage.getItem('fm_erika_auth'); // sesión iniciada en el hub de FlashMate
-  if ((auth && parseInt(auth) > Date.now()) || (erika && parseInt(erika) > Date.now())) {
+  const rev = localStorage.getItem('fm_review');        // modo revisión (temporal, Andrea)
+  if ((auth && parseInt(auth) > Date.now()) || (erika && parseInt(erika) > Date.now()) || (rev && parseInt(rev) > Date.now())) {
     mostrarPanel();
   } else {
     localStorage.removeItem('fm_doc_auth');
