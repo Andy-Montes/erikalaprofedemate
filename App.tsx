@@ -17,7 +17,13 @@ const App: React.FC = () => {
     isOpen: false,
     url: '',
   });
-  const [currentView, setCurrentView] = useState<'home' | 'flashmate'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'flashmate'>(() => {
+    try {
+      return new URLSearchParams(window.location.search).get('fm') === '1' ? 'flashmate' : 'home';
+    } catch {
+      return 'home';
+    }
+  });
 
   const openModal = (url: string) => {
     if (url.includes("wa.me")) {

@@ -490,6 +490,10 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;">
+    <a href="/?fm=1" class="curso-chip" title="Volver al panel principal de FlashMate"
+      style="text-decoration:none;background:rgba(56,56,142,0.08);border-color:rgba(56,56,142,0.20);color:#38388E;">
+      ← FlashMate
+    </a>
     <button class="curso-chip" onclick="volverSelectorCurso()"
       style="background:rgba(56,56,142,0.08);border-color:rgba(56,56,142,0.20);color:#38388E;">
       <span id="curso-activo-label">—</span>
@@ -505,7 +509,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
     <button class="tab activo" onclick="cambiarTab('planificacion',this)">Planificación semanal</button>
     <button class="tab" onclick="cambiarTab('ensayos',this)">Ensayos</button>
     <button class="tab" onclick="cambiarTab('seguimiento',this)">Seguimiento</button>
-    <button class="tab" onclick="cambiarTab('catalogo',this)">Catálogo de guías</button>
+    <button class="tab" onclick="cambiarTab('catalogo',this)">Gestión de guías</button>
   </div>
 </div>
 
@@ -578,6 +582,16 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
      VISTA: CATÁLOGO
 ══════════════════════════════════════ -->
 <div class="vista" id="vista-catalogo">
+
+  <!-- Subir guía nueva (gestión de Erika) -->
+  <a href="/flashmate/admin-guias.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;background:#fff;border:2px solid rgba(237,59,98,0.25);border-radius:14px;padding:16px 18px;margin-bottom:18px;transition:all .15s;">
+    <div style="width:46px;height:46px;border-radius:12px;background:#FEF2F2;color:var(--rojo);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;">↑</div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:15px;font-weight:700;color:var(--texto);">Subir guía nueva</div>
+      <div style="font-size:12px;color:var(--suave);">Arrastra el HTML de la guía, ponle su código y publícala. Queda en línea en 1-2 minutos.</div>
+    </div>
+    <span style="color:var(--rojo);font-size:20px;">→</span>
+  </a>
 
   <div class="stats">
     <div class="stat">
@@ -1654,7 +1668,8 @@ function mostrarPanel() {
 
 function chequearAcceso() {
   const auth = localStorage.getItem('fm_doc_auth');
-  if (auth && parseInt(auth) > Date.now()) {
+  const erika = localStorage.getItem('fm_erika_auth'); // sesión iniciada en el hub de FlashMate
+  if ((auth && parseInt(auth) > Date.now()) || (erika && parseInt(erika) > Date.now())) {
     mostrarPanel();
   } else {
     localStorage.removeItem('fm_doc_auth');
