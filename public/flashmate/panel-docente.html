@@ -504,6 +504,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
   <div class="tabs">
     <button class="tab activo" onclick="cambiarTab('planificacion',this)">Planificación semanal</button>
     <button class="tab" onclick="cambiarTab('ensayos',this)">Ensayos</button>
+    <button class="tab" onclick="cambiarTab('seguimiento',this)">Seguimiento</button>
     <button class="tab" onclick="cambiarTab('catalogo',this)">Catálogo de guías</button>
   </div>
 </div>
@@ -609,6 +610,23 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
   </div>
 
   <div id="contenedor-guias"></div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     VISTA: SEGUIMIENTO (guías hechas por estudiante)
+══════════════════════════════════════ -->
+<div class="vista" id="vista-seguimiento">
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+    <div>
+      <div style="font-size:15px;font-weight:700;color:var(--azul);">Guías completadas por estudiante</div>
+      <div style="font-size:12px;color:var(--suave);margin-top:2px;">Resultados registrados desde las guías que cada estudiante realizó</div>
+    </div>
+    <button class="nav-btn" onclick="cargarSeguimiento()">↻ actualizar</button>
+  </div>
+
+  <div id="seg-contenido"></div>
 
 </div>
 </div>
@@ -805,6 +823,87 @@ function cambiarTab(id, btn) {
   document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
   btn.classList.add('activo');
   document.getElementById('vista-' + id).classList.add('activa');
+  if (id === 'seguimiento' && !SEG_CARGADO) cargarSeguimiento();
+}
+
+// ── SEGUIMIENTO: guías hechas por estudiante (lee resultados del Sheet) ──
+let RESULTADOS = [];
+let SEG_CARGADO = false;
+
+async function cargarSeguimiento() {
+  const cont = document.getElementById('seg-contenido');
+  cont.innerHTML = '<div style="padding:24px;text-align:center;color:var(--suave);font-size:13px;">Cargando resultados...</div>';
+  try {
+    const resp = await fetch(SCRIPT_URL + '?accion=todos_resultados');
+    const data = await resp.json();
+    RESULTADOS = data.registros || [];
+    SEG_CARGADO = true;
+    renderSeguimiento();
+  } catch (e) {
+    cont.innerHTML = '<div style="padding:24px;text-align:center;color:#991B1B;font-size:13px;">No se pudieron cargar los resultados. Reintenta.</div>';
+  }
+}
+
+function renderSeguimiento() {
+  const cont = document.getElementById('seg-contenido');
+  cont.innerHTML = '';
+
+  if (!ESTUDIANTES.length) {
+    cont.innerHTML = '<div style="padding:24px;text-align:center;color:var(--suave);font-size:13px;">No hay estudiantes cargados.</div>';
+    return;
+  }
+
+  gruposPorCurso(ESTUDIANTES).forEach(grupo => {
+    cont.appendChild(crearSeparadorCurso(grupo));
+
+    grupo.alumnos.forEach(est => {
+      // Mejor logro por guía para este estudiante
+      const porGuia = {};
+      RESULTADOS.forEach(r => {
+        if (String(r.correo || '').trim().toLowerCase() !== est.correo) return;
+        const cod = String(r.guia || '').replace('guia-', '');
+        if (!cod) return;
+        const logro = parseFloat(r.logro) || 0;
+        if (!porGuia[cod] || logro > porGuia[cod].logro) {
+          porGuia[cod] = { logro: logro, correctas: parseInt(r.correctas) || 0, fecha: String(r.fecha || '') };
+        }
+      });
+      const guias = Object.keys(porGuia).sort((a, b) => a.localeCompare(b, 'es', { numeric: true }));
+
+      const bloque = document.createElement('div');
+      bloque.className = 'estudiante-bloque';
+      bloque.style.marginBottom = '12px';
+
+      let filasHTML = '';
+      if (!guias.length) {
+        filasHTML = '<div style="padding:10px 4px;font-size:12px;color:var(--suave);">Aún no ha completado guías.</div>';
+      } else {
+        filasHTML = guias.map(cod => {
+          const d = porGuia[cod];
+          const pct = Math.round(d.logro * 100);
+          const info = CATALOGO[cod] || { nombre: cod };
+          const color = pct >= 60 ? 'var(--verde,#10B981)' : 'var(--rojo)';
+          return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 4px;border-top:1px solid var(--borde);">' +
+              '<div style="min-width:0;"><div style="font-size:12px;font-weight:600;color:var(--texto);">' + cod + ' · ' + (info.nombre || '') + '</div>' +
+              '<div style="font-size:10px;color:var(--suave);">' + d.correctas + '/8 correctas · ' + (d.fecha || '') + '</div></div>' +
+              '<div style="font-size:13px;font-weight:700;color:' + color + ';flex-shrink:0;">' + pct + '%</div>' +
+            '</div>';
+        }).join('');
+      }
+
+      bloque.innerHTML =
+        '<div class="estudiante-hdr">' +
+          '<div class="estudiante-info">' +
+            '<div class="avatar av-' + (est.avIdx % 5) + '">' + (est.iniciales || '') + '</div>' +
+            '<div><div class="est-nombre">' + est.nombre + '</div>' +
+            '<div class="est-meta">' + est.correo + ' · ' + guias.length + ' guía' + (guias.length === 1 ? '' : 's') + ' completada' + (guias.length === 1 ? '' : 's') + '</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="padding:4px 18px 14px;">' + filasHTML + '</div>';
+
+      cont.appendChild(bloque);
+    });
+  });
 }
 
 // ── PLANIFICACIÓN ──
