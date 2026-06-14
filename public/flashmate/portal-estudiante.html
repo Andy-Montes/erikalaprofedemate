@@ -313,6 +313,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 }
 .btn-ensayo:hover{opacity:.88;}
 </style>
+<script src="https://accounts.google.com/gsi/client" async></script>
 </head>
 <body>
 
@@ -321,7 +322,14 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
   <div class="login-card">
     <img class="login-logo" src="/flashmate/logo-erika.png" alt="FlashMate" onerror="this.style.display='none'">
     <div class="login-titulo">FlashMate</div>
-    <div class="login-sub">Ingresa tu correo electrónico para acceder a tu guía de hoy.</div>
+    <div class="login-sub">Inicia sesión con tu cuenta de Google para acceder a tu guía de hoy.</div>
+
+    <!-- Login con Google -->
+    <div id="g-login-wrap">
+      <div class="g_id_signin" data-type="standard" data-size="large" data-text="signin_with" data-shape="pill" data-logo_alignment="left" style="display:flex;justify-content:center;"></div>
+    </div>
+
+    <div style="font-size:11px;color:#9CA3AF;margin:16px 0 8px;">o ingresa con tu correo</div>
     <input class="login-input" type="email" id="inp-correo-login"
       placeholder="tucorreo@gmail.com"
       onkeydown="if(event.key==='Enter')verificarAcceso()">
@@ -549,30 +557,81 @@ async function verificarAcceso() {
       return;
     }
 
-    const urlRes = SCRIPT_URL + '?accion=resultados&correo=' + encodeURIComponent(correo);
-    const respRes = await fetch(urlRes);
-    const dataRes = await respRes.json();
-
-    estudiante = {
-      nombre:           dataVerif.nombre,
-      correo:           dataVerif.correo,
-      plan:             dataVerif.plan,
-      vencimiento:      dataVerif.vencimiento,
-      guiasHabilitadas: dataVerif.guiasHabilitadas || [],
-      guiasDesbloqueadas: dataVerif.guiasDesbloqueadas || [],
-      guiaHoy:          dataVerif.guiaHoy   || null,
-      ensayoHoy:        dataVerif.ensayoHoy  || null,
-      semana:           dataVerif.semana    || [],
-      totalEjercicios:  dataVerif.totalEjercicios || 0,
-      resultados:       dataRes.resultados  || {}
-    };
-
-    mostrarPortal();
+    await entrarConDatos(dataVerif);
 
   } catch(err) {
     btn.disabled = false;
     btn.textContent = 'Ingresar →';
     mostrarError('Error de conexión. Verifica tu internet e intenta de nuevo.');
+  }
+}
+
+// Arma el estado del estudiante y entra al portal (reusado por login por
+// correo y por login con Google). dataVerif viene de accion=verificar.
+async function entrarConDatos(dataVerif) {
+  const correo = dataVerif.correo;
+  let dataRes = { resultados: {} };
+  try {
+    const respRes = await fetch(SCRIPT_URL + '?accion=resultados&correo=' + encodeURIComponent(correo));
+    dataRes = await respRes.json();
+  } catch (e) { /* sin resultados aún */ }
+
+  estudiante = {
+    nombre:             dataVerif.nombre,
+    correo:             dataVerif.correo,
+    plan:               dataVerif.plan,
+    vencimiento:        dataVerif.vencimiento,
+    guiasHabilitadas:   dataVerif.guiasHabilitadas || [],
+    guiasDesbloqueadas: dataVerif.guiasDesbloqueadas || [],
+    guiaHoy:            dataVerif.guiaHoy   || null,
+    ensayoHoy:          dataVerif.ensayoHoy  || null,
+    semana:             dataVerif.semana    || [],
+    totalEjercicios:    dataVerif.totalEjercicios || 0,
+    resultados:         dataRes.resultados  || {}
+  };
+
+  mostrarPortal();
+}
+
+// ── LOGIN CON GOOGLE ──
+const GOOGLE_CLIENT_ID = '568804580001-snpipfnntq0u828f8fdjjfqov2l36rq1.apps.googleusercontent.com';
+
+function initGoogleLoginEstudiante() {
+  (function render() {
+    if (!(window.google && google.accounts && google.accounts.id)) {
+      return setTimeout(render, 300);
+    }
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: onGoogleLoginEstudiante });
+    google.accounts.id.renderButton(
+      document.querySelector('.g_id_signin'),
+      { type: 'standard', size: 'large', text: 'signin_with', shape: 'pill', logo_alignment: 'left' }
+    );
+  })();
+}
+
+async function onGoogleLoginEstudiante(resp) {
+  const errDiv = document.getElementById('login-error');
+  errDiv.style.display = 'none';
+  try {
+    const r = await fetch('/.netlify/functions/verificar-estudiante', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ credential: resp.credential })
+    });
+    const dataVerif = await r.json();
+    if (!dataVerif.acceso) {
+      const mensajes = {
+        'correo_no_registrado': 'Tu cuenta de Google no está registrada. Contacta a tu profesora.',
+        'cuenta_inactiva':      'Tu cuenta está inactiva. Contacta a tu profesora.',
+        'acceso_vencido':       'Tu acceso ha vencido. Contacta a tu profesora para renovarlo.',
+        'hoja_no_encontrada':   'Error del sistema. Contacta a tu profesora.'
+      };
+      mostrarError(dataVerif.error || mensajes[dataVerif.motivo] || 'Acceso no autorizado.');
+      return;
+    }
+    await entrarConDatos(dataVerif);
+  } catch (e) {
+    mostrarError('Error al iniciar sesión con Google. Intenta de nuevo.');
   }
 }
 
@@ -1021,6 +1080,7 @@ function salir() {
 
 // Auto-login desde guía
 window.addEventListener('load', async function(){
+  initGoogleLoginEstudiante();
   await cargarCatalogoRemoto();
   const params = new URLSearchParams(window.location.search);
   const correo = params.get('correo');
