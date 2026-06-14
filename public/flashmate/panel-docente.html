@@ -475,6 +475,16 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
       <span class="curso-card-count" id="count-4m">— alumnos</span>
     </button>
   </div>
+  <button onclick="entrarGestionGuias()"
+    style="margin-top:22px;display:flex;align-items:center;gap:12px;width:100%;max-width:560px;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.22);border-radius:16px;padding:16px 20px;cursor:pointer;font-family:'Poppins',sans-serif;color:#fff;transition:all .15s;"
+    onmouseover="this.style.background='rgba(255,255,255,0.14)';" onmouseout="this.style.background='rgba(255,255,255,0.08)';">
+    <span style="width:42px;height:42px;border-radius:11px;background:rgba(255,255,255,0.16);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📚</span>
+    <span style="flex:1;text-align:left;">
+      <span style="display:block;font-size:15px;font-weight:700;">Gestión de guías</span>
+      <span style="display:block;font-size:12px;color:rgba(255,255,255,0.6);">Subir guías nuevas y revisar la biblioteca completa</span>
+    </span>
+    <span style="font-size:18px;opacity:.7;">→</span>
+  </button>
   <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:30px;">© 2026 Erika la Profe de Mate</div>
 </div>
 
@@ -509,7 +519,6 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
     <button class="tab activo" onclick="cambiarTab('planificacion',this)">Planificación semanal</button>
     <button class="tab" onclick="cambiarTab('ensayos',this)">Ensayos</button>
     <button class="tab" onclick="cambiarTab('seguimiento',this)">Seguimiento</button>
-    <button class="tab" onclick="cambiarTab('catalogo',this)">Gestión de guías</button>
   </div>
 </div>
 
@@ -758,15 +767,40 @@ function actualizarContadoresCurso() {
   });
 }
 
+// Muestra solo una vista por su id y resalta su tab (si tiene)
+function activarVista(id) {
+  document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('activo'));
+  const vista = document.getElementById('vista-' + id);
+  if (vista) vista.classList.add('activa');
+  const tab = document.querySelector('.tab[onclick*="' + id + '"]');
+  if (tab) tab.classList.add('activo');
+}
+
 // Elige un curso desde la subportada y entra al panel filtrado
 function elegirCurso(curso) {
   cursoActivo = curso;
   document.getElementById('selector-curso').style.display = 'none';
   document.getElementById('panel-contenido').style.display = 'block';
+  const tabs = document.querySelector('.tabs-wrap');
+  if (tabs) tabs.style.display = '';
+  activarVista('planificacion'); // siempre arranca en planificación
   const lbl = document.getElementById('curso-activo-label');
   if (lbl) lbl.textContent = curso;
   renderPlanificacion();
   renderEnsayos();
+}
+
+// Entra directo a la gestión de guías desde la subportada (no depende del curso)
+function entrarGestionGuias() {
+  cursoActivo = null;
+  document.getElementById('selector-curso').style.display = 'none';
+  document.getElementById('panel-contenido').style.display = 'block';
+  const tabs = document.querySelector('.tabs-wrap');
+  if (tabs) tabs.style.display = 'none'; // la gestión no es por curso: sin tabs
+  activarVista('catalogo');
+  const lbl = document.getElementById('curso-activo-label');
+  if (lbl) lbl.textContent = 'Gestión de guías';
 }
 
 // Vuelve a la subportada para cambiar de curso

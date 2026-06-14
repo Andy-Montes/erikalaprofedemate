@@ -1098,8 +1098,11 @@ async function entrarModoRevisionEstudiante() {
 window.addEventListener('load', async function(){
   initGoogleLoginEstudiante();
   await cargarCatalogoRemoto();
-  const rev = localStorage.getItem('fm_review');
-  if (rev && parseInt(rev) > Date.now()) { entrarModoRevisionEstudiante(); return; }
+  // Modo revisión (PIN admin) o sesión de Erika logueada → previsualizar el portal con el primer alumno
+  const rev   = localStorage.getItem('fm_review');
+  const erika = localStorage.getItem('fm_erika_auth');
+  const accesoRevision = (rev && parseInt(rev) > Date.now()) || (erika && parseInt(erika) > Date.now());
+  if (accesoRevision) { entrarModoRevisionEstudiante(); return; }
   const params = new URLSearchParams(window.location.search);
   const correo = params.get('correo');
   const nombre = params.get('nombre');
