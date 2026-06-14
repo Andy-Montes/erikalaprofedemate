@@ -16,7 +16,10 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 // aquí y NO como variable de entorno (marcarlo secreto rompe el build de Netlify).
 const GOOGLE_CLIENT_ID = '568804580001-snpipfnntq0u828f8fdjjfqov2l36rq1.apps.googleusercontent.com';
 
-const DOCENTES_DEFAULT = ['erikalaprofedemate@gmail.com'];
+const DOCENTES_DEFAULT = [
+  'erikalaprofedemate@gmail.com',
+  'agathablu@gmail.com', // TEMPORAL — superadmin Andrea para revisar cambios. QUITAR cuando termine.
+];
 
 function docentesAutorizados(): string[] {
   const env = process.env.DOCENTES_AUTORIZADOS;
