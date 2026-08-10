@@ -330,6 +330,17 @@
       "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
       "subunidadTitulo": "Subunidad: Productos Notables",
       "disp": true
+    },
+    {
+      "cod": "U04.C.6a",
+      "nombre": "U04.C.6a",
+      "desc": "",
+      "nivel": "a",
+      "unidad": "U04",
+      "subunidad": "C",
+      "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
+      "subunidadTitulo": "Subunidad: Factorización",
+      "disp": true
     }
   ]
 }
