@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.A.2c · Lenguaje Algebraico</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.A.2c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'A', nivel: 'c',
+  titulo: 'Lenguaje Algebraico',
+  sub: 'Operatoria · multiplicación · valorización tipo PAES',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Representar', 'Modelar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · monomio x polinomio con reduccion (Resolver)
+    E.push(armar('Resolver problemas', 'Reduce \\(2p(p-2q)-q(p+2q)\\).',
+      [{ t: '\\(2p^2-5pq-2q^2\\)', err: null },
+       { t: '\\(2p^2-5pq+2q^2\\)', err: '\\(-q\\cdot2q=-2q^2\\) (negativo): queda \\(-2q^2\\).' },
+       { t: '\\(2p^2-6q^2-pq\\)', err: 'Junta los \\(pq\\): \\(-4pq-pq=-5pq\\). Y el término es \\(-2q^2\\).' },
+       { t: '\\(p^2-5pq+2q^2\\)', err: '\\(2p\\cdot p=2p^2\\) (no \\(p^2\\)); y \\(-q\\cdot2q=-2q^2\\).' }],
+      'Correcto. \\(2p^2-4pq-pq-2q^2=2p^2-5pq-2q^2\\).'));
+
+    // P2 · producto de monomios con fracciones (Resolver)
+    E.push(armar('Resolver problemas', 'Calcula \\(\\left(\\tfrac{2}{5}xy^2z\\right)\\cdot\\left(\\tfrac{25}{4}x^2y\\right)\\cdot(-2yz^{-3})\\).',
+      [{ t: '\\(-5x^3y^4z^{-2}\\)', err: null },
+       { t: '\\(5x^3y^4z^{-2}\\)', err: 'El factor \\(-2\\) hace negativo el resultado: \\(-5x^3y^4z^{-2}\\).' },
+       { t: '\\(-5x^{-3}y^4z^{-2}\\)', err: 'Las potencias de \\(x\\) se SUMAN: \\(1+2=3\\), da \\(x^3\\).' },
+       { t: '\\(-5x^3y^4z^{-6}\\)', err: 'En \\(z\\): \\(1+(-3)=-2\\), no \\(-6\\): \\(z^{-2}\\).' }],
+      'Correcto. Coeficientes: \\(\\tfrac25\\cdot\\tfrac{25}{4}\\cdot(-2)=-5\\); \\(x^{1+2}=x^3\\); \\(y^{2+1+1}=y^4\\); \\(z^{1-3}=z^{-2}\\).'));
+
+    // P3 · producto polinomio x polinomio distintos (Representar)
+    E.push(armar('Representar', 'Desarrolla \\((2x+y)(3a-b)\\).',
+      [{ t: '\\(6ax-2bx+3ay-by\\)', err: null },
+       { t: '\\(6ax-by\\)', err: 'Cada término del primero multiplica a cada uno del segundo (4 productos), no solo 2.' },
+       { t: '\\(6ax+2bx+3ay+by\\)', err: 'Cuidado con los signos: \\(2x\\cdot(-b)=-2bx\\) y \\(y\\cdot(-b)=-by\\).' },
+       { t: '\\(5ax-3bx\\)', err: 'No se suman términos distintos: quedan \\(6ax-2bx+3ay-by\\) (sin semejantes).' }],
+      'Correcto. \\(2x\\cdot3a+2x\\cdot(-b)+y\\cdot3a+y\\cdot(-b)=6ax-2bx+3ay-by\\).'));
+
+    // P4 · modelar area (Modelar)
+    E.push(armar('Modelar', 'Un rectángulo tiene base \\((2x+1)\\) y altura \\((x+3)\\). ¿Cuál es su área desarrollada?',
+      [{ t: '\\(2x^2+7x+3\\)', err: null },
+       { t: '\\(2x^2+3\\)', err: 'Faltan los productos cruzados: \\(2x\\cdot3+1\\cdot x=7x\\). Área \\(=2x^2+7x+3\\).' },
+       { t: '\\(3x+4\\)', err: 'El área es un PRODUCTO, no una suma de lados: \\((2x+1)(x+3)=2x^2+7x+3\\).' },
+       { t: '\\(2x^2+6x+3\\)', err: 'Los cruzados son \\(2x\\cdot3+1\\cdot x=6x+x=7x\\), no \\(6x\\).' }],
+      'Correcto. Área \\(=(2x+1)(x+3)=2x^2+6x+x+3=2x^2+7x+3\\).'));
+
+    // P5 · valorizacion (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(x=2\\) y \\(y=-1\\), ¿cuál es el valor de \\(3x^2-2xy+y^2\\)?',
+      [{ t: '\\(17\\)', err: null },
+       { t: '\\(9\\)', err: 'El término \\(-2xy=-2\\cdot2\\cdot(-1)=+4\\) es positivo: \\(12+4+1=17\\).' },
+       { t: '\\(13\\)', err: '\\(3x^2=3\\cdot4=12\\), \\(-2xy=+4\\), \\(y^2=1\\): \\(12+4+1=17\\).' },
+       { t: '\\(15\\)', err: 'Cuidado: \\(-2\\cdot2\\cdot(-1)=+4\\) (dos negativos). Total \\(17\\).' }],
+      'Correcto. \\(3(2)^2-2(2)(-1)+(-1)^2=12+4+1=17\\).'));
+
+    // P6 · -a^2 vs (-a)^2 (Argumentar)
+    E.push(armar('Argumentar', 'Si \\(a=-3\\), ¿cuál es el valor de \\(-a^2\\)?',
+      [{ t: '\\(-9\\)', err: null },
+       { t: '\\(9\\)', err: 'En \\(-a^2\\) primero se eleva y luego se aplica el signo: \\(-(-3)^2=-(9)=-9\\).' },
+       { t: '\\(6\\)', err: 'No es \\(-a\\cdot2\\): es \\(-(a^2)=-(9)=-9\\).' },
+       { t: '\\(-6\\)', err: '\\(a^2=9\\), no 6: \\(-a^2=-9\\).' }],
+      'Correcto. \\(-a^2\\) significa \\(-(a^2)\\): con \\(a=-3\\), \\(a^2=9\\) y \\(-a^2=-9\\).'));
+
+    // P7 · monomio x polinomio (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\(2x^5(5x-2y^4+4xy)\\).',
+      [{ t: '\\(10x^6-4x^5y^4+8x^6y\\)', err: null },
+       { t: '\\(10x^5-4x^5y^4+8x^5y\\)', err: 'Al multiplicar \\(x^5\\cdot x=x^6\\): los exponentes se suman.' },
+       { t: '\\(10x^6-4x^5y^4\\)', err: 'Falta el tercer término: \\(2x^5\\cdot4xy=8x^6y\\).' },
+       { t: '\\(10x^6+4x^5y^4+8x^6y\\)', err: 'El segundo término es \\(2x^5\\cdot(-2y^4)=-4x^5y^4\\) (negativo).' }],
+      'Correcto. \\(2x^5\\cdot5x=10x^6\\); \\(2x^5\\cdot(-2y^4)=-4x^5y^4\\); \\(2x^5\\cdot4xy=8x^6y\\).'));
+
+    // P8 · terminos semejantes / grado (Argumentar)
+    E.push(armar('Argumentar', '¿Se pueden reducir \\(5x^2\\) y \\(3x\\) a un solo término?',
+      [{ t: 'No: tienen distinto grado (parte literal).', err: null },
+       { t: 'Sí: \\(8x^2\\).', err: 'Solo se suman términos con IGUAL parte literal. \\(x^2\\) y \\(x\\) son distintos: no se reducen.' },
+       { t: 'Sí: \\(8x\\).', err: 'No se puede cambiar el grado al reducir: \\(x^2\\) y \\(x\\) no son semejantes.' },
+       { t: 'Sí: \\(15x^3\\).', err: 'Reducir es sumar coeficientes de términos semejantes, no multiplicar ni sumar exponentes.' }],
+      'Correcto. \\(5x^2\\) y \\(3x\\) tienen distinta parte literal (\\(x^2\\) vs \\(x\\)): no son semejantes y no se reducen.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
