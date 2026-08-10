@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.B.5c · Productos Notables</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.B.5c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'B', nivel: 'c',
+  titulo: 'Productos Notables',
+  sub: 'Cubo · suma de cubos · equivalencias tipo PAES',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Argumentar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · cubo de binomio resta (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\((4n-3)^3\\).',
+      [{ t: '\\(64n^3-144n^2+108n-27\\)', err: null },
+       { t: '\\(64n^3-27\\)', err: 'El cubo tiene 4 términos: \\(a^3-3a^2b+3ab^2-b^3\\).' },
+       { t: '\\(64n^3-144n^2+108n+27\\)', err: 'El último término es \\(-(3)^3=-27\\) (resta): \\(-27\\).' },
+       { t: '\\(64n^3-48n^2+36n-27\\)', err: 'El segundo es \\(3\\cdot(4n)^2\\cdot3=144n^2\\); el tercero \\(3\\cdot4n\\cdot9=108n\\).' }],
+      'Correcto. \\((4n)^3-3(4n)^2(3)+3(4n)(3)^2-3^3=64n^3-144n^2+108n-27\\).'));
+
+    // P2 · cuadrado con fraccion (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\(\\left(\\tfrac{1}{2x}-y\\right)^2\\).',
+      [{ t: '\\(\\tfrac{1}{4x^2}-\\tfrac{y}{x}+y^2\\)', err: null },
+       { t: '\\(\\tfrac{1}{4x^2}+y^2\\)', err: 'Falta el doble producto \\(-2\\cdot\\tfrac{1}{2x}\\cdot y=-\\tfrac{y}{x}\\).' },
+       { t: '\\(\\tfrac{1}{2x^2}-\\tfrac{y}{x}+y^2\\)', err: 'El cuadrado del primero es \\(\\left(\\tfrac{1}{2x}\\right)^2=\\tfrac{1}{4x^2}\\).' },
+       { t: '\\(\\tfrac{1}{4x^2}-\\tfrac{2y}{x}+y^2\\)', err: 'El doble producto es \\(2\\cdot\\tfrac{1}{2x}\\cdot y=\\tfrac{y}{x}\\), no \\(\\tfrac{2y}{x}\\).' }],
+      'Correcto. \\(\\left(\\tfrac{1}{2x}\\right)^2-2\\cdot\\tfrac{1}{2x}\\cdot y+y^2=\\tfrac{1}{4x^2}-\\tfrac{y}{x}+y^2\\).'));
+
+    // P3 · suma de cubos (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\((x+2)(x^2-2x+4)\\).',
+      [{ t: '\\(x^3+8\\)', err: null },
+       { t: '\\(x^3-8\\)', err: 'Es una SUMA de cubos: \\((a+b)(a^2-ab+b^2)=a^3+b^3=x^3+8\\).' },
+       { t: '\\(x^3+2x^2+4\\)', err: 'Al multiplicar todo, los términos intermedios se cancelan y queda \\(x^3+8\\).' },
+       { t: '\\(x^3+6x^2+8\\)', err: 'Es el patrón de suma de cubos: \\(x^3+2^3=x^3+8\\).' }],
+      'Correcto. \\((a+b)(a^2-ab+b^2)=a^3+b^3\\): con \\(a=x,b=2\\), \\(x^3+8\\).'));
+
+    // P4 · suma por diferencia con fracciones (Representar)
+    E.push(armar('Representar', 'Desarrolla \\(\\left(\\tfrac{1}{x}-\\tfrac{1}{y}\\right)\\left(\\tfrac{1}{x}+\\tfrac{1}{y}\\right)\\).',
+      [{ t: '\\(\\tfrac{1}{x^2}-\\tfrac{1}{y^2}\\)', err: null },
+       { t: '\\(\\tfrac{1}{x^2}+\\tfrac{1}{y^2}\\)', err: 'La suma por su diferencia RESTA los cuadrados: \\(\\tfrac{1}{x^2}-\\tfrac{1}{y^2}\\).' },
+       { t: '\\(\\tfrac{1}{x}-\\tfrac{1}{y}\\)', err: 'Cada término se eleva al cuadrado: \\(\\left(\\tfrac1x\\right)^2-\\left(\\tfrac1y\\right)^2\\).' },
+       { t: '\\(\\tfrac{2}{x^2}-\\tfrac{2}{y^2}\\)', err: 'No se duplica: es \\(\\left(\\tfrac1x\\right)^2-\\left(\\tfrac1y\\right)^2=\\tfrac{1}{x^2}-\\tfrac{1}{y^2}\\).' }],
+      'Correcto. \\((a+b)(a-b)=a^2-b^2\\): \\(\\left(\\tfrac1x\\right)^2-\\left(\\tfrac1y\\right)^2=\\tfrac{1}{x^2}-\\tfrac{1}{y^2}\\).'));
+
+    // P5 · equivalencias a (x+y)^2 (Argumentar)
+    E.push(armar('Argumentar', 'De las expresiones: I) \\((x-y)^2+4xy\\)  II) \\((x+y)(x-y)\\)  III) \\(x^2+y^2\\). ¿Cuál(es) es(son) equivalente(s) a \\((x+y)^2\\)?',
+      [{ t: 'Solo I', err: null },
+       { t: 'I y II', err: 'II es \\(x^2-y^2\\), que no es \\((x+y)^2\\). Solo I: \\((x-y)^2+4xy=x^2+2xy+y^2\\).' },
+       { t: 'I y III', err: 'III \\(x^2+y^2\\) le falta el \\(2xy\\). Solo I es equivalente.' },
+       { t: 'Solo II', err: 'II \\(=x^2-y^2\\). La equivalente es I: \\((x-y)^2+4xy=(x+y)^2\\).' }],
+      'Correcto. I: \\((x-y)^2+4xy=x^2-2xy+y^2+4xy=x^2+2xy+y^2=(x+y)^2\\). II y III no coinciden.'));
+
+    // P6 · diferencia de cuadrados de binomios (Resolver)
+    E.push(armar('Resolver problemas', 'Reduce \\((x+3)^2-(x-3)^2\\).',
+      [{ t: '\\(12x\\)', err: null },
+       { t: '\\(0\\)', err: 'No se cancelan: \\((x^2+6x+9)-(x^2-6x+9)=12x\\).' },
+       { t: '\\(18\\)', err: 'Los \\(x^2\\) y los \\(9\\) se cancelan; quedan los términos centrales: \\(6x-(-6x)=12x\\).' },
+       { t: '\\(6x\\)', err: 'Al restar \\(-6x\\) se suma: \\(6x-(-6x)=12x\\).' }],
+      'Correcto. \\((x^2+6x+9)-(x^2-6x+9)=12x\\).'));
+
+    // P7 · cubo vs suma de cubos (Argumentar)
+    E.push(armar('Argumentar', '¿Es cierto que \\((a+b)^3=a^3+b^3\\)?',
+      [{ t: 'No: faltan \\(3a^2b+3ab^2\\).', err: null },
+       { t: 'Sí, siempre.', err: 'El cubo de un binomio tiene 4 términos: \\(a^3+3a^2b+3ab^2+b^3\\), no solo \\(a^3+b^3\\).' },
+       { t: 'Sí, si \\(a=b\\).', err: 'Es falso en general: \\((a+b)^3=a^3+3a^2b+3ab^2+b^3\\).' },
+       { t: 'No: es \\(a^3-b^3\\).', err: '\\(a^3+b^3\\) es la SUMA de cubos factorizada \\((a+b)(a^2-ab+b^2)\\), distinta del cubo del binomio.' }],
+      'Correcto. \\((a+b)^3=a^3+3a^2b+3ab^2+b^3\\): el error clásico es olvidar los triples productos.'));
+
+    // P8 · uso de identidad (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(a+b=5\\) y \\(ab=6\\), ¿cuánto vale \\(a^2+b^2\\)?',
+      [{ t: '\\(13\\)', err: null },
+       { t: '\\(25\\)', err: 'Ese es \\((a+b)^2\\). Falta restar \\(2ab\\): \\(a^2+b^2=(a+b)^2-2ab=25-12=13\\).' },
+       { t: '\\(37\\)', err: 'Se RESTA \\(2ab\\), no se suma: \\(25-12=13\\).' },
+       { t: '\\(19\\)', err: '\\(2ab=2\\cdot6=12\\): \\(25-12=13\\).' }],
+      'Correcto. \\((a+b)^2=a^2+2ab+b^2\\Rightarrow a^2+b^2=(a+b)^2-2ab=25-12=13\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
