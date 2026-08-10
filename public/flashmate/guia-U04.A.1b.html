@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.A.1b · Lenguaje Algebraico</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.A.1b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'A', nivel: 'b',
+  titulo: 'Lenguaje Algebraico',
+  sub: 'Términos · reducción · valorización · operatoria',
+  HAB_E: ['Representar', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · clasificar por numero de terminos (Representar)
+    E.push(armar('Representar', '¿Cuál de las siguientes expresiones es un binomio?',
+      [{ t: '\\(3x+2y\\)', err: null },
+       { t: '\\(6xy^2\\)', err: 'Eso es un monomio: tiene un solo término. Un binomio tiene dos términos.' },
+       { t: '\\(xy+4x-2y\\)', err: 'Eso es un trinomio: tiene tres términos. Un binomio tiene dos.' },
+       { t: '\\(5x\\)', err: 'Eso es un monomio (un término). Un binomio tiene dos términos.' }],
+      'Correcto. \\(3x+2y\\) tiene dos términos separados por una suma: es un binomio.'));
+
+    // P2 · terminos semejantes (Representar)
+    E.push(armar('Representar', 'En la expresión \\(6ab^2-\\tfrac{1}{2}a^3b^3+6a^2b^3-\\tfrac{5}{4}ab^2\\), ¿cuáles son términos semejantes?',
+      [{ t: '\\(6ab^2\\) y \\(-\\tfrac{5}{4}ab^2\\)', err: null },
+       { t: '\\(6ab^2\\) y \\(6a^2b^3\\)', err: 'Tienen el mismo coeficiente 6, pero distinta parte literal: no son semejantes.' },
+       { t: '\\(-\\tfrac{1}{2}a^3b^3\\) y \\(6a^2b^3\\)', err: 'Comparten \\(b^3\\), pero la potencia de \\(a\\) es distinta (\\(a^3\\) vs \\(a^2\\)): no son semejantes.' },
+       { t: 'Todos son semejantes', err: 'Solo son semejantes los que tienen IGUAL parte literal: \\(6ab^2\\) y \\(-\\tfrac{5}{4}ab^2\\).' }],
+      'Correcto. Términos semejantes son los que tienen la misma parte literal: \\(6ab^2\\) y \\(-\\tfrac{5}{4}ab^2\\) (ambos \\(ab^2\\)).'));
+
+    // P3 · reduccion (Resolver)
+    E.push(armar('Resolver problemas', 'Reduce \\(x-4y-2z-2x+3y-z\\).',
+      [{ t: '\\(-x-y-3z\\)', err: null },
+       { t: '\\(-x+y+z\\)', err: 'Revisa los signos: \\(-4y+3y=-y\\) y \\(-2z-z=-3z\\), no \\(+y+z\\).' },
+       { t: '\\(x+y-3z\\)', err: '\\(x-2x=-x\\) (no \\(+x\\)); y \\(-4y+3y=-y\\). Queda \\(-x-y-3z\\).' },
+       { t: '\\(x-y+z\\)', err: 'Solo se agrupan términos semejantes con su signo: \\(-x-y-3z\\).' }],
+      'Correcto. \\(x-2x=-x\\); \\(-4y+3y=-y\\); \\(-2z-z=-3z\\): \\(-x-y-3z\\).'));
+
+    // P4 · reduccion con fracciones (Resolver)
+    E.push(armar('Resolver problemas', 'Reduce \\(a^2b-\\tfrac{1}{3}ab^2-\\tfrac{1}{4}a^2b+\\tfrac{2}{3}ab^2\\).',
+      [{ t: '\\(\\tfrac{3}{4}a^2b+\\tfrac{1}{3}ab^2\\)', err: null },
+       { t: '\\(\\tfrac{3}{4}a^4b^2+\\tfrac{1}{3}a^4b\\)', err: 'Al reducir NO se suman los exponentes: la parte literal se conserva (\\(a^2b\\) y \\(ab^2\\)).' },
+       { t: '\\(\\tfrac{3}{4}a^2b-\\tfrac{1}{3}ab^2\\)', err: 'En \\(ab^2\\): \\(-\\tfrac13+\\tfrac23=+\\tfrac13\\) (positivo). Queda \\(+\\tfrac13ab^2\\).' },
+       { t: '\\(a^2b+\\tfrac{1}{3}ab^2\\)', err: 'En \\(a^2b\\): \\(1-\\tfrac14=\\tfrac34\\), no 1. Queda \\(\\tfrac34a^2b\\).' }],
+      'Correcto. \\(a^2b:\\;1-\\tfrac14=\\tfrac34\\); \\(ab^2:\\;-\\tfrac13+\\tfrac23=\\tfrac13\\): \\(\\tfrac34a^2b+\\tfrac13ab^2\\).'));
+
+    // P5 · valorizacion (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(a=3\\) y \\(b=4\\), ¿cuál es el valor de \\(a^2-\\tfrac{1}{2}b^3+4(a-b)^2\\)?',
+      [{ t: '\\(-19\\)', err: null },
+       { t: '\\(19\\)', err: 'El término \\(-\\tfrac12b^3=-32\\) es negativo y domina: \\(9-32+4=-19\\).' },
+       { t: '\\(45\\)', err: 'Cuidado: \\(\\tfrac12b^3=\\tfrac12\\cdot64=32\\) se RESTA. \\(9-32+4=-19\\).' },
+       { t: '\\(-13\\)', err: '\\(4(a-b)^2=4(-1)^2=4\\) (positivo). \\(9-32+4=-19\\).' }],
+      'Correcto. \\(3^2-\\tfrac12\\cdot4^3+4(3-4)^2=9-32+4=-19\\).'));
+
+    // P6 · operatoria combinada, error de signo (Argumentar)
+    E.push(armar('Argumentar', 'Al reducir \\(7(3x-y+1)-(-3x+8)\\), un estudiante escribe \\(21x-7y+7-3x+8\\). ¿Es correcto?',
+      [{ t: 'No: el signo cambia a \\(+3x-8\\); da \\(24x-7y-1\\).', err: null },
+       { t: 'Sí, está bien.', err: 'El \\(-\\) delante del paréntesis cambia TODOS los signos: \\(-(-3x+8)=+3x-8\\), no \\(-3x+8\\).' },
+       { t: 'No: da \\(18x-7y+15\\).', err: 'Al distribuir el \\(-\\): \\(+3x-8\\). Total: \\(21x+3x=24x\\), \\(7-8=-1\\): \\(24x-7y-1\\).' },
+       { t: 'No: da \\(24x-7y+15\\).', err: 'El \\(8\\) entra restando: \\(+7-8=-1\\), no \\(+15\\). Queda \\(24x-7y-1\\).' }],
+      'Correcto. \\(-(-3x+8)=+3x-8\\); entonces \\(21x-7y+7+3x-8=24x-7y-1\\).'));
+
+    // P7 · multiplicacion monomio x monomio (Resolver)
+    E.push(armar('Resolver problemas', 'Multiplica \\(-10x^5\\cdot 5xy^4\\).',
+      [{ t: '\\(-50x^6y^4\\)', err: null },
+       { t: '\\(-50x^5y^4\\)', err: 'Las potencias de igual base se SUMAN: \\(x^5\\cdot x=x^6\\). Da \\(-50x^6y^4\\).' },
+       { t: '\\(50x^6y^4\\)', err: 'Los signos: \\((-)\\cdot(+)=(-)\\). El resultado es negativo: \\(-50x^6y^4\\).' },
+       { t: '\\(-15x^6y^4\\)', err: 'Los coeficientes se MULTIPLICAN: \\(-10\\cdot5=-50\\), no \\(-15\\).' }],
+      'Correcto. Coeficientes: \\(-10\\cdot5=-50\\); \\(x^5\\cdot x=x^6\\); \\(y^4\\): \\(-50x^6y^4\\).'));
+
+    // P8 · modelar perimetro (Modelar)
+    E.push(armar('Modelar', 'Un triángulo tiene lados de largo \\(x\\), \\(2x\\) y \\(3x-1\\). ¿Cuál es su perímetro reducido?',
+      [{ t: '\\(6x-1\\)', err: null },
+       { t: '\\(6x+1\\)', err: 'El lado \\(3x-1\\) aporta un \\(-1\\): la suma es \\(6x-1\\).' },
+       { t: '\\(5x-1\\)', err: 'Suma los tres lados: \\(x+2x+3x=6x\\), luego \\(-1\\): \\(6x-1\\).' },
+       { t: '\\(6x^3-1\\)', err: 'Los términos semejantes se suman sin cambiar el exponente: \\(x+2x+3x=6x\\).' }],
+      'Correcto. Perímetro \\(=x+2x+(3x-1)=6x-1\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
