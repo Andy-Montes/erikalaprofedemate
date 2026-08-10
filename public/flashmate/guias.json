@@ -300,11 +300,11 @@
     },
     {
       "cod": "U04.B.3a",
-      "nombre": "U04.A.1b",
+      "nombre": "U04.B.3a",
       "desc": "",
-      "nivel": "c",
+      "nivel": "a",
       "unidad": "U04",
-      "subunidad": "A",
+      "subunidad": "B",
       "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
       "subunidadTitulo": "Subunidad: Productos Notables",
       "disp": true
