@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.C.6a · Factorización</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.C.6a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'C', nivel: 'a',
+  titulo: 'Factorización',
+  sub: 'Factor común · diferencia de cuadrados',
+  HAB_E: ['Representar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · factor comun concepto (Representar)
+    E.push(armar('Representar', 'Factoriza \\(2ab+4a\\) sacando el factor común.',
+      [{ t: '\\(2a(b+2)\\)', err: null },
+       { t: '\\(2(ab+2a)\\)', err: 'Falta sacar también la \\(a\\), que está en ambos términos: \\(2a(b+2)\\).' },
+       { t: '\\(2a(b+4)\\)', err: 'Al dividir \\(4a:2a=2\\), no 4: \\(2a(b+2)\\).' },
+       { t: '\\(a(2b+4)\\)', err: 'También el 2 es factor común de ambos: \\(2a(b+2)\\).' }],
+      'Correcto. El factor común es \\(2a\\): \\(2ab+4a=2a(b+2)\\). (Verifica distribuyendo.)'));
+
+    // P2 · factor comun con potencias (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(2x^4+2x^3\\).',
+      [{ t: '\\(2x^3(x+1)\\)', err: null },
+       { t: '\\(2x^4(1+x)\\)', err: 'El menor exponente común es \\(x^3\\): \\(2x^4:2x^3=x\\). Da \\(2x^3(x+1)\\).' },
+       { t: '\\(2x^3(x)\\)', err: 'Falta el segundo término: \\(2x^3:2x^3=1\\). Queda \\(2x^3(x+1)\\).' },
+       { t: '\\(x^3(2x+2)\\)', err: 'El 2 también es común: \\(2x^3(x+1)\\).' }],
+      'Correcto. Factor común \\(2x^3\\): \\(2x^4+2x^3=2x^3(x+1)\\).'));
+
+    // P3 · cual no factoriza por x (Argumentar)
+    E.push(armar('Argumentar', '¿Cuál de estas expresiones NO se puede factorizar por \\(x\\)?',
+      [{ t: '\\(3x-3\\)', err: null },
+       { t: '\\(x^2\\)', err: '\\(x^2=x\\cdot x\\): sí tiene \\(x\\) como factor.' },
+       { t: '\\(x^4-x^2\\)', err: '\\(x^4-x^2=x^2(x^2-1)\\): sí se puede factorizar por \\(x\\).' },
+       { t: '\\(4ax-3bx\\)', err: '\\(4ax-3bx=x(4a-3b)\\): la \\(x\\) está en ambos términos.' }],
+      'Correcto. \\(3x-3=3(x-1)\\): el segundo término no tiene \\(x\\), así que no se puede sacar \\(x\\) como factor común.'));
+
+    // P4 · diferencia de cuadrados (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(x^2-4y^2\\).',
+      [{ t: '\\((x-2y)(x+2y)\\)', err: null },
+       { t: '\\((x-4y)(x+4y)\\)', err: 'La raíz de \\(4y^2\\) es \\(2y\\), no \\(4y\\): \\((x-2y)(x+2y)\\).' },
+       { t: '\\((x-2y)^2\\)', err: 'Es una diferencia de cuadrados, no un cuadrado de binomio: \\((x-2y)(x+2y)\\).' },
+       { t: 'No se puede factorizar', err: 'Sí: es \\(a^2-b^2\\) con \\(a=x,b=2y\\): \\((x-2y)(x+2y)\\).' }],
+      'Correcto. \\(x^2-4y^2=x^2-(2y)^2=(x-2y)(x+2y)\\).'));
+
+    // P5 · diferencia de cuadrados con numero (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(16x^2-1\\).',
+      [{ t: '\\((4x-1)(4x+1)\\)', err: null },
+       { t: '\\((16x-1)(16x+1)\\)', err: 'La raíz de \\(16x^2\\) es \\(4x\\), no \\(16x\\): \\((4x-1)(4x+1)\\).' },
+       { t: '\\((4x-1)^2\\)', err: 'Es diferencia de cuadrados, no un cuadrado: \\((4x-1)(4x+1)\\).' },
+       { t: '\\(4x(4x-1)\\)', err: 'No hay factor común; es \\(a^2-b^2\\): \\((4x)^2-1^2=(4x-1)(4x+1)\\).' }],
+      'Correcto. \\(16x^2-1=(4x)^2-1^2=(4x-1)(4x+1)\\).'));
+
+    // P6 · factor comun binomio (Representar)
+    E.push(armar('Representar', 'Factoriza \\(m(a+2)+n(a+2)\\).',
+      [{ t: '\\((m+n)(a+2)\\)', err: null },
+       { t: '\\(mn(a+2)\\)', err: 'Los términos se SUMAN, no se multiplican: \\((m+n)(a+2)\\).' },
+       { t: '\\((m+a)(n+2)\\)', err: 'El factor común es el binomio \\((a+2)\\): \\((m+n)(a+2)\\).' },
+       { t: '\\(2mn(a+2)\\)', err: 'Solo se factoriza el \\((a+2)\\) común; queda \\((m+n)(a+2)\\).' }],
+      'Correcto. El factor común es el binomio \\((a+2)\\): \\(m(a+2)+n(a+2)=(m+n)(a+2)\\).'));
+
+    // P7 · suma de cuadrados no factoriza (Argumentar)
+    E.push(armar('Argumentar', '¿Se puede factorizar \\(x^2+9\\) como diferencia de cuadrados?',
+      [{ t: 'No: es una suma, no una diferencia.', err: null },
+       { t: 'Sí: \\((x-3)(x+3)\\).', err: 'Eso da \\(x^2-9\\) (diferencia). \\(x^2+9\\) es una SUMA de cuadrados: no aplica esa factorización.' },
+       { t: 'Sí: \\((x+3)^2\\).', err: '\\((x+3)^2=x^2+6x+9\\), no \\(x^2+9\\).' },
+       { t: 'Sí: \\((x+3)(x+3)\\).', err: 'Eso es \\((x+3)^2=x^2+6x+9\\), distinto de \\(x^2+9\\).' }],
+      'Correcto. La diferencia de cuadrados requiere una RESTA (\\(a^2-b^2\\)). \\(x^2+9\\) es una suma y no se factoriza así en los reales.'));
+
+    // P8 · factor comun mixto (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(3x^2+6x\\).',
+      [{ t: '\\(3x(x+2)\\)', err: null },
+       { t: '\\(3x(x+6)\\)', err: '\\(6x:3x=2\\), no 6: \\(3x(x+2)\\).' },
+       { t: '\\(x(3x+6)\\)', err: 'El 3 también es factor común: \\(3x(x+2)\\).' },
+       { t: '\\(3(x^2+2x)\\)', err: 'También la \\(x\\) es común: \\(3x(x+2)\\).' }],
+      'Correcto. Factor común \\(3x\\): \\(3x^2+6x=3x(x+2)\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
