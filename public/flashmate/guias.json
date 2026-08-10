@@ -352,6 +352,17 @@
       "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
       "subunidadTitulo": "Subunidad: Factorización",
       "disp": true
+    },
+    {
+      "cod": "U04.C.8c",
+      "nombre": "U04.C.8c",
+      "desc": "",
+      "nivel": "c",
+      "unidad": "U04",
+      "subunidad": "C",
+      "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
+      "subunidadTitulo": "Subunidad: Factorización",
+      "disp": true
     }
   ]
 }
