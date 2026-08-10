@@ -286,6 +286,17 @@
       "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
       "subunidadTitulo": "Sub unidad Exp. Algebraicas",
       "disp": true
+    },
+    {
+      "cod": "U04.A.2c",
+      "nombre": "U04.A.1b",
+      "desc": "",
+      "nivel": "c",
+      "unidad": "U04",
+      "subunidad": "A",
+      "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
+      "subunidadTitulo": "Subunidad Exp. Algebraicas",
+      "disp": true
     }
   ]
 }
