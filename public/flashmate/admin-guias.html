@@ -207,6 +207,13 @@ drop.addEventListener('drop', e=>{
 fileInput.addEventListener('change', e=>{ if(e.target.files.length) leerArchivo(e.target.files[0]); });
 
 let HTML_GUIA = '';
+function normalizarCod(v){
+  const s = String(v || '').trim();
+  const m = s.match(/^u?(\d{2})\.?([a-c])\.?(\d{1,2})([a-c])$/i);
+  if(!m) return s;
+  const [,uu,sub,num,niv] = m;
+  return `U${uu}.${sub.toUpperCase()}.${num}${niv.toLowerCase()}`;
+}
 function leerArchivo(file){
   const nombre = String(file?.name || '').trim();
   const tipo = String(file?.type || '').trim().toLowerCase();
@@ -234,14 +241,15 @@ function leerArchivo(file){
     document.getElementById('file-ok').style.display='flex';
     // Autodetectar código desde el nombre: guia-U04.A.1a.html
     const m = file.name.match(/U\d{2}\.[A-C]\.\d{1,2}[a-c]/i);
-    if(m){ document.getElementById('f-cod').value = m[0].toUpperCase(); onCod(); }
+    if(m){ document.getElementById('f-cod').value = normalizarCod(m[0]); onCod(); }
   };
   reader.readAsText(file, 'UTF-8');
 }
 
 // ── Autocompletar campos desde el código ──
 function onCod(){
-  const cod = document.getElementById('f-cod').value.trim().toUpperCase();
+  const cod = normalizarCod(document.getElementById('f-cod').value);
+  document.getElementById('f-cod').value = cod;
   const m = cod.match(/^U(\d{2})\.([A-C])\.(\d{1,2})([a-c])$/);
   if(!m) return;
   const [,uu,sub,,niv] = m;
@@ -266,7 +274,8 @@ async function publicar(){
   exito.style.display='none';
   estado.className='estado'; estado.textContent='';
 
-  const cod = document.getElementById('f-cod').value.trim().toUpperCase();
+  const cod = normalizarCod(document.getElementById('f-cod').value);
+  document.getElementById('f-cod').value = cod;
   if(!HTML_GUIA){ estado.className='estado bad'; estado.textContent='Falta el archivo de la guía.'; return; }
   if(!/^U\d{2}\.[A-C]\.\d{1,2}[a-c]$/.test(cod)){ estado.className='estado bad'; estado.textContent='Código inválido (ej: U04.A.1a).'; return; }
 
