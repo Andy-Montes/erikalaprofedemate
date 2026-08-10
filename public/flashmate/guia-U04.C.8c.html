@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.C.8c · Factorización</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.C.8c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'C', nivel: 'c',
+  titulo: 'Factorización',
+  sub: 'Suma y diferencia de cubos · casos combinados tipo PAES',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · suma de cubos (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(x^3+64\\).',
+      [{ t: '\\((x+4)(x^2-4x+16)\\)', err: null },
+       { t: '\\((x+4)(x^2+4x+16)\\)', err: 'En la SUMA de cubos el término central del trinomio va con signo \\(-\\): \\(-4x\\).' },
+       { t: '\\((x+4)^3\\)', err: 'No es un cubo perfecto de un binomio: es suma de cubos \\(x^3+4^3\\).' },
+       { t: '\\((x+4)(x^2-16)\\)', err: 'El trinomio es \\(a^2-ab+b^2=x^2-4x+16\\), no \\(x^2-16\\).' }],
+      'Correcto. \\(a^3+b^3=(a+b)(a^2-ab+b^2)\\) con \\(a=x,b=4\\): \\((x+4)(x^2-4x+16)\\).'));
+
+    // P2 · diferencia de cubos con coeficientes (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(27x^3-8y^3\\).',
+      [{ t: '\\((3x-2y)(9x^2+6xy+4y^2)\\)', err: null },
+       { t: '\\((3x-2y)(9x^2-6xy+4y^2)\\)', err: 'En la DIFERENCIA de cubos el central va con signo \\(+\\): \\(+6xy\\).' },
+       { t: '\\((3x-8y)(9x^2+6xy+4y^2)\\)', err: 'La raíz cúbica de \\(8y^3\\) es \\(2y\\), no \\(8y\\).' },
+       { t: '\\((27x-8y)(x^2+xy+y^2)\\)', err: 'Las bases son las raíces cúbicas: \\(3x\\) y \\(2y\\), no \\(27x\\) y \\(8y\\).' }],
+      'Correcto. \\(a^3-b^3=(a-b)(a^2+ab+b^2)\\) con \\(a=3x,b=2y\\): \\((3x-2y)(9x^2+6xy+4y^2)\\).'));
+
+    // P3 · suma de cubos con coeficientes (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(8x^3+y^3\\).',
+      [{ t: '\\((2x+y)(4x^2-2xy+y^2)\\)', err: null },
+       { t: '\\((2x+y)(4x^2+2xy+y^2)\\)', err: 'En la suma de cubos el central va con signo \\(-\\): \\(-2xy\\).' },
+       { t: '\\((8x+y)(x^2-xy+y^2)\\)', err: 'La raíz cúbica de \\(8x^3\\) es \\(2x\\), no \\(8x\\).' },
+       { t: '\\((2x+y)^3\\)', err: 'No es un cubo de binomio: es suma de cubos \\((2x)^3+y^3\\).' }],
+      'Correcto. \\(a^3+b^3=(a+b)(a^2-ab+b^2)\\) con \\(a=2x,b=y\\): \\((2x+y)(4x^2-2xy+y^2)\\).'));
+
+    // P4 · 1-p^6 (Argumentar)
+    E.push(armar('Argumentar', 'La expresión \\(1-p^6\\) es equivalente a:',
+      [{ t: '\\((1-p^3)(1+p^3)\\)', err: null },
+       { t: '\\((2-p^3)(1-p^2)\\)', err: 'Es diferencia de cuadrados: \\(1^2-(p^3)^2=(1-p^3)(1+p^3)\\).' },
+       { t: '\\(p^3(1-p^2)\\)', err: 'No hay factor común \\(p^3\\); es \\(1^2-(p^3)^2\\).' },
+       { t: '\\((2-p)(2+p)\\)', err: 'Las bases son \\(1\\) y \\(p^3\\): \\((1-p^3)(1+p^3)\\).' }],
+      'Correcto. \\(1-p^6=1^2-(p^3)^2=(1-p^3)(1+p^3)\\) (diferencia de cuadrados).'));
+
+    // P5 · agrupacion + diferencia de cuadrados (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(x^2-y^2-3x-3y\\).',
+      [{ t: '\\((x+y)(x-y-3)\\)', err: null },
+       { t: '\\((x-y)(x+y-3)\\)', err: 'El factor común de \\(-3x-3y\\) es \\((x+y)\\), igual que en \\(x^2-y^2\\): \\((x+y)(x-y-3)\\).' },
+       { t: '\\((x+y)(x-y+3)\\)', err: 'El factor común es \\(-3\\) (negativo): queda \\(-3\\) dentro, \\((x+y)(x-y-3)\\).' },
+       { t: '\\((x-y)(x-y-3)\\)', err: '\\(x^2-y^2=(x+y)(x-y)\\); el factor común es \\((x+y)\\): \\((x+y)(x-y-3)\\).' }],
+      'Correcto. \\(x^2-y^2=(x+y)(x-y)\\); \\(-3x-3y=-3(x+y)\\); factor común \\((x+y)\\): \\((x+y)(x-y-3)\\).'));
+
+    // P6 · trinomio cuadrado perfecto (Representar)
+    E.push(armar('Representar', '¿Cuál es la factorización de \\(x^2+6x+9\\)?',
+      [{ t: '\\((x+3)^2\\)', err: null },
+       { t: '\\((x+3)(x-3)\\)', err: 'Eso da \\(x^2-9\\). Aquí es un cuadrado perfecto: \\((x+3)^2\\).' },
+       { t: '\\((x+9)(x+1)\\)', err: 'La suma sería \\(10\\), no 6. Es \\((x+3)^2\\).' },
+       { t: '\\((x+6)^2\\)', err: '\\((x+6)^2=x^2+12x+36\\), no \\(x^2+6x+9\\).' }],
+      'Correcto. \\(x^2+6x+9=(x+3)^2\\): el doble producto \\(2\\cdot x\\cdot3=6x\\) confirma el trinomio cuadrado perfecto.'));
+
+    // P7 · cual no factoriza por x (Argumentar)
+    E.push(armar('Argumentar', '¿Cuál de estas expresiones NO admite \\(x\\) como factor común?',
+      [{ t: '\\(3x-3\\)', err: null },
+       { t: '\\(x^4-x^2\\)', err: '\\(x^4-x^2=x^2(x^2-1)\\): sí tiene \\(x\\) como factor.' },
+       { t: '\\(4ax-3bx\\)', err: '\\(4ax-3bx=x(4a-3b)\\): la \\(x\\) está en ambos términos.' },
+       { t: '\\(x^2+x\\)', err: '\\(x^2+x=x(x+1)\\): sí tiene \\(x\\) como factor.' }],
+      'Correcto. \\(3x-3=3(x-1)\\): el segundo término (\\(-3\\)) no contiene \\(x\\), así que no se puede sacar \\(x\\) como factor común.'));
+
+    // P8 · factor comun + diferencia de cuadrados (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza completamente \\(2x^2-8\\).',
+      [{ t: '\\(2(x-2)(x+2)\\)', err: null },
+       { t: '\\(2(x^2-4)\\)', err: 'Falta factorizar \\(x^2-4=(x-2)(x+2)\\): completa es \\(2(x-2)(x+2)\\).' },
+       { t: '\\((2x-4)(x+2)\\)', err: 'Primero saca el factor común 2: \\(2(x^2-4)=2(x-2)(x+2)\\).' },
+       { t: '\\(2(x-4)(x+4)\\)', err: 'La raíz de \\(4\\) es \\(2\\), no 4: \\(2(x-2)(x+2)\\).' }],
+      'Correcto. Factor común 2: \\(2(x^2-4)\\); luego diferencia de cuadrados: \\(2(x-2)(x+2)\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
