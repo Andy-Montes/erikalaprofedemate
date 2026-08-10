@@ -308,6 +308,17 @@
       "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
       "subunidadTitulo": "Subunidad: Productos Notables",
       "disp": true
+    },
+    {
+      "cod": "U04.B.4b",
+      "nombre": "U04.B.4b",
+      "desc": "",
+      "nivel": "b",
+      "unidad": "U04",
+      "subunidad": "B",
+      "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
+      "subunidadTitulo": "Subunidad: Productos Notables",
+      "disp": true
     }
   ]
 }
