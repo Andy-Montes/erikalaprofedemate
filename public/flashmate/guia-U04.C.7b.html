@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.C.7b · Factorización</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.C.7b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'C', nivel: 'b',
+  titulo: 'Factorización',
+  sub: 'Trinomios · agrupación · diferencia de cuadrados',
+  HAB_E: ['Resolver problemas', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · trinomio simple (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(x^2+3x-10\\).',
+      [{ t: '\\((x+5)(x-2)\\)', err: null },
+       { t: '\\((x-5)(x+2)\\)', err: 'Buscamos dos números que multiplicados den \\(-10\\) y sumados \\(+3\\): son \\(+5\\) y \\(-2\\).' },
+       { t: '\\((x+5)(x+2)\\)', err: 'El producto debe ser \\(-10\\): uno de los signos es negativo, \\((x+5)(x-2)\\).' },
+       { t: '\\((x+10)(x-1)\\)', err: 'La suma debe ser \\(+3\\): \\(10+(-1)=9\\), no 3. Son \\(+5\\) y \\(-2\\).' }],
+      'Correcto. Dos números: producto \\(-10\\), suma \\(+3\\): \\(+5\\) y \\(-2\\). \\((x+5)(x-2)\\).'));
+
+    // P2 · trinomio cuadrado perfecto (Representar)
+    E.push(armar('Representar', 'Factoriza \\(x^2+6x+9\\).',
+      [{ t: '\\((x+3)^2\\)', err: null },
+       { t: '\\((x+3)(x-3)\\)', err: 'Eso da \\(x^2-9\\). Aquí es un trinomio cuadrado perfecto: \\((x+3)^2\\).' },
+       { t: '\\((x+6)(x+3)\\)', err: 'La suma sería \\(9\\), no 6. Es \\((x+3)(x+3)=(x+3)^2\\).' },
+       { t: '\\((x+9)(x+1)\\)', err: 'Suma \\(10\\), producto \\(9\\): no calza. Son \\(3\\) y \\(3\\): \\((x+3)^2\\).' }],
+      'Correcto. \\(x^2+6x+9=(x+3)(x+3)=(x+3)^2\\): trinomio cuadrado perfecto.'));
+
+    // P3 · trinomio con coeficiente (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(2x^2+13x+15\\).',
+      [{ t: '\\((x+5)(2x+3)\\)', err: null },
+       { t: '\\((2x+5)(x+3)\\)', err: 'Verifica el término central: \\((2x+5)(x+3)=2x^2+11x+15\\), no \\(13x\\).' },
+       { t: '\\((x+15)(2x+1)\\)', err: 'El central sería \\(x+30x=31x\\). Lo correcto: \\((x+5)(2x+3)\\).' },
+       { t: '\\((2x+15)(x+1)\\)', err: 'Da central \\(2x+15x=17x\\). Es \\((x+5)(2x+3)\\).' }],
+      'Correcto. \\((x+5)(2x+3)=2x^2+3x+10x+15=2x^2+13x+15\\).'));
+
+    // P4 · trinomio con coeficiente 2 (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(2x^2+5x+2\\).',
+      [{ t: '\\((2x+1)(x+2)\\)', err: null },
+       { t: '\\((2x+1)(2x+4)\\)', err: 'Eso daría \\(4x^2+\\ldots\\): el producto de los primeros debe ser \\(2x^2\\), no \\(4x^2\\).' },
+       { t: '\\((2x+1)(x+4)\\)', err: 'El central sería \\(8x+x=9x\\), no \\(5x\\).' },
+       { t: '\\((x+1)(2x+4)\\)', err: '\\((x+1)(2x+4)=2x^2+6x+4\\): central \\(6x\\), no \\(5x\\).' }],
+      'Correcto. \\((2x+1)(x+2)=2x^2+4x+x+2=2x^2+5x+2\\).'));
+
+    // P5 · verificar factorizacion (Argumentar)
+    E.push(armar('Argumentar', '¿Es correcto afirmar que \\(x^2+3x-10=(x+5)(x-2)\\)?',
+      [{ t: 'Sí: al multiplicar se obtiene \\(x^2+3x-10\\).', err: null },
+       { t: 'No: da \\(x^2-3x-10\\).', err: 'El central es \\(+5x-2x=+3x\\) (positivo): sí es correcto.' },
+       { t: 'No: da \\(x^2+3x+10\\).', err: 'El producto de los términos libres es \\(5\\cdot(-2)=-10\\) (negativo): sí es correcto.' },
+       { t: 'No: falta un término.', err: 'Multiplicando: \\(x^2-2x+5x-10=x^2+3x-10\\). La factorización es correcta.' }],
+      'Correcto. Verificando: \\((x+5)(x-2)=x^2-2x+5x-10=x^2+3x-10\\). Coincide.'));
+
+    // P6 · factorizacion por agrupacion (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza por agrupación \\(ax+bx+ay+by\\).',
+      [{ t: '\\((x+y)(a+b)\\)', err: null },
+       { t: '\\((a+b)(x+y+1)\\)', err: 'Agrupa: \\(x(a+b)+y(a+b)=(x+y)(a+b)\\), sin el \\(+1\\).' },
+       { t: '\\((ax+by)(x+y)\\)', err: 'Agrupa por factor común: \\(x(a+b)+y(a+b)=(x+y)(a+b)\\).' },
+       { t: '\\(xy(a+b)\\)', err: 'Los términos se SUMAN: \\((x+y)(a+b)\\), no \\(xy\\).' }],
+      'Correcto. \\(ax+bx+ay+by=x(a+b)+y(a+b)=(x+y)(a+b)\\).'));
+
+    // P7 · diferencia de cuadrados con potencias (Representar)
+    E.push(armar('Representar', 'La expresión \\(1-p^6\\) es equivalente a:',
+      [{ t: '\\((1-p^3)(1+p^3)\\)', err: null },
+       { t: '\\((1-p^2)(1+p^2)\\)', err: 'La raíz de \\(p^6\\) es \\(p^3\\) (mitad del exponente): \\((1-p^3)(1+p^3)\\).' },
+       { t: '\\((2-p^3)(1-p^2)\\)', err: 'Es diferencia de cuadrados: \\(1^2-(p^3)^2=(1-p^3)(1+p^3)\\).' },
+       { t: '\\(p^3(1-p^2)\\)', err: 'No hay factor común \\(p^3\\); es \\(1^2-(p^3)^2=(1-p^3)(1+p^3)\\).' }],
+      'Correcto. \\(1-p^6=1^2-(p^3)^2=(1-p^3)(1+p^3)\\).'));
+
+    // P8 · agrupacion + diferencia de cuadrados (Resolver)
+    E.push(armar('Resolver problemas', 'Factoriza \\(x^2-y^2-3x-3y\\).',
+      [{ t: '\\((x+y)(x-y-3)\\)', err: null },
+       { t: '\\((x-y)(x+y-3)\\)', err: 'El factor común de \\(-3x-3y\\) es \\(-3(x+y)\\); junto a \\((x+y)(x-y)\\) queda \\((x+y)(x-y-3)\\).' },
+       { t: '\\((x+y)(x-y+3)\\)', err: 'El factor común es \\(-3\\) (negativo): \\((x+y)(x-y-3)\\).' },
+       { t: '\\((x-y)(x-y+3)\\)', err: 'De \\(x^2-y^2=(x+y)(x-y)\\), el factor común es \\((x+y)\\): \\((x+y)(x-y-3)\\).' }],
+      'Correcto. \\(x^2-y^2=(x+y)(x-y)\\); \\(-3x-3y=-3(x+y)\\); factor común \\((x+y)\\): \\((x+y)(x-y-3)\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
