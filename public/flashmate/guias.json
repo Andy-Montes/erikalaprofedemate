@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-06-13",
+  "actualizado": "2026-08-10",
   "guias": [
     {
       "cod": "U01.A.1a",
@@ -274,6 +274,17 @@
       "subunidad": "B",
       "unidadTitulo": "Unidad 03 · Potencias y Raíces",
       "subunidadTitulo": "Subunidad B: Raíces Enésimas",
+      "disp": true
+    },
+    {
+      "cod": "U04.A.1b",
+      "nombre": "U04.A.1b",
+      "desc": "",
+      "nivel": "b",
+      "unidad": "U04",
+      "subunidad": "A",
+      "unidadTitulo": "Unidad 04: Expresiones Algebraicas",
+      "subunidadTitulo": "Sub unidad Exp. Algebraicas",
       "disp": true
     }
   ]
