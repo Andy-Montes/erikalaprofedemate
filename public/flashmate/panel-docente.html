@@ -1627,6 +1627,7 @@ async function cargarEnsayosExistentes() {
 // ── CONTROL DE ACCESO ────────────────────────────────────
 const CLAVE_HASH = 'MateFlash_1976';
 const DIAS_SESSION = 30;
+const DOC_SESSION_VERSION = '2';
 
 // ── LOGIN CON GOOGLE ─────────────────────────────────────
 // PEGAR AQUÍ el OAuth Client ID que crea Erika en Google Cloud
@@ -1678,6 +1679,7 @@ async function onGoogleLoginDocente(resp) {
       const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
       localStorage.setItem('fm_doc_auth', expira);
       localStorage.setItem('fm_doc_email', data.email || '');
+      localStorage.setItem('fm_doc_session_version', DOC_SESSION_VERSION);
       mostrarPanel();
     } else {
       if (errEl) { errEl.textContent = data.error || 'No se pudo iniciar sesión.'; errEl.style.display = 'block'; }
@@ -1702,6 +1704,7 @@ async function verificarClave() {
       const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
       localStorage.setItem('fm_doc_auth', expira);
       localStorage.setItem('fm_doc_email', data.email || 'docente@flashmate.local');
+      localStorage.setItem('fm_doc_session_version', DOC_SESSION_VERSION);
       mostrarPanel();
     } catch (e) {
       err.textContent = 'No se pudo crear la sesiÃ³n docente. Intenta nuevamente.';
@@ -1725,12 +1728,15 @@ function mostrarPanel() {
 
 function chequearAcceso() {
   const auth = localStorage.getItem('fm_doc_auth');
-  const erika = localStorage.getItem('fm_erika_auth'); // sesión iniciada en el hub de FlashMate
-  const rev = localStorage.getItem('fm_review');        // modo revisión (temporal, Andrea)
-  if ((auth && parseInt(auth) > Date.now()) || (erika && parseInt(erika) > Date.now()) || (rev && parseInt(rev) > Date.now())) {
+  const erika = localStorage.getItem('fm_erika_auth'); // sesion iniciada en el hub de FlashMate
+  const rev = localStorage.getItem('fm_review');        // modo revision (temporal, Andrea)
+  const version = localStorage.getItem('fm_doc_session_version');
+  const sesionLocalVigente = (auth && parseInt(auth) > Date.now()) || (erika && parseInt(erika) > Date.now()) || (rev && parseInt(rev) > Date.now());
+  if (sesionLocalVigente && version === DOC_SESSION_VERSION) {
     mostrarPanel();
   } else {
     localStorage.removeItem('fm_doc_auth');
+    localStorage.removeItem('fm_doc_session_version');
     document.getElementById('pantalla-clave').style.display = 'flex';
     initGoogleLogin();
   }
