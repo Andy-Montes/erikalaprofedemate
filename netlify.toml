@@ -8,13 +8,13 @@
   included_files = ["protected/**"]
 
 [[redirects]]
-  from = "/flashmate/guia-*.html"
+  from = "/flashmate/guia-*"
   to = "/.netlify/functions/ver-guia?codigo=:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/flashmate/ensayo-*.html"
+  from = "/flashmate/ensayo-*"
   to = "/.netlify/functions/ver-ensayo?codigo=:splat"
   status = 200
   force = true

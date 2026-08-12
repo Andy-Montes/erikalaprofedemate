@@ -8,7 +8,10 @@ export default async (req) => {
   const queryCode = url.searchParams.get("codigo");
   if (!match && !queryCode) return forbidden("Ensayo no encontrado", "La ruta solicitada no corresponde a un ensayo de FlashMate.");
 
-  const fileName = match ? match[1] : `ensayo-${queryCode}.html`;
+  const queryFile = queryCode && String(queryCode).toLowerCase().endsWith(".html")
+    ? `ensayo-${queryCode}`
+    : `ensayo-${queryCode}.html`;
+  const fileName = match ? match[1] : queryFile;
   if (!/^ensayo-E[0-9]+\.html$/i.test(fileName)) {
     return forbidden("Ensayo no encontrado", "La ruta solicitada no corresponde a un ensayo de FlashMate.");
   }

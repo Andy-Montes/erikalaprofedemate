@@ -8,7 +8,10 @@ export default async (req) => {
   const queryCode = url.searchParams.get("codigo");
   if (!match && !queryCode) return forbidden("Guia no encontrada", "La ruta solicitada no corresponde a una guia de FlashMate.");
 
-  const fileName = match ? match[1] : `guia-${queryCode}.html`;
+  const queryFile = queryCode && String(queryCode).toLowerCase().endsWith(".html")
+    ? `guia-${queryCode}`
+    : `guia-${queryCode}.html`;
+  const fileName = match ? match[1] : queryFile;
   if (!/^guia-[A-Z0-9.]+\.html$/i.test(fileName)) {
     return forbidden("Guia no encontrada", "La ruta solicitada no corresponde a una guia de FlashMate.");
   }
