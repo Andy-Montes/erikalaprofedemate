@@ -539,8 +539,11 @@ async function verificarAcceso() {
   btn.innerHTML = '<span class="spinner"></span>';
 
   try {
-    const urlVerif = SCRIPT_URL + '?accion=verificar&correo=' + encodeURIComponent(correo);
-    const respVerif = await fetch(urlVerif);
+    const respVerif = await fetch('/.netlify/functions/verificar-estudiante-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ correo })
+    });
     const dataVerif = await respVerif.json();
 
     if (!dataVerif.acceso) {
@@ -632,7 +635,7 @@ async function onGoogleLoginEstudiante(resp) {
   const errDiv = document.getElementById('login-error');
   errDiv.style.display = 'none';
   try {
-    const r = await fetch('/.netlify/functions/verificar-estudiante', {
+    const r = await fetch('/.netlify/functions/verificar-estudiante-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ credential: resp.credential })

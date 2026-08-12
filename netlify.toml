@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["protected/**"]
+
+[[redirects]]
+  from = "/flashmate/guia-:codigo.html"
+  to = "/.netlify/functions/ver-guia?codigo=:codigo"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/flashmate/ensayo-:codigo.html"
+  to = "/.netlify/functions/ver-ensayo?codigo=:codigo"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/protected/*"
+  to = "/404.html"
+  status = 404
+  force = true

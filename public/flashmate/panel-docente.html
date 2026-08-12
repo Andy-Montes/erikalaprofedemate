@@ -689,7 +689,7 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec';
-const BASE = 'https://flashmate.netlify.app/';
+const BASE = '/flashmate/';
 
 // ── CATÁLOGO COMPLETO ──
 let GUIAS = [
@@ -1668,7 +1668,7 @@ async function onGoogleLoginDocente(resp) {
   const errEl = document.getElementById('g-login-error');
   if (errEl) errEl.style.display = 'none';
   try {
-    const r = await fetch('/.netlify/functions/verificar-docente', {
+    const r = await fetch('/.netlify/functions/verificar-docente-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ credential: resp.credential })
