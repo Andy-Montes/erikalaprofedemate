@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flash Mate · Guía U01.A.1a · Conjuntos numéricos</title>
-<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:100vh;padding:16px 12px 80px}
@@ -20,9 +23,6 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
 .fm-titulo{font-size:15px;font-weight:600;color:#fff;margin-bottom:2px}
 .fm-sub{font-size:11px;color:rgba(255,255,255,0.65)}
 .fm-hdr-logo{height:52px;width:auto;flex-shrink:0;border-radius:6px}
-
-
-
 .prog-bg{background:rgba(255,255,255,0.2);border-radius:4px;height:4px;margin-top:8px}
 .prog-bar{background:#0187F3;height:4px;border-radius:4px;transition:width .4s}
 .fm-ident{padding:16px 16px 14px;border-bottom:0.5px solid #eee}
@@ -54,6 +54,7 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
 .opt.mal .letra{background:#E24B4A;color:#fff;border-color:#E24B4A}
 .opt.show .letra{background:#1D9E75;color:#fff;border-color:#1D9E75}
 .otxt{font-size:14px;color:#1a1a1a;line-height:1.4}
+.rad{border-top:1.4px solid currentColor;padding:0 1px;margin-left:1px}
 .opt.nls .otxt{color:#aaa;font-style:italic}
 .fb{border-radius:8px;padding:12px 14px;margin-top:10px;font-size:13px;line-height:1.7;display:none}
 .fb.ok{background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5}
@@ -91,24 +92,19 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
 <div class="fm-wrap">
 <div class="fm-card">
 
-  <!-- ENCABEZADO -->
   <div class="fm-hdr">
     <div class="fm-hdr-top">
       <div class="fm-hdr-left">
         <span class="fm-badge">Flash Mate · Guía U01.A.1a</span>
-        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01</div>
+        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01 · NIVEL a</div>
         <div class="fm-titulo">Conjuntos numéricos</div>
-        <div class="fm-sub">Pares/impares · Primos · Divisibilidad · mcm · MCD</div>
+        <div class="fm-sub">Conjuntos · Divisibilidad · Primos · Factores · mcm y MCD</div>
       </div>
-      <img class="fm-hdr-logo"
-        src="/flashmate/logo-erika.png"
-        alt="Erika la Profe de Mate"
-        onerror="this.style.display='none'">
+      <img class="fm-hdr-logo" src="https://emerinoo.github.io/flashmate/logo-erika.png" alt="Erika la Profe de Mate" onerror="this.style.display='none'">
     </div>
     <div class="prog-bg"><div class="prog-bar" id="barra" style="width:0%"></div></div>
   </div>
 
-  <!-- IDENTIFICACIÓN -->
   <div class="fm-ident" id="zona-ident">
     <div class="fm-ident-titulo">ANTES DE COMENZAR</div>
     <input class="fm-input" type="text" id="inp-nombre" placeholder="Tu nombre completo">
@@ -117,7 +113,6 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
     <button class="fm-btn-start" onclick="iniciar()">Comenzar guía →</button>
   </div>
 
-  <!-- ZONA EJERCICIO -->
   <div class="fm-body" id="zona-q">
     <div class="fm-qnum" id="qnum">Pregunta 1 de 8</div>
     <div id="htag"></div>
@@ -130,7 +125,6 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
     </div>
   </div>
 
-  <!-- ZONA FINAL -->
   <div class="fm-body final" id="zona-final">
     <div class="pje-big" id="pje"></div>
     <div class="pje-sub" id="pmsg"></div>
@@ -146,7 +140,6 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
     </div>
   </div>
 
-  <!-- PIE -->
   <div class="fm-footer">
     <span class="fm-footer-copy">© 2026 Erika la Profe de Mate</span>
     <a href="https://www.erikalaprofedemate.com" class="fm-footer-link" target="_blank">www.erikalaprofedemate.com</a>
@@ -155,11 +148,8 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
 </div>
 </div>
 
-<!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.A.1a%20(Conjuntos%20Num%C3%A9ricos%2C%20Nivel%20a)" class="fm-wa" target="_blank" title="Contactar a Erika">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
+<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.A.1a" class="fm-wa" target="_blank" title="Contactar a Erika">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
@@ -170,135 +160,146 @@ let EJ=[],actual=0,resp=[],sel=null;
 
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(s){return esc(s).replace(/\n/g,'<br>');}
+function mathify(el){ if(el&&window.renderMathInElement){ try{ renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false}); }catch(e){} } }
+
+// Cada ejercicio se arma con opciones-objeto {t, err}. La correcta lleva err:null.
+// Al confirmar se muestra la retroalimentacion ESPECIFICA del distractor elegido.
+function armar(hab, txt, opciones, fb_ok){
+  const sh = shuffle(opciones);
+  const ok = sh.findIndex(o => o.err === null);
+  return {hab, txt, opts:sh, ok, fb_ok};
+}
 
 function generarEjercicios(){
-  const EJ=[];
-  const PRIMOS=[41,43,47,53,59,61,67,71,73,79,83,89,97];
-  const NO_PRIMOS=[[51,'3×17'],[57,'3×19'],[91,'7×13'],[77,'7×11'],[87,'3×29'],[93,'3×31'],[111,'3×37']];
+  const E=[];
 
-  // P1 — ¿Cuál es primo? (Resolver problemas)
-  const primo=rnd(PRIMOS);
-  const np=shuffle(NO_PRIMOS).slice(0,3);
-  const ops1=shuffle([String(primo),...np.map(x=>String(x[0]))]);
-  const ok1=ops1.indexOf(String(primo));
-  EJ.push({hab:'Resolver problemas',hcss:'hab-rp',
-    txt:'¿Cuál de los siguientes números es primo?',
-    ops:ops1,ok:ok1,
-    fb_ok:`Correcto. ${primo} es primo: sus únicos divisores son 1 y ${primo}. Los demás: ${np.map(x=>x[0]+' = '+x[1]).join(', ')}.`,
-    fb_mal:`Un número primo tiene exactamente dos divisores. Los demás: ${np.map(x=>x[0]+' = '+x[1]).join(', ')}. Solo ${primo} es primo.`
-  });
-
-  // P2 — Divisores pares (Representar)
-  const bases2=[24,36,48,60,72];
-  const n2=rnd(bases2);
-  const divs2=[];for(let i=1;i<=n2;i++)if(n2%i===0)divs2.push(i);
-  const pares2=divs2.filter(x=>x%2===0);
-  const ok2v=pares2.length;
-  const w2=shuffle([ok2v-1,ok2v+1,ok2v+2,ok2v-2].filter(x=>x>0&&x!==ok2v)).slice(0,3);
-  const ops2=shuffle([ok2v,...w2]).map(String);
-  EJ.push({hab:'Representar',hcss:'hab-r',
-    txt:`El conjunto de divisores de ${n2} es {${divs2.join(', ')}}. ¿Cuántos de esos divisores son números pares?`,
-    ops:ops2,ok:ops2.indexOf(String(ok2v)),
-    fb_ok:`Correcto. Los divisores pares de ${n2} son: ${pares2.join(', ')}. Total: ${ok2v}.`,
-    fb_mal:`Los pares en {${divs2.join(',')}} son: ${pares2.join(', ')}. Total: ${ok2v}.`
-  });
-
-  // P3 — MCD (Resolver problemas)
-  const pares3=[[36,48,12],[24,36,12],[60,84,12],[48,72,24],[30,45,15],[42,63,21]];
-  const [a3,b3,mcd3]=rnd(pares3);
-  const w3=shuffle([mcd3/2,mcd3*2,mcd3+3,mcd3-3].filter(x=>x>0&&x!==mcd3&&Number.isInteger(x))).slice(0,3);
-  const ops3=shuffle([mcd3,...w3]).map(String);
-  EJ.push({hab:'Resolver problemas',hcss:'hab-rp',
-    txt:`¿Cuál es el Máximo Común Divisor (MCD) de ${a3} y ${b3}?`,
-    ops:ops3,ok:ops3.indexOf(String(mcd3)),
-    fb_ok:`Correcto. El MCD de ${a3} y ${b3} es ${mcd3}. Verifica: ${a3}÷${mcd3}=${a3/mcd3} y ${b3}÷${mcd3}=${b3/mcd3}, ambos enteros.`,
-    fb_mal:`Para el MCD de ${a3} y ${b3}, busca el mayor divisor común. El resultado es ${mcd3}: ${a3}=${mcd3}×${a3/mcd3} y ${b3}=${mcd3}×${b3/mcd3}.`
-  });
-
-  // P4 — mcm en contexto (Modelar)
-  const ctx4=[
-    {t1:15,t2:20,mcm:60,cosa:'buses'},
-    {t1:12,t2:18,mcm:36,cosa:'semáforos'},
-    {t1:10,t2:15,mcm:30,cosa:'máquinas'},
-    {t1:8,t2:12,mcm:24,cosa:'turnos'}
+  // ── P1 · Clasificar en el conjunto MAS pequeño (Representar) ──
+  const CLAS=[
+    {num:'−6',ok:'Entero',
+     nat:'−6 no es natural: los naturales sirven para contar (1, 2, 3, …) y no incluyen negativos.',
+     rac:'−6 sí es racional, pero pertenece a uno más pequeño: los enteros.',
+     irr:'−6 no es irracional: se puede escribir como fracción, −6/1.',
+     fb:'−6 es entero (no natural, por ser negativo), y ese es el conjunto más pequeño al que pertenece.'},
+    {num:'8',ok:'Natural',
+     ent:'8 sí es entero, pero pertenece a uno más pequeño: los naturales (sirve para contar).',
+     rac:'8 sí es racional, pero hay uno más pequeño: los naturales.',
+     irr:'8 no es irracional: es un número exacto para contar.',
+     fb:'8 es natural (sirve para contar); ese es el conjunto más pequeño al que pertenece.'},
+    {num:'3/4',ok:'Racional',
+     nat:'3/4 no es natural: no es un número entero de conteo.',
+     ent:'3/4 no es entero: está entre 0 y 1.',
+     irr:'3/4 no es irracional: ya está escrito como fracción de enteros.',
+     fb:'3/4 es racional: es un cociente de enteros (y no es entero ni natural).'},
+    {num:'\\(\\sqrt5\\)',ok:'Irracional',
+     nat:'\\(\\sqrt5\\) no es natural: no es un número exacto de conteo.',
+     ent:'\\(\\sqrt5\\) no es entero: su valor es 2,236… (no exacto).',
+     rac:'\\(\\sqrt5\\) no es racional: no puede escribirse como fracción exacta; su decimal es infinito y no periódico.',
+     fb:'\\(\\sqrt5\\) es irracional: no puede escribirse como fracción; su decimal es infinito y no periódico.'}
   ];
-  const c4=rnd(ctx4);
-  const w4=shuffle([c4.mcm/2,c4.mcm+c4.t1,c4.mcm-c4.t1,c4.mcm*2].filter(x=>x>0&&x!==c4.mcm&&Number.isInteger(x))).slice(0,3);
-  const ops4=shuffle([c4.mcm,...w4]).map(x=>x+' minutos');
-  EJ.push({hab:'Modelar',hcss:'hab-m',
-    txt:`Dos ${c4.cosa} se activan al mismo tiempo. El primero se repite cada ${c4.t1} minutos y el segundo cada ${c4.t2} minutos. ¿Cada cuántos minutos coinciden nuevamente?`,
-    ops:ops4,ok:ops4.indexOf(c4.mcm+' minutos'),
-    fb_ok:`Correcto. Se calcula el mcm(${c4.t1},${c4.t2})=${c4.mcm} minutos.`,
-    fb_mal:`Cuando dos eventos se repiten, el momento en que coinciden es el mcm. mcm(${c4.t1},${c4.t2})=${c4.mcm} minutos.`
-  });
+  const c1=rnd(CLAS);
+  const setErr={
+    'Natural':c1.nat||null,'Entero':c1.ent||null,'Racional':c1.rac||null,'Irracional':c1.irr||null
+  };
+  E.push(armar('Representar',
+    `¿A cuál de los siguientes conjuntos numéricos pertenece ${c1.num}, tomando el más pequeño posible?`,
+    ['Natural','Entero','Racional','Irracional'].map(s=>({t:s,err:s===c1.ok?null:setErr[s]})),
+    `Correcto. ${c1.fb}`));
 
-  // P5 — Argumentar: divisibilidad
-  const dd5=rnd([[6,'2 y 3'],[4,'2 y 2'],[9,'3 y 3'],[12,'3 y 4']]);
-  const [d5,fact5]=dd5;
-  const [f5a,f5b]=fact5.split(' y ');
-  EJ.push({hab:'Argumentar',hcss:'hab-a',
-    txt:`Un estudiante afirma: "Todo número divisible por ${d5} también es divisible por ${f5a} y por ${f5b}". ¿Es correcta esta afirmación?`,
-    ops:[
-      `No, porque ${d5} no siempre es par`,
-      `Sí, porque ${d5} = ${fact5.replace(' y ','×')} y ambos dividen a cualquier múltiplo de ${d5}`,
-      `No, porque hay múltiplos de ${d5} que no son divisibles por ${f5b}`,
-      `Sí, pero solo para números menores que 50`
-    ],ok:1,
-    fb_ok:`Correcto. Si n es múltiplo de ${d5}, entonces n=(${fact5.replace(' y ','×')})k, lo que garantiza divisibilidad por ambos factores.`,
-    fb_mal:`Si n=${d5}k=(${fact5.replace(' y ','×')})k, entonces ${f5a} y ${f5b} dividen a n. La afirmación es correcta para todo número.`
-  });
+  // ── P2 · Cierre de operaciones en N (Argumentar) ──
+  const P2=[[3,8],[4,9],[2,7],[5,11]];
+  const [a2,b2]=rnd(P2);
+  E.push(armar('Argumentar',
+    'En el conjunto de los números naturales, ¿cuál de estas operaciones puede dar un resultado que NO es natural?',
+    [{t:`Una resta, como ${a2} − ${b2}`,err:null},
+     {t:`Una suma, como ${a2} + ${b2}`,err:`La suma de dos naturales siempre da un natural (${a2}+${b2}=${a2+b2}).`},
+     {t:`Una multiplicación, como ${a2} × ${b2}`,err:`El producto de dos naturales siempre da un natural (${a2}×${b2}=${a2*b2}).`},
+     {t:`Ninguna: todas dan naturales`,err:`La resta puede salir del conjunto: ${a2} − ${b2} = ${a2-b2}, que no es natural.`}],
+    `Correcto. La resta ${a2} − ${b2} = ${a2-b2} da un negativo, que no es natural. Por eso se amplía a los enteros.`));
 
-  // P6 — mcm directo (Resolver problemas)
-  const pares6=[[8,12,24],[6,9,18],[10,15,30],[4,6,12],[9,15,45]];
-  const [a6,b6,mcm6]=rnd(pares6);
-  const w6=shuffle([mcm6/2,mcm6+a6,mcm6+b6,mcm6*2].filter(x=>x>0&&x!==mcm6&&Number.isInteger(x))).slice(0,3);
-  const ops6=shuffle([mcm6,...w6]).map(String);
-  EJ.push({hab:'Resolver problemas',hcss:'hab-rp',
-    txt:`¿Cuál es el mínimo común múltiplo (mcm) de ${a6} y ${b6}?`,
-    ops:ops6,ok:ops6.indexOf(String(mcm6)),
-    fb_ok:`Correcto. mcm(${a6},${b6})=${mcm6}. Verifica: ${mcm6}÷${a6}=${mcm6/a6} y ${mcm6}÷${b6}=${mcm6/b6}, ambos enteros.`,
-    fb_mal:`El mcm es el menor número divisible por ambos. mcm(${a6},${b6})=${mcm6}.`
-  });
-
-  // P7 — Par/Impar falsa (Representar)
-  const falsas7=[
-    {txt:'La suma de un número par y uno impar siempre es par',ej:'4+3=7 (impar)',expl:'par + impar = impar siempre.'},
-    {txt:'El producto de un número par y uno impar siempre es impar',ej:'4×3=12 (par)',expl:'par × cualquier número = par siempre.'},
-    {txt:'La suma de tres números impares siempre es par',ej:'1+3+5=9 (impar)',expl:'impar+impar+impar = impar.'},
+  // ── P3 · Paridad por reglas, sin calcular (Argumentar) ──
+  const P3=[
+    {exp:'(impar × impar) + par',res:'Impar',regla:'impar × impar = impar, y luego impar + par = impar'},
+    {exp:'(par × impar) + impar',res:'Impar',regla:'par × impar = par, y luego par + impar = impar'},
+    {exp:'(impar + impar) × impar',res:'Par',regla:'impar + impar = par, y luego par × impar = par'},
+    {exp:'(par + par) × impar',res:'Par',regla:'par + par = par, y luego par × impar = par'}
   ];
-  const f7=rnd(falsas7);
-  const ver7=shuffle([
-    'La suma de dos números impares siempre es par',
-    'El cuadrado de un número impar siempre es impar',
-    'El producto de dos números impares siempre es impar',
-    'La suma de dos números pares siempre es par'
-  ]).slice(0,3);
-  const ops7=shuffle([f7.txt,...ver7]);
-  EJ.push({hab:'Representar',hcss:'hab-r',
-    txt:'¿Cuál de las siguientes afirmaciones sobre números pares e impares es FALSA?',
-    ops:ops7,ok:ops7.indexOf(f7.txt),
-    fb_ok:`Correcto. Es falsa porque: ${f7.expl} Ejemplo: ${f7.ej}.`,
-    fb_mal:`La afirmación falsa es: "${f7.txt}". Contraejemplo: ${f7.ej}. ${f7.expl}`
-  });
+  const c3=rnd(P3);
+  const otro=c3.res==='Par'?'Impar':'Par';
+  E.push(armar('Argumentar',
+    `Sin calcular el valor, ¿el resultado de ${c3.exp} es par o impar?`,
+    [{t:c3.res,err:null},
+     {t:otro,err:`Por las reglas de paridad: ${c3.regla}. El resultado es ${c3.res.toLowerCase()}.`},
+     {t:'Depende de los números que se usen',err:`No depende: las reglas de paridad lo garantizan siempre. ${c3.regla}. Es ${c3.res.toLowerCase()}.`},
+     {t:'No se puede saber sin calcular',err:`Sí se puede: ${c3.regla}. El resultado es ${c3.res.toLowerCase()}.`}],
+    `Correcto. ${c3.regla}. El resultado es ${c3.res.toLowerCase()}.`));
 
-  // P8 — mcm contexto lotes (Modelar)
-  const lotes8=[
-    {l1:18,l2:24,mcm:72,cosa:'cajas'},
-    {l1:15,l2:25,mcm:75,cosa:'unidades'},
-    {l1:12,l2:20,mcm:60,cosa:'piezas'},
-    {l1:16,l2:24,mcm:48,cosa:'paquetes'}
+  // ── P4 · Descomposicion prima (Resolver problemas) ──
+  const P4=[
+    {n:60,ok:'\\(2^2\\cdot3\\cdot5\\)',d:[['\\(4\\cdot3\\cdot5\\)','El 4 no es primo; hay que seguir: \\(4=2^2\\). Entonces \\(60=2^2\\cdot3\\cdot5\\).'],['\\(2\\cdot3\\cdot5\\)','\\(2\\cdot3\\cdot5=30\\), no 60. Falta un factor 2.'],['\\(2^2\\cdot3\\cdot7\\)','\\(2^2\\cdot3\\cdot7=84\\), no 60. Revisa los factores primos.']]},
+    {n:72,ok:'\\(2^3\\cdot3^2\\)',d:[['\\(8\\cdot3^2\\)','El 8 no es primo; \\(8=2^3\\). Entonces \\(72=2^3\\cdot3^2\\).'],['\\(2^3\\cdot3\\)','\\(2^3\\cdot3=24\\), no 72. Falta un factor 3.'],['\\(2^2\\cdot3^2\\)','\\(2^2\\cdot3^2=36\\), no 72. Falta un factor 2.']]},
+    {n:90,ok:'\\(2\\cdot3^2\\cdot5\\)',d:[['\\(9\\cdot2\\cdot5\\)','El 9 no es primo; \\(9=3^2\\). Entonces \\(90=2\\cdot3^2\\cdot5\\).'],['\\(2\\cdot3\\cdot5\\)','\\(2\\cdot3\\cdot5=30\\), no 90. Falta un factor 3.'],['\\(2\\cdot3^2\\cdot7\\)','\\(2\\cdot3^2\\cdot7=126\\), no 90. Revisa los factores.']]}
   ];
-  const c8=rnd(lotes8);
-  const w8=shuffle([c8.mcm-c8.l1,c8.mcm+c8.l2,c8.mcm/2,c8.mcm+c8.l1].filter(x=>x>0&&x!==c8.mcm&&Number.isInteger(x))).slice(0,3);
-  const ops8=shuffle([c8.mcm,...w8]).map(String);
-  EJ.push({hab:'Modelar',hcss:'hab-m',
-    txt:`Una fábrica empaca ${c8.cosa} en cajas de ${c8.l1} o de ${c8.l2} unidades. ¿Cuál es la menor cantidad de ${c8.cosa} que permite llenar exactamente cualquiera de los dos tipos de caja sin que sobre ninguna?`,
-    ops:ops8,ok:ops8.indexOf(String(c8.mcm)),
-    fb_ok:`Correcto. Se necesita el mcm(${c8.l1},${c8.l2})=${c8.mcm} ${c8.cosa}. Con esa cantidad: ${c8.mcm/c8.l1} cajas de ${c8.l1} o ${c8.mcm/c8.l2} cajas de ${c8.l2}.`,
-    fb_mal:`La menor cantidad múltiplo de ${c8.l1} y de ${c8.l2} es el mcm(${c8.l1},${c8.l2})=${c8.mcm}.`
-  });
+  const c4=rnd(P4);
+  E.push(armar('Resolver problemas',
+    `¿Cuál es la descomposición prima de ${c4.n}?`,
+    [{t:c4.ok,err:null},{t:c4.d[0][0],err:c4.d[0][1]},{t:c4.d[1][0],err:c4.d[1][1]},{t:c4.d[2][0],err:c4.d[2][1]}],
+    `Correcto. ${c4.n} = ${c4.ok}, un producto solo de números primos.`));
 
-  return EJ;
+  // ── P5 · Factores con lenguaje preciso (Representar) ──
+  const P5=[
+    {n:24,imp:'{1, 3}',tod:'{1, 2, 3, 4, 6, 8, 12, 24}',par:'{2, 4, 6, 8, 12, 24}',bog:['{1, 3, 5}','El 5 no es factor de 24 (no lo divide exacto). Los factores impares son 1 y 3.']},
+    {n:18,imp:'{1, 3, 9}',tod:'{1, 2, 3, 6, 9, 18}',par:'{2, 6, 18}',bog:['{1, 3, 5, 9}','El 5 no es factor de 18. Los factores impares son 1, 3 y 9.']},
+    {n:20,imp:'{1, 5}',tod:'{1, 2, 4, 5, 10, 20}',par:'{2, 4, 10, 20}',bog:['{1, 3, 5}','El 3 no es factor de 20. Los factores impares son 1 y 5.']}
+  ];
+  const c5=rnd(P5);
+  E.push(armar('Representar',
+    `¿Cuáles son los factores impares de ${c5.n}?`,
+    [{t:c5.imp,err:null},
+     {t:c5.tod,err:`Esos son TODOS los factores de ${c5.n}; te piden solo los impares: ${c5.imp}.`},
+     {t:c5.par,err:`Esos son los factores PARES; los impares son ${c5.imp}.`},
+     {t:c5.bog[0],err:c5.bog[1]}],
+    `Correcto. Los factores impares de ${c5.n} son ${c5.imp} (los divisores que no son pares).`));
+
+  // ── P6 · Divisibilidad razonada por 6 (Resolver problemas) ──
+  const P6=[
+    {c:72,sc:9,n3:44,s3:8,n2:51,nn:25},
+    {c:54,sc:9,n3:40,s3:4,n2:33,nn:35},
+    {c:84,sc:12,n3:22,s3:4,n2:27,nn:55}
+  ];
+  const c6=rnd(P6);
+  E.push(armar('Resolver problemas',
+    '¿Cuál de los siguientes números es divisible por 6?',
+    [{t:String(c6.c),err:null},
+     {t:String(c6.n3),err:`${c6.n3} es divisible por 2 pero no por 3 (sus cifras suman ${c6.s3}); el 6 exige ambas.`},
+     {t:String(c6.n2),err:`${c6.n2} es divisible por 3 pero es impar (no por 2); el 6 exige ambas.`},
+     {t:String(c6.nn),err:`${c6.nn} no es divisible por 2 ni por 3.`}],
+    `Correcto. ${c6.c} es divisible por 6: es par (÷2) y sus cifras suman ${c6.sc} (÷3). El 6 exige cumplir ambas reglas.`));
+
+  // ── P7 · mcm en contexto (Modelar) ──
+  const P7=[[15,20,60,'micros'],[12,18,36,'trenes'],[10,15,30,'alarmas'],[8,12,24,'turnos']];
+  const c7=rnd(P7);
+  E.push(armar('Modelar',
+    `Dos ${c7[3]} salen juntos. El primero se repite cada ${c7[0]} minutos y el segundo cada ${c7[1]} minutos. ¿Cada cuántos minutos vuelven a coincidir?`,
+    [{t:c7[2]+' minutos',err:null},
+     {t:(c7[0]+c7[1])+' minutos',err:`Sumar los tiempos (${c7[0]}+${c7[1]}) no da la coincidencia; se necesita un múltiplo común, el mcm = ${c7[2]}.`},
+     {t:(c7[0]*c7[1])+' minutos',err:`El producto ${c7[0]}×${c7[1]} es un múltiplo común, pero no el MENOR. El mcm es ${c7[2]}.`},
+     {t:c7[1]+' minutos',err:`A los ${c7[1]} min solo se completa un ciclo del segundo; el primero aún no coincide. El mcm es ${c7[2]}.`}],
+    `Correcto. Coinciden en el mcm(${c7[0]},${c7[1]}) = ${c7[2]} minutos.`));
+
+  // ── P8 · MCD en contexto (Modelar) ──
+  const P8=[[24,36,12,72,6,'lápices','cuadernos'],[18,30,6,90,3,'manzanas','peras'],[40,60,20,120,10,'stickers','láminas'],[16,24,8,48,4,'fichas rojas','fichas azules']];
+  const c8=rnd(P8);
+  E.push(armar('Modelar',
+    `Se quieren repartir ${c8[0]} ${c8[5]} y ${c8[1]} ${c8[6]} en bolsas iguales, sin que sobre nada, usando la mayor cantidad de bolsas posible. ¿Cuántas bolsas se arman?`,
+    [{t:String(c8[2]),err:null},
+     {t:String(c8[3]),err:`Ese es el mcm, no el MCD. Con ${c8[3]} bolsas no alcanzan los objetos.`},
+     {t:String(c8[0]+c8[1]),err:`Sumar el total (${c8[0]}+${c8[1]}) no reparte en grupos iguales. Se busca el MCD, que es ${c8[2]}.`},
+     {t:String(c8[4]),err:`${c8[4]} da bolsas iguales, pero no la MAYOR cantidad. El MCD es ${c8[2]}.`}],
+    `Correcto. La mayor cantidad de bolsas iguales es el MCD(${c8[0]},${c8[1]}) = ${c8[2]}; cada bolsa lleva ${c8[0]/c8[2]} ${c8[5]} y ${c8[1]/c8[2]} ${c8[6]}.`));
+
+  return E;
 }
 
 function hcss(h){
@@ -339,14 +340,14 @@ function render(){
   document.getElementById('qnum').textContent=`Pregunta ${actual+1} de 8`;
   document.getElementById('barra').style.width=((actual+1)/8*100)+'%';
   document.getElementById('htag').innerHTML=`<span class="hab-tag ${hcss(e.hab)}">${e.hab}</span>`;
-  document.getElementById('qtxt').textContent=e.txt;
+  document.getElementById('qtxt').innerHTML=fmt(e.txt);
   sel=null;
   const od=document.getElementById('opts');
   od.innerHTML='';
-  e.ops.forEach((o,i)=>{
+  e.opts.forEach((o,i)=>{
     const d=document.createElement('div');
     d.className='opt';d.id='op'+i;
-    d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${o}</span>`;
+    d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${fmt(o.t)}</span>`;
     d.onclick=()=>elegir(i);
     od.appendChild(d);
   });
@@ -355,6 +356,7 @@ function render(){
   nls.innerHTML=`<div class="letra" style="border-style:dashed">E</div><span class="otxt">No lo sé</span>`;
   nls.onclick=()=>elegir(4);
   od.appendChild(nls);
+  mathify(document.getElementById('qtxt'));mathify(document.getElementById('opts'));
   document.getElementById('fb').style.display='none';
   document.getElementById('btnc').style.display='inline-block';
   document.getElementById('btnc').disabled=true;
@@ -383,11 +385,15 @@ function confirmar(){
   const fb=document.getElementById('fb');
   if(esNls){
     fb.className='fb nls';
-    fb.textContent=`La respuesta correcta es ${LETRAS[e.ok]}: ${e.ops[e.ok]}. ${e.fb_mal}`;
+    fb.innerHTML=fmt(`La respuesta correcta es ${LETRAS[e.ok]}: ${e.opts[e.ok].t}. ${e.fb_ok.replace(/^Correcto\. /,'')}`);
+  } else if(esOk){
+    fb.className='fb ok';
+    fb.innerHTML=fmt(e.fb_ok);
   } else {
-    fb.className='fb '+(esOk?'ok':'mal');
-    fb.textContent=esOk?e.fb_ok:e.fb_mal;
+    fb.className='fb mal';
+    fb.innerHTML=fmt(e.opts[sel].err);
   }
+  mathify(fb);
   fb.style.display='block';
   document.getElementById('btnc').style.display='none';
   const bs=document.getElementById('btns');
@@ -403,8 +409,6 @@ function siguiente(){
 function mostrarFinal(){
   document.getElementById('zona-q').style.display='none';
   document.getElementById('zona-final').style.display='block';
-  document.getElementById('zona-final').style.visibility='visible';
-  document.getElementById('zona-final').style.opacity='1';
   document.getElementById('barra').style.width='100%';
   const corr=resp.filter((r,i)=>r===EJ[i].ok).length;
   const nlsC=resp.filter(r=>r===NLS).length;
@@ -414,46 +418,17 @@ function mostrarFinal(){
   registrar(corr,incorrectas,nlsC,pct);
   document.getElementById('pmsg').textContent=pct+'% de logro'+(nlsC>0?` · ${nlsC} sin responder`:'');
   const al=document.getElementById('alerta');
-  // Frases por nivel — rotan aleatoriamente
-  const MSGS = {
-    alto: [
-      {titulo:'🔥 ¡Dominaste esta guía!', txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},
-      {titulo:'⚡ ¡Excelente nivel!', txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},
-      {titulo:'🎯 ¡Puntazo!', txt:'Cada guía así te acerca más al puntaje que quieres.'},
-      {titulo:'🚀 ¡Así se hace!', txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},
-      {titulo:'🌟 ¡Brillante!', txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}
-    ],
-    medio: [
-      {titulo:'💪 ¡Vas bien!', txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},
-      {titulo:'📈 Buen avance', txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},
-      {titulo:'✨ ¡Ya casi!', txt:'Con un intento más lo dominas. El progreso ya es visible.'},
-      {titulo:'🎯 En camino', txt:'Cada intento te acerca más. Repite sin presión, con foco.'},
-      {titulo:'⚡ Sigue sumando', txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}
-    ],
-    bajo: [
-      {titulo:'💡 Esta guía te está enseñando algo importante', txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},
-      {titulo:'🧠 Así funciona el aprendizaje real', txt:'Los errores son parte del proceso. Repite antes de avanzar.'},
-      {titulo:'🔄 No te rindas', txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelta a intentarlo!'},
-      {titulo:'💪 El desafío es parte del camino', txt:'Repite esta guía. Con práctica constante lo lograrás.'},
-      {titulo:'🌱 Aquí es donde más se aprende', txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}
-    ]
+  const MSGS={
+    alto:[{titulo:'🔥 ¡Dominaste esta guía!',txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},{titulo:'⚡ ¡Excelente nivel!',txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},{titulo:'🎯 ¡Puntazo!',txt:'Cada guía así te acerca más al puntaje que quieres.'},{titulo:'🚀 ¡Así se hace!',txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},{titulo:'🌟 ¡Brillante!',txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}],
+    medio:[{titulo:'💪 ¡Vas bien!',txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},{titulo:'📈 Buen avance',txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},{titulo:'✨ ¡Ya casi!',txt:'Con un intento más lo dominas. El progreso ya es visible.'},{titulo:'🎯 En camino',txt:'Cada intento te acerca más. Repite sin presión, con foco.'},{titulo:'⚡ Sigue sumando',txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}],
+    bajo:[{titulo:'💡 Esta guía te está enseñando algo importante',txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},{titulo:'🧠 Así funciona el aprendizaje real',txt:'Los errores son parte del proceso. Repite antes de avanzar.'},{titulo:'🔄 No te rindas',txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelve a intentarlo!'},{titulo:'💪 El desafío es parte del camino',txt:'Repite esta guía. Con práctica constante lo lograrás.'},{titulo:'🌱 Aquí es donde más se aprende',txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}]
   };
-  const nivel_msg = pct >= 75 ? 'alto' : pct >= 50 ? 'medio' : 'bajo';
-  const lista = MSGS[nivel_msg];
-  const msg = lista[Math.floor(Math.random()*lista.length)];
-  if(nivel_msg === 'alto'){
-    al.className='alerta bien';
-    al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;
-    document.getElementById('btn-rep').textContent='Repetir para afianzar';
-  } else if(nivel_msg === 'medio'){
-    al.className='alerta bien';
-    al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;
-    document.getElementById('btn-rep').textContent='Repetir con valores nuevos';
-  } else {
-    al.className='alerta rep';
-    al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}.</strong><br>${msg.txt}`;
-    document.getElementById('btn-rep').textContent='Repetir con valores nuevos';
-  }
+  const nivel_msg=pct>=75?'alto':pct>=50?'medio':'bajo';
+  const lista=MSGS[nivel_msg];
+  const msg=lista[Math.floor(Math.random()*lista.length)];
+  if(nivel_msg==='alto'){al.className='alerta bien';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir para afianzar';}
+  else if(nivel_msg==='medio'){al.className='alerta bien';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir con valores nuevos';}
+  else{al.className='alerta rep';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}.</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir con valores nuevos';}
   const dots=document.getElementById('dots');
   dots.innerHTML='';
   resp.forEach((r,i)=>{
@@ -475,16 +450,10 @@ function registrar(corr,incorr,nls,pct){
   if (window._modoDocente) return;
   var fecha=new Date().toLocaleDateString('es-CL',{timeZone:'America/Santiago'});
   var correo=document.getElementById('inp-correo').value.trim();
-  var HAB_E=["Resolver problemas", "Representar", "Resolver problemas", "Modelar", "Argumentar", "Resolver problemas", "Representar", "Modelar"];
-  var ejercicios=resp.map(function(r,i){
-    if(r===4) return 2;
-    return (r===EJ[i].ok)?1:0;
-  });
+  var HAB_E=["Representar","Argumentar","Argumentar","Resolver problemas","Representar","Resolver problemas","Modelar","Modelar"];
+  var ejercicios=resp.map(function(r,i){return r===4?2:(r===EJ[i].ok?1:0);});
   var falladas=[];
-  resp.forEach(function(r,i){
-    if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1) falladas.push(EJ[i].hab);
-  });
-  // ── CÁLCULO LOGRO POR HABILIDAD ──────────────────────
+  resp.forEach(function(r,i){if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1)falladas.push(EJ[i].hab);});
   var HAB_MAP={e1:HAB_E[0],e2:HAB_E[1],e3:HAB_E[2],e4:HAB_E[3],e5:HAB_E[4],e6:HAB_E[5],e7:HAB_E[6],e8:HAB_E[7]};
   var habCorr={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
   var habTot={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
@@ -493,49 +462,25 @@ function registrar(corr,incorr,nls,pct){
     habTot[h]=(habTot[h]||0)+1;
     if(ejercicios[i]===1) habCorr[h]=(habCorr[h]||0)+1;
   });
-  var logroResolver=habTot['Resolver problemas']>0?Math.round(habCorr['Resolver problemas']/habTot['Resolver problemas']*100)/100:null;
-  var logroModelar=habTot['Modelar']>0?Math.round(habCorr['Modelar']/habTot['Modelar']*100)/100:null;
-  var logroRepresentar=habTot['Representar']>0?Math.round(habCorr['Representar']/habTot['Representar']*100)/100:null;
-  var logroArgumentar=habTot['Argumentar']>0?Math.round(habCorr['Argumentar']/habTot['Argumentar']*100)/100:null;
+  var lg=function(h){return habTot[h]>0?Math.round(habCorr[h]/habTot[h]*100)/100:'';};
   var params=[
-    'fecha='+encodeURIComponent(fecha),
-    'nombre='+encodeURIComponent(nombreEstudiante),
-    'correo='+encodeURIComponent(correo),
-    'tipo=individual',
-    'grupo=NA',
-    'guia=guia-U01.A.1a',
-    'eje=E1',
-    'unidad=U01',
-    'subunidad=A',
-    'nivel=a',
-    'correctas='+corr,
-    'incorrectas='+incorr,
-    'nls='+nls,
-    'logro='+(pct/100),
-    'e1='+ejercicios[0],
-    'e2='+ejercicios[1],
-    'e3='+ejercicios[2],
-    'e4='+ejercicios[3],
-    'e5='+ejercicios[4],
-    'e6='+ejercicios[5],
-    'e7='+ejercicios[6],
-    'e8='+ejercicios[7],
+    'fecha='+encodeURIComponent(fecha),'nombre='+encodeURIComponent(nombreEstudiante),'correo='+encodeURIComponent(correo),
+    'tipo=individual','grupo=NA','guia=guia-U01.A.1a','eje=E1','unidad=U01','subunidad=A','nivel=a',
+    'correctas='+corr,'incorrectas='+incorr,'nls='+nls,'logro='+(pct/100),
+    'e1='+ejercicios[0],'e2='+ejercicios[1],'e3='+ejercicios[2],'e4='+ejercicios[3],'e5='+ejercicios[4],'e6='+ejercicios[5],'e7='+ejercicios[6],'e8='+ejercicios[7],
     'habilidades='+encodeURIComponent(falladas.join('|')),
-    'logro_resolver='+(logroResolver!==null?logroResolver:''),'logro_modelar='+(logroModelar!==null?logroModelar:''),'logro_representar='+(logroRepresentar!==null?logroRepresentar:''),'logro_argumentar='+(logroArgumentar!==null?logroArgumentar:'')
+    'logro_resolver='+lg('Resolver problemas'),'logro_modelar='+lg('Modelar'),'logro_representar='+lg('Representar'),'logro_argumentar='+lg('Argumentar')
   ].join('&');
   var img=new Image();
-  img.src='https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec?'+params;
+  img.src='https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec?'+params;
 }
 
 function volverPortal(){
   const params=new URLSearchParams(window.location.search);
   const nombre=params.get('nombre');
   const correo=params.get('correo');
-  if(nombre&&correo){
-    window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);
-  } else {
-    window.location.href='portal-estudiante.html';
-  }
+  if(nombre&&correo){window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);}
+  else{window.location.href='portal-estudiante.html';}
 }
 function reiniciar(){
   EJ=generarEjercicios();actual=0;resp=new Array(8).fill(null);sel=null;
@@ -544,61 +489,27 @@ function reiniciar(){
   render();
 }
 
-// ── AUTO-IDENTIFICACIÓN DESDE PORTAL ──────────────────
-// Si el estudiante llega desde el portal, nombre y correo
-// vienen en la URL y se saltan el formulario
-function autoIdentificar() {
-  const params = new URLSearchParams(window.location.search);
-  const nombre = params.get('nombre');
-  const correo = params.get('correo');
-  if (nombre && correo) {
-    document.getElementById('inp-nombre').value = nombre;
-    document.getElementById('inp-correo').value = correo;
-    // Ocultar formulario y arrancar directo
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    nombreEstudiante = nombre;
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
-  }
-}
-
-// ── AUTO-LOGIN Y MODO DOCENTE ──────────────────────────
 window.addEventListener('load', function() {
-  const params = new URLSearchParams(window.location.search);
-  const modo   = params.get('modo');
-  const nombre = params.get('nombre');
-  const correo = params.get('correo');
-
-  if (modo === 'docente') {
-    // Modo docente: saltar formulario, no registrar
-    window._modoDocente = true;
-    nombreEstudiante = 'Vista docente';
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
-    return; // no continuar con autoIdentificar
+  const params=new URLSearchParams(window.location.search);
+  const modo=params.get('modo');
+  const nombre=params.get('nombre');
+  const correo=params.get('correo');
+  if(modo==='docente'){
+    window._modoDocente=true;nombreEstudiante='Vista docente';
+    document.getElementById('zona-ident').style.display='none';
+    document.getElementById('zona-q').style.display='block';
+    EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
+    return;
   }
-
-  if (nombre && correo) {
-    // Auto-login desde portal: saltar formulario con datos reales
-    document.getElementById('inp-nombre').value = nombre;
-    document.getElementById('inp-correo').value = correo;
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    nombreEstudiante = nombre;
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
+  if(nombre&&correo){
+    document.getElementById('inp-nombre').value=nombre;
+    document.getElementById('inp-correo').value=correo;
+    document.getElementById('zona-ident').style.display='none';
+    document.getElementById('zona-q').style.display='block';
+    nombreEstudiante=nombre;
+    EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
   }
 });
-
 </script>
 </body>
 </html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U12.B.4b · Isometrías: traslación, rotación y simetría central</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U12.B.4b', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U12', unidadNum: '12', subunidad: 'B', nivel: 'b',
+  titulo: 'Isometrías: traslación, rotación y simetría central',
+  sub: 'Traslación de figuras · vector de traslación · rotaciones · simetría central',
+  HAB_E: ['Resolver problemas', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · traslación de un vértice de la figura (Resolver) · GRID
+    var e1 = armar('Resolver problemas', 'El triángulo \\(ABC\\) de la figura se traslada por el vector \\((2,-3)\\). Si \\(A(1,1)\\), ¿cuáles son las coordenadas de \\(A\\,'\\)?',
+      [{ t: '\\((3,-2)\\)', err: null },
+       { t: '\\((3,4)\\)', err: 'La segunda componente baja 3: \\(1+(-3)=-2\\).' },
+       { t: '\\((-1,4)\\)', err: 'La traslación suma el vector: \\((1+2,\\,1-3)\\).' },
+       { t: '\\((2,-3)\\)', err: 'Ese es el vector de traslación, no la imagen de \\(A\\).' }],
+      'Correcto. \\(A\\,'=(1+2,\\,1+(-3))=(3,-2)\\).');
+    e1.fig = GRID({ xmin: -2, xmax: 6, ymin: -4, ymax: 5, unit: 14, polys: [{ pts: [[1, 1], [3, 1], [1, 4]], role: 'dato', t: 'ABC' }, { pts: [[3, -2], [5, -2], [3, 1]], role: 'incog', dashed: true, t: "A'B'C'" }], desc: 'Triángulo ABC trasladado por (2,-3).' });
+    E.push(e1);
+
+    // P2 · hallar el vector de traslación (Representar) · GRID
+    var e2 = armar('Representar', 'Para trasladar el punto \\(A(4,3)\\) hasta \\(B(-5,-1)\\), ¿qué vector de traslación se aplicó?',
+      [{ t: '\\(T(-9,-4)\\)', err: null },
+       { t: '\\(T(-5,-1)\\)', err: 'Esas son las coordenadas de \\(B\\). El vector es \\(B-A\\).' },
+       { t: '\\(T(-4,-9)\\)', err: 'Intercambiaste las componentes: \\(B-A=(-5-4,\\,-1-3)=(-9,-4)\\).' },
+       { t: '\\(T(-4,9)\\)', err: 'Cuida los signos: \\(-1-3=-4\\) y \\(-5-4=-9\\).' }],
+      'Correcto. El vector es \\(B-A=(-5-4,\\,-1-3)=(-9,-4)\\).');
+    e2.fig = GRID({ xmin: -6, xmax: 6, ymin: -3, ymax: 4, unit: 16, points: [{ at: [4, 3], role: 'dato', t: 'A' }, { at: [-5, -1], role: 'dato', t: 'B' }], vectors: [{ from: [4, 3], to: [-5, -1], role: 'incog', t: 'T' }], desc: 'Traslación del punto A(4,3) al punto B(-5,-1).' });
+    E.push(e2);
+
+    // P3 · rotación 90° antihorario (Resolver) · GRID
+    var e3 = armar('Resolver problemas', 'El punto \\(P(3,2)\\) se rota 90° en sentido antihorario con centro en el origen. ¿Cuál es su imagen?',
+      [{ t: '\\((-2,3)\\)', err: null },
+       { t: '\\((2,-3)\\)', err: 'Ese es el giro de 90° horario. El antihorario es \\((x,y)\\to(-y,x)\\).' },
+       { t: '\\((3,-2)\\)', err: 'No basta cambiar un signo. La regla es \\((x,y)\\to(-y,x)=(-2,3)\\).' },
+       { t: '\\((-3,-2)\\)', err: 'Eso es 180°. Para 90° antihorario: \\((-y,x)=(-2,3)\\).' }],
+      'Correcto. \\(R(O,90°)\\): \\((x,y)\\to(-y,x)=(-2,3)\\).');
+    e3.fig = GRID({ xmin: -4, xmax: 4, ymin: -2, ymax: 5, unit: 15, points: [{ at: [3, 2], role: 'dato', t: 'P' }, { at: [-2, 3], role: 'incog', t: "P'" }], desc: 'Rotación de P(3,2) en 90° antihorario respecto del origen.' });
+    E.push(e3);
+
+    // P4 · rotación 180° (Resolver)
+    E.push(armar('Resolver problemas', 'El punto \\(P(4,-1)\\) se rota 180° con centro en el origen. ¿Cuál es su imagen?',
+      [{ t: '\\((-4,1)\\)', err: null },
+       { t: '\\((1,4)\\)', err: 'No se intercambian. La rotación de 180° es \\((x,y)\\to(-x,-y)\\).' },
+       { t: '\\((4,1)\\)', err: 'También cambia el signo de \\(x\\): \\((-4,1)\\).' },
+       { t: '\\((-1,-4)\\)', err: 'No se intercambian las coordenadas: \\((-x,-y)=(-4,1)\\).' }],
+      'Correcto. \\(R(O,180°)\\): \\((x,y)\\to(-x,-y)=(-4,1)\\).');
+
+    // P5 · simetría central (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es la imagen de \\(P(5,-2)\\) por una simetría central respecto del origen?',
+      [{ t: '\\((-5,2)\\)', err: null },
+       { t: '\\((5,2)\\)', err: 'También cambia el signo de \\(x\\): la simetría central es \\((-x,-y)\\).' },
+       { t: '\\((-5,-2)\\)', err: 'La segunda componente era \\(-2\\); su opuesto es \\(+2\\): \\((-5,2)\\).' },
+       { t: '\\((2,-5)\\)', err: 'No se intercambian las coordenadas: \\((-x,-y)=(-5,2)\\).' }],
+      'Correcto. La simetría central respecto del origen: \\((x,y)\\to(-x,-y)=(-5,2)\\).');
+
+    // P6 · equivalencia simetría central = rotación (Representar)
+    E.push(armar('Representar', 'La simetría central respecto del origen equivale a una rotación de…',
+      [{ t: '\\(180°\\)', err: null },
+       { t: '\\(90°\\)', err: 'Con 90° las coordenadas se transforman en \\((-y,x)\\), no en \\((-x,-y)\\).' },
+       { t: '\\(360°\\)', err: 'Con 360° la figura queda igual. La simetría central es \\(180°\\).' },
+       { t: '\\(45°\\)', err: 'La simetría central respecto del origen equivale a una rotación de \\(180°\\).' }],
+      'Correcto. La simetría central respecto de un punto equivale a una rotación de \\(180°\\) en torno a ese punto: ambas dan \\((-x,-y)\\).');
+
+    // P7 · identificar el error: rotación 90° (Argumentar)
+    E.push(armar('Argumentar', 'Para rotar \\(P(2,5)\\) en 90° antihorario (centro en el origen), Luis escribe \\(P\\,'=(5,2)\\). ¿Dónde está el error?',
+      [{ t: 'Solo intercambió las coordenadas; la regla es \\((-y,x)=(-5,2)\\).', err: null },
+       { t: 'No hay error; \\(P\\,'=(5,2)\\).', err: 'Falta el signo: \\(90°\\) antihorario da \\((-y,x)=(-5,2)\\).' },
+       { t: 'Debió ser \\((5,-2)\\).', err: '\\((5,-2)\\) es \\(90°\\) horario. El antihorario es \\((-y,x)=(-5,2)\\).' },
+       { t: 'Debió cambiar el signo de ambas.', err: 'Cambiar ambas es \\(180°\\). Para \\(90°\\) antihorario: \\((-y,x)\\).' }],
+      'Correcto. \\(R(O,90°)\\): \\((x,y)\\to(-y,x)\\). Para \\((2,5)\\): \\((-5,2)\\). Luis solo intercambió sin cambiar el signo.');
+
+    // P8 · rotación 270° en contexto (Modelar)
+    E.push(armar('Modelar', 'Una pieza gira 270° en sentido antihorario respecto del origen. El punto \\((1,4)\\) de la pieza queda en…',
+      [{ t: '\\((4,-1)\\)', err: null },
+       { t: '\\((-4,1)\\)', err: 'Ese es \\(90°\\) antihorario. Para \\(270°\\): \\((x,y)\\to(y,-x)\\).' },
+       { t: '\\((-1,-4)\\)', err: 'Eso es \\(180°\\). Para \\(270°\\) antihorario: \\((y,-x)=(4,-1)\\).' },
+       { t: '\\((1,-4)\\)', err: 'La regla de \\(270°\\) es \\((y,-x)\\): \\((4,-1)\\).' }],
+      'Correcto. \\(R(O,270°)\\): \\((x,y)\\to(y,-x)=(4,-1)\\).');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

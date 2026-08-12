@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U12.A.2c · Vectores: módulo, operaciones y prioridad</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U12.A.2c', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U12', unidadNum: '12', subunidad: 'A', nivel: 'c',
+  titulo: 'Vectores: módulo, operaciones y prioridad',
+  sub: 'Origen fuera de (0,0) · operaciones combinadas · módulo tipo PAES',
+  HAB_E: ['Representar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Representar', 'Modelar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · vector con origen fuera del (0,0) (Representar) · GRID
+    var e1 = armar('Representar', 'El vector de la figura tiene origen \\(A(-2,-4)\\) y extremo \\(B(6,3)\\). ¿Cuáles son sus componentes?',
+      [{ t: '\\((8,7)\\)', err: null },
+       { t: '\\((4,-1)\\)', err: 'Sumaste extremo y origen. Se restan: \\((6-(-2),\\,3-(-4))\\).' },
+       { t: '\\((-8,-7)\\)', err: 'Restaste al revés (origen − extremo). Es extremo − origen: \\((8,7)\\).' },
+       { t: '\\((8,-1)\\)', err: 'La segunda componente es \\(3-(-4)=7\\), no \\(-1\\).' }],
+      'Correcto. Con origen fuera del \\((0,0)\\): \\(v=(x_2-x_1,\\,y_2-y_1)=(6-(-2),\\,3-(-4))=(8,7)\\).');
+    e1.fig = GRID({ xmin: -4, xmax: 8, ymin: -5, ymax: 4, unit: 13, points: [{ at: [-2, -4], role: 'dato', t: 'A' }, { at: [6, 3], role: 'dato', t: 'B' }], vectors: [{ from: [-2, -4], to: [6, 3], role: 'incog', t: 'v' }], desc: 'Vector de origen A(-2,-4) y extremo B(6,3).' });
+    E.push(e1);
+
+    // P2 · módulo con origen fuera (Resolver)
+    E.push(armar('Resolver problemas', 'Un vector tiene origen \\((1,2)\\) y extremo \\((4,6)\\). ¿Cuál es su módulo?',
+      [{ t: '\\(5\\)', err: null },
+       { t: '\\(7\\)', err: 'Sumaste las componentes del vector \\((3,4)\\). El módulo usa los cuadrados.' },
+       { t: '\\(25\\)', err: 'Te faltó la raíz: \\(3^2+4^2=25\\Rightarrow\\sqrt{25}=5\\).' },
+       { t: '\\(\\sqrt{52}\\)', err: 'Usaste el extremo directamente (\\(\\sqrt{4^2+6^2}\\)). Primero resta el origen: \\(v=(3,4)\\).' }],
+      'Correcto. \\(v=(4-1,\\,6-2)=(3,4)\\); \\(|v|=\\sqrt{3^2+4^2}=\\sqrt{25}=5\\).');
+
+    // P3 · operaciones combinadas con prioridad (Resolver)
+    E.push(armar('Resolver problemas', 'Con \\(a=(5,-3)\\), \\(b=(-3,1)\\) y \\(c=(3,6)\\), ¿cuál es \\(5\\cdot\\big(a-(b+c)\\big)\\)?',
+      [{ t: '\\((25,-50)\\)', err: null },
+       { t: '\\((5,-10)\\)', err: 'Ese es \\(a-(b+c)\\); falta multiplicar por 5: \\(5\\cdot(5,-10)=(25,-50)\\).' },
+       { t: '\\((25,50)\\)', err: 'La segunda componente de \\(a-(b+c)\\) es \\(-10\\): \\(5\\cdot(-10)=-50\\).' },
+       { t: '\\((-25,-50)\\)', err: 'La primera componente es \\(5\\cdot5=25\\) (positiva).' }],
+      'Correcto. Prioridad: \\(b+c=(0,7)\\); \\(a-(0,7)=(5,-10)\\); \\(5\\cdot(5,-10)=(25,-50)\\).');
+
+    // P4 · DEMRE: módulo doble (Resolver)
+    E.push(armar('Resolver problemas', 'Dados \\(v=(m,2)\\) y \\(u=(3,4)\\), ¿cuál puede ser el valor de \\(m\\) para que \\(|v|\\) sea el doble de \\(|u|\\)?',
+      [{ t: '\\(\\sqrt{96}\\)', err: null },
+       { t: '\\(\\sqrt{104}\\)', err: 'Revisa: \\(|v|=2|u|=10\\Rightarrow m^2+4=100\\Rightarrow m^2=96\\).' },
+       { t: '\\(\\sqrt{46}\\)', err: 'De \\(m^2+4=100\\) sale \\(m^2=96\\), no 46.' },
+       { t: '\\(\\sqrt{21}\\)', err: 'Cuida el cuadrado: \\(|v|^2=m^2+4=(2\\cdot5)^2=100\\Rightarrow m^2=96\\).' }],
+      'Correcto. \\(|u|=\\sqrt{9+16}=5\\), así \\(|v|=10\\). Entonces \\(m^2+2^2=10^2\\Rightarrow m^2=96\\Rightarrow m=\\sqrt{96}\\).');
+
+    // P5 · identificar el error: módulo origen fuera (Argumentar)
+    E.push(armar('Argumentar', 'Para el módulo del vector de origen \\((1,2)\\) y extremo \\((4,6)\\), Beto escribe: Paso 1: \\(|v|=\\sqrt{4^2+6^2}\\) · Paso 2: \\(|v|=\\sqrt{52}\\). ¿Dónde está el error?',
+      [{ t: 'En el Paso 1: usó el extremo; primero hay que restar el origen: \\(v=(3,4)\\).', err: null },
+       { t: 'En el Paso 2: \\(4^2+6^2\\) no es 52.', err: '\\(16+36=52\\) está bien; el error es no restar el origen antes.' },
+       { t: 'No hay error; \\(|v|=\\sqrt{52}\\).', err: 'El vector es \\((4-1,\\,6-2)=(3,4)\\), así que \\(|v|=5\\).' },
+       { t: 'En el Paso 1: debió sumar el origen.', err: 'Se resta, no se suma: \\(v=(4-1,\\,6-2)=(3,4)\\).' }],
+      'Correcto. Con el origen fuera del \\((0,0)\\), primero \\(v=(4-1,\\,6-2)=(3,4)\\); luego \\(|v|=\\sqrt{9+16}=5\\).');
+
+    // P6 · dirección / opuesto (Representar)
+    E.push(armar('Representar', '¿Cuál vector tiene la misma dirección que \\((2,3)\\) pero sentido opuesto?',
+      [{ t: '\\((-2,-3)\\)', err: null },
+       { t: '\\((3,2)\\)', err: 'Ese apunta en otra dirección. El opuesto cambia el signo: \\((-2,-3)\\).' },
+       { t: '\\((-3,-2)\\)', err: 'Cambiaste los signos y los intercambiaste: solo hay que cambiar el signo.' },
+       { t: '\\((2,-3)\\)', err: 'Ese cambia solo una componente; el opuesto cambia ambas: \\((-2,-3)\\).' }],
+      'Correcto. El opuesto \\((-2,-3)\\) tiene la misma dirección (misma recta) y sentido contrario.');
+
+    // P7 · desplazamiento total y distancia (Modelar)
+    E.push(armar('Modelar', 'Un barco se desplaza según \\(a=(4,3)\\) y luego según \\(b=(1,-1)\\). ¿A qué distancia del punto de partida queda?',
+      [{ t: '\\(\\sqrt{29}\\)', err: null },
+       { t: '\\(7\\)', err: 'Sumaste las componentes del desplazamiento total \\((5,2)\\). La distancia es \\(\\sqrt{5^2+2^2}\\).' },
+       { t: '\\(29\\)', err: 'Te faltó la raíz: \\(5^2+2^2=29\\Rightarrow\\sqrt{29}\\).' },
+       { t: '\\(\\sqrt{34}\\)', err: 'El desplazamiento total es \\(a+b=(5,2)\\), no \\((5,3)\\): \\(\\sqrt{25+4}=\\sqrt{29}\\).' }],
+      'Correcto. Desplazamiento total \\(a+b=(5,2)\\); distancia \\(=\\sqrt{5^2+2^2}=\\sqrt{29}\\).');
+
+    // P8 · combinación 2u+v (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(u=(-3,1)\\) y \\(v=(3,6)\\), ¿cuál es \\(2u+v\\)?',
+      [{ t: '\\((-3,8)\\)', err: null },
+       { t: '\\((0,7)\\)', err: 'Ese es \\(u+v\\). Primero \\(2u=(-6,2)\\), luego \\(+v\\).' },
+       { t: '\\((3,8)\\)', err: 'La primera componente es \\(-6+3=-3\\), no 3.' },
+       { t: '\\((-3,7)\\)', err: 'La segunda componente es \\(2\\cdot1+6=8\\), no 7.' }],
+      'Correcto. \\(2u=(-6,2)\\); \\(2u+v=(-6+3,\\,2+6)=(-3,8)\\).');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

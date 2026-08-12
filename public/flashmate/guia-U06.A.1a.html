@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.A.1a · Ecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.A.1a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'A', nivel: 'a',
+  titulo: 'Ecuaciones de primer grado',
+  sub: 'Concepto · verificación · propiedades · lenguaje algebraico',
+  HAB_E: ['Representar', 'Argumentar', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Representar', 'Modelar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · reconocer ecuación de 1er grado con una incógnita (Representar)
+    E.push(armar('Representar', '¿Cuál de las siguientes es una ecuación de PRIMER grado con una incógnita?',
+      [{ t: '\\(x+3=14\\)', err: null },
+       { t: '\\(x^2+3=19\\)', err: 'Ahí la incógnita está elevada al cuadrado: es de segundo grado, no de primero.' },
+       { t: '\\(x^2+y^2=5\\)', err: 'Tiene dos incógnitas y ambas al cuadrado: no es de primer grado ni de una incógnita.' },
+       { t: '\\(2x-3y+4=x-y\\)', err: 'Tiene dos incógnitas (x e y). Una ecuación de primer grado con una incógnita usa una sola letra elevada a 1.' }],
+      'Correcto. En \\(x+3=14\\) hay una sola incógnita elevada a 1 (grado 1). Ese es el tipo que resolvemos en esta unidad.'));
+
+    // P2 · verificar solución por reemplazo (Argumentar)
+    E.push(armar('Argumentar', 'Para comprobar que \\(x=4\\) es solución de \\(x+6=10\\), ¿qué hay que hacer?',
+      [{ t: 'Reemplazar \\(x\\) por 4 y ver que ambos lados dan 10.', err: null },
+       { t: 'Sumar 4 más 10 y ver que da 14.', err: 'Verificar no es sumar los números sueltos: es reemplazar la incógnita y comprobar la igualdad.' },
+       { t: 'Multiplicar 4 por 6.', err: 'La ecuación es una suma, no un producto. Verificar es reemplazar \\(x=4\\) en \\(x+6\\).' },
+       { t: 'Cambiar el 6 por un 4.', err: 'No se cambian los datos de la ecuación: se reemplaza la incógnita \\(x\\) por el valor y se comprueba.' }],
+      'Correcto. Verificar es reemplazar la incógnita: \\(4+6=10\\) se cumple, así que \\(x=4\\) es la solución.'));
+
+    // P3 · resolver con propiedades 1 y 2 (Resolver problemas)
+    E.push(armar('Resolver problemas', 'Resuelve la ecuación \\(2x+4=24\\).',
+      [{ t: '\\(x=10\\)', err: null },
+       { t: '\\(x=14\\)', err: 'Restaste el 4 pero no dividiste por 2. Tras \\(2x=20\\) falta dividir: \\(x=10\\).' },
+       { t: '\\(x=4\\)', err: 'Ese es el número que se resta, no la solución. Primero \\(2x=20\\), luego \\(x=10\\).' },
+       { t: '\\(x=0\\)', err: 'Reemplaza: \\(2\\cdot0+4=4\\neq24\\). La solución es \\(x=10\\).' }],
+      'Correcto. Resto 4 a ambos lados: \\(2x=20\\); luego divido por 2: \\(x=10\\).'));
+
+    // P4 · resolver usando propiedad 2 (Resolver problemas)
+    E.push(armar('Resolver problemas', 'Resuelve la ecuación \\(3x=18\\).',
+      [{ t: '\\(x=6\\)', err: null },
+       { t: '\\(x=54\\)', err: 'Multiplicaste por 3 en vez de dividir. Para despejar \\(x\\) divido por 3: \\(x=6\\).' },
+       { t: '\\(x=15\\)', err: 'Restaste 3 en vez de dividir. Como \\(x\\) está multiplicado por 3, se divide: \\(x=6\\).' },
+       { t: '\\(x=21\\)', err: 'Sumaste 3. Con \\(3x=18\\) hay que dividir por 3: \\(x=6\\).' }],
+      'Correcto. Como \\(x\\) está multiplicado por 3, divido ambos lados por 3: \\(x=6\\).'));
+
+    // P5 · lenguaje algebraico: número impar (Representar)
+    E.push(armar('Representar', 'En lenguaje algebraico, ¿cuál expresión representa "un número impar"?',
+      [{ t: '\\(2n+1\\)', err: null },
+       { t: '\\(2x\\)', err: '\\(2x\\) siempre es par (el doble de un número). Un impar se escribe \\(2n+1\\).' },
+       { t: '\\(x+1\\)', err: '\\(x+1\\) es el sucesor de un número, no necesariamente impar. Un impar es \\(2n+1\\).' },
+       { t: '\\(x^2\\)', err: '\\(x^2\\) es el cuadrado de un número, no un impar. Un impar se representa \\(2n+1\\).' }],
+      'Correcto. Todo impar es un par (\\(2n\\)) más 1: \\(2n+1\\).'));
+
+    // P6 · traducir frase compuesta (Representar)
+    E.push(armar('Representar', '¿Cuál expresión representa "el doble de un número, aumentado en 5"?',
+      [{ t: '\\(2x+5\\)', err: null },
+       { t: '\\(2(x+5)\\)', err: 'Eso es "el doble de (un número aumentado en 5)". Aquí primero el doble y luego se suma 5: \\(2x+5\\).' },
+       { t: '\\(x^2+5\\)', err: '"El doble" es \\(2x\\), no el cuadrado. La expresión es \\(2x+5\\).' },
+       { t: '\\(5x+2\\)', err: 'Cambiaste los papeles: el doble del número es \\(2x\\), y luego se suma 5: \\(2x+5\\).' }],
+      'Correcto. "El doble de un número" es \\(2x\\); "aumentado en 5" suma 5: \\(2x+5\\).'));
+
+    // P7 · planteamiento simple (Modelar)
+    E.push(armar('Modelar', 'Si al triple de un número se le suma 4, se obtiene 19. ¿Cuál es el número?',
+      [{ t: '5', err: null },
+       { t: '45', err: 'Multiplicaste \\(3\\cdot(19-4)\\). Lo correcto: \\(3x+4=19\\Rightarrow 3x=15\\Rightarrow x=5\\).' },
+       { t: '7', err: 'Reemplaza: \\(3\\cdot7+4=25\\neq19\\). El número es 5.' },
+       { t: '15', err: 'Ese es \\(3x\\), no el número. Falta dividir por 3: \\(x=5\\).' }],
+      'Correcto. Planteo \\(3x+4=19\\Rightarrow 3x=15\\Rightarrow x=5\\).'));
+
+    // P8 · existencia de solución (Argumentar)
+    E.push(armar('Argumentar', '¿Cuántas soluciones tiene la ecuación \\(x+5=x+2\\)?',
+      [{ t: 'Ninguna: no tiene solución.', err: null },
+       { t: 'Una: \\(x=3\\).', err: 'Reemplaza \\(x=3\\): \\(8\\neq5\\). Al restar \\(x\\) queda \\(5=2\\), imposible: no hay solución.' },
+       { t: 'Una: \\(x=-3\\).', err: 'Reemplaza \\(x=-3\\): \\(2\\neq-1\\). Al restar \\(x\\) queda \\(5=2\\), falso: no hay solución.' },
+       { t: 'Infinitas.', err: 'Al restar \\(x\\) a ambos lados queda \\(5=2\\), que es falso siempre: ningún \\(x\\) la cumple.' }],
+      'Correcto. Al restar \\(x\\) a ambos lados queda \\(5=2\\), una igualdad falsa: la ecuación no tiene solución.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

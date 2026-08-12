@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U10.B.4b · Área y perímetro: trapecio, rombo, círculo y polígono</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U10.B.4b', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U10', unidadNum: '10', subunidad: 'B', nivel: 'b',
+  titulo: 'Área y perímetro: trapecio, rombo, círculo y polígono',
+  sub: 'Trapecio · rombo (diagonales) · círculo (πr²) · polígono regular',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Representar', 'Modelar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · área del trapecio (Resolver) · FIGURA a mano
+    var e1 = armar('Resolver problemas', '¿Cuál es el área del trapecio de la figura (bases 10 y 6, altura 4)?',
+      [{ t: '\\(32\\)', err: null },
+       { t: '\\(64\\)', err: 'Olvidaste dividir por 2. Área \\(=\\tfrac{(B+b)}{2}\\cdot h=\\tfrac{(10+6)}{2}\\cdot4=32\\).' },
+       { t: '\\(40\\)', err: 'Usaste solo la base mayor (\\(10\\cdot4\\)). El trapecio promedia las bases: \\(\\tfrac{10+6}{2}\\cdot4=32\\).' },
+       { t: '\\(24\\)', err: 'Usaste solo la base menor (\\(6\\cdot4\\)). Debes promediar ambas: \\(\\tfrac{10+6}{2}\\cdot4=32\\).' }],
+      'Correcto. Área del trapecio \\(=\\tfrac{(B+b)}{2}\\cdot h=\\tfrac{(10+6)}{2}\\cdot4=8\\cdot4=32\\).');
+    e1.fig = '<svg viewBox="0 0 200 140" width="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trapecio con altura"><title>Trapecio</title><desc>Trapecio de bases 10 y 6 y altura 4.</desc><polygon points="30,110 170,110 142,45 58,45" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="58" y1="45" x2="58" y2="110" stroke="#38388e" stroke-width="1.5" stroke-dasharray="4 3"/><polyline points="58,100 68,100 68,110" fill="none" stroke="#1a1a1a" stroke-width="1.2"/><text x="100" y="126" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">10</text><text x="100" y="40" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">6</text><text x="70" y="80" font-family="sans-serif" font-size="13" font-weight="600" fill="#38388e" text-anchor="start">4</text></svg>';
+    E.push(e1);
+
+    // P2 · área del rombo por diagonales (Resolver) · FIGURA a mano
+    var e2 = armar('Resolver problemas', 'El rombo de la figura tiene diagonales \\(D=12\\) y \\(d=8\\). ¿Cuál es su área?',
+      [{ t: '\\(48\\)', err: null },
+       { t: '\\(96\\)', err: 'Olvidaste dividir por 2. Área del rombo \\(=\\tfrac{D\\cdot d}{2}=\\tfrac{12\\cdot8}{2}=48\\).' },
+       { t: '\\(20\\)', err: 'Sumaste las diagonales (\\(12+8\\)). El área es \\(\\tfrac{D\\cdot d}{2}=48\\).' },
+       { t: '\\(10\\)', err: 'Promediaste las diagonales. El área es \\(\\tfrac{D\\cdot d}{2}=\\tfrac{96}{2}=48\\).' }],
+      'Correcto. Área del rombo \\(=\\tfrac{D\\cdot d}{2}=\\tfrac{12\\cdot8}{2}=48\\). Dividir por 2 es el paso que más se olvida.');
+    e2.fig = '<svg viewBox="0 0 200 152" width="195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rombo con diagonales"><title>Rombo</title><desc>Rombo de diagonales 12 y 8.</desc><polygon points="40,76 100,36 160,76 100,116" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="40" y1="76" x2="160" y2="76" stroke="#0187f3" stroke-width="1.5"/><line x1="100" y1="36" x2="100" y2="116" stroke="#0187f3" stroke-width="1.5"/><polyline points="100,86 110,86 110,76" fill="none" stroke="#1a1a1a" stroke-width="1.1"/><text x="132" y="72" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="start">D=12</text><text x="104" y="54" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="start">d=8</text></svg>';
+    E.push(e2);
+
+    // P3 · área del círculo (Resolver) · FIGURA CIRC
+    var e3 = armar('Resolver problemas', 'El círculo de la figura tiene radio 5. ¿Cuál es su área?',
+      [{ t: '\\(25\\pi\\)', err: null },
+       { t: '\\(10\\pi\\)', err: '\\(10\\pi\\) es el perímetro (\\(2\\pi r\\)). El área es \\(\\pi r^2=\\pi\\cdot5^2\\).' },
+       { t: '\\(100\\pi\\)', err: 'Usaste el diámetro al cuadrado. El área usa el radio: \\(\\pi\\cdot5^2=25\\pi\\).' },
+       { t: '\\(5\\pi\\)', err: 'Falta elevar el radio al cuadrado: \\(\\pi\\cdot5^2=25\\pi\\).' }],
+      'Correcto. Área del círculo \\(=\\pi r^2=\\pi\\cdot5^2=25\\pi\\).');
+    e3.fig = CIRC({ mode: 'radio', segL: { t: '5', role: 'dato' }, desc: 'Círculo de radio 5.' });
+    E.push(e3);
+
+    // P4 · de perímetro a radio (Representar)
+    E.push(armar('Representar', 'El perímetro (longitud) de una circunferencia es \\(14\\pi\\). ¿Cuánto mide su radio?',
+      [{ t: '\\(7\\)', err: null },
+       { t: '\\(14\\)', err: 'Eso es el diámetro. De \\(2\\pi r=14\\pi\\) se obtiene \\(r=7\\) (el diámetro es 14).' },
+       { t: '\\(3{,}5\\)', err: 'Dividiste de más. \\(2\\pi r=14\\pi\\Rightarrow r=\\tfrac{14}{2}=7\\).' },
+       { t: '\\(49\\)', err: 'Eso vendría de un área. Aquí \\(2\\pi r=14\\pi\\Rightarrow r=7\\).' }],
+      'Correcto. \\(C=2\\pi r\\); si \\(2\\pi r=14\\pi\\), entonces \\(r=\\tfrac{14}{2}=7\\).');
+
+    // P5 · identificar el error (área vs perímetro del círculo) (Argumentar)
+    E.push(armar('Argumentar', 'Para el área de un círculo de radio 5, Pedro escribe:\nPaso 1: \\(A=2\\cdot\\pi\\cdot r\\)\nPaso 2: \\(A=2\\cdot\\pi\\cdot5\\)\nPaso 3: \\(A=10\\pi\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: esa es la fórmula del perímetro; el área es \\(\\pi r^2\\).', err: null },
+       { t: 'En el Paso 2: \\(2\\cdot5\\) no es 10.', err: '\\(2\\cdot5=10\\) está bien; el problema es la fórmula: el área es \\(\\pi r^2\\), no \\(2\\pi r\\).' },
+       { t: 'No hay error; \\(A=10\\pi\\).', err: '\\(10\\pi\\) es el perímetro. El área es \\(\\pi\\cdot5^2=25\\pi\\).' },
+       { t: 'En el Paso 3: faltó elevar \\(\\pi\\) al cuadrado.', err: 'No se eleva \\(\\pi\\), sino el radio: \\(A=\\pi r^2=25\\pi\\).' }],
+      'Correcto. \\(2\\pi r\\) es el perímetro. El área es \\(A=\\pi r^2=\\pi\\cdot5^2=25\\pi\\).');
+
+    // P6 · fórmula del triángulo equilátero (Representar)
+    E.push(armar('Representar', '¿Cuál expresión representa el área de un triángulo equilátero de lado \\(x\\)?',
+      [{ t: '\\(\\dfrac{x^2\\sqrt{3}}{4}\\)', err: null },
+       { t: '\\(3x\\)', err: 'Eso es el perímetro (\\(P=3x\\)), no el área.' },
+       { t: '\\(x^2\\)', err: 'Ese es el área de un cuadrado de lado \\(x\\). El equilátero es \\(\\tfrac{x^2\\sqrt{3}}{4}\\).' },
+       { t: '\\(\\dfrac{x^2}{2}\\)', err: 'Le falta el factor \\(\\sqrt{3}\\): el área es \\(\\tfrac{x^2\\sqrt{3}}{4}\\).' }],
+      'Correcto. El área del triángulo equilátero de lado \\(x\\) es \\(\\tfrac{x^2\\sqrt{3}}{4}\\) (su altura es \\(\\tfrac{x\\sqrt{3}}{2}\\)).');
+
+    // P7 · jardín circular = área (Modelar)
+    E.push(armar('Modelar', 'Un jardín circular tiene radio 3 m. ¿Cuántos \\(m^2\\) de césped cubre?',
+      [{ t: '\\(9\\pi\\) m²', err: null },
+       { t: '\\(6\\pi\\) m²', err: '\\(6\\pi\\) es el contorno (\\(2\\pi r\\)). La superficie es el área: \\(\\pi r^2=\\pi\\cdot3^2\\).' },
+       { t: '\\(3\\pi\\) m²', err: 'Falta elevar el radio al cuadrado: \\(\\pi\\cdot3^2=9\\pi\\).' },
+       { t: '\\(9\\) m²', err: 'Falta el factor \\(\\pi\\): el área es \\(\\pi\\cdot3^2=9\\pi\\).' }],
+      'Correcto. La superficie es el área \\(=\\pi r^2=\\pi\\cdot3^2=9\\pi\\) m².');
+
+    // P8 · área del polígono regular con apotema (Modelar) · FIGURA a mano
+    var e8 = armar('Modelar', 'Un hexágono regular tiene perímetro 24 cm y apotema 3,5 cm (figura). ¿Cuál es su área?',
+      [{ t: '\\(42\\) cm²', err: null },
+       { t: '\\(84\\) cm²', err: 'Olvidaste dividir por 2. Área \\(=\\tfrac{P\\cdot a}{2}=\\tfrac{24\\cdot3{,}5}{2}=42\\).' },
+       { t: '\\(27{,}5\\) cm²', err: 'Sumaste \\(P+a\\). El área usa el producto: \\(\\tfrac{P\\cdot a}{2}=42\\).' },
+       { t: '\\(12\\) cm²', err: 'Usaste solo \\(\\tfrac{P}{2}\\). Falta la apotema: \\(\\tfrac{24\\cdot3{,}5}{2}=42\\).' }],
+      'Correcto. Área del polígono regular \\(=\\tfrac{P\\cdot a}{2}=\\tfrac{24\\cdot3{,}5}{2}=42\\) cm².');
+    e8.fig = '<svg viewBox="0 0 200 168" width="190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hexagono regular con apotema"><title>Hexágono regular</title><desc>Hexágono regular con apotema a.</desc><polygon points="88,26 135,53 135,107 88,134 41,107 41,53" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="88" y1="80" x2="112" y2="40" stroke="#38388e" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="88" cy="80" r="2" fill="#1a1a1a"/><text x="104" y="58" font-family="sans-serif" font-size="13" font-weight="600" fill="#38388e" text-anchor="start">a</text></svg>';
+    E.push(e8);
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

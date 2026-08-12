@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U07.A.5c · Planteo de sistemas</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U07.A.5c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U07', unidadNum: '07', subunidad: 'A', nivel: 'c',
+  titulo: 'Planteo de sistemas (modelar)',
+  sub: 'Traducir enunciado a sistema · condiciones · literales',
+  HAB_E: ['Modelar', 'Representar', 'Modelar', 'Modelar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · plantear (Modelar) — PDF Ej3
+    E.push(armar('Modelar', '"El doble de la suma de dos números distintos es \\(180\\) y uno de ellos es el cuádruple del sucesor del sucesor del otro." ¿Qué sistema representa mejor la relación?',
+      [{ t: '\\(x+y=90\\) ; \\(4x-y=-8\\)', err: null },
+       { t: '\\(2x+2y=180\\) ; \\(4x+2=y\\)', err: 'La 1ª equivale a \\(x+y=90\\) ✓, pero "cuádruple del sucesor del sucesor" es \\(4(x+2)=y\\Rightarrow4x-y=-8\\), no \\(4x+2=y\\).' },
+       { t: '\\(x+y=180\\) ; \\(4x+2=y\\)', err: '"El DOBLE de la suma es 180" da \\(x+y=90\\), no \\(180\\).' },
+       { t: '\\(x+90=y\\) ; \\(4x+y=2\\)', err: 'No corresponde: la suma es \\(x+y=90\\) y el vínculo es \\(y=4(x+2)\\Rightarrow4x-y=-8\\).' }],
+      'Correcto. \\(2(x+y)=180\\Rightarrow x+y=90\\); \\(y=4(x+2)\\Rightarrow4x-y=-8\\).'));
+
+    // P2 · traducir (Representar)
+    E.push(armar('Representar', 'En lenguaje algebraico, "un número \\(x\\) es el triple de otro \\(y\\)" se escribe:',
+      [{ t: '\\(x=3y\\)', err: null },
+       { t: '\\(3x=y\\)', err: 'El TRIPLE del segundo es \\(3y\\), e iguala al primero: \\(x=3y\\).' },
+       { t: '\\(x+3=y\\)', err: '"Triple" es multiplicar por 3, no sumar 3: \\(x=3y\\).' },
+       { t: '\\(x\\cdot y=3\\)', err: 'No es el producto: el primero es tres veces el segundo, \\(x=3y\\).' }],
+      'Correcto. "El triple de \\(y\\)" es \\(3y\\), igual a \\(x\\): \\(x=3y\\).'));
+
+    // P3 · edades (Modelar)
+    E.push(armar('Modelar', '"María tiene 3 años más que Juan y juntos suman 21 años." Con \\(m\\) la edad de María y \\(j\\) la de Juan, ¿qué sistema modela la situación?',
+      [{ t: '\\(m=j+3\\) ; \\(m+j=21\\)', err: null },
+       { t: '\\(m=j-3\\) ; \\(m+j=21\\)', err: 'María tiene 3 años MÁS: \\(m=j+3\\) (suma, no resta).' },
+       { t: '\\(j=m+3\\) ; \\(m+j=21\\)', err: 'La que tiene más es María: \\(m=j+3\\), no al revés.' },
+       { t: '\\(m=3j\\) ; \\(m+j=21\\)', err: '"3 años más" es \\(+3\\), no el triple \\(3j\\).' }],
+      'Correcto. "3 años más" \\(\\to m=j+3\\); "juntos 21" \\(\\to m+j=21\\).'));
+
+    // P4 · compra (Modelar)
+    E.push(armar('Modelar', 'En una librería, 5 lápices y 3 gomas cuestan 2.800 pesos; 2 lápices y 1 goma cuestan 1.000 pesos. Con \\(x\\) el precio del lápiz e \\(y\\) el de la goma, ¿qué sistema corresponde?',
+      [{ t: '\\(5x+3y=2800\\) ; \\(2x+y=1000\\)', err: null },
+       { t: '\\(5x+3y=1000\\) ; \\(2x+y=2800\\)', err: 'Cambiaste los totales: 5 lápices y 3 gomas cuestan 2.800, no 1.000.' },
+       { t: '\\(3x+5y=2800\\) ; \\(x+2y=1000\\)', err: 'Confundiste cantidades: son 5 lápices (\\(x\\)) y 3 gomas (\\(y\\)): \\(5x+3y\\).' },
+       { t: '\\(5x+3y=2800\\) ; \\(2x-y=1000\\)', err: 'Se SUMAN los precios: \\(2x+y=1000\\), no una resta.' }],
+      'Correcto. Cada compra suma sus precios: \\(5x+3y=2800\\) y \\(2x+y=1000\\).'));
+
+    // P5 · literal, afirmación falsa (Argumentar) — PDF Ej2
+    E.push(armar('Argumentar', 'Si \\((2,3)\\) es solución del sistema \\(ax+(b-1)y=2\\) y \\(4x-(b+2)y=5\\), ¿cuál de las siguientes afirmaciones es FALSA?',
+      [{ t: '\\(a-b=2\\)', err: null },
+       { t: '\\(a=4\\)', err: 'Es verdadera: de la 2ª ecuación, \\(a=4\\). Buscamos la FALSA.' },
+       { t: '\\(a+b=3\\)', err: 'Es verdadera: \\(a+b=4+(-1)=3\\). Buscamos la FALSA.' },
+       { t: '\\(a-3b=7\\)', err: 'Es verdadera: \\(4-3(-1)=7\\). Buscamos la FALSA.' }],
+      'Correcto. De la 2ª: \\(8-3(b+2)=5\\Rightarrow b=-1\\); de la 1ª: \\(2a-6=2\\Rightarrow a=4\\). Entonces \\(a-b=5\\neq2\\): esa afirmación es FALSA.'));
+
+    // P6 · resolver edades (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve el sistema de edades \\(m=j+3\\) y \\(m+j=21\\). ¿Qué edades resultan?',
+      [{ t: '\\(m=12,\\;j=9\\)', err: null },
+       { t: '\\(m=9,\\;j=12\\)', err: 'María es la mayor (\\(m=j+3\\)): \\(m=12\\), \\(j=9\\).' },
+       { t: '\\(m=13,\\;j=8\\)', err: 'Sustituyendo: \\(2j+3=21\\Rightarrow j=9\\), \\(m=12\\).' },
+       { t: '\\(m=15,\\;j=6\\)', err: 'Revisa: \\(j+3+j=21\\Rightarrow2j=18\\Rightarrow j=9\\), \\(m=12\\).' }],
+      'Correcto. \\(j+3+j=21\\Rightarrow2j=18\\Rightarrow j=9\\); \\(m=12\\).'));
+
+    // P7 · perímetro (Modelar)
+    E.push(armar('Modelar', 'Un rectángulo tiene perímetro \\(40\\) cm y su largo \\(x\\) mide \\(4\\) cm más que su ancho \\(y\\). ¿Qué sistema modela la situación?',
+      [{ t: '\\(2(x+y)=40\\) ; \\(x=y+4\\)', err: null },
+       { t: '\\(x+y=40\\) ; \\(x=y+4\\)', err: 'El perímetro suma los cuatro lados: \\(2(x+y)=40\\), no \\(x+y=40\\).' },
+       { t: '\\(2(x+y)=40\\) ; \\(y=x+4\\)', err: 'El largo es el mayor: \\(x=y+4\\), no \\(y=x+4\\).' },
+       { t: '\\(2xy=40\\) ; \\(x=y+4\\)', err: 'El perímetro no es el producto: es \\(2(x+y)=40\\).' }],
+      'Correcto. Perímetro \\(2(x+y)=40\\); "4 cm más" \\(\\to x=y+4\\).'));
+
+    // P8 · cuál NO representa (Argumentar)
+    E.push(armar('Argumentar', '"Un número excede al otro en 5 y su suma es 20." ¿Cuál sistema NO representa correctamente esta situación?',
+      [{ t: '\\(x+y=5\\) ; \\(x-y=20\\)', err: null },
+       { t: '\\(x-y=5\\) ; \\(x+y=20\\)', err: 'Ese SÍ representa: "excede en 5" es \\(x-y=5\\) y "suma 20" es \\(x+y=20\\). Buscamos el que NO.' },
+       { t: '\\(x=y+5\\) ; \\(x+y=20\\)', err: 'Ese SÍ representa: \\(x=y+5\\) equivale a \\(x-y=5\\). Buscamos el que NO.' },
+       { t: '\\(y=x-5\\) ; \\(x+y=20\\)', err: 'Ese SÍ representa: \\(y=x-5\\) equivale a \\(x-y=5\\). Buscamos el que NO.' }],
+      'Correcto. "Excede en 5" es \\(x-y=5\\) (no \\(x+y=5\\)) y "suma 20" es \\(x+y=20\\); por eso \\(x+y=5\\); \\(x-y=20\\) NO representa la situación.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

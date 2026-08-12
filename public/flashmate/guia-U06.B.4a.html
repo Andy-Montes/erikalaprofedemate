@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.B.4a · Inecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.B.4a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'B', nivel: 'a',
+  titulo: 'Inecuaciones de primer grado',
+  sub: 'Concepto · diferencia con ecuación · signo · intervalos',
+  HAB_E: ['Argumentar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Representar', 'Resolver problemas', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · diferencia ecuación vs inecuación (Argumentar)
+    E.push(armar('Argumentar', '¿Qué caracteriza a la solución de la inecuación \\(x+4>12\\)?',
+      [{ t: 'Tiene infinitas soluciones (todos los \\(x>8\\)).', err: null },
+       { t: 'Tiene una sola solución: \\(x=8\\).', err: 'Con "=" habría un valor. Con ">", \\(x=8\\) NO sirve (\\(12>12\\) es falso); sirven todos los mayores que 8.' },
+       { t: 'No tiene solución.', err: 'Sí tiene: por ejemplo \\(x=9\\) cumple \\(13>12\\). De hecho hay infinitos: todos los \\(x>8\\).' },
+       { t: 'Solo \\(x=9\\).', err: 'También \\(10, 11, 12\\ldots\\) cumplen. Una inecuación tiene infinitas soluciones: \\(x>8\\).' }],
+      'Correcto. A diferencia de una ecuación (un valor), la inecuación \\(x>8\\) tiene infinitas soluciones.'));
+
+    // P2 · resolver con propiedad 1 (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(x-3<5\\).',
+      [{ t: '\\(x<8\\)', err: null },
+       { t: '\\(x<2\\)', err: 'El \\(-3\\) pasa SUMANDO: \\(x<5+3=8\\).' },
+       { t: '\\(x>8\\)', err: 'No se invierte el signo: solo sumamos 3 (operación positiva). Queda \\(x<8\\).' },
+       { t: '\\(x<15\\)', err: 'No se multiplica: se suma 3 a ambos lados: \\(x<8\\).' }],
+      'Correcto. Sumo 3 a ambos lados: \\(x<8\\). La desigualdad se mantiene.'));
+
+    // P3 · dividir por negativo invierte (Argumentar) — clave de la unidad
+    E.push(armar('Argumentar', 'Al resolver \\(-4x<12\\) dividimos ambos lados por \\(-4\\). ¿Qué resulta?',
+      [{ t: '\\(x>-3\\)', err: null },
+       { t: '\\(x<-3\\)', err: 'Al dividir por un número NEGATIVO se invierte la desigualdad: de \\(<\\) pasa a \\(>\\). Queda \\(x>-3\\).' },
+       { t: '\\(x>3\\)', err: '\\(12:(-4)=-3\\), no 3. Y al dividir por negativo se invierte: \\(x>-3\\).' },
+       { t: '\\(x<3\\)', err: 'Dos errores: el resultado es \\(-3\\) y el signo se invierte. Queda \\(x>-3\\).' }],
+      'Correcto. Al dividir por \\(-4\\) (negativo) se INVIERTE la desigualdad: \\(x>-3\\).'));
+
+    // P4 · resolver con -x (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(-x<5\\).',
+      [{ t: '\\(x>-5\\)', err: null },
+       { t: '\\(x<-5\\)', err: 'Al multiplicar por \\(-1\\) para despejar \\(x\\), se invierte el signo: \\(x>-5\\).' },
+       { t: '\\(x<5\\)', err: 'Falta el signo negativo y la inversión: multiplicando por \\(-1\\) queda \\(x>-5\\).' },
+       { t: '\\(x>5\\)', err: 'El 5 pasa como \\(-5\\): multiplicando por \\(-1\\), \\(x>-5\\).' }],
+      'Correcto. Multiplico por \\(-1\\) (negativo): se invierte la desigualdad y queda \\(x>-5\\).'));
+
+    // P5 · LEER la recta → intervalo (Representar) · FIGURA DE ENUNCIADO (e.fig)
+    var e5 = armar('Representar', 'La recta numérica de abajo muestra un conjunto solución. ¿Qué intervalo lo representa?',
+      [{ t: '\\(]-\\infty,\\,3[\\)', err: null },
+       { t: '\\([3,\\,\\infty[\\)', err: 'La flecha va a la IZQUIERDA (los menores que 3): es \\(]-\\infty,3[\\), no hacia \\(+\\infty\\).' },
+       { t: '\\(]3,\\,\\infty[\\)', err: 'Esa apunta a los mayores que 3; la recta apunta a los menores: \\(]-\\infty,3[\\).' },
+       { t: '\\(]-\\infty,\\,3]\\)', err: 'El punto está ABIERTO (hueco): el 3 NO se incluye, corchete abierto \\(]-\\infty,3[\\).' }],
+      'Correcto. Punto ABIERTO en 3 (no incluido) y flecha a la izquierda (los menores): \\(]-\\infty,3[\\).');
+    e5.fig = RN({ min: -4, max: 8, ticks: [-3, 0, 3, 6], bx: 3, dir: 'left', closed: false, desc: 'Recta numérica con punto abierto en 3 y sombreado hacia la izquierda.' });
+    E.push(e5);
+
+    // P6 · intervalo con >= (Representar)
+    E.push(armar('Representar', 'La solución \\(x\\geq2\\) escrita como intervalo es:',
+      [{ t: '\\([2,\\,\\infty[\\)', err: null },
+       { t: '\\(]2,\\,\\infty[\\)', err: 'El \\(\\geq\\) SÍ incluye al 2: el corchete junto al 2 va cerrado: \\([2,\\infty[\\).' },
+       { t: '\\(]-\\infty,\\,2]\\)', err: 'Ese es \\(x\\leq2\\). Aquí es \\(x\\geq2\\): \\([2,\\infty[\\).' },
+       { t: '\\(]-\\infty,\\,2[\\)', err: 'Ese es \\(x<2\\). Aquí van los mayores o iguales a 2: \\([2,\\infty[\\).' }],
+      'Correcto. \\(x\\geq2\\) incluye al 2 (corchete cerrado) y sigue al infinito: \\([2,\\infty[\\).'));
+
+    // P7 · resolver con transposición (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(2x+1>x+5\\).',
+      [{ t: '\\(x>4\\)', err: null },
+       { t: '\\(x<4\\)', err: 'No hay que invertir: solo pasamos términos (sin multiplicar por negativos). Queda \\(x>4\\).' },
+       { t: '\\(x>6\\)', err: 'El \\(+1\\) pasa restando: \\(2x-x>5-1\\Rightarrow x>4\\).' },
+       { t: '\\(x>-4\\)', err: 'Revisa signos: \\(x>5-1=4\\), positivo.' }],
+      'Correcto. Junto términos: \\(2x-x>5-1\\Rightarrow x>4\\). No se invierte porque no dividimos por negativos.'));
+
+    // P8 · situación simple (Modelar)
+    E.push(armar('Modelar', 'Para aprobar un juego necesitas al menos 40 puntos. Ya llevas 25. ¿Cuántos puntos \\(p\\) más necesitas?',
+      [{ t: '\\(p\\geq15\\)', err: null },
+       { t: '\\(p\\geq65\\)', err: 'Sumaste 25+40. Lo correcto: \\(25+p\\geq40\\Rightarrow p\\geq15\\).' },
+       { t: '\\(p\\geq40\\)', err: 'Ya tienes 25; solo faltan los que completan 40: \\(p\\geq40-25=15\\).' },
+       { t: '\\(p\\leq15\\)', err: '"Al menos" es \\(\\geq\\): necesitas 15 o más, \\(p\\geq15\\).' }],
+      'Correcto. "Al menos 40" es \\(25+p\\geq40\\Rightarrow p\\geq15\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

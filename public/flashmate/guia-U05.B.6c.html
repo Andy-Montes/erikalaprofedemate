@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U05.B.6c · Proporcionalidad Compuesta</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U05.B.6c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U05', unidadNum: '05', subunidad: 'B', nivel: 'c',
+  titulo: 'Proporcionalidad Compuesta',
+  sub: 'Modelar situaciones · directa-inversa · pertinencia',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Modelar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · volantes (Resolver)
+    E.push(armar('Resolver problemas', '5 impresoras en 4 horas imprimen 2000 volantes. ¿Cuántos volantes imprimen 3 impresoras en 6 horas?',
+      [{ t: '1800 volantes', err: null },
+       { t: '2400 volantes', err: 'Directa con impresoras (\\(\\tfrac{3}{5}\\)) y con horas (\\(\\tfrac{6}{4}\\)): \\(2000\\cdot\\tfrac35\\cdot\\tfrac64=1800\\).' },
+       { t: '3000 volantes', err: 'Menos impresoras reduce la producción: \\(2000\\cdot\\tfrac35\\cdot\\tfrac64=1800\\).' },
+       { t: '1500 volantes', err: 'Aplica ambos factores: \\(2000\\cdot\\tfrac35=1200\\), luego \\(\\cdot\\tfrac64=1800\\).' }],
+      'Correcto. Directa con impresoras y con horas: \\(2000\\cdot\\tfrac{3}{5}\\cdot\\tfrac{6}{4}=1800\\) volantes.'));
+
+    // P2 · obreros inversa (Resolver)
+    E.push(armar('Resolver problemas', '9 obreros hacen una obra en 12 días. ¿Cuántos obreros se necesitan para hacer la misma obra en 6 días?',
+      [{ t: '18 obreros', err: null },
+       { t: '15 obreros', err: 'Es INVERSA: la mitad de días requiere el doble de obreros. \\(9\\cdot12=108=x\\cdot6\\Rightarrow x=18\\).' },
+       { t: '\\(4{,}5\\) obreros', err: 'Para MENOS tiempo hacen falta MÁS obreros: \\(108:6=18\\).' },
+       { t: '6 obreros', err: 'El producto es \\(9\\cdot12=108\\): \\(x\\cdot6=108\\Rightarrow x=18\\).' }],
+      'Correcto. Inversa: \\(9\\cdot12=108\\); \\(x\\cdot6=108\\Rightarrow x=18\\) obreros.'));
+
+    // P3 · modelar viajes (Modelar)
+    E.push(armar('Modelar', 'Para transportar 300 cajas con 5 camiones se hacen 6 viajes. ¿Cuántos viajes se necesitan para transportar 360 cajas con 3 camiones?',
+      [{ t: '12 viajes', err: null },
+       { t: '9 viajes', err: 'Directa con cajas (\\(\\tfrac{360}{300}\\)) e inversa con camiones (\\(\\tfrac{5}{3}\\)): \\(6\\cdot\\tfrac{360}{300}\\cdot\\tfrac53=12\\).' },
+       { t: '7 viajes', err: 'Más cajas y menos camiones ⇒ MÁS viajes: \\(6\\cdot1{,}2\\cdot\\tfrac53=12\\).' },
+       { t: '15 viajes', err: 'Aplica ambos factores: \\(6\\cdot\\tfrac{360}{300}=7{,}2\\), luego \\(\\cdot\\tfrac53=12\\).' }],
+      'Correcto. Directa con cajas e inversa con camiones: \\(6\\cdot\\tfrac{360}{300}\\cdot\\tfrac{5}{3}=12\\) viajes.'));
+
+    // P4 · agua (Resolver)
+    E.push(armar('Resolver problemas', '20 personas consumen 500 litros de agua en 10 días. ¿Cuántos litros consumen 30 personas en 6 días?',
+      [{ t: '450 litros', err: null },
+       { t: '750 litros', err: 'Directa con personas (\\(\\tfrac{30}{20}\\)) y con días (\\(\\tfrac{6}{10}\\)): \\(500\\cdot\\tfrac32\\cdot\\tfrac{6}{10}=450\\).' },
+       { t: '600 litros', err: 'Aplica el factor de los días también: \\(500\\cdot\\tfrac32\\cdot\\tfrac{6}{10}=450\\).' },
+       { t: '300 litros', err: 'Multiplica ambos factores: \\(\\tfrac32\\cdot\\tfrac{6}{10}=\\tfrac{9}{10}\\); \\(500\\cdot\\tfrac{9}{10}=450\\).' }],
+      'Correcto. Directa con personas y con días: \\(500\\cdot\\tfrac{30}{20}\\cdot\\tfrac{6}{10}=450\\) litros.'));
+
+    // P5 · clasificar relaciones (Argumentar)
+    E.push(armar('Argumentar', 'Para llenar estanques: mientras más estanques se llenan se necesita más agua, pero mientras más llaves haya se demora menos. La cantidad de agua respecto a los estanques, y el tiempo respecto a las llaves, son respectivamente:',
+      [{ t: 'Directa e inversa', err: null },
+       { t: 'Directa y directa', err: 'Más llaves ⇒ MENOS tiempo: eso es inverso, no directo.' },
+       { t: 'Inversa e inversa', err: 'Más estanques ⇒ MÁS agua: eso es directo, no inverso.' },
+       { t: 'Inversa y directa', err: 'Es al revés: agua-estanques es directa; tiempo-llaves es inversa.' }],
+      'Correcto. Agua respecto a estanques: directa (más estanques, más agua). Tiempo respecto a llaves: inversa (más llaves, menos tiempo).'));
+
+    // P6 · bombas inversa (Resolver)
+    E.push(armar('Resolver problemas', '4 bombas iguales vacían un pozo en 9 horas. ¿En cuántas horas lo vacían 6 bombas?',
+      [{ t: '6 horas', err: null },
+       { t: '\\(13{,}5\\) horas', err: 'Es INVERSA: más bombas ⇒ menos tiempo. \\(4\\cdot9=36=6\\cdot x\\Rightarrow x=6\\).' },
+       { t: '\\(1{,}5\\) horas', err: 'El producto es \\(4\\cdot9=36\\): \\(6\\cdot x=36\\Rightarrow x=6\\).' },
+       { t: '\\(3{,}6\\) horas', err: 'Revisa: \\(36:6=6\\) horas.' }],
+      'Correcto. Inversa: \\(4\\cdot9=36\\); \\(6\\cdot x=36\\Rightarrow x=6\\) horas.'));
+
+    // P7 · plantear factores (Representar)
+    E.push(armar('Representar', 'Se sabe que el número de días es inverso a los obreros y directo a la cantidad de obra. Partiendo de \\(D_0\\) días para \\(o_0\\) obreros y obra \\(w_0\\), ¿qué expresión da los días \\(D\\) para \\(o\\) obreros y obra \\(w\\)?',
+      [{ t: '\\(D=D_0\\cdot\\dfrac{o_0}{o}\\cdot\\dfrac{w}{w_0}\\)', err: null },
+       { t: '\\(D=D_0\\cdot\\dfrac{o}{o_0}\\cdot\\dfrac{w}{w_0}\\)', err: 'Los obreros van INVERSOS: el factor debe ser \\(\\tfrac{o_0}{o}\\) (el original arriba).' },
+       { t: '\\(D=D_0\\cdot\\dfrac{o_0}{o}\\cdot\\dfrac{w_0}{w}\\)', err: 'La obra va DIRECTA: el factor debe ser \\(\\tfrac{w}{w_0}\\) (el nuevo arriba).' },
+       { t: '\\(D=D_0\\cdot\\dfrac{o}{o_0}\\cdot\\dfrac{w_0}{w}\\)', err: 'Ambos factores están invertidos respecto de lo correcto: \\(\\tfrac{o_0}{o}\\) y \\(\\tfrac{w}{w_0}\\).' }],
+      'Correcto. Inverso con obreros (\\(\\tfrac{o_0}{o}\\)) y directo con la obra (\\(\\tfrac{w}{w_0}\\)): \\(D=D_0\\cdot\\tfrac{o_0}{o}\\cdot\\tfrac{w}{w_0}\\).'));
+
+    // P8 · pertinencia (Argumentar)
+    E.push(armar('Argumentar', 'Un cálculo de proporcionalidad da que se necesitan \\(4{,}3\\) buses para trasladar a un grupo, y todos deben viajar. ¿Cuántos buses se contratan?',
+      [{ t: '5 buses', err: null },
+       { t: '4 buses', err: 'Con 4 buses quedaría gente sin traslado (falta la fracción 0,3). Se redondea hacia ARRIBA: 5.' },
+       { t: '\\(4{,}3\\) buses', err: 'No existen fracciones de bus: la cantidad debe ser un entero.' },
+       { t: '4 buses y el resto camina', err: 'Todos deben viajar en bus: se redondea hacia arriba a 5.' }],
+      'Correcto. La cantidad debe ser entera y todos deben viajar, así que se redondea hacia arriba: 5 buses.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

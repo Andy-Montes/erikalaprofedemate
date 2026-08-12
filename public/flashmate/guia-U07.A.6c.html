@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U07.A.6c · Problemas de aplicación</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U07.A.6c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U07', unidadNum: '07', subunidad: 'A', nivel: 'c',
+  titulo: 'Problemas de aplicación con sistemas',
+  sub: 'Edades · mezclas · dinero · geometría',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Resolver problemas', 'Argumentar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · edades (Resolver)
+    E.push(armar('Resolver problemas', 'Un padre tiene el triple de la edad de su hijo. Dentro de 10 años tendrá el doble de la edad que su hijo tendrá entonces. ¿Qué edad tiene cada uno hoy?',
+      [{ t: 'Padre 30, hijo 10.', err: null },
+       { t: 'Padre 45, hijo 15.', err: 'Dentro de 10 años: \\(55\\) vs \\(2\\cdot25=50\\): no cumple. La solución es \\(30\\) y \\(10\\).' },
+       { t: 'Padre 36, hijo 12.', err: 'Dentro de 10 años: \\(46\\) vs \\(2\\cdot22=44\\): no cumple. Es \\(30\\) y \\(10\\).' },
+       { t: 'Padre 30, hijo 15.', err: 'Debe ser el TRIPLE: \\(30=3\\cdot10\\), no \\(3\\cdot15\\). El hijo tiene 10.' }],
+      'Correcto. \\(p=3h\\) y \\(p+10=2(h+10)\\Rightarrow3h+10=2h+20\\Rightarrow h=10\\), \\(p=30\\).'));
+
+    // P2 · entradas (Resolver)
+    E.push(armar('Resolver problemas', 'Una entrada de adulto cuesta 5.000 pesos y una de niño 3.000 pesos. Se vendieron 8 entradas por un total de 34.000 pesos. ¿Cuántas entradas de adulto se vendieron?',
+      [{ t: '5 entradas de adulto.', err: null },
+       { t: '3 entradas de adulto.', err: 'Esas son las de niño. Con \\(a+n=8\\) y \\(5a+3n=34\\) (en miles): \\(a=5\\).' },
+       { t: '4 entradas de adulto.', err: 'Prueba: \\(5\\cdot4+3\\cdot4=32\\neq34\\). El correcto es \\(a=5\\).' },
+       { t: '6 entradas de adulto.', err: '\\(5\\cdot6+3\\cdot2=36\\neq34\\). Es \\(a=5\\), \\(n=3\\).' }],
+      'Correcto. \\(a+n=8\\) y \\(5a+3n=34\\) (miles): \\(2a=10\\Rightarrow a=5\\), \\(n=3\\).'));
+
+    // P3 · granja (Resolver)
+    E.push(armar('Resolver problemas', 'En una granja hay gallinas y conejos: en total 20 cabezas y 56 patas (gallina: 2 patas; conejo: 4 patas). ¿Cuántos conejos hay?',
+      [{ t: '8 conejos.', err: null },
+       { t: '12 conejos.', err: 'Esas son las gallinas. De \\(g+c=20\\), \\(2g+4c=56\\): \\(c=8\\).' },
+       { t: '10 conejos.', err: 'Prueba \\(10\\) y \\(10\\): \\(2\\cdot10+4\\cdot10=60\\neq56\\). El correcto es \\(8\\).' },
+       { t: '14 conejos.', err: 'Restando \\(2\\times\\)cabezas a las patas: \\(56-40=16=2c\\Rightarrow c=8\\).' }],
+      'Correcto. \\(g+c=20\\), \\(2g+4c=56\\); \\(56-2\\cdot20=16=2c\\Rightarrow c=8\\), \\(g=12\\).'));
+
+    // P4 · útiles (Resolver)
+    E.push(armar('Resolver problemas', 'Tres lápices y dos cuadernos cuestan 4.200 pesos. Un lápiz y un cuaderno cuestan 1.800 pesos. ¿Cuánto cuesta un cuaderno?',
+      [{ t: '1.200 pesos.', err: null },
+       { t: '600 pesos.', err: 'Ese es el precio del lápiz. Resolviendo, el lápiz sale 600 y el cuaderno 1.200.' },
+       { t: '900 pesos.', err: 'No es la mitad de 1.800: resolviendo, el cuaderno vale 1.200.' },
+       { t: '1.800 pesos.', err: 'Ese es el total de un lápiz MÁS un cuaderno, no solo el cuaderno (1.200).' }],
+      'Correcto. \\(3l+2c=4200\\) y \\(l+c=1800\\); \\(l=600\\Rightarrow c=1200\\).'));
+
+    // P5 · ecuación de patas (Representar)
+    E.push(armar('Representar', 'En la granja anterior (gallinas de 2 patas y conejos de 4 patas, 20 cabezas), ¿qué ecuación representa el conteo de PATAS si hay 56 en total?',
+      [{ t: '\\(2g+4c=56\\)', err: null },
+       { t: '\\(g+c=56\\)', err: 'Eso cuenta CABEZAS. Las patas son 2 por gallina y 4 por conejo: \\(2g+4c=56\\).' },
+       { t: '\\(4g+2c=56\\)', err: 'La gallina tiene 2 patas y el conejo 4: \\(2g+4c=56\\), no al revés.' },
+       { t: '\\(2g+4c=20\\)', err: 'El 20 son las cabezas; las patas totales son 56: \\(2g+4c=56\\).' }],
+      'Correcto. Cada gallina aporta 2 patas y cada conejo 4: \\(2g+4c=56\\).'));
+
+    // P6 · rectángulo (Resolver)
+    E.push(armar('Resolver problemas', 'Un rectángulo tiene perímetro 40 cm y su largo mide 4 cm más que su ancho. ¿Cuánto mide el largo?',
+      [{ t: '12 cm.', err: null },
+       { t: '8 cm.', err: 'Ese es el ANCHO. El largo es 4 cm mayor: \\(x=12\\).' },
+       { t: '10 cm.', err: 'Si fueran iguales serían 10 y 10, pero el largo excede en 4: \\(12\\) y \\(8\\).' },
+       { t: '16 cm.', err: 'Revisa: \\(x+y=20\\) y \\(x=y+4\\Rightarrow2y+4=20\\Rightarrow y=8\\), \\(x=12\\).' }],
+      'Correcto. \\(2(x+y)=40\\Rightarrow x+y=20\\); con \\(x=y+4\\): \\(2y=16\\Rightarrow y=8\\), \\(x=12\\).'));
+
+    // P7 · descartar candidato (Argumentar)
+    E.push(armar('Argumentar', 'En el problema de las entradas (adulto 5.000, niño 3.000; 8 entradas, total 34.000), un estudiante propone 4 adultos y 4 niños. ¿Por qué NO puede ser?',
+      [{ t: 'Porque \\(5\\cdot4+3\\cdot4=32\\neq34\\) (en miles): no da el total.', err: null },
+       { t: 'Porque no suman 8 entradas.', err: '\\(4+4=8\\) sí cumple esa condición; falla en el TOTAL: \\(32\\neq34\\) mil.' },
+       { t: 'Porque no pueden venderse cantidades iguales.', err: 'Sí podrían ser iguales si cuadrara el total; el problema es que \\(32\\neq34\\) mil.' },
+       { t: 'Porque las entradas de niño son más caras.', err: 'Son más baratas (3.000 < 5.000). La razón real: \\(32\\neq34\\) mil.' }],
+      'Correcto. \\(4+4=8\\) ✓ pero \\(5\\cdot4+3\\cdot4=32\\neq34\\): no cumple el total. La solución es \\(5\\) y \\(3\\).'));
+
+    // P8 · plantear y resolver (Modelar)
+    E.push(armar('Modelar', 'La suma de dos números es 30 y el mayor excede al menor en 6. ¿Cuál es el número mayor?',
+      [{ t: '18', err: null },
+       { t: '12', err: 'Ese es el menor. El mayor lo excede en 6: \\(x=18\\).' },
+       { t: '15', err: 'Si fueran iguales serían 15 y 15; pero uno excede en 6: \\(18\\) y \\(12\\).' },
+       { t: '24', err: 'Revisa: \\(y+6+y=30\\Rightarrow2y=24\\Rightarrow y=12\\), \\(x=18\\).' }],
+      'Correcto. \\(x+y=30\\), \\(x=y+6\\Rightarrow2y+6=30\\Rightarrow y=12\\), \\(x=18\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U11.A.2b · Área de superficie y diagonal (cubo y paralelepípedo)</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U11.A.2b', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U11', unidadNum: '11', subunidad: 'A', nivel: 'b',
+  titulo: 'Área de superficie y diagonal (cubo y paralelepípedo)',
+  sub: 'Área \\(6a^2\\) y \\(2(ab+ac+bc)\\) · diagonal \\(a\\sqrt3\\) y \\(\\sqrt{a^2+b^2+c^2}\\)',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Representar', 'Modelar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · área del cubo (Resolver) · BOX
+    var e1 = armar('Resolver problemas', 'El cubo de la figura tiene arista 4. ¿Cuál es su área de superficie (total)?',
+      [{ t: '\\(96\\)', err: null },
+       { t: '\\(64\\)', err: '64 es el volumen (\\(a^3\\)). El área es \\(6a^2=6\\cdot4^2=96\\).' },
+       { t: '\\(16\\)', err: '16 es el área de UNA cara (\\(a^2\\)). El cubo tiene 6 caras: \\(6\\cdot16=96\\).' },
+       { t: '\\(24\\)', err: 'Eso sería \\(6a\\) (suma de aristas). El área es \\(6a^2=96\\).' }],
+      'Correcto. Área del cubo \\(=6a^2=6\\cdot4^2=6\\cdot16=96\\).');
+    e1.fig = BOX({ a: 3, b: 3, c: 3, aL: { t: '4', role: 'dato' }, bL: { t: '4', role: 'dato' }, cL: { t: '4', role: 'dato' }, desc: 'Cubo de arista 4.' });
+    E.push(e1);
+
+    // P2 · área del paralelepípedo (Resolver) · BOX
+    var e2 = armar('Resolver problemas', 'El paralelepípedo de la figura tiene aristas 6, 3 y 2. ¿Cuál es su área de superficie?',
+      [{ t: '\\(72\\)', err: null },
+       { t: '\\(36\\)', err: '36 es el volumen (\\(6\\cdot3\\cdot2\\)). El área es \\(2(ab+ac+bc)\\).' },
+       { t: '\\(11\\)', err: 'Sumaste las aristas (\\(6+3+2\\)). El área es \\(2(6\\cdot3+6\\cdot2+3\\cdot2)=72\\).' },
+       { t: '\\(144\\)', err: 'Ese es el doble del volumen. El área es \\(2(18+12+6)=72\\).' }],
+      'Correcto. Área \\(=2(ab+ac+bc)=2(6\\cdot3+6\\cdot2+3\\cdot2)=2(18+12+6)=72\\).');
+    e2.fig = BOX({ a: 6, b: 2, c: 3, aL: { t: '6', role: 'dato' }, bL: { t: '2', role: 'dato' }, cL: { t: '3', role: 'dato' }, desc: 'Paralelepípedo 6, 3, 2.' });
+    E.push(e2);
+
+    // P3 · diagonal del cubo (Resolver) · BOX diag
+    var e3 = armar('Resolver problemas', 'El cubo de la figura tiene arista 5. ¿Cuánto mide su diagonal espacial \\(d\\) (entre dos vértices opuestos)?',
+      [{ t: '\\(5\\sqrt{3}\\)', err: null },
+       { t: '\\(5\\sqrt{2}\\)', err: 'Esa es la diagonal de una CARA. La diagonal del cuerpo es \\(a\\sqrt{3}=5\\sqrt{3}\\).' },
+       { t: '\\(15\\)', err: 'Eso sería \\(3a\\). La diagonal del cubo es \\(a\\sqrt{3}=5\\sqrt{3}\\).' },
+       { t: '\\(5\\)', err: 'La diagonal del cuerpo es mayor que la arista: \\(a\\sqrt{3}=5\\sqrt{3}\\).' }],
+      'Correcto. Diagonal del cubo \\(=a\\sqrt{3}=5\\sqrt{3}\\).');
+    e3.fig = BOX({ a: 3, b: 3, c: 3, aL: { t: '5', role: 'dato' }, cL: { t: '5', role: 'dato' }, diag: true, diagL: { t: 'd', role: 'incog' }, desc: 'Cubo de arista 5 con su diagonal espacial.' });
+    E.push(e3);
+
+    // P4 · diagonal del paralelepípedo (Resolver) · BOX diag
+    var e4 = armar('Resolver problemas', 'El paralelepípedo de la figura tiene aristas 6, 3 y 2. ¿Cuánto mide su diagonal espacial \\(d\\)?',
+      [{ t: '\\(7\\)', err: null },
+       { t: '\\(11\\)', err: 'Sumaste las aristas (\\(6+3+2\\)). La diagonal es \\(\\sqrt{6^2+3^2+2^2}=\\sqrt{49}=7\\).' },
+       { t: '\\(\\sqrt{11}\\)', err: 'Sumaste las aristas antes de la raíz. Se suman los cuadrados: \\(\\sqrt{36+9+4}=7\\).' },
+       { t: '\\(5\\)', err: 'Revisa: \\(\\sqrt{6^2+3^2+2^2}=\\sqrt{49}=7\\).' }],
+      'Correcto. Diagonal \\(=\\sqrt{a^2+b^2+c^2}=\\sqrt{6^2+3^2+2^2}=\\sqrt{36+9+4}=\\sqrt{49}=7\\).');
+    e4.fig = BOX({ a: 6, b: 2, c: 3, aL: { t: '6', role: 'dato' }, bL: { t: '2', role: 'dato' }, cL: { t: '3', role: 'dato' }, diag: true, diagL: { t: 'd', role: 'incog' }, desc: 'Paralelepípedo 6, 3, 2 con su diagonal espacial.' });
+    E.push(e4);
+
+    // P5 · identificar el error: diagonal de cara vs de cuerpo (Argumentar)
+    E.push(armar('Argumentar', 'Para la diagonal espacial de un cubo de arista 5, Luis escribe:\nPaso 1: \\(d=a\\sqrt{2}\\)\nPaso 2: \\(d=5\\sqrt{2}\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: \\(a\\sqrt{2}\\) es la diagonal de una cara; la del cuerpo es \\(a\\sqrt{3}\\).', err: null },
+       { t: 'En el Paso 2: \\(5\\sqrt{2}\\) está mal calculado.', err: 'El cálculo del Paso 2 es coherente con la fórmula usada; el problema es la fórmula: el cuerpo usa \\(\\sqrt{3}\\).' },
+       { t: 'No hay error; \\(d=5\\sqrt{2}\\).', err: '\\(5\\sqrt{2}\\) es la diagonal de una cara. La del cuerpo es \\(5\\sqrt{3}\\).' },
+       { t: 'En el Paso 1: debió ser \\(a\\).', err: 'La diagonal del cuerpo es mayor que la arista: \\(a\\sqrt{3}\\).' }],
+      'Correcto. \\(a\\sqrt{2}\\) es la diagonal de una cara. La diagonal del cuerpo (tres dimensiones) es \\(a\\sqrt{3}=5\\sqrt{3}\\).');
+
+    // P6 · reconocer la fórmula del área del cubo (Representar)
+    E.push(armar('Representar', '¿Cuál expresión representa el área de superficie (total) de un cubo de arista \\(a\\)?',
+      [{ t: '\\(6a^2\\)', err: null },
+       { t: '\\(a^3\\)', err: 'Ese es el volumen del cubo, no el área.' },
+       { t: '\\(a^2\\sqrt{3}\\)', err: 'No corresponde. El cubo tiene 6 caras cuadradas: \\(6a^2\\).' },
+       { t: '\\(4a\\)', err: 'Eso es el perímetro de una cara. El área total es \\(6a^2\\).' }],
+      'Correcto. El cubo tiene 6 caras cuadradas de área \\(a^2\\): área total \\(=6a^2\\).');
+
+    // P7 · forrar una caja cúbica (Modelar)
+    E.push(armar('Modelar', 'Se quiere forrar con papel una caja cúbica de arista 10 cm (por todas sus caras). ¿Cuántos \\(cm^2\\) de papel se necesitan?',
+      [{ t: '\\(600\\) cm²', err: null },
+       { t: '\\(1000\\) cm²', err: '1000 es el volumen (\\(a^3\\)). El papel cubre la superficie: \\(6a^2=6\\cdot100\\).' },
+       { t: '\\(100\\) cm²', err: 'Eso es una sola cara. Son 6 caras: \\(6\\cdot100=600\\).' },
+       { t: '\\(60\\) cm²', err: 'Falta elevar la arista al cuadrado: \\(6\\cdot10^2=600\\).' }],
+      'Correcto. El papel cubre las 6 caras: \\(6a^2=6\\cdot10^2=600\\) cm².');
+
+    // P8 · mayor distancia entre vértices (Modelar)
+    E.push(armar('Modelar', 'Una caja tiene forma de paralelepípedo de 3 cm × 4 cm × 12 cm. ¿Cuál es la mayor distancia en línea recta entre dos de sus vértices?',
+      [{ t: '\\(13\\) cm', err: null },
+       { t: '\\(19\\) cm', err: 'Sumaste las aristas (\\(3+4+12\\)). La mayor distancia es la diagonal: \\(\\sqrt{3^2+4^2+12^2}\\).' },
+       { t: '\\(\\sqrt{176}\\) cm', err: 'Cuida los cuadrados: \\(9+16+144=169\\), y \\(\\sqrt{169}=13\\).' },
+       { t: '\\(12\\) cm', err: '12 es solo una arista. La diagonal del cuerpo es \\(\\sqrt{9+16+144}=13\\).' }],
+      'Correcto. La mayor distancia es la diagonal espacial: \\(\\sqrt{3^2+4^2+12^2}=\\sqrt{9+16+144}=\\sqrt{169}=13\\) cm.');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

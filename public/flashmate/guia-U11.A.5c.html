@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U11.A.5c · Cuerpos geométricos: multipaso y contextos PAES</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U11.A.5c', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U11', unidadNum: '11', subunidad: 'A', nivel: 'c',
+  titulo: 'Cuerpos geométricos: multipaso y contextos PAES',
+  sub: 'Diagonal → área · trasvasije en cilindros · redes · cuerpos combinados',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Modelar', 'Resolver problemas', 'Argumentar', 'Modelar', 'Representar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · diagonal del cubo -> área (Resolver) · BOX diag
+    var e1 = armar('Resolver problemas', 'La diagonal espacial de un cubo mide \\(6\\sqrt{3}\\) cm. ¿Cuál es su área de superficie?',
+      [{ t: '\\(216\\) cm²', err: null },
+       { t: '\\(36\\) cm²', err: '36 es el área de UNA cara. De \\(a\\sqrt{3}=6\\sqrt{3}\\) sale \\(a=6\\); área \\(=6a^2=216\\).' },
+       { t: '\\(108\\) cm²', err: 'Revisa: con \\(a=6\\), área \\(=6\\cdot6^2=216\\).' },
+       { t: '\\(72\\) cm²', err: 'Eso es \\(2a^2\\). El cubo tiene 6 caras: \\(6\\cdot36=216\\).' }],
+      'Correcto. De \\(a\\sqrt{3}=6\\sqrt{3}\\) sale \\(a=6\\). Área \\(=6a^2=6\\cdot36=216\\) cm².');
+    e1.fig = BOX({ a: 3, b: 3, c: 3, aL: { t: '6', role: 'dato' }, cL: { t: '6', role: 'dato' }, diag: true, diagL: { t: 'd', role: 'dato' }, desc: 'Cubo de arista 6 con su diagonal espacial.' });
+    E.push(e1);
+
+    // P2 · trasvasije entre cilindros (Resolver) · CYL
+    var e2 = armar('Resolver problemas', 'Un cilindro de radio 2 y altura 9 está lleno de agua y se vierte todo en otro cilindro de radio 3. ¿Qué altura alcanza el agua?',
+      [{ t: '\\(4\\)', err: null },
+       { t: '\\(6\\)', err: 'El volumen se conserva: \\(\\pi\\cdot4\\cdot9=36\\pi\\); en el otro \\(\\pi\\cdot9\\cdot h=36\\pi\\Rightarrow h=4\\).' },
+       { t: '\\(9\\)', err: 'La altura cambia porque el radio es mayor: \\(h=\\tfrac{36\\pi}{9\\pi}=4\\).' },
+       { t: '\\(2\\)', err: 'Revisa: \\(\\pi\\cdot9\\cdot h=36\\pi\\Rightarrow h=4\\).' }],
+      'Correcto. El volumen se conserva: \\(\\pi\\cdot2^2\\cdot9=36\\pi\\). En el cilindro de radio 3: \\(\\pi\\cdot3^2\\cdot h=36\\pi\\Rightarrow 9h=36\\Rightarrow h=4\\).');
+    e2.fig = CYL({ rL: { t: '2', role: 'dato' }, hL: { t: '9', role: 'dato' }, desc: 'Cilindro r=2, h=9.' });
+    E.push(e2);
+
+    // P3 · cuerpo combinado: dos cubos distintos (Modelar)
+    E.push(armar('Modelar', 'Un cuerpo se forma apoyando un cubo de arista 2 cm sobre un cubo de arista 4 cm. ¿Cuál es el volumen total del cuerpo?',
+      [{ t: '\\(72\\) cm³', err: null },
+       { t: '\\(216\\) cm³', err: 'Eso sería \\((4+2)^3\\). Los volúmenes se suman: \\(4^3+2^3=64+8=72\\).' },
+       { t: '\\(66\\) cm³', err: 'Revisa \\(2^3=8\\) (no 2). Total \\(64+8=72\\).' },
+       { t: '\\(12\\) cm³', err: 'Sumaste aristas o áreas. Los volúmenes: \\(64+8=72\\).' }],
+      'Correcto. Los volúmenes se suman: \\(4^3+2^3=64+8=72\\) cm³.');
+
+    // P4 · red (desarrollo) -> distancia (Resolver) · NET a mano
+    var e4 = armar('Resolver problemas', 'La figura es la red (desarrollo) de una caja de 6 × 3 × 2 cm. Al armarla, ¿cuál es la mayor distancia en línea recta entre dos de sus vértices?',
+      [{ t: '\\(7\\) cm', err: null },
+       { t: '\\(11\\) cm', err: 'Sumaste las aristas (\\(6+3+2\\)). La mayor distancia es la diagonal: \\(\\sqrt{6^2+3^2+2^2}\\).' },
+       { t: '\\(5\\) cm', err: 'Esa es la diagonal de una cara. La del cuerpo usa las tres aristas: \\(\\sqrt{36+9+4}=7\\).' },
+       { t: '\\(\\sqrt{13}\\) cm', err: 'Faltó una arista. La diagonal usa las tres: \\(\\sqrt{36+9+4}=\\sqrt{49}=7\\).' }],
+      'Correcto. Al armar la caja de \\(6\\times3\\times2\\), la mayor distancia es la diagonal espacial: \\(\\sqrt{6^2+3^2+2^2}=\\sqrt{49}=7\\) cm.');
+    e4.fig = '<svg viewBox="0 0 250 190" width="230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Red de un prisma"><title>Red</title><desc>Red desplegada de una caja de 6 por 3 por 2; al armarla se forma el prisma.</desc><rect x="26" y="74" width="84" height="42" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><rect x="110" y="74" width="28" height="42" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><rect x="138" y="74" width="84" height="42" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><rect x="26" y="46" width="84" height="28" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><rect x="26" y="116" width="84" height="28" fill="none" stroke="#1a1a1a" stroke-width="1.5"/><text x="68" y="100" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">6</text><text x="124" y="100" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">2</text><text x="22" y="99" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="end">3</text></svg>';
+    E.push(e4);
+
+    // P5 · identificar el error: diámetro como radio (Argumentar)
+    E.push(armar('Argumentar', 'Para el volumen de un cilindro de diámetro 6 y altura 10, Tomás escribe:\nPaso 1: \\(V=\\pi\\cdot6^2\\cdot10\\)\nPaso 2: \\(V=360\\pi\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: usó el diámetro; el radio es \\(6\\div2=3\\), así \\(V=\\pi\\cdot3^2\\cdot10\\).', err: null },
+       { t: 'En el Paso 2: \\(6^2\\cdot10\\) no es 360.', err: '\\(36\\cdot10=360\\) está bien; el error es usar el diámetro en vez del radio (3).' },
+       { t: 'No hay error; \\(V=360\\pi\\).', err: 'Usó el diámetro. El radio es 3: \\(V=\\pi\\cdot9\\cdot10=90\\pi\\).' },
+       { t: 'En el Paso 1: sobra el cuadrado.', err: 'El radio sí va al cuadrado; el problema es usar 6 (diámetro) en vez de 3 (radio).' }],
+      'Correcto. El radio es la mitad del diámetro: \\(r=3\\). \\(V=\\pi\\cdot3^2\\cdot10=90\\pi\\), no \\(360\\pi\\).');
+
+    // P6 · estanque cilíndrico (Modelar) · CYL
+    var e6 = armar('Modelar', 'Un estanque cilíndrico tiene radio 5 m y altura 10 m (figura). ¿Cuál es su capacidad (volumen)?',
+      [{ t: '\\(250\\pi\\) m³', err: null },
+       { t: '\\(100\\pi\\) m³', err: 'Ese es el manto (\\(2\\pi r h\\)). La capacidad es el volumen: \\(\\pi\\cdot25\\cdot10=250\\pi\\).' },
+       { t: '\\(50\\pi\\) m³', err: 'Falta elevar el radio al cuadrado: \\(\\pi\\cdot5^2\\cdot10=250\\pi\\).' },
+       { t: '\\(500\\pi\\) m³', err: 'Usaste el diámetro. Con \\(r=5\\): \\(\\pi\\cdot25\\cdot10=250\\pi\\).' }],
+      'Correcto. Volumen \\(=\\pi r^2 h=\\pi\\cdot5^2\\cdot10=250\\pi\\) m³.');
+    e6.fig = CYL({ rL: { t: '5', role: 'dato' }, hL: { t: '10', role: 'dato' }, desc: 'Estanque cilíndrico r=5, h=10.' });
+    E.push(e6);
+
+    // P7 · efecto de duplicar el radio (Representar)
+    E.push(armar('Representar', 'Si se duplica el radio de un cilindro (manteniendo la altura), su volumen queda multiplicado por…',
+      [{ t: '\\(4\\)', err: null },
+       { t: '\\(2\\)', err: 'El volumen depende de \\(r^2\\); al duplicar \\(r\\): \\((2r)^2=4r^2\\). Se multiplica por 4.' },
+       { t: '\\(8\\)', err: 'Por 8 se multiplica al duplicar la arista de un cubo (\\(a^3\\)). Aquí solo el radio va al cuadrado: por 4.' },
+       { t: '\\(6\\)', err: '\\((2r)^2=4r^2\\): el volumen se multiplica por 4.' }],
+      'Correcto. \\(V=\\pi r^2 h\\); al duplicar el radio, \\((2r)^2=4r^2\\): el volumen se multiplica por 4.');
+
+    // P8 · cuerpo de cubos: área (Resolver) · CUBES
+    var e8 = armar('Resolver problemas', 'El cuerpo de la figura está formado por cubos de arista 2 cm. ¿Cuál es su área de superficie?',
+      [{ t: '\\(96\\) cm²', err: null },
+       { t: '\\(144\\) cm²', err: 'Contaste 6 caras por cubo (\\(6\\cdot6=36\\)) sin descontar las pegadas. Las expuestas son 24: \\(24\\cdot4=96\\).' },
+       { t: '\\(24\\) cm²', err: '24 es el número de caras expuestas; falta el área de cada una (\\(2^2=4\\)): \\(96\\).' },
+       { t: '\\(48\\) cm²', err: 'Revisa el área de cada cara: \\(2^2=4\\). \\(24\\cdot4=96\\).' }],
+      'Correcto. El cuerpo tiene 24 caras expuestas; cada una mide \\(2^2=4\\): \\(24\\cdot4=96\\) cm².');
+    e8.fig = CUBES([[0,0,0],[1,0,0],[2,0,0],[3,0,0],[0,0,1],[1,0,1]], { desc: 'Cuerpo formado por cubos de arista 2.' });
+    E.push(e8);
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

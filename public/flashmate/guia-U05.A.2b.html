@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U05.A.2b · Proporcionalidad</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U05.A.2b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U05', unidadNum: '05', subunidad: 'A', nivel: 'b',
+  titulo: 'Proporcionalidad',
+  sub: 'Directa e inversa · regla de tres · series',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Modelar', 'Modelar', 'Argumentar', 'Resolver problemas', 'Representar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · directa regla de tres (Resolver)
+    E.push(armar('Resolver problemas', 'Si 3 kg de manzanas cuestan 2.400 pesos, ¿cuánto cuestan 5 kg (al mismo precio)?',
+      [{ t: '4.000 pesos', err: null },
+       { t: '3.600 pesos', err: 'Cada kg cuesta \\(2400:3=800\\); por 5 kg: \\(800\\cdot5=4000\\).' },
+       { t: '7.200 pesos', err: 'Eso sería el triple; con 5 kg: \\(\\tfrac{2400}{3}\\cdot5=4000\\).' },
+       { t: '1.440 pesos', err: 'Es directa: a más kg, más precio. \\(\\tfrac{2400}{3}\\cdot5=4000\\).' }],
+      'Correcto. Directa: \\(\\tfrac{2400}{3}=800\\) por kg; \\(800\\cdot5=4000\\) pesos.'));
+
+    // P2 · inversa (Resolver)
+    E.push(armar('Resolver problemas', '3 llaves iguales llenan un estanque en 8 horas. ¿En cuántas horas lo llenan 4 llaves?',
+      [{ t: '6 horas', err: null },
+       { t: '\\(10{,}7\\) horas', err: 'Es INVERSA: más llaves ⇒ menos tiempo. \\(3\\cdot8=24=4\\cdot x\\Rightarrow x=6\\).' },
+       { t: '\\(32\\) horas', err: 'No se multiplica directo: el producto se mantiene, \\(4\\cdot x=24\\Rightarrow x=6\\).' },
+       { t: '\\(4\\) horas', err: 'Revisa: \\(3\\cdot8=24\\), y \\(24:4=6\\) horas.' }],
+      'Correcto. Inversa: \\(3\\cdot8=24\\) (constante); \\(4\\cdot x=24\\Rightarrow x=6\\) horas.'));
+
+    // P3 · modelar directa (Modelar)
+    E.push(armar('Modelar', 'Un auto a velocidad constante recorre 120 km en 2 horas. ¿Cuántos km recorre en 5 horas?',
+      [{ t: '300 km', err: null },
+       { t: '240 km', err: 'La velocidad es \\(120:2=60\\) km/h; en 5 h: \\(60\\cdot5=300\\) km.' },
+       { t: '600 km', err: 'Eso es en 10 h. La velocidad es 60 km/h; en 5 h: \\(300\\) km.' },
+       { t: '48 km', err: 'Es directa: a más tiempo, más distancia. \\(60\\cdot5=300\\) km.' }],
+      'Correcto. Velocidad \\(=120:2=60\\) km/h; en 5 h: \\(60\\cdot5=300\\) km.'));
+
+    // P4 · modelar inversa (Modelar)
+    E.push(armar('Modelar', '6 obreros hacen una obra en 10 días. ¿En cuántos días la hacen 12 obreros (al mismo ritmo)?',
+      [{ t: '5 días', err: null },
+       { t: '20 días', err: 'Es INVERSA: más obreros ⇒ menos días. \\(6\\cdot10=60=12\\cdot x\\Rightarrow x=5\\).' },
+       { t: '2 días', err: 'Revisa: \\(6\\cdot10=60\\), y \\(60:12=5\\) días.' },
+       { t: '12 días', err: 'No aumenta: al doblar los obreros, el tiempo se reduce a la mitad, \\(5\\) días.' }],
+      'Correcto. Inversa: \\(6\\cdot10=60\\); \\(12\\cdot x=60\\Rightarrow x=5\\) días.'));
+
+    // P5 · identificar inversa (Argumentar)
+    E.push(armar('Argumentar', 'Para un mismo trayecto, a mayor velocidad se necesita menos tiempo. La velocidad y el tiempo son:',
+      [{ t: 'Inversamente proporcionales', err: null },
+       { t: 'Directamente proporcionales', err: 'Al aumentar la velocidad, el tiempo DISMINUYE: es inversa, no directa.' },
+       { t: 'No proporcionales', err: 'Su producto (la distancia) es constante: \\(v\\cdot t=d\\). Es inversa.' },
+       { t: 'Constantes', err: 'La velocidad varía; lo constante es el trayecto. \\(v\\cdot t=d\\): inversa.' }],
+      'Correcto. \\(v\\cdot t=d\\) (distancia fija): al subir la velocidad, baja el tiempo. Es proporcionalidad inversa.'));
+
+    // P6 · serie de razones (Resolver)
+    E.push(armar('Resolver problemas', 'Las edades de tres hermanas están en la razón \\(2:5:3\\) y suman 30 años. ¿Cuántos años tiene la mayor?',
+      [{ t: '15 años', err: null },
+       { t: '9 años', err: 'La mayor corresponde al número mayor de la razón (5). Con \\(k=3\\): \\(5\\cdot3=15\\).' },
+       { t: '6 años', err: 'Ese es el 2 (la menor). La mayor es \\(5\\cdot3=15\\).' },
+       { t: '18 años', err: 'La constante es \\(k=\\tfrac{30}{10}=3\\); la mayor es \\(5\\cdot3=15\\).' }],
+      'Correcto. \\(k=\\tfrac{30}{2+5+3}=3\\); la mayor (5) tiene \\(5\\cdot3=15\\) años.'));
+
+    // P7 · leer tabla / constante (Representar)
+    E.push(armar('Representar', 'En una proporcionalidad directa, al dividir cada valor de una magnitud por el correspondiente de la otra siempre se obtiene el mismo número. Ese número es:',
+      [{ t: 'La constante de proporcionalidad \\(k\\)', err: null },
+       { t: 'La suma de las magnitudes', err: 'No es una suma: es el COCIENTE constante \\(\\tfrac{a}{b}=k\\).' },
+       { t: 'Siempre 1', err: 'No siempre es 1: es el valor fijo \\(k=\\tfrac{a}{b}\\), que depende de las magnitudes.' },
+       { t: 'El total de datos', err: 'Es el cociente constante entre las magnitudes, la constante \\(k\\).' }],
+      'Correcto. En proporcionalidad directa \\(\\tfrac{a}{b}=k\\) es constante: \\(k\\) es la constante de proporcionalidad.'));
+
+    // P8 · propiedad fundamental (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la proporción \\(\\tfrac{4}{6}=\\tfrac{x}{15}\\).',
+      [{ t: '\\(x=10\\)', err: null },
+       { t: '\\(x=9\\)', err: 'Productos cruzados: \\(6x=4\\cdot15=60\\Rightarrow x=10\\).' },
+       { t: '\\(x=13\\)', err: 'No se suma: \\(\\tfrac46=\\tfrac{x}{15}\\Rightarrow 6x=60\\Rightarrow x=10\\).' },
+       { t: '\\(x=6\\)', err: 'Revisa: \\(4\\cdot15=60\\) y \\(60:6=10\\).' }],
+      'Correcto. Propiedad fundamental: \\(6x=4\\cdot15=60\\Rightarrow x=10\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

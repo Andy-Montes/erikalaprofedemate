@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U09.B.5b · Vértice y eje de simetría</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U09.B.5b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U09', unidadNum: '09', subunidad: 'B', nivel: 'b',
+  titulo: 'Vértice y eje de simetría',
+  sub: 'Calcular el vértice · eje de simetría · máximo/mínimo · recorrido',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Argumentar', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Modelar', 'Representar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · eje de simetría (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es la ecuación del eje de simetría de \\(f(x)=x^2-6x+5\\)?',
+      [{ t: '\\(x=3\\)', err: null },
+       { t: '\\(x=-3\\)', err: '\\(x=\\tfrac{-b}{2a}=\\tfrac{-(-6)}{2}=3\\) (positivo).' },
+       { t: '\\(x=6\\)', err: 'Falta dividir por \\(2a\\): \\(\\tfrac{6}{2}=3\\).' },
+       { t: '\\(x=5\\)', err: 'El 5 es \\(c\\); el eje es \\(x=\\tfrac{-b}{2a}=3\\).' }],
+      'Correcto. \\(x=\\tfrac{-b}{2a}=\\tfrac{6}{2}=3\\).'));
+
+    // P2 · vértice completo (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es el vértice de la parábola \\(f(x)=x^2-6x+5\\)?',
+      [{ t: '\\((3,-4)\\)', err: null },
+       { t: '\\((3,4)\\)', err: '\\(f(3)=9-18+5=-4\\) (negativo).' },
+       { t: '\\((-3,-4)\\)', err: 'La primera coordenada es \\(x=\\tfrac{-b}{2a}=3\\) (positiva).' },
+       { t: '\\((3,5)\\)', err: 'La \\(y\\) del vértice es \\(f(3)=-4\\), no \\(c=5\\).' }],
+      'Correcto. \\(x_v=3\\), \\(y_v=f(3)=9-18+5=-4\\): \\(V=(3,-4)\\).'));
+
+    // P3 · máximo o mínimo (Argumentar)
+    E.push(armar('Argumentar', 'La función \\(f(x)=2x^2-8x+1\\):',
+      [{ t: 'Tiene un valor MÍNIMO (porque \\(a>0\\)).', err: null },
+       { t: 'Tiene un valor MÁXIMO (porque \\(a>0\\)).', err: 'Con \\(a>0\\) abre hacia arriba: el vértice es el punto más BAJO ⇒ mínimo.' },
+       { t: 'No tiene ni máximo ni mínimo.', err: 'Toda parábola tiene un extremo en el vértice; con \\(a>0\\) es un mínimo.' },
+       { t: 'Tiene dos mínimos.', err: 'Hay un solo extremo (el vértice); con \\(a>0\\) es el mínimo.' }],
+      'Correcto. \\(a>0\\Rightarrow\\) abre hacia arriba: el vértice es un mínimo.'));
+
+    // P4 · eje de simetría desde gráfico (Representar) · FIGURA PCU — DEMRE
+    var e4 = armar('Representar', 'Según el gráfico, ¿cuál es la ecuación del eje de simetría?',
+      [{ t: '\\(x=-2\\)', err: null },
+       { t: '\\(y=2\\)', err: 'El eje de simetría es una recta VERTICAL (\\(x=\\)constante). Pasa por el vértice: \\(x=-2\\).' },
+       { t: '\\(x=2\\)', err: 'El vértice está a la IZQUIERDA del eje Y, en \\(x=-2\\).' },
+       { t: '\\(y=-2\\)', err: 'El eje es vertical y pasa por \\(x=-2\\): \\(x=-2\\).' }],
+      'Correcto. El eje de simetría pasa por el vértice: \\(x=-2\\).');
+    e4.fig = PCU({ a: -0.5, h: -2, k: 2, axis: true, marks: [[-2, 2, '']], desc: 'Parábola cóncava hacia abajo con vértice en x = -2, y = 2.' });
+    E.push(e4);
+
+    // P5 · valor mínimo (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es el valor MÍNIMO de \\(f(x)=x^2-4x+7\\)?',
+      [{ t: '\\(3\\)', err: null },
+       { t: '\\(7\\)', err: 'El mínimo es \\(f\\) en el vértice: \\(x_v=2\\), \\(f(2)=4-8+7=3\\).' },
+       { t: '\\(2\\)', err: '\\(2\\) es \\(x_v\\) (dónde ocurre); el VALOR mínimo es \\(f(2)=3\\).' },
+       { t: '\\(-3\\)', err: '\\(f(2)=4-8+7=3\\) (positivo).' }],
+      'Correcto. \\(x_v=\\tfrac{4}{2}=2\\); mínimo \\(=f(2)=4-8+7=3\\).'));
+
+    // P6 · x del vértice con a distinto de 1 (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es la primera coordenada del vértice de \\(f(x)=2x^2+8x+1\\)?',
+      [{ t: '\\(x=-2\\)', err: null },
+       { t: '\\(x=-4\\)', err: '\\(x=\\tfrac{-b}{2a}=\\tfrac{-8}{2\\cdot2}=\\tfrac{-8}{4}=-2\\).' },
+       { t: '\\(x=2\\)', err: 'El signo: \\(\\tfrac{-8}{4}=-2\\) (negativo).' },
+       { t: '\\(x=-8\\)', err: 'Divide por \\(2a=4\\): \\(\\tfrac{-8}{4}=-2\\).' }],
+      'Correcto. \\(x_v=\\tfrac{-b}{2a}=\\tfrac{-8}{4}=-2\\).'));
+
+    // P7 · altura máxima (Modelar)
+    E.push(armar('Modelar', 'Un proyectil sigue \\(h(x)=-x^2+6x\\) (con \\(x\\) en segundos). ¿En qué instante alcanza su altura máxima?',
+      [{ t: '\\(x=3\\)', err: null },
+       { t: '\\(x=6\\)', err: '\\(x_v=\\tfrac{-b}{2a}=\\tfrac{-6}{2(-1)}=3\\) (el punto medio entre los ceros 0 y 6).' },
+       { t: '\\(x=-3\\)', err: '\\(\\tfrac{-6}{-2}=3\\) (positivo).' },
+       { t: '\\(x=9\\)', err: 'La altura máxima está en el vértice: \\(x=3\\).' }],
+      'Correcto. \\(x_v=\\tfrac{-6}{2(-1)}=3\\) segundos (altura máxima).'));
+
+    // P8 · recorrido desde el vértice (Representar)
+    E.push(armar('Representar', 'Una parábola abre hacia arriba y su vértice es \\((2,-4)\\). ¿Cuál es su recorrido?',
+      [{ t: '\\([-4,\\,+\\infty[\\)', err: null },
+       { t: '\\(]-\\infty,\\,-4]\\)', err: 'Abre hacia ARRIBA: el vértice es el MÍNIMO; los valores van de \\(-4\\) hacia arriba: \\([-4,\\infty[\\).' },
+       { t: 'Todos los reales.', err: 'El recorrido está limitado por el vértice: no baja de \\(-4\\): \\([-4,\\infty[\\).' },
+       { t: '\\([2,\\,+\\infty[\\)', err: 'El recorrido usa la \\(y\\) del vértice (\\(-4\\)), no la \\(x\\) (2): \\([-4,\\infty[\\).' }],
+      'Correcto. Vértice mínimo en \\(y=-4\\): recorrido \\([-4,\\infty[\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

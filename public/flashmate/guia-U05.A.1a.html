@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U05.A.1a · Proporcionalidad</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U05.A.1a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U05', unidadNum: '05', subunidad: 'A', nivel: 'a',
+  titulo: 'Proporcionalidad',
+  sub: 'Razón · proporción · directa e inversa',
+  HAB_E: ['Representar', 'Representar', 'Resolver problemas', 'Modelar', 'Argumentar', 'Argumentar', 'Resolver problemas', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · valor de una razon (Representar)
+    E.push(armar('Representar', 'Cuatro personas gastan 200 litros de agua en un día. ¿Cuál es el valor de la razón entre litros y personas (litros por persona)?',
+      [{ t: '\\(50\\)', err: null },
+       { t: '\\(\\tfrac{4}{200}\\)', err: 'El valor de la razón es litros ÷ personas: \\(200:4=50\\), no personas entre litros.' },
+       { t: '\\(204\\)', err: 'Una razón compara por COCIENTE, no por suma: \\(200:4=50\\).' },
+       { t: '\\(800\\)', err: 'Se divide, no se multiplica: \\(200:4=50\\) litros por persona.' }],
+      'Correcto. El valor de la razón es el cociente \\(\\tfrac{200}{4}=50\\) litros por persona.'));
+
+    // P2 · razon con unidades (Representar)
+    E.push(armar('Representar', 'Un terreno mide 0,6 km de largo y 200 m de ancho. ¿Cuál es la razón entre largo y ancho?',
+      [{ t: '\\(3:1\\)', err: null },
+       { t: '\\(1:3\\)', err: 'El largo va primero: \\(600:200=3:1\\), no al revés.' },
+       { t: '\\(3:1000\\)', err: 'Hay que usar la MISMA unidad: \\(0{,}6\\) km \\(=600\\) m. Entonces \\(600:200=3:1\\).' },
+       { t: '\\(0{,}6:2\\)', err: 'Convierte a la misma unidad: \\(0{,}6\\) km \\(=600\\) m y \\(200\\) m; \\(600:200=3:1\\).' }],
+      'Correcto. Con la misma unidad: \\(0{,}6\\) km \\(=600\\) m; \\(600:200=3:1\\).'));
+
+    // P3 · forman proporcion (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál de estas parejas de razones forma una proporción?',
+      [{ t: '\\(\\tfrac{12}{27}\\) y \\(\\tfrac{4}{9}\\)', err: null },
+       { t: '\\(\\tfrac{5}{8}\\) y \\(\\tfrac{10}{14}\\)', err: 'Productos cruzados: \\(5\\cdot14=70\\) y \\(8\\cdot10=80\\): distintos, no es proporción.' },
+       { t: '\\(\\tfrac{2}{3}\\) y \\(\\tfrac{6}{18}\\)', err: '\\(2\\cdot18=36\\) y \\(3\\cdot6=18\\): distintos, no forman proporción.' },
+       { t: '\\(\\tfrac{5}{3}\\) y \\(\\tfrac{6}{10}\\)', err: '\\(5\\cdot10=50\\) y \\(3\\cdot6=18\\): distintos, no es proporción.' }],
+      'Correcto. Propiedad fundamental: \\(12\\cdot9=108\\) y \\(27\\cdot4=108\\) son iguales, así que \\(\\tfrac{12}{27}=\\tfrac{4}{9}\\).'));
+
+    // P4 · modelar fichas (Modelar)
+    E.push(armar('Modelar', 'En una urna hay fichas blancas y negras en la razón \\(2:3\\). Si hay 18 fichas negras, ¿cuántas blancas hay?',
+      [{ t: '\\(12\\)', err: null },
+       { t: '\\(27\\)', err: 'Esa es una proporción invertida. \\(\\tfrac{2}{3}=\\tfrac{x}{18}\\Rightarrow x=\\tfrac{2\\cdot18}{3}=12\\).' },
+       { t: '\\(9\\)', err: 'Con \\(\\tfrac{2}{3}=\\tfrac{x}{18}\\): \\(3x=36\\Rightarrow x=12\\).' },
+       { t: '\\(18\\)', err: 'No hay igual cantidad: hay menos blancas (razón menor). \\(x=12\\).' }],
+      'Correcto. \\(\\tfrac{2}{3}=\\tfrac{x}{18}\\Rightarrow 3x=2\\cdot18\\Rightarrow x=12\\) fichas blancas.'));
+
+    // P5 · directa o inversa (Argumentar)
+    E.push(armar('Argumentar', 'La cantidad de trabajadores y el tiempo que tardan en pintar una misma pared son magnitudes:',
+      [{ t: 'Inversamente proporcionales', err: null },
+       { t: 'Directamente proporcionales', err: 'Si hay MÁS trabajadores, tardan MENOS: al aumentar una, la otra disminuye. Es inversa.' },
+       { t: 'No proporcionales', err: 'Sí se relacionan: su producto (trabajo total) es constante. Es proporcionalidad inversa.' },
+       { t: 'Iguales', err: 'No son iguales; se compensan: más trabajadores, menos tiempo. Es inversa.' }],
+      'Correcto. Más trabajadores ⇒ menos tiempo: al aumentar una, la otra disminuye. Es proporcionalidad inversa (\\(a\\cdot b=k\\)).'));
+
+    // P6 · directa (Argumentar)
+    E.push(armar('Argumentar', 'El consumo de electricidad y el valor de la cuenta a pagar son magnitudes:',
+      [{ t: 'Directamente proporcionales', err: null },
+       { t: 'Inversamente proporcionales', err: 'A MÁS consumo, MÁS valor a pagar: ambas aumentan juntas. Es directa.' },
+       { t: 'No proporcionales', err: 'Se relacionan por un valor fijo por unidad (el precio del kWh): es directa.' },
+       { t: 'Constantes', err: 'El valor no es fijo: depende del consumo. Al subir uno sube el otro: directa.' }],
+      'Correcto. A mayor consumo, mayor valor: ambas aumentan juntas. Es proporcionalidad directa (\\(\\tfrac{a}{b}=k\\)).'));
+
+    // P7 · serie de razones (Resolver)
+    E.push(armar('Resolver problemas', 'Las edades de tres hermanas están en la razón \\(2:5:3\\) y suman 30 años. ¿Cuántos años tiene la del medio (la que corresponde a 5)?',
+      [{ t: '\\(15\\)', err: null },
+       { t: '\\(9\\)', err: 'Ese corresponde al 3. Con \\(k=\\tfrac{30}{2+5+3}=3\\), la del 5 tiene \\(5\\cdot3=15\\).' },
+       { t: '\\(6\\)', err: 'Ese es el 2. La constante es \\(k=3\\); la del 5 tiene \\(5\\cdot3=15\\).' },
+       { t: '\\(10\\)', err: 'La constante es \\(k=\\tfrac{30}{10}=3\\), no \\(5\\). La edad es \\(5\\cdot3=15\\).' }],
+      'Correcto. \\(k=\\tfrac{30}{2+5+3}=3\\); la del 5 tiene \\(5\\cdot3=15\\) años.'));
+
+    // P8 · reparto proporcional (Modelar)
+    E.push(armar('Modelar', 'Una cuerda de 100 cm se corta en tres partes en la razón \\(3:2:5\\). ¿Cuánto mide la parte mayor?',
+      [{ t: '\\(50\\) cm', err: null },
+       { t: '\\(30\\) cm', err: 'Esa corresponde al 3. La mayor es la del 5: \\(5\\cdot10=50\\) cm.' },
+       { t: '\\(20\\) cm', err: 'Esa es la del 2 (la menor). La constante es \\(k=10\\); la mayor mide \\(5\\cdot10=50\\).' },
+       { t: '\\(60\\) cm', err: 'La constante es \\(k=\\tfrac{100}{3+2+5}=10\\); la mayor mide \\(5\\cdot10=50\\).' }],
+      'Correcto. \\(k=\\tfrac{100}{3+2+5}=10\\); la parte mayor (5) mide \\(5\\cdot10=50\\) cm.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

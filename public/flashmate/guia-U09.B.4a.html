@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U09.B.4a · Función cuadrática: concavidad y cortes</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U09.B.4a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U09', unidadNum: '09', subunidad: 'B', nivel: 'a',
+  titulo: 'Función cuadrática: concavidad y cortes',
+  sub: 'Reconocer la cuadrática · signo de a · corte con el eje Y · evaluar',
+  HAB_E: ['Resolver problemas', 'Representar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Modelar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · reconocer cuadrática (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', '¿Cuál de las siguientes es una función cuadrática?',
+      [{ t: '\\(f(x)=(-2x+1)^2\\)', err: null },
+       { t: '\\(f(x)=(x^2-4)-(x^2+2x)\\)', err: 'Al reducir: \\(x^2-4-x^2-2x=-2x-4\\), lineal (se cancela el \\(x^2\\)).' },
+       { t: '\\(f(x)=x+4\\)', err: 'Es lineal (grado 1): no tiene \\(x^2\\).' },
+       { t: '\\(f(x)=(x+2)(x-2)-x^2\\)', err: '\\(x^2-4-x^2=-4\\): queda constante, sin \\(x^2\\).' }],
+      'Correcto. \\((-2x+1)^2=4x^2-4x+1\\): sí tiene término \\(x^2\\) (\\(a=4\\neq0\\)).'));
+
+    // P2 · concavidad por signo de a (Representar)
+    E.push(armar('Representar', 'La parábola de \\(f(x)=-3x^2+2x-1\\) es:',
+      [{ t: 'Cóncava hacia abajo (porque \\(a<0\\)).', err: null },
+       { t: 'Cóncava hacia arriba (porque \\(a<0\\)).', err: 'Con \\(a<0\\) la parábola abre hacia ABAJO. Hacia arriba es \\(a>0\\).' },
+       { t: 'Una recta.', err: 'Tiene \\(x^2\\): es una parábola, no una recta.' },
+       { t: 'No se puede saber.', err: 'Sí: el signo de \\(a\\) lo decide; \\(a=-3<0\\Rightarrow\\) cóncava hacia abajo.' }],
+      'Correcto. \\(a=-3<0\\Rightarrow\\) parábola cóncava hacia abajo.'));
+
+    // P3 · corte con eje Y (Resolver)
+    E.push(armar('Resolver problemas', '¿En qué punto la parábola \\(f(x)=x^2+3x-5\\) corta al eje Y?',
+      [{ t: '\\((0,-5)\\)', err: null },
+       { t: '\\((0,5)\\)', err: 'El corte con Y es \\((0,c)\\); aquí \\(c=-5\\): \\((0,-5)\\).' },
+       { t: '\\((-5,0)\\)', err: 'El corte con Y tiene \\(x=0\\): \\(f(0)=-5\\Rightarrow(0,-5)\\).' },
+       { t: '\\((0,3)\\)', err: 'El corte con Y es \\(c\\) (el término libre), que es \\(-5\\), no \\(3\\).' }],
+      'Correcto. \\(f(0)=c=-5\\): corta el eje Y en \\((0,-5)\\).'));
+
+    // P4 · concavidad desde gráfico (Argumentar) · FIGURA PCU
+    var e4 = armar('Argumentar', 'Observa la parábola. ¿Qué signo tiene el coeficiente \\(a\\)?',
+      [{ t: 'Positivo (\\(a>0\\)): abre hacia arriba.', err: null },
+       { t: 'Negativo (\\(a<0\\)): abre hacia abajo.', err: 'La parábola abre hacia ARRIBA, así que \\(a>0\\).' },
+       { t: 'Cero.', err: 'Si \\(a=0\\) no sería parábola. Como abre hacia arriba, \\(a>0\\).' },
+       { t: 'No se puede saber del gráfico.', err: 'Sí: como abre hacia arriba, \\(a>0\\).' }],
+      'Correcto. Abre hacia arriba \\(\\Rightarrow a>0\\).');
+    e4.fig = PCU({ a: 0.5, h: 0, k: -3, desc: 'Parábola que abre hacia arriba, vértice bajo el eje X.' });
+    E.push(e4);
+
+    // P5 · evaluar (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', 'Para \\(f(x)=3x^2+13x-10\\), ¿cuál es el valor de \\(f(-5)\\)?',
+      [{ t: '\\(0\\)', err: null },
+       { t: '\\(-10\\)', err: '\\(f(-5)=3\\cdot25+13\\cdot(-5)-10=75-65-10=0\\).' },
+       { t: '\\(140\\)', err: 'Cuidado con los signos: \\(13\\cdot(-5)=-65\\); total \\(75-65-10=0\\).' },
+       { t: '\\(30\\)', err: '\\(3\\cdot(-5)^2=75\\); luego \\(75-65-10=0\\).' }],
+      'Correcto. \\(f(-5)=3(25)-65-10=0\\).'));
+
+    // P6 · dominio (Representar)
+    E.push(armar('Representar', '¿Cuál es el dominio de cualquier función cuadrática \\(f(x)=ax^2+bx+c\\)?',
+      [{ t: 'Todos los números reales.', err: null },
+       { t: 'Solo los reales positivos.', err: 'No hay restricción: \\(x\\) puede ser cualquier real. Dominio \\(=\\mathbb{R}\\).' },
+       { t: 'Los reales, excepto 0.', err: 'No se excluye ningún valor: el dominio es todo \\(\\mathbb{R}\\).' },
+       { t: 'El recorrido.', err: 'El dominio (valores de \\(x\\)) es \\(\\mathbb{R}\\); el recorrido depende del vértice.' }],
+      'Correcto. El dominio de una función cuadrática es \\(\\mathbb{R}\\) (todos los reales).'));
+
+    // P7 · modelar área (Modelar)
+    E.push(armar('Modelar', 'El área de un cuadrado de lado \\(x\\) es \\(A(x)=x^2\\). ¿Qué tipo de función es y cómo es su gráfico?',
+      [{ t: 'Cuadrática; su gráfico es una parábola.', err: null },
+       { t: 'Lineal; su gráfico es una recta.', err: 'El área depende de \\(x^2\\): es CUADRÁTICA, y su gráfico es una parábola.' },
+       { t: 'Constante; su gráfico es horizontal.', err: 'No es constante: el área cambia con \\(x\\) (según \\(x^2\\)).' },
+       { t: 'No es función.', err: 'Sí: a cada lado \\(x\\) le corresponde un único área \\(x^2\\). Es cuadrática.' }],
+      'Correcto. \\(A(x)=x^2\\) es cuadrática; su gráfico es una parábola.'));
+
+    // P8 · punto que pertenece (Resolver)
+    E.push(armar('Resolver problemas', 'Para \\(f(x)=x^2-2x\\), ¿cuál de estos puntos pertenece a la parábola?',
+      [{ t: '\\((3,3)\\)', err: null },
+       { t: '\\((3,9)\\)', err: '\\(f(3)=9-6=3\\), no 9.' },
+       { t: '\\((0,2)\\)', err: '\\(f(0)=0\\): el punto es \\((0,0)\\).' },
+       { t: '\\((1,1)\\)', err: '\\(f(1)=1-2=-1\\): el punto es \\((1,-1)\\).' }],
+      'Correcto. \\(f(3)=3^2-2\\cdot3=9-6=3\\): pertenece \\((3,3)\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

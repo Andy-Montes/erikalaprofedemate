@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flash Mate · Guía U01.B.5b · Números Enteros</title>
-<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<title>Flash Mate · Guía U01.B.5b · Números enteros</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:100vh;padding:16px 12px 80px}
@@ -85,19 +88,22 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
 </style>
 </head>
 <body>
-<div class="fm-wrap"><div class="fm-card">
+<div class="fm-wrap">
+<div class="fm-card">
+
   <div class="fm-hdr">
     <div class="fm-hdr-top">
       <div class="fm-hdr-left">
         <span class="fm-badge">Flash Mate · Guía U01.B.5b</span>
-        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01</div>
-        <div class="fm-titulo">Números Enteros</div>
-        <div class="fm-sub">Propiedades · Expresiones · Condiciones de signo</div>
+        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01 · NIVEL b</div>
+        <div class="fm-titulo">Números enteros</div>
+        <div class="fm-sub">Orden en la recta · Operatoria · Signos · Contexto</div>
       </div>
-      <img class="fm-hdr-logo" src="/flashmate/logo-erika.png" alt="Erika la Profe de Mate" onerror="this.style.display='none'">
+      <img class="fm-hdr-logo" src="https://emerinoo.github.io/flashmate/logo-erika.png" alt="Erika la Profe de Mate" onerror="this.style.display='none'">
     </div>
     <div class="prog-bg"><div class="prog-bar" id="barra" style="width:0%"></div></div>
   </div>
+
   <div class="fm-ident" id="zona-ident">
     <div class="fm-ident-titulo">ANTES DE COMENZAR</div>
     <input class="fm-input" type="text" id="inp-nombre" placeholder="Tu nombre completo">
@@ -105,6 +111,7 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
     <div id="error-ident" style="font-size:12px;color:#E24B4A;margin-bottom:6px;display:none">Por favor completa tu nombre y correo.</div>
     <button class="fm-btn-start" onclick="iniciar()">Comenzar guía →</button>
   </div>
+
   <div class="fm-body" id="zona-q">
     <div class="fm-qnum" id="qnum">Pregunta 1 de 8</div>
     <div id="htag"></div>
@@ -116,192 +123,306 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
       <button class="btn-s" id="btns" onclick="siguiente()">Siguiente →</button>
     </div>
   </div>
+
   <div class="fm-body final" id="zona-final">
     <div class="pje-big" id="pje"></div>
     <div class="pje-sub" id="pmsg"></div>
     <div class="alerta" id="alerta"></div>
     <div class="dots" id="dots"></div>
-    <div class="resumen"><div class="res-titulo">Detalle por pregunta</div><div id="reslista" class="res-fila"></div></div>
-    <div class="btns" style="justify-content:center"><button class="btn-p" id="btn-rep" onclick="reiniciar()">Repetir con valores nuevos</button></div>
+    <div class="resumen">
+      <div class="res-titulo">Detalle por pregunta</div>
+      <div id="reslista" class="res-fila"></div>
+    </div>
+    <div class="btns" style="justify-content:center">
+      <button class="btn-p" id="btn-rep" onclick="reiniciar()">Repetir con valores nuevos</button>
+      <button class="btn-s" id="btn-portal" onclick="volverPortal()" style="display:inline-block;margin-top:8px">← Volver al portal</button>
+    </div>
   </div>
+
   <div class="fm-footer">
     <span class="fm-footer-copy">© 2026 Erika la Profe de Mate</span>
     <a href="https://www.erikalaprofedemate.com" class="fm-footer-link" target="_blank">www.erikalaprofedemate.com</a>
   </div>
-</div></div>
 
-<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.B.5b%20(N%C3%BAmeros%20Enteros%2C%20Nivel%20b)" class="fm-wa" target="_blank">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</div>
+</div>
+
+<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.B.5b" class="fm-wa" target="_blank" title="Contactar a Erika">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
-const NLS=4,LETRAS=['A','B','C','D','E'];
-let nombreEstudiante='',EJ=[],actual=0,resp=[],sel=null;
+const NLS=4;
+const LETRAS=['A','B','C','D','E'];
+let nombreEstudiante='';
+let EJ=[],actual=0,resp=[],sel=null;
+
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
-function hcss(h){if(h==='Resolver problemas')return 'hab-rp';if(h==='Modelar')return 'hab-m';if(h==='Representar')return 'hab-r';return 'hab-a';}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(s){return esc(s).replace(/\n/g,'<br>');}
+function mathify(el){ if(el&&window.renderMathInElement){ try{ renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false}); }catch(e){} } }
+
+function armar(hab, txt, opciones, fb_ok){
+  const sh = shuffle(opciones);
+  const ok = sh.findIndex(o => o.err === null);
+  return {hab, txt, opts:sh, ok, fb_ok};
+}
 
 function generarEjercicios(){
-  const EJ=[];
+  const E=[];
 
-  // P1 — Modelar: elevador con subterráneos
-  const pIni=rnd([-3,-2,-1]);
-  const mov=[rnd([7,8,9,10]),rnd([-3,-4,-5]),rnd([2,3,4])];
-  const pFin=pIni+mov[0]+mov[1]+mov[2];
-  const w1=shuffle([pFin+1,pFin-1,pFin+2,pFin-2]).slice(0,3);
-  const ops1=shuffle([pFin,...w1]).map(x=>'Piso '+x);
-  EJ.push({hab:'Modelar',
-    txt:`Un edificio tiene subterráneos (−1, −2, −3) y pisos sobre el suelo. Un elevador parte del piso ${pIni}, sube ${mov[0]} pisos, baja ${Math.abs(mov[1])} y sube ${mov[2]}. ¿En qué piso queda?`,
-    ops:ops1,ok:ops1.indexOf('Piso '+pFin),
-    fb_ok:`Correcto. ${pIni} + ${mov[0]} = ${pIni+mov[0]}. Luego ${pIni+mov[0]} ${mov[1]} = ${pIni+mov[0]+mov[1]}. Finalmente + ${mov[2]} = ${pFin}.`,
-    fb_mal:`Paso a paso: ${pIni}+${mov[0]}=${pIni+mov[0]}; ${pIni+mov[0]}${mov[1]}=${pIni+mov[0]+mov[1]}; +${mov[2]}=${pFin}. Los subterráneos son enteros negativos.`
-  });
+  // ── P1 · Ordenar de menor a mayor (Representar) ──
+  const ORD=[
+    {s:['−4','2','−7','0'],order:'−7, −4, 0, 2',d:[['0, 2, −4, −7','Ordenaste por tamaño ignorando el signo; los negativos "grandes" son los MENORES.'],['2, 0, −4, −7','Ese orden es de MAYOR a menor.'],['−4, −7, 0, 2','Entre negativos, −7 es menor que −4 (está más a la izquierda).']]},
+    {s:['3','−6','1','−2'],order:'−6, −2, 1, 3',d:[['1, 3, −2, −6','Ordenaste por tamaño ignorando el signo.'],['3, 1, −2, −6','Ese orden es de mayor a menor.'],['−2, −6, 1, 3','Entre negativos, −6 es menor que −2.']]}
+  ];
+  const c1=rnd(ORD);
+  E.push(armar('Representar',`¿Cuál es el orden CORRECTO, de MENOR a MAYOR, de los números ${c1.s.join(', ')}?`,
+    [{t:c1.order,err:null},{t:c1.d[0][0],err:c1.d[0][1]},{t:c1.d[1][0],err:c1.d[1][1]},{t:c1.d[2][0],err:c1.d[2][1]}],
+    `Correcto. De menor a mayor: ${c1.order}. Mientras más a la izquierda en la recta, menor.`));
 
-  // P2 — Argumentar: tres proposiciones verdaderas/falsas
-  EJ.push({hab:'Argumentar',
-    txt:'¿Cuál o cuáles de las siguientes afirmaciones sobre enteros son SIEMPRE verdaderas?\nI. El producto de tres enteros negativos es negativo.\nII. La suma de un entero con su opuesto es cero.\nIII. El cuadrado de cualquier entero negativo es positivo.',
-    ops:['Solo I','Solo II','I y III','I, II y III'],ok:3,
-    fb_ok:'Correcto. I: (−)×(−)×(−)=(+)×(−)=negativo ✓. II: n+(−n)=0 siempre ✓. III: (−n)²=n²>0 para n≠0 ✓. Las tres son verdaderas.',
-    fb_mal:'I: neg×neg×neg=pos×neg=negativo ✓. II: n+(−n)=0 es la propiedad del inverso aditivo ✓. III: (−n)²=n²>0 siempre ✓. Las tres son correctas.'
-  });
+  // ── P2 · Temperatura con varios cambios (Modelar) ──
+  const TEMP=[
+    {ini:'−3',s:5,b:8,r:'−6',sgn:'6',om:'2',allneg:'−16'},
+    {ini:'−1',s:4,b:9,r:'−6',sgn:'6',om:'3',allneg:'−14'},
+    {ini:'2',s:1,b:7,r:'−4',sgn:'4',om:'3',allneg:'−10'}
+  ];
+  const c2=rnd(TEMP);
+  E.push(armar('Modelar',`La temperatura es ${c2.ini} °C. Sube ${c2.s}° y luego baja ${c2.b}°. ¿Cuál es la temperatura final?`,
+    [{t:c2.r+' °C',err:null},
+     {t:c2.sgn+' °C',err:`Error de signo: ${c2.ini} + ${c2.s} − ${c2.b} = ${c2.r}.`},
+     {t:c2.om+' °C',err:`Falta bajar ${c2.b}°: ${c2.ini} + ${c2.s} − ${c2.b} = ${c2.r}.`},
+     {t:c2.allneg+' °C',err:`Subir SUMA: ${c2.ini} + ${c2.s} − ${c2.b} = ${c2.r}.`}],
+    `Correcto. ${c2.ini} + ${c2.s} − ${c2.b} = ${c2.r} °C.`));
 
-  // P3 — Resolver problemas: empresa con balances trimestrales
-  const q=[rnd([-4000,-3200,-5000]),rnd([1500,1800,2200]),rnd([-800,-1200,-900])];
-  const saldoQ3=q[0]+q[1]+q[2];
-  const meta=rnd([400,500,600]);
-  const necesita=meta-saldoQ3;
-  const w3=shuffle([necesita+300,necesita-200,necesita+500,necesita-400]).slice(0,3);
-  const ops3=shuffle([necesita,...w3]).map(x=>'$'+Math.abs(x).toLocaleString('es-CL'));
-  EJ.push({hab:'Resolver problemas',
-    txt:`Una empresa registró: Q1: $${q[0].toLocaleString('es-CL')}, Q2: $${q[1].toLocaleString('es-CL')}, Q3: $${q[2].toLocaleString('es-CL')}. ¿Cuánto debe ganar en Q4 para cerrar el año con al menos $${meta.toLocaleString('es-CL')} de ganancia?`,
-    ops:ops3,ok:ops3.indexOf('$'+Math.abs(necesita).toLocaleString('es-CL')),
-    fb_ok:`Correcto. Saldo Q3: ${q[0]}+${q[1]}+${q[2]}=${saldoQ3}. Para llegar a ${meta}: ${meta}−(${saldoQ3})=${necesita}. Restar un negativo equivale a sumar.`,
-    fb_mal:`Saldo acumulado: ${q.join('+')}=${saldoQ3}. Necesita: ${meta}−(${saldoQ3})=${meta}+${Math.abs(saldoQ3)}=${necesita}.`
-  });
+  // ── P3 · Resta de dos negativos (Resolver) ──
+  const RES=[
+    {a:'−5',b:9,r:'4',sub:'−14',sgn:'−4'},
+    {a:'−8',b:3,r:'−5',sub:'−11',sgn:'5'},
+    {a:'−2',b:7,r:'5',sub:'−9',sgn:'−5'},
+    {a:'−10',b:4,r:'−6',sub:'−14',sgn:'6'}
+  ];
+  const c3=rnd(RES);
+  E.push(armar('Resolver problemas',`¿Cuál es el resultado de ${c3.a} − (−${c3.b})?`,
+    [{t:c3.r,err:null},
+     {t:c3.sub,err:`Restar un negativo es SUMAR el opuesto: ${c3.a} − (−${c3.b}) = ${c3.a} + ${c3.b} = ${c3.r}.`},
+     {t:c3.sgn,err:`Error de signo: ${c3.a} + ${c3.b} = ${c3.r}.`},
+     {t:c3.a,err:`No ignores el −(−${c3.b}): hay que sumar ${c3.b}.`}],
+    `Correcto. ${c3.a} − (−${c3.b}) = ${c3.a} + ${c3.b} = ${c3.r}.`));
 
-  // P4 — Representar: cámara frigorífica con variaciones
-  const base=rnd([-18,-20,-15,-22]);
-  const vars=[rnd([3,4,5]),rnd([-2,-3,-1]),rnd([6,7,8]),rnd([-4,-5,-6]),rnd([1,2,3]),rnd([-1,-2,-3])];
-  const tFinal=base+vars.reduce((a,b)=>a+b,0);
-  const w4=shuffle([tFinal+2,tFinal-1,tFinal+3,tFinal-2]).slice(0,3);
-  const ops4=shuffle([tFinal,...w4]).map(x=>x+'°C');
-  EJ.push({hab:'Representar',
-    txt:`Una cámara frigorífica parte en ${base}°C (temperatura objetivo). Registra estas variaciones: ${vars.join(', ')}. ¿Cuál es la temperatura final?`,
-    ops:ops4,ok:ops4.indexOf(tFinal+'°C'),
-    fb_ok:`Correcto. ${base} + (${vars.join('+'+'')}) = ${base} + ${vars.reduce((a,b)=>a+b,0)} = ${tFinal}°C. Suma algebraica de todas las variaciones.`,
-    fb_mal:`Temperatura final = ${base} + suma de variaciones = ${base} + ${vars.reduce((a,b)=>a+b,0)} = ${tFinal}°C.`
-  });
+  // ── P4 · Operatoria combinada con paréntesis (Resolver) ──
+  E.push(armar('Resolver problemas','¿Cuál es el resultado de −4 + 3 · (−2) − (−6)?',
+    [{t:'−4',err:null},
+     {t:'8',err:'No respetaste la precedencia: primero se multiplica 3·(−2)=−6. Da −4 + (−6) − (−6) = −4.'},
+     {t:'−16',err:'Restar (−6) es SUMAR 6, no restar: −4 + (−6) − (−6) = −4.'},
+     {t:'−10',err:'Falta sumar 6 al final: −(−6) = +6. El resultado es −4.'}],
+    'Correcto. Primero 3·(−2) = −6; luego −4 + (−6) − (−6) = −4.'));
 
-  // P5 — Argumentar: expresión siempre negativa dado p<0, q>0
-  const n5=rnd([3,4,5,6,7]),m5=rnd([2,3,4,5]);
-  EJ.push({hab:'Argumentar',
-    txt:`Se sabe que p < 0 y q > 0. ¿Cuál de las siguientes expresiones es SIEMPRE negativa?`,
-    ops:['p + q','p · q','p − q','q · p²'],ok:2,
-    fb_ok:'Correcto. p − q: negativo menos positivo = siempre negativo ✓. p+q depende de magnitudes. p·q=negativo también, pero p−q es aún más directo.',
-    fb_mal:'p−q: p<0 y q>0, entonces p−q = negativo − positivo = siempre negativo. p·q también es negativo, pero la opción más directamente negativa es p−q.'
-  });
+  // ── P5 · Punto medio en la recta (Representar) ──
+  const MED=[
+    {lo:'−8',hi:'−2',m:'−5',d:[['−6','De −8 a −2 hay 6 pasos; el punto medio es −5.'],['−4','−4 está más cerca de −2; el medio de −8 y −2 es −5.'],['−10','−10 es la suma; el punto medio se promedia: (−8 + −2)/2 = −5.']]},
+    {lo:'−10',hi:'4',m:'−3',d:[['−6','El punto medio de −10 y 4 es (−10 + 4)/2 = −3.'],['−2','Revisa: el medio entre −10 y 4 es −3.'],['−14','−14 es −10 − 4; se promedia: (−10 + 4)/2 = −3.']]}
+  ];
+  const c5=rnd(MED);
+  E.push(armar('Representar',`¿Qué número entero está justo en el medio, en la recta numérica, entre ${c5.lo} y ${c5.hi}?`,
+    [{t:c5.m,err:null},{t:c5.d[0][0],err:c5.d[0][1]},{t:c5.d[1][0],err:c5.d[1][1]},{t:c5.d[2][0],err:c5.d[2][1]}],
+    `Correcto. El punto medio es el promedio: (${c5.lo} + ${c5.hi})/2 = ${c5.m}.`));
 
-  // P6 — Modelar: programa de puntos fidelización
-  const puntos=[rnd([400,500,600]),rnd([1000,1200,1500]),rnd([-600,-800,-700]),rnd([800,900,1100]),rnd([-200,-300,-250])];
-  const totalP=puntos.reduce((a,b)=>a+b,0);
-  const w6=shuffle([totalP+150,totalP-100,totalP+300,totalP-200]).slice(0,3);
-  const ops6=shuffle([totalP,...w6]).map(String);
-  EJ.push({hab:'Modelar',
-    txt:`Un programa de puntos registra: inscripción +${puntos[0]}, primera compra +${puntos[1]}, canje −${Math.abs(puntos[2])}, segunda compra +${puntos[3]}, penalización −${Math.abs(puntos[4])}. ¿Cuál es el saldo?`,
-    ops:ops6,ok:ops6.indexOf(String(totalP)),
-    fb_ok:`Correcto. Suma: ${puntos.join('+')}=${totalP} puntos. Se agrupan positivos: ${puntos.filter(x=>x>0).join('+')}=${puntos.filter(x=>x>0).reduce((a,b)=>a+b,0)}, negativos: ${puntos.filter(x=>x<0).reduce((a,b)=>a+b,0)}.`,
-    fb_mal:`Suma algebraica: ${puntos.join('+')}=${totalP}. Positivos: ${puntos.filter(x=>x>0).reduce((a,b)=>a+b,0)}, negativos: ${puntos.filter(x=>x<0).reduce((a,b)=>a+b,0)}.`
-  });
+  // ── P6 · Signo del producto de varios negativos (Argumentar) ──
+  const SIG=[
+    {n:'tres',res:'Negativo',otro:'Positivo',ej:'(−2)·(−1)·(−3) = −6',regla:'un número IMPAR de factores negativos da producto negativo'},
+    {n:'cuatro',res:'Positivo',otro:'Negativo',ej:'(−1)·(−2)·(−1)·(−3) = 6',regla:'un número PAR de factores negativos da producto positivo'}
+  ];
+  const c6=rnd(SIG);
+  E.push(armar('Argumentar',`El producto de ${c6.n} números negativos, ¿es positivo o negativo?`,
+    [{t:c6.res,err:null},
+     {t:c6.otro,err:`Con ${c6.n} negativos el resultado es ${c6.res.toLowerCase()}: ${c6.ej}.`},
+     {t:'Depende de los valores',err:`No depende: ${c6.regla}. Por ejemplo, ${c6.ej}.`},
+     {t:'Cero',err:`No da cero (ningún factor es 0): ${c6.ej}.`}],
+    `Correcto. ${c6.regla}: ${c6.ej}.`));
 
-  // P7 — Representar: expresión equivalente con paréntesis
-  const a7=rnd([3,4,5]),b7=rnd([6,7,8]),c7=rnd([2,3,4]);
-  const inner=b7-c7; // b7-c7 puede ser negativo si c7>b7, ajustar
-  const step1=`(${b7}−${c7})=${b7-c7}`;
-  const step2=`${a7}−(${b7-c7})=${a7-(b7-c7)}`;
-  const res7=-(a7-(b7-c7));
-  EJ.push({hab:'Representar',
-    txt:`¿Cuál de las siguientes expresiones es equivalente a −[${a7} − (${b7} − ${c7})]?`,
-    ops:[
-      `−[${a7} + ${b7-c7}]`,
-      `−${a7} + ${b7} − ${c7}`,
-      `−[${a7} − ${b7-c7}]`,
-      `${res7}`
-    ],ok:2,
-    fb_ok:`Correcto. Paso 1: (${b7}−${c7})=${b7-c7}. Paso 2: −[${a7}−(${b7-c7})] = −[${a7}−${b7-c7}]. Esa es la forma equivalente antes de simplificar.`,
-    fb_mal:`Resolviendo: (${b7}−${c7})=${b7-c7}. Entonces −[${a7}−(${b7-c7})]=−[${a7}−${b7-c7}]. La opción equivalente es −[${a7}−${b7-c7}].`
-  });
+  // ── P7 · Saldo de cuenta con sobregiro (Modelar) ──
+  const SAL=[
+    {ini:'−$2.000',dep:'$5.000',gas:'$4.000',r:'−$1.000',olv:'$3.000',nog:'$7.000',pos:'$1.000',op:'−2.000 + 5.000 − 4.000 = −1.000'},
+    {ini:'−$3.000',dep:'$8.000',gas:'$6.000',r:'−$1.000',olv:'$5.000',nog:'$11.000',pos:'$1.000',op:'−3.000 + 8.000 − 6.000 = −1.000'}
+  ];
+  const c7=rnd(SAL);
+  E.push(armar('Modelar',`Una cuenta tiene un saldo de ${c7.ini} (sobregiro). Se deposita ${c7.dep} y luego se gastan ${c7.gas}. ¿Cuál es el saldo final?`,
+    [{t:c7.r,err:null},
+     {t:c7.olv,err:`Olvidaste el sobregiro: el saldo parte en ${c7.ini}, negativo. Da ${c7.r}.`},
+     {t:c7.nog,err:`Gastar RESTA: ${c7.op}.`},
+     {t:c7.pos,err:`Revisa el signo: queda en ${c7.r} (aún en sobregiro).`}],
+    `Correcto. ${c7.op}: sigue en sobregiro.`));
 
-  // P8 — Resolver problemas: videojuego con tres tipos de puntaje
-  const niv=rnd([4,5,6]),vidas=rnd([2,3,4]),bonus=rnd([1,2,3]);
-  const pts=rnd([300,350,400]),rest=rnd([100,120,150]),bon=rnd([150,200,250]);
-  const total8=niv*pts - vidas*rest + bonus*bon;
-  const w8=shuffle([total8+50,total8-100,total8+150,total8-50]).slice(0,3);
-  const ops8=shuffle([total8,...w8]).map(String);
-  EJ.push({hab:'Resolver problemas',
-    txt:`En un videojuego: nivel completado +${pts} pts, vida perdida −${rest} pts, bonus +${bon} pts. Un jugador completó ${niv} niveles, perdió ${vidas} vidas y obtuvo ${bonus} bonus. ¿Cuál es su puntaje?`,
-    ops:ops8,ok:ops8.indexOf(String(total8)),
-    fb_ok:`Correcto. ${niv}×${pts}=${niv*pts}. ${vidas}×(−${rest})=−${vidas*rest}. ${bonus}×${bon}=${bonus*bon}. Total: ${niv*pts}−${vidas*rest}+${bonus*bon}=${total8}.`,
-    fb_mal:`Niveles: ${niv}×${pts}=${niv*pts}. Vidas: −${vidas*rest}. Bonus: +${bonus*bon}. Total: ${total8}.`
-  });
+  // ── P8 · Identificar el error en una resta (Argumentar) ──
+  const OC=[
+    {en:'Una persona calcula −8 − (−3), cometiendo un error.\nPaso 1: cambia restar el negativo por sumar: −8 + 3.\nPaso 2: suma: −8 + 3 = −11.\nPaso 3: concluye que el resultado es −11.\n¿En qué paso está el error?',fb:'−8 + 3 = −5, no −11.'},
+    {en:'Una persona calcula −6 − (−10), cometiendo un error.\nPaso 1: cambia restar el negativo por sumar: −6 + 10.\nPaso 2: suma: −6 + 10 = −16.\nPaso 3: concluye que el resultado es −16.\n¿En qué paso está el error?',fb:'−6 + 10 = 4, no −16.'}
+  ];
+  const c8=rnd(OC);
+  E.push(armar('Argumentar',c8.en,
+    [{t:'En el Paso 2',err:null},
+     {t:'En el Paso 1',err:'El Paso 1 está bien: restar un negativo es sumar el opuesto.'},
+     {t:'En el Paso 3',err:'El Paso 3 solo copia el resultado del Paso 2; el error es antes.'},
+     {t:'No hay error',err:`Sí hay error: ${c8.fb}`}],
+    `Correcto. El error está en el Paso 2: ${c8.fb}`));
 
-  return EJ;
+  return E;
 }
 
-function validarCorreo(c){if(c.indexOf('@')===-1)return false;var p=c.split('@');if(p.length!==2||!p[0].length)return false;if(p[1].indexOf('.')===-1)return false;var d=p[1].split('.');return d[0].length>0&&d[d.length-1].length>=2;}
+function hcss(h){
+  if(h==='Resolver problemas')return 'hab-rp';
+  if(h==='Modelar')return 'hab-m';
+  if(h==='Representar')return 'hab-r';
+  return 'hab-a';
+}
+
+function validarCorreo(correo){
+  if(correo.indexOf('@')===-1) return false;
+  var partes=correo.split('@');
+  if(partes.length!==2) return false;
+  if(partes[0].length===0) return false;
+  if(partes[1].indexOf('.')===-1) return false;
+  var dominio=partes[1].split('.');
+  if(dominio[0].length===0) return false;
+  if(dominio[dominio.length-1].length<2) return false;
+  return true;
+}
 function iniciar(){
-  const nom=document.getElementById('inp-nombre').value.trim(),cor=document.getElementById('inp-correo').value.trim();
+  const nom=document.getElementById('inp-nombre').value.trim();
+  const cor=document.getElementById('inp-correo').value.trim();
   if(!nom||!cor){document.getElementById('error-ident').style.display='block';return;}
-  if(!validarCorreo(cor)){document.getElementById('error-ident').textContent='Correo inválido.';document.getElementById('error-ident').style.display='block';return;}
-  nombreEstudiante=nom;document.getElementById('zona-ident').style.display='none';document.getElementById('zona-q').style.display='block';
-  EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
+  if(!validarCorreo(cor)){document.getElementById('error-ident').textContent='Por favor ingresa un correo válido. Ejemplo: nombre@gmail.com';document.getElementById('error-ident').style.display='block';return;}
+  document.getElementById('error-ident').textContent='Por favor completa tu nombre y correo.';
+  nombreEstudiante=nom;
+  document.getElementById('zona-ident').style.display='none';
+  document.getElementById('zona-q').style.display='block';
+  EJ=generarEjercicios();
+  resp=new Array(8).fill(null);
+  actual=0;sel=null;
+  render();
 }
+
 function render(){
   const e=EJ[actual];
   document.getElementById('qnum').textContent=`Pregunta ${actual+1} de 8`;
   document.getElementById('barra').style.width=((actual+1)/8*100)+'%';
   document.getElementById('htag').innerHTML=`<span class="hab-tag ${hcss(e.hab)}">${e.hab}</span>`;
-  document.getElementById('qtxt').textContent=e.txt;sel=null;
-  const od=document.getElementById('opts');od.innerHTML='';
-  e.ops.forEach((o,i)=>{const d=document.createElement('div');d.className='opt';d.id='op'+i;d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${o}</span>`;d.onclick=()=>elegir(i);od.appendChild(d);});
-  const nls=document.createElement('div');nls.className='opt nls';nls.id='op4';nls.innerHTML=`<div class="letra" style="border-style:dashed">E</div><span class="otxt">No lo sé</span>`;nls.onclick=()=>elegir(4);od.appendChild(nls);
-  document.getElementById('fb').style.display='none';document.getElementById('btnc').style.display='inline-block';document.getElementById('btnc').disabled=true;document.getElementById('btns').style.display='none';
+  document.getElementById('qtxt').innerHTML=fmt(e.txt);
+  sel=null;
+  const od=document.getElementById('opts');
+  od.innerHTML='';
+  e.opts.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='opt';d.id='op'+i;
+    d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${fmt(o.t)}</span>`;
+    d.onclick=()=>elegir(i);
+    od.appendChild(d);
+  });
+  const nls=document.createElement('div');
+  nls.className='opt nls';nls.id='op4';
+  nls.innerHTML=`<div class="letra" style="border-style:dashed">E</div><span class="otxt">No lo sé</span>`;
+  nls.onclick=()=>elegir(4);
+  od.appendChild(nls);
+  mathify(document.getElementById('qtxt'));mathify(document.getElementById('opts'));
+  document.getElementById('fb').style.display='none';
+  document.getElementById('btnc').style.display='inline-block';
+  document.getElementById('btnc').disabled=true;
+  document.getElementById('btns').style.display='none';
 }
-function elegir(i){if(document.getElementById('btnc').style.display==='none')return;document.querySelectorAll('.opt').forEach(d=>d.classList.remove('sel'));document.getElementById('op'+i).classList.add('sel');sel=i;document.getElementById('btnc').disabled=false;}
+
+function elegir(i){
+  if(document.getElementById('btnc').style.display==='none')return;
+  document.querySelectorAll('.opt').forEach(d=>d.classList.remove('sel'));
+  document.getElementById('op'+i).classList.add('sel');
+  sel=i;document.getElementById('btnc').disabled=false;
+}
+
 function confirmar(){
-  if(sel===null)return;const e=EJ[actual];resp[actual]=sel;const esNls=sel===NLS,esOk=!esNls&&sel===e.ok;
-  document.querySelectorAll('.opt').forEach((d,i)=>{d.onclick=null;if(i===NLS){d.className='opt nls dis';return;}if(i===e.ok)d.className='opt '+(esOk?'ok':'show');else if(i===sel&&!esOk&&!esNls)d.className='opt mal';else d.className='opt dis';});
+  if(sel===null)return;
+  const e=EJ[actual];resp[actual]=sel;
+  const esNls=sel===NLS;
+  const esOk=!esNls&&sel===e.ok;
+  document.querySelectorAll('.opt').forEach((d,i)=>{
+    d.onclick=null;
+    if(i===NLS){d.className='opt nls dis';return;}
+    if(i===e.ok)d.className='opt '+(esOk?'ok':'show');
+    else if(i===sel&&!esOk&&!esNls)d.className='opt mal';
+    else d.className='opt dis';
+  });
   const fb=document.getElementById('fb');
-  if(esNls){fb.className='fb nls';fb.textContent=`La respuesta correcta es ${LETRAS[e.ok]}: ${e.ops[e.ok]}. ${e.fb_mal}`;}
-  else{fb.className='fb '+(esOk?'ok':'mal');fb.textContent=esOk?e.fb_ok:e.fb_mal;}
-  fb.style.display='block';document.getElementById('btnc').style.display='none';
-  const bs=document.getElementById('btns');bs.style.display='inline-block';bs.textContent=actual<7?'Siguiente →':'Ver resultados →';
+  if(esNls){
+    fb.className='fb nls';
+    fb.innerHTML=fmt(`La respuesta correcta es ${LETRAS[e.ok]}: ${e.opts[e.ok].t}. ${e.fb_ok.replace(/^Correcto\. /,'')}`);
+  } else if(esOk){
+    fb.className='fb ok';
+    fb.innerHTML=fmt(e.fb_ok);
+  } else {
+    fb.className='fb mal';
+    fb.innerHTML=fmt(e.opts[sel].err);
+  }
+  mathify(fb);
+  fb.style.display='block';
+  document.getElementById('btnc').style.display='none';
+  const bs=document.getElementById('btns');
+  bs.style.display='inline-block';
+  bs.textContent=actual<7?'Siguiente →':'Ver resultados →';
 }
-function siguiente(){if(actual<7){actual++;render();}else mostrarFinal();}
+
+function siguiente(){
+  if(actual<7){actual++;render();}
+  else mostrarFinal();
+}
+
 function mostrarFinal(){
-  document.getElementById('zona-q').style.display='none';document.getElementById('zona-final').style.display='block';document.getElementById('barra').style.width='100%';
-  const corr=resp.filter((r,i)=>r===EJ[i].ok).length,nlsC=resp.filter(r=>r===NLS).length,incorrectas=8-corr-nlsC,pct=Math.round(corr/8*100);
-  document.getElementById('pje').textContent=corr+' / 8 correctas';registrar(corr,incorrectas,nlsC,pct);
+  document.getElementById('zona-q').style.display='none';
+  document.getElementById('zona-final').style.display='block';
+  document.getElementById('barra').style.width='100%';
+  const corr=resp.filter((r,i)=>r===EJ[i].ok).length;
+  const nlsC=resp.filter(r=>r===NLS).length;
+  const incorrectas=8-corr-nlsC;
+  const pct=Math.round(corr/8*100);
+  document.getElementById('pje').textContent=corr+' / 8 correctas';
+  registrar(corr,incorrectas,nlsC,pct);
   document.getElementById('pmsg').textContent=pct+'% de logro'+(nlsC>0?` · ${nlsC} sin responder`:'');
   const al=document.getElementById('alerta');
-  const MSGS={alto:[{titulo:'🔥 ¡Dominaste esta guía!',txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},{titulo:'⚡ ¡Excelente nivel!',txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},{titulo:'🎯 ¡Puntazo!',txt:'Cada guía así te acerca más al puntaje que quieres.'},{titulo:'🚀 ¡Así se hace!',txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},{titulo:'🌟 ¡Brillante!',txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}],medio:[{titulo:'💪 ¡Vas bien!',txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},{titulo:'📈 Buen avance',txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},{titulo:'✨ ¡Ya casi!',txt:'Con un intento más lo dominas. El progreso ya es visible.'},{titulo:'🎯 En camino',txt:'Cada intento te acerca más. Repite sin presión, con foco.'},{titulo:'⚡ Sigue sumando',txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}],bajo:[{titulo:'💡 Esta guía te está enseñando algo importante',txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},{titulo:'🧠 Así funciona el aprendizaje real',txt:'Los errores son parte del proceso. Repite antes de avanzar.'},{titulo:'🔄 No te rindas',txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelta a intentarlo!'},{titulo:'💪 El desafío es parte del camino',txt:'Repite esta guía. Con práctica constante lo lograrás.'},{titulo:'🌱 Aquí es donde más se aprende',txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}]};
+  const MSGS={
+    alto:[{titulo:'🔥 ¡Dominaste esta guía!',txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},{titulo:'⚡ ¡Excelente nivel!',txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},{titulo:'🎯 ¡Puntazo!',txt:'Cada guía así te acerca más al puntaje que quieres.'},{titulo:'🚀 ¡Así se hace!',txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},{titulo:'🌟 ¡Brillante!',txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}],
+    medio:[{titulo:'💪 ¡Vas bien!',txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},{titulo:'📈 Buen avance',txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},{titulo:'✨ ¡Ya casi!',txt:'Con un intento más lo dominas. El progreso ya es visible.'},{titulo:'🎯 En camino',txt:'Cada intento te acerca más. Repite sin presión, con foco.'},{titulo:'⚡ Sigue sumando',txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}],
+    bajo:[{titulo:'💡 Esta guía te está enseñando algo importante',txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},{titulo:'🧠 Así funciona el aprendizaje real',txt:'Los errores son parte del proceso. Repite antes de avanzar.'},{titulo:'🔄 No te rindas',txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelve a intentarlo!'},{titulo:'💪 El desafío es parte del camino',txt:'Repite esta guía. Con práctica constante lo lograrás.'},{titulo:'🌱 Aquí es donde más se aprende',txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}]
+  };
   const nivel_msg=pct>=75?'alto':pct>=50?'medio':'bajo';
   const lista=MSGS[nivel_msg];
   const msg=lista[Math.floor(Math.random()*lista.length)];
   if(nivel_msg==='alto'){al.className='alerta bien';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir para afianzar';}
   else if(nivel_msg==='medio'){al.className='alerta bien';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir con valores nuevos';}
   else{al.className='alerta rep';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}.</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir con valores nuevos';}
-  const dots=document.getElementById('dots');dots.innerHTML='';
-  resp.forEach((r,i)=>{const d=document.createElement('div');d.className='dot '+(r===EJ[i].ok?'ok':r===NLS?'nls':'mal');dots.appendChild(d);});
-  document.getElementById('reslista').innerHTML=resp.map((r,i)=>{const ok=r===EJ[i].ok,nls=r===NLS;const color=ok?'#085041':nls?'#5F5E5A':'#791F1F';const icono=ok?'✓':nls?'?':'✗';const txt=ok?'Correcta':nls?`No lo sé — correcta: ${LETRAS[EJ[i].ok]}`:`Incorrecta — correcta: ${LETRAS[EJ[i].ok]}`;return `<div style="color:${color}">${icono} P${i+1} (${EJ[i].hab}): ${txt}</div>`;}).join('');
+  const dots=document.getElementById('dots');
+  dots.innerHTML='';
+  resp.forEach((r,i)=>{
+    const d=document.createElement('div');
+    const ok=r===EJ[i].ok,nls=r===NLS;
+    d.className='dot '+(ok?'ok':nls?'nls':'mal');
+    dots.appendChild(d);
+  });
+  document.getElementById('reslista').innerHTML=resp.map((r,i)=>{
+    const ok=r===EJ[i].ok,nls=r===NLS;
+    const color=ok?'#085041':nls?'#5F5E5A':'#791F1F';
+    const icono=ok?'✓':nls?'?':'✗';
+    const txt=ok?'Correcta':nls?`No lo sé — correcta: ${LETRAS[EJ[i].ok]}`:`Incorrecta — correcta: ${LETRAS[EJ[i].ok]}`;
+    return `<div style="color:${color}">${icono} P${i+1} (${EJ[i].hab}): ${txt}</div>`;
+  }).join('');
 }
+
 function registrar(corr,incorr,nls,pct){
   if (window._modoDocente) return;
   var fecha=new Date().toLocaleDateString('es-CL',{timeZone:'America/Santiago'});
   var correo=document.getElementById('inp-correo').value.trim();
-  var HAB_E=["Modelar", "Argumentar", "Resolver problemas", "Representar", "Argumentar", "Modelar", "Representar", "Resolver problemas"];
+  var HAB_E=["Representar","Modelar","Resolver problemas","Resolver problemas","Representar","Argumentar","Modelar","Argumentar"];
   var ejercicios=resp.map(function(r,i){return r===4?2:(r===EJ[i].ok?1:0);});
-  var falladas=[];resp.forEach(function(r,i){if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1)falladas.push(EJ[i].hab);});
-  // ── CÁLCULO LOGRO POR HABILIDAD ──────────────────────
+  var falladas=[];
+  resp.forEach(function(r,i){if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1)falladas.push(EJ[i].hab);});
   var HAB_MAP={e1:HAB_E[0],e2:HAB_E[1],e3:HAB_E[2],e4:HAB_E[3],e5:HAB_E[4],e6:HAB_E[5],e7:HAB_E[6],e8:HAB_E[7]};
   var habCorr={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
   var habTot={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
@@ -310,80 +431,54 @@ function registrar(corr,incorr,nls,pct){
     habTot[h]=(habTot[h]||0)+1;
     if(ejercicios[i]===1) habCorr[h]=(habCorr[h]||0)+1;
   });
-  var logroResolver=habTot['Resolver problemas']>0?Math.round(habCorr['Resolver problemas']/habTot['Resolver problemas']*100)/100:null;
-  var logroModelar=habTot['Modelar']>0?Math.round(habCorr['Modelar']/habTot['Modelar']*100)/100:null;
-  var logroRepresentar=habTot['Representar']>0?Math.round(habCorr['Representar']/habTot['Representar']*100)/100:null;
-  var logroArgumentar=habTot['Argumentar']>0?Math.round(habCorr['Argumentar']/habTot['Argumentar']*100)/100:null;
-  var params=['fecha='+encodeURIComponent(fecha),'nombre='+encodeURIComponent(nombreEstudiante),'correo='+encodeURIComponent(correo),'tipo=individual','grupo=NA','guia=guia-U01.B.5b','eje=E1','unidad=U01','subunidad=B','nivel=b','correctas='+corr,'incorrectas='+incorr,'nls='+nls,'logro='+(pct/100),'e1='+ejercicios[0],'e2='+ejercicios[1],'e3='+ejercicios[2],'e4='+ejercicios[3],'e5='+ejercicios[4],'e6='+ejercicios[5],'e7='+ejercicios[6],'e8='+ejercicios[7],'habilidades='+encodeURIComponent(falladas.join('|'))].join('&');
-  var img=new Image();img.src='https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec?'+params;
+  var lg=function(h){return habTot[h]>0?Math.round(habCorr[h]/habTot[h]*100)/100:'';};
+  var params=[
+    'fecha='+encodeURIComponent(fecha),'nombre='+encodeURIComponent(nombreEstudiante),'correo='+encodeURIComponent(correo),
+    'tipo=individual','grupo=NA','guia=guia-U01.B.5b','eje=E1','unidad=U01','subunidad=B','nivel=b',
+    'correctas='+corr,'incorrectas='+incorr,'nls='+nls,'logro='+(pct/100),
+    'e1='+ejercicios[0],'e2='+ejercicios[1],'e3='+ejercicios[2],'e4='+ejercicios[3],'e5='+ejercicios[4],'e6='+ejercicios[5],'e7='+ejercicios[6],'e8='+ejercicios[7],
+    'habilidades='+encodeURIComponent(falladas.join('|')),
+    'logro_resolver='+lg('Resolver problemas'),'logro_modelar='+lg('Modelar'),'logro_representar='+lg('Representar'),'logro_argumentar='+lg('Argumentar')
+  ].join('&');
+  var img=new Image();
+  img.src='https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec?'+params;
 }
 
 function volverPortal(){
   const params=new URLSearchParams(window.location.search);
   const nombre=params.get('nombre');
   const correo=params.get('correo');
-  if(nombre&&correo){
-    window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);
-  } else {
-    window.location.href='portal-estudiante.html';
-  }
+  if(nombre&&correo){window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);}
+  else{window.location.href='portal-estudiante.html';}
 }
-function reiniciar(){EJ=generarEjercicios();actual=0;resp=new Array(8).fill(null);sel=null;document.getElementById('zona-final').style.display='none';document.getElementById('zona-q').style.display='block';render();}
-
-// ── AUTO-IDENTIFICACIÓN DESDE PORTAL ──────────────────
-// Si el estudiante llega desde el portal, nombre y correo
-// vienen en la URL y se saltan el formulario
-function autoIdentificar() {
-  const params = new URLSearchParams(window.location.search);
-  const nombre = params.get('nombre');
-  const correo = params.get('correo');
-  if (nombre && correo) {
-    document.getElementById('inp-nombre').value = nombre;
-    document.getElementById('inp-correo').value = correo;
-    // Ocultar formulario y arrancar directo
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    nombreEstudiante = nombre;
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
-  }
+function reiniciar(){
+  EJ=generarEjercicios();actual=0;resp=new Array(8).fill(null);sel=null;
+  document.getElementById('zona-final').style.display='none';
+  document.getElementById('zona-q').style.display='block';
+  render();
 }
 
-// ── AUTO-LOGIN Y MODO DOCENTE ──────────────────────────
 window.addEventListener('load', function() {
-  const params = new URLSearchParams(window.location.search);
-  const modo   = params.get('modo');
-  const nombre = params.get('nombre');
-  const correo = params.get('correo');
-
-  if (modo === 'docente') {
-    // Modo docente: saltar formulario, no registrar
-    window._modoDocente = true;
-    nombreEstudiante = 'Vista docente';
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
-    return; // no continuar con autoIdentificar
+  const params=new URLSearchParams(window.location.search);
+  const modo=params.get('modo');
+  const nombre=params.get('nombre');
+  const correo=params.get('correo');
+  if(modo==='docente'){
+    window._modoDocente=true;nombreEstudiante='Vista docente';
+    document.getElementById('zona-ident').style.display='none';
+    document.getElementById('zona-q').style.display='block';
+    EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
+    return;
   }
-
-  if (nombre && correo) {
-    // Auto-login desde portal: saltar formulario con datos reales
-    document.getElementById('inp-nombre').value = nombre;
-    document.getElementById('inp-correo').value = correo;
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    nombreEstudiante = nombre;
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
+  if(nombre&&correo){
+    document.getElementById('inp-nombre').value=nombre;
+    document.getElementById('inp-correo').value=correo;
+    document.getElementById('zona-ident').style.display='none';
+    document.getElementById('zona-q').style.display='block';
+    nombreEstudiante=nombre;
+    EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
   }
 });
-
 </script>
-</body></html>
+</body>
+</html>

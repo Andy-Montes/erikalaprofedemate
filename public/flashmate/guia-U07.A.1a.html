@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U07.A.1a · Sistemas de ecuaciones 2×2</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U07.A.1a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U07', unidadNum: '07', subunidad: 'A', nivel: 'a',
+  titulo: 'Sistemas de ecuaciones 2×2: concepto y solución',
+  sub: 'Qué es un sistema · verificar solución · par ordenado',
+  HAB_E: ['Argumentar', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Representar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · significado de solución (Argumentar)
+    E.push(armar('Argumentar', '¿Qué significa que el par \\((x,y)\\) sea solución de un sistema de dos ecuaciones?',
+      [{ t: 'Que satisface simultáneamente AMBAS ecuaciones.', err: null },
+       { t: 'Que satisface al menos una de las ecuaciones.', err: 'No basta con una: la solución debe cumplir las DOS ecuaciones a la vez.' },
+       { t: 'Que hace verdadera solo la primera ecuación.', err: 'Debe cumplir ambas; si falla en la segunda, no es solución del sistema.' },
+       { t: 'Que el valor de \\(x\\) es igual al de \\(y\\).', err: 'No hay tal exigencia: la solución es el par que satisface las dos ecuaciones, aunque \\(x\\neq y\\).' }],
+      'Correcto. La solución es el par que satisface las dos ecuaciones al mismo tiempo.'));
+
+    // P2 · verificar par (Resolver) — PDF ejemplo
+    E.push(armar('Resolver problemas', 'Verifica si \\((3,5)\\) es solución del sistema \\(4x-2y=2\\) y \\(x+3y=18\\).',
+      [{ t: 'Sí, cumple ambas ecuaciones.', err: null },
+       { t: 'No, no cumple ninguna.', err: 'Reemplaza: \\(4\\cdot3-2\\cdot5=2\\) ✓ y \\(3+3\\cdot5=18\\) ✓. Sí cumple ambas.' },
+       { t: 'Solo cumple la primera.', err: 'La segunda también: \\(3+15=18\\) ✓. Cumple las dos.' },
+       { t: 'Solo cumple la segunda.', err: 'La primera también: \\(12-10=2\\) ✓. Cumple las dos.' }],
+      'Correcto. \\(4\\cdot3-2\\cdot5=2\\) y \\(3+3\\cdot5=18\\): satisface ambas.'));
+
+    // P3 · par ordenado (Representar)
+    E.push(armar('Representar', 'La solución de un sistema es \\(x=1\\) e \\(y=4\\). ¿Cómo se escribe como par ordenado \\((x,y)\\)?',
+      [{ t: '\\((1,4)\\)', err: null },
+       { t: '\\((4,1)\\)', err: 'El orden importa: primero \\(x\\), luego \\(y\\). Como \\(x=1\\) e \\(y=4\\), es \\((1,4)\\).' },
+       { t: '\\(1+4=5\\)', err: 'No se suman: el par ordenado conserva ambos valores por separado: \\((1,4)\\).' },
+       { t: 'No puede escribirse como par.', err: 'Sí puede: el par ordenado es justo \\((1,4)\\), con \\(x\\) primero.' }],
+      'Correcto. El par ordenado escribe \\(x\\) primero: \\((1,4)\\).'));
+
+    // P4 · una sí, otra no (Argumentar)
+    E.push(armar('Argumentar', 'Un par cumple la ecuación \\(x+y=7\\) pero NO cumple \\(x-y=1\\). ¿Es solución del sistema formado por ambas?',
+      [{ t: 'No, porque debe cumplir las dos ecuaciones.', err: null },
+       { t: 'Sí, con cumplir una basta.', err: 'La solución de un sistema debe cumplir AMBAS. Si falla una, no es solución.' },
+       { t: 'Sí, porque cumple la primera.', err: 'Cumplir la primera no alcanza: se exige que cumpla también la segunda.' },
+       { t: 'Depende del valor de \\(x\\).', err: 'No depende: la regla es fija: para ser solución debe satisfacer las dos ecuaciones.' }],
+      'Correcto. Si no satisface las dos ecuaciones a la vez, no es solución del sistema.'));
+
+    // P5 · elegir el par (Resolver)
+    E.push(armar('Resolver problemas', 'Uno de estos pares es la solución del sistema \\(x+y=10\\) y \\(x-y=4\\). ¿Cuál es?',
+      [{ t: '\\((7,3)\\)', err: null },
+       { t: '\\((3,7)\\)', err: 'Cumple la suma pero no la resta: \\(3-7=-4\\neq4\\). El correcto es \\((7,3)\\).' },
+       { t: '\\((6,4)\\)', err: 'La suma da \\(10\\) ✓ pero \\(6-4=2\\neq4\\). Falla la segunda.' },
+       { t: '\\((5,5)\\)', err: 'Suma \\(10\\) ✓ pero \\(5-5=0\\neq4\\). No sirve.' }],
+      'Correcto. \\(7+3=10\\) y \\(7-3=4\\): cumple ambas.'));
+
+    // P6 · modelar (Modelar)
+    E.push(armar('Modelar', 'La suma de dos números es \\(20\\) y su diferencia es \\(6\\). ¿Qué sistema representa la situación?',
+      [{ t: '\\(x+y=20\\) ; \\(x-y=6\\)', err: null },
+       { t: '\\(x+y=6\\) ; \\(x-y=20\\)', err: 'Cambiaste los datos: la SUMA es 20 y la DIFERENCIA es 6, no al revés.' },
+       { t: '\\(x\\cdot y=20\\) ; \\(x-y=6\\)', err: '"Suma" es \\(+\\), no producto: \\(x+y=20\\).' },
+       { t: '\\(x+y=20\\) ; \\(x+y=6\\)', err: 'La segunda condición es la DIFERENCIA: \\(x-y=6\\), no otra suma.' }],
+      'Correcto. Suma \\(\\to x+y=20\\); diferencia \\(\\to x-y=6\\).'));
+
+    // P7 · forma general (Representar)
+    E.push(armar('Representar', 'La forma general de un sistema de primer grado es \\(ax+by=c\\) y \\(dx+ey=f\\). ¿Cuántas ecuaciones y cuántas incógnitas tiene?',
+      [{ t: 'Dos ecuaciones y dos incógnitas.', err: null },
+       { t: 'Una ecuación y dos incógnitas.', err: 'Son DOS ecuaciones (dos renglones) con dos incógnitas \\(x,y\\).' },
+       { t: 'Dos ecuaciones y cuatro incógnitas.', err: 'Las incógnitas son solo \\(x\\) e \\(y\\); \\(a,b,c,d,e,f\\) son números conocidos.' },
+       { t: 'Dos ecuaciones y una incógnita.', err: 'Hay dos incógnitas: \\(x\\) e \\(y\\).' }],
+      'Correcto. Dos ecuaciones y dos incógnitas (\\(x\\) e \\(y\\)); las letras \\(a,b,\\ldots,f\\) son coeficientes conocidos.'));
+
+    // P8 · verificar con negativos (Resolver)
+    E.push(armar('Resolver problemas', 'Verifica si \\((2,-1)\\) es solución de \\(3x+2y=4\\) y \\(x-y=3\\).',
+      [{ t: 'Sí, cumple ambas.', err: null },
+       { t: 'No, falla en la primera.', err: '\\(3\\cdot2+2\\cdot(-1)=6-2=4\\) ✓. La primera sí se cumple.' },
+       { t: 'No, falla en la segunda.', err: '\\(2-(-1)=2+1=3\\) ✓. La segunda sí se cumple.' },
+       { t: 'No cumple ninguna.', err: 'Ambas se cumplen: \\(6-2=4\\) y \\(2+1=3\\).' }],
+      'Correcto. \\(3\\cdot2+2(-1)=4\\) y \\(2-(-1)=3\\): satisface las dos.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U04.B.3a · Productos Notables</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U04.B.3a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U04', unidadNum: '04', subunidad: 'B', nivel: 'a',
+  titulo: 'Productos Notables',
+  sub: 'Cuadrado de binomio · suma por diferencia · término común',
+  HAB_E: ['Representar', 'Argumentar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Resolver problemas', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · formula cuadrado de binomio (Representar)
+    E.push(armar('Representar', '¿A qué es igual \\((a+b)^2\\)?',
+      [{ t: '\\(a^2+2ab+b^2\\)', err: null },
+       { t: '\\(a^2+b^2\\)', err: 'Falta el doble producto \\(2ab\\): al desarrollar \\((a+b)(a+b)\\) aparece \\(a^2+2ab+b^2\\).' },
+       { t: '\\(a^2-2ab+b^2\\)', err: 'Ese es el cuadrado de la RESTA \\((a-b)^2\\). Aquí es una suma: \\(+2ab\\).' },
+       { t: '\\(2a+2b\\)', err: 'Elevar al cuadrado no es multiplicar por 2: \\((a+b)^2=a^2+2ab+b^2\\).' }],
+      'Correcto. \\((a+b)^2=a^2+2ab+b^2\\): cuadrado del primero, doble producto, cuadrado del segundo.'));
+
+    // P2 · error tipico (Argumentar)
+    E.push(armar('Argumentar', '¿Es cierto que \\((a+b)^2=a^2+b^2\\)?',
+      [{ t: 'No: falta el doble producto \\(2ab\\).', err: null },
+       { t: 'Sí, siempre.', err: 'Al desarrollar \\((a+b)(a+b)\\) aparece \\(a^2+2ab+b^2\\): falta el término \\(2ab\\).' },
+       { t: 'Sí, si \\(a\\) y \\(b\\) son positivos.', err: 'No depende del signo: siempre aparece \\(2ab\\). \\((a+b)^2=a^2+2ab+b^2\\).' },
+       { t: 'No: es \\(a^2-b^2\\).', err: '\\(a^2-b^2\\) es la suma por su diferencia \\((a+b)(a-b)\\), no un cuadrado.' }],
+      'Correcto. \\((a+b)^2=a^2+2ab+b^2\\): el error clásico es olvidar el doble producto \\(2ab\\).'));
+
+    // P3 · cuadrado de binomio (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\((x+3)^2\\).',
+      [{ t: '\\(x^2+6x+9\\)', err: null },
+       { t: '\\(x^2+9\\)', err: 'Falta el doble producto \\(2\\cdot x\\cdot3=6x\\): \\(x^2+6x+9\\).' },
+       { t: '\\(x^2+3x+9\\)', err: 'El doble producto es \\(2\\cdot x\\cdot3=6x\\), no \\(3x\\).' },
+       { t: '\\(x^2+6x+6\\)', err: 'El cuadrado del segundo es \\(3^2=9\\), no 6.' }],
+      'Correcto. \\((x+3)^2=x^2+2\\cdot x\\cdot3+3^2=x^2+6x+9\\).'));
+
+    // P4 · cuadrado de la resta (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\((x-5)^2\\).',
+      [{ t: '\\(x^2-10x+25\\)', err: null },
+       { t: '\\(x^2+25\\)', err: 'Falta el doble producto \\(-2\\cdot x\\cdot5=-10x\\).' },
+       { t: '\\(x^2-25\\)', err: 'Eso es \\((x-5)(x+5)\\). El cuadrado de la resta deja \\(x^2-10x+25\\).' },
+       { t: '\\(x^2-5x+25\\)', err: 'El doble producto es \\(2\\cdot x\\cdot5=10x\\) (con signo \\(-\\)): \\(-10x\\).' }],
+      'Correcto. \\((x-5)^2=x^2-2\\cdot x\\cdot5+5^2=x^2-10x+25\\).'));
+
+    // P5 · suma por su diferencia (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\((x+6)(x-6)\\).',
+      [{ t: '\\(x^2-36\\)', err: null },
+       { t: '\\(x^2+36\\)', err: 'La suma por su diferencia da una RESTA de cuadrados: \\(x^2-36\\).' },
+       { t: '\\(x^2-12x-36\\)', err: 'Los términos centrales \\(-6x\\) y \\(+6x\\) se cancelan: queda \\(x^2-36\\).' },
+       { t: '\\(x^2-12x+36\\)', err: 'Eso es \\((x-6)^2\\). Aquí, suma por diferencia: \\(x^2-36\\).' }],
+      'Correcto. \\((x+6)(x-6)=x^2-6^2=x^2-36\\) (los términos centrales se cancelan).'));
+
+    // P6 · reconocer suma por diferencia (Representar)
+    E.push(armar('Representar', '¿A qué es igual \\((a+b)(a-b)\\)?',
+      [{ t: '\\(a^2-b^2\\)', err: null },
+       { t: '\\(a^2+b^2\\)', err: 'La suma por su diferencia da la RESTA de los cuadrados: \\(a^2-b^2\\).' },
+       { t: '\\(a^2-2ab+b^2\\)', err: 'Eso es \\((a-b)^2\\). Aquí los términos \\(-ab\\) y \\(+ab\\) se cancelan: \\(a^2-b^2\\).' },
+       { t: '\\(a^2-b\\)', err: 'El segundo término también se eleva al cuadrado: \\(a^2-b^2\\).' }],
+      'Correcto. \\((a+b)(a-b)=a^2-b^2\\).'));
+
+    // P7 · binomio con termino comun (Resolver)
+    E.push(armar('Resolver problemas', 'Desarrolla \\((x+5)(x+2)\\).',
+      [{ t: '\\(x^2+7x+10\\)', err: null },
+       { t: '\\(x^2+10x+7\\)', err: 'Se cambiaron: la suma \\(5+2=7\\) acompaña a \\(x\\), y el producto \\(5\\cdot2=10\\) es el término libre.' },
+       { t: '\\(x^2+7x+7\\)', err: 'El término libre es el PRODUCTO \\(5\\cdot2=10\\), no la suma.' },
+       { t: '\\(x^2+25x+10\\)', err: 'El coeficiente de \\(x\\) es la SUMA \\(5+2=7\\), no el producto.' }],
+      'Correcto. \\((x+a)(x+b)=x^2+(a+b)x+ab\\): \\((x+5)(x+2)=x^2+7x+10\\).'));
+
+    // P8 · distinguir cuadrado vs suma por diferencia (Argumentar)
+    E.push(armar('Argumentar', '¿Es cierto que \\((x-3)^2=x^2-9\\)?',
+      [{ t: 'No: \\((x-3)^2=x^2-6x+9\\).', err: null },
+       { t: 'Sí, ambas dan lo mismo.', err: '\\(x^2-9\\) es \\((x-3)(x+3)\\). El cuadrado de la resta deja un término central: \\(x^2-6x+9\\).' },
+       { t: 'No: \\((x-3)^2=x^2+9\\).', err: 'El cuadrado del segundo es \\(+9\\), pero también aparece \\(-6x\\): \\(x^2-6x+9\\).' },
+       { t: 'No: \\((x-3)^2=x^2-6x-9\\).', err: 'El cuadrado de \\(-3\\) es \\(+9\\) (positivo): \\(x^2-6x+9\\).' }],
+      'Correcto. \\((x-3)^2=x^2-6x+9\\); en cambio \\(x^2-9=(x-3)(x+3)\\). Son productos notables distintos.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

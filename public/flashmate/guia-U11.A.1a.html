@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U11.A.1a · Cuerpos geométricos: cubo y paralelepípedo</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U11.A.1a', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U11', unidadNum: '11', subunidad: 'A', nivel: 'a',
+  titulo: 'Cuerpos geométricos: cubo y paralelepípedo',
+  sub: 'Clasificación · elementos · área y volumen básicos',
+  HAB_E: ['Representar', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Modelar', 'Representar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · poliedro vs redondo (Representar)
+    E.push(armar('Representar', '¿Cuál de los siguientes cuerpos NO es un poliedro (es un cuerpo redondo)?',
+      [{ t: 'Cilindro', err: null },
+       { t: 'Cubo', err: 'El cubo es un poliedro: todas sus caras son polígonos (cuadrados).' },
+       { t: 'Prisma', err: 'El prisma es un poliedro: sus caras son planas y poligonales.' },
+       { t: 'Paralelepípedo', err: 'El paralelepípedo es un poliedro: 6 caras rectangulares.' }],
+      'Correcto. El cilindro es un cuerpo redondo (tiene una superficie curva), no un poliedro. Poliedros: cubo, prisma, paralelepípedo.');
+
+    // P2 · elementos del poliedro (Representar) · FIGURA BOX
+    var e2 = armar('Representar', 'En el poliedro de la figura, ¿cómo se llama cada segmento donde se encuentran dos caras?',
+      [{ t: 'Arista', err: null },
+       { t: 'Vértice', err: 'El vértice es el punto donde concurren tres o más aristas, no el segmento.' },
+       { t: 'Cara', err: 'La cara es cada polígono (superficie plana) del poliedro, no el segmento.' },
+       { t: 'Diagonal', err: 'La diagonal une dos vértices de distintas caras; no es la unión de dos caras.' }],
+      'Correcto. La arista es el segmento donde se intersectan dos caras. Los vértices son los puntos donde concurren las aristas.');
+    e2.fig = BOX({ a: 3, b: 2.4, c: 4, desc: 'Paralelepípedo: caras, aristas y vértices.' });
+    E.push(e2);
+
+    // P3 · número de aristas del cubo (Resolver) · FIGURA BOX
+    var e3 = armar('Resolver problemas', '¿Cuántas aristas tiene un cubo?',
+      [{ t: '\\(12\\)', err: null },
+       { t: '\\(6\\)', err: '6 es el número de caras. Las aristas (los bordes) son 12.' },
+       { t: '\\(8\\)', err: '8 es el número de vértices (esquinas). Las aristas son 12.' },
+       { t: '\\(4\\)', err: 'Un cubo tiene 12 aristas: 4 abajo, 4 arriba y 4 verticales.' }],
+      'Correcto. El cubo tiene 12 aristas (4 abajo, 4 arriba, 4 verticales), 6 caras y 8 vértices.');
+    e3.fig = BOX({ a: 3, b: 3, c: 3, desc: 'Cubo.' });
+    E.push(e3);
+
+    // P4 · volumen del cubo (Resolver) · FIGURA BOX
+    var e4 = armar('Resolver problemas', 'El cubo de la figura tiene arista 3. ¿Cuál es su volumen?',
+      [{ t: '\\(27\\)', err: null },
+       { t: '\\(9\\)', err: '9 es \\(3^2\\) (el área de una cara). El volumen es \\(a^3=3^3=27\\).' },
+       { t: '\\(54\\)', err: '54 es el área total (\\(6a^2\\)). El volumen es \\(a^3=27\\).' },
+       { t: '\\(12\\)', err: '12 sería la suma de las aristas. El volumen es \\(a^3=3^3=27\\).' }],
+      'Correcto. Volumen del cubo \\(=a^3=3^3=27\\).');
+    e4.fig = BOX({ a: 3, b: 3, c: 3, aL: { t: '3', role: 'dato' }, cL: { t: '3', role: 'dato' }, bL: { t: '3', role: 'dato' }, desc: 'Cubo de arista 3.' });
+    E.push(e4);
+
+    // P5 · identificar el error: área vs volumen (Argumentar)
+    E.push(armar('Argumentar', 'Para el volumen de un cubo de arista 3, Ana escribe:\nPaso 1: \\(V=6\\cdot a^2\\)\nPaso 2: \\(V=6\\cdot9=54\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: esa es la fórmula del ÁREA; el volumen es \\(a^3\\).', err: null },
+       { t: 'En el Paso 2: \\(6\\cdot9\\) no es 54.', err: '\\(6\\cdot9=54\\) está bien; el error es la fórmula: el volumen es \\(a^3\\), no \\(6a^2\\).' },
+       { t: 'No hay error; \\(V=54\\).', err: '\\(54\\) es el área total del cubo. El volumen es \\(a^3=27\\).' },
+       { t: 'En el Paso 1: debió ser \\(a^2\\).', err: '\\(a^2\\) es el área de una cara. El volumen es \\(a^3=27\\).' }],
+      'Correcto. \\(6a^2\\) es el área total del cubo. El volumen es \\(V=a^3=3^3=27\\).');
+
+    // P6 · volumen del paralelepípedo (Resolver) · FIGURA BOX
+    var e6 = armar('Resolver problemas', 'El paralelepípedo de la figura tiene aristas 4, 3 y 2. ¿Cuál es su volumen?',
+      [{ t: '\\(24\\)', err: null },
+       { t: '\\(52\\)', err: '52 es el área total (\\(2(ab+ac+bc)\\)). El volumen es \\(a\\cdot b\\cdot c=4\\cdot3\\cdot2=24\\).' },
+       { t: '\\(9\\)', err: 'Sumaste las aristas (\\(4+3+2\\)). El volumen las multiplica: \\(4\\cdot3\\cdot2=24\\).' },
+       { t: '\\(12\\)', err: 'Usaste solo dos aristas (\\(4\\cdot3\\)). Falta la tercera: \\(4\\cdot3\\cdot2=24\\).' }],
+      'Correcto. Volumen del paralelepípedo \\(=a\\cdot b\\cdot c=4\\cdot3\\cdot2=24\\).');
+    e6.fig = BOX({ a: 4, b: 2, c: 3, aL: { t: '4', role: 'dato' }, cL: { t: '3', role: 'dato' }, bL: { t: '2', role: 'dato' }, desc: 'Paralelepípedo de aristas 4, 3 y 2.' });
+    E.push(e6);
+
+    // P7 · volumen en contexto (Modelar) · FIGURA BOX
+    var e7 = armar('Modelar', 'Una caja tiene forma de paralelepípedo de 20 cm × 10 cm × 5 cm (figura). ¿Cuál es su volumen (lo que cabe dentro)?',
+      [{ t: '\\(1000\\) cm³', err: null },
+       { t: '\\(700\\) cm³', err: '700 es el área de la superficie (\\(2(ab+ac+bc)\\)). Lo que cabe es el volumen: \\(20\\cdot10\\cdot5\\).' },
+       { t: '\\(35\\) cm³', err: 'Sumaste las dimensiones. El volumen las multiplica: \\(20\\cdot10\\cdot5=1000\\).' },
+       { t: '\\(100\\) cm³', err: 'Usaste solo dos dimensiones. El volumen es \\(20\\cdot10\\cdot5=1000\\).' }],
+      'Correcto. El volumen (capacidad) \\(=20\\cdot10\\cdot5=1000\\) cm³.');
+    e7.fig = BOX({ a: 20, b: 10, c: 5, aL: { t: '20', role: 'dato' }, cL: { t: '5', role: 'dato' }, bL: { t: '10', role: 'dato' }, desc: 'Caja de 20 por 10 por 5 cm.' });
+    E.push(e7);
+
+    // P8 · unidades del volumen (Representar)
+    E.push(armar('Representar', 'El volumen de un cuerpo geométrico se mide en…',
+      [{ t: 'unidades cúbicas (por ejemplo, cm³).', err: null },
+       { t: 'unidades cuadradas (cm²).', err: 'Eso mide el área (una superficie). El volumen usa unidades cúbicas (cm³).' },
+       { t: 'unidades de longitud (cm).', err: 'Eso mide longitudes (aristas). El volumen se mide en cm³.' },
+       { t: 'no tiene unidad.', err: 'El volumen sí tiene unidad: cúbica (cm³, m³).' }],
+      'Correcto. El volumen se mide en unidades cúbicas (cm³, m³); el área en cuadradas (cm²) y las aristas en unidades de longitud (cm).');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

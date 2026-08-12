@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U10.B.5c · Área y perímetro: figuras compuestas y regiones achuradas</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U10.B.5c', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U10', unidadNum: '10', subunidad: 'B', nivel: 'c',
+  titulo: 'Área y perímetro: figuras compuestas y regiones achuradas',
+  sub: 'Achurados · compuestas · círculo inscrito · multipaso PAES',
+  HAB_E: ['Resolver problemas', 'Representar', 'Modelar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Modelar', 'Representar'],
+  generar: function () {
+    var E = [];
+    var SQCIRC = '<svg viewBox="0 0 180 176" width="176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuadrado con circulo inscrito, esquinas achuradas"><title>Cuadrado con círculo inscrito</title><desc>Cuadrado de lado 8 con círculo inscrito de radio 4; esquinas achuradas.</desc><defs><pattern id="hA" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="7" stroke="#8a86c9" stroke-width="1.1"/></pattern></defs><path d="M30,20 H150 V140 H30 Z M150,80 A60,60 0 1,0 30,80 A60,60 0 1,0 150,80 Z" fill-rule="evenodd" fill="url(#hA)" stroke="none"/><rect x="30" y="20" width="120" height="120" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><circle cx="90" cy="80" r="60" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><text x="90" y="160" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">8</text></svg>';
+
+    // P1 · área achurada = cuadrado - círculo inscrito (Resolver)
+    var e1 = armar('Resolver problemas', 'El cuadrado de la figura tiene lado 8 y el círculo inscrito tiene radio 4. ¿Cuál es el área de la región achurada (las esquinas)?',
+      [{ t: '\\(64-16\\pi\\)', err: null },
+       { t: '\\(16\\pi-64\\)', err: 'El cuadrado es mayor que el círculo, así que se resta en ese orden: \\(64-16\\pi\\).' },
+       { t: '\\(64-8\\pi\\)', err: 'El área del círculo es \\(\\pi r^2=\\pi\\cdot4^2=16\\pi\\), no \\(8\\pi\\). Región \\(=64-16\\pi\\).' },
+       { t: '\\(64-64\\pi\\)', err: 'El área del círculo es \\(16\\pi\\) (\\(\\pi\\cdot4^2\\)), no \\(64\\pi\\). Región \\(=64-16\\pi\\).' }],
+      'Correcto. Región achurada \\(=\\) área del cuadrado \\(-\\) área del círculo \\(=8^2-\\pi\\cdot4^2=64-16\\pi\\).');
+    e1.fig = SQCIRC; E.push(e1);
+
+    // P2 · perímetro de la región achurada (Representar)
+    var e2 = armar('Representar', 'Para la misma figura (cuadrado de lado 8 y círculo inscrito de radio 4), ¿cuál es el perímetro de la región achurada?',
+      [{ t: '\\(32+8\\pi\\)', err: null },
+       { t: '\\(32\\)', err: 'El borde incluye también la circunferencia interior (\\(2\\pi\\cdot4=8\\pi\\)), no solo el cuadrado.' },
+       { t: '\\(16+8\\pi\\)', err: 'El perímetro del cuadrado es \\(4\\cdot8=32\\), no 16. Total \\(32+8\\pi\\).' },
+       { t: '\\(32+16\\pi\\)', err: 'La circunferencia es \\(2\\pi r=2\\pi\\cdot4=8\\pi\\), no \\(16\\pi\\). Total \\(32+8\\pi\\).' }],
+      'Correcto. El contorno de la región achurada son los 4 lados del cuadrado (\\(4\\cdot8=32\\)) más la circunferencia interior (\\(2\\pi\\cdot4=8\\pi\\)): \\(32+8\\pi\\).');
+    e2.fig = SQCIRC; E.push(e2);
+
+    // P3 · ventana compuesta = rectángulo + semicírculo (Modelar)
+    var e3 = armar('Modelar', 'Una ventana tiene forma de un rectángulo de 4 por 3, coronado por un semicírculo de diámetro 4 (figura). ¿Cuál es su área total?',
+      [{ t: '\\(12+2\\pi\\)', err: null },
+       { t: '\\(12+4\\pi\\)', err: 'El semicírculo tiene radio 2: su área es \\(\\tfrac{1}{2}\\pi\\cdot2^2=2\\pi\\), no \\(4\\pi\\).' },
+       { t: '\\(12+2\\)', err: 'Falta \\(\\pi\\) en el semicírculo: \\(\\tfrac{1}{2}\\pi\\cdot2^2=2\\pi\\).' },
+       { t: '\\(12+8\\pi\\)', err: 'Usaste un círculo completo de radio mayor. Semicírculo de radio 2: \\(\\tfrac{1}{2}\\pi\\cdot2^2=2\\pi\\).' }],
+      'Correcto. Área \\(=\\) rectángulo \\(+\\) semicírculo \\(=4\\cdot3+\\tfrac{1}{2}\\pi\\cdot2^2=12+2\\pi\\).');
+    e3.fig = '<svg viewBox="0 0 200 150" width="195" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ventana: rectangulo con semicirculo"><title>Ventana</title><desc>Rectángulo de 4 por 3 coronado por un semicírculo de diámetro 4.</desc><path d="M60,120 L60,60 A40,40 0 0,1 140,60 L140,120 Z" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><text x="100" y="136" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">4</text><text x="54" y="93" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="end">3</text></svg>';
+    E.push(e3);
+
+    // P4 · círculo - triángulo rectángulo inscrito (Resolver)
+    var e4 = armar('Resolver problemas', 'En la figura, \\(AB\\) es diámetro (el círculo tiene radio 5) y el triángulo \\(ABC\\) es rectángulo en \\(C\\), con catetos 6 y 8. ¿Cuál es el área de la región achurada (círculo menos triángulo)?',
+      [{ t: '\\(25\\pi-24\\)', err: null },
+       { t: '\\(24-25\\pi\\)', err: 'El círculo es mayor que el triángulo: el orden correcto es \\(25\\pi-24\\).' },
+       { t: '\\(25\\pi-48\\)', err: 'El área del triángulo es \\(\\tfrac{6\\cdot8}{2}=24\\), no 48. Región \\(=25\\pi-24\\).' },
+       { t: '\\(100\\pi-24\\)', err: 'El área del círculo es \\(\\pi\\cdot5^2=25\\pi\\) (radio 5), no \\(100\\pi\\). Región \\(=25\\pi-24\\).' }],
+      'Correcto. Área \\(=\\) círculo \\(-\\) triángulo \\(=\\pi\\cdot5^2-\\tfrac{6\\cdot8}{2}=25\\pi-24\\). El triángulo es rectángulo porque \\(AB\\) es diámetro.');
+    e4.fig = '<svg viewBox="0 0 165 150" width="165" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circulo con triangulo inscrito"><title>Círculo con triángulo inscrito</title><desc>Círculo de radio 5 y triángulo rectángulo inscrito con catetos 6 y 8; región achurada entre el círculo y el triángulo.</desc><defs><pattern id="hB" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="7" stroke="#8a86c9" stroke-width="1.1"/></pattern></defs><path d="M140,80 A60,60 0 1,0 20,80 A60,60 0 1,0 140,80 Z M20,80 L140,80 L97,22 Z" fill-rule="evenodd" fill="url(#hB)" stroke="none"/><circle cx="80" cy="80" r="60" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><polygon points="20,80 140,80 97,22" fill="none" stroke="#1a1a1a" stroke-width="1.6"/><path d="M97,22 L89.8,27.4 L95.2,34.6 L102.4,29.2 Z" fill="none" stroke="#1a1a1a" stroke-width="1"/><text x="126" y="52" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="start">6</text><text x="52" y="50" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="end">8</text><text x="13" y="84" font-family="sans-serif" font-size="11" font-weight="400" font-style="italic" fill="#1a1a1a" text-anchor="end">A</text><text x="146" y="84" font-family="sans-serif" font-size="11" font-weight="400" font-style="italic" fill="#1a1a1a" text-anchor="start">B</text><text x="97" y="15" font-family="sans-serif" font-size="11" font-weight="400" font-style="italic" fill="#1a1a1a" text-anchor="middle">C</text></svg>';
+    E.push(e4);
+
+    // P5 · identificar el error en achurado (Argumentar)
+    var e5 = armar('Argumentar', 'Para hallar el área achurada (cuadrado de lado 8 menos círculo inscrito de radio 4), Sofía escribe:\nPaso 1: área = área del cuadrado + área del círculo\nPaso 2: \\(=64+16\\pi\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: la región es el cuadrado MENOS el círculo: \\(64-16\\pi\\).', err: null },
+       { t: 'En el Paso 1: el círculo tiene radio 8.', err: 'El círculo está inscrito: su radio es la mitad del lado, \\(4\\). El verdadero error es sumar en vez de restar.' },
+       { t: 'En el Paso 2: el área del cuadrado no es 64.', err: '\\(8^2=64\\) está bien. El error es sumar el círculo en vez de restarlo.' },
+       { t: 'No hay error.', err: 'Sí: la región achurada es el cuadrado menos el círculo, \\(64-16\\pi\\), no la suma.' }],
+      'Correcto. La región achurada es lo que queda al quitar el círculo: \\(64-16\\pi\\). Sumar en vez de restar es el error típico en los achurados.');
+    e5.fig = SQCIRC; E.push(e5);
+
+    // P6 · cuadrado dividido en 4 rectángulos (Resolver)
+    var e6 = armar('Resolver problemas', 'El cuadrado de la figura se dividió en 4 rectángulos congruentes. Si cada rectángulo tiene perímetro 50 cm, ¿cuál es el perímetro del cuadrado?',
+      [{ t: '\\(80\\) cm', err: null },
+       { t: '\\(50\\) cm', err: '\\(50\\) es el perímetro de un rectángulo. Cada uno mide \\(\\tfrac{L}{4}\\) por \\(L\\): \\(2(\\tfrac{L}{4}+L)=50\\Rightarrow L=20\\), y el cuadrado \\(4L=80\\).' },
+       { t: '\\(60\\) cm', err: 'Si \\(L=20\\), el perímetro del cuadrado es \\(4\\cdot20=80\\), no 60.' },
+       { t: '\\(45\\) cm', err: 'Plantea el rectángulo: lados \\(\\tfrac{L}{4}\\) y \\(L\\), perímetro \\(2{,}5L=50\\Rightarrow L=20\\); cuadrado \\(=80\\).' }],
+      'Correcto. Cada rectángulo mide \\(\\tfrac{L}{4}\\times L\\); su perímetro \\(2(\\tfrac{L}{4}+L)=\\tfrac{5L}{2}=50\\Rightarrow L=20\\). Perímetro del cuadrado \\(=4\\cdot20=80\\) cm.');
+    e6.fig = '<svg viewBox="0 0 180 162" width="170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuadrado dividido en cuatro rectangulos"><title>Cuadrado dividido</title><desc>Cuadrado dividido en 4 rectángulos verticales congruentes.</desc><rect x="30" y="20" width="120" height="120" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="60" y1="20" x2="60" y2="140" stroke="#1a1a1a" stroke-width="1.3"/><line x1="90" y1="20" x2="90" y2="140" stroke="#1a1a1a" stroke-width="1.3"/><line x1="120" y1="20" x2="120" y2="140" stroke="#1a1a1a" stroke-width="1.3"/><text x="90" y="158" font-family="sans-serif" font-size="11" font-weight="400" fill="#0187f3" text-anchor="middle">cada rectángulo: P = 50</text></svg>';
+    E.push(e6);
+
+    // P7 · pista (stadium) perímetro (Modelar)
+    var e7 = armar('Modelar', 'Una pista tiene forma de un rectángulo de 40 m de largo y 20 m de ancho, con un semicírculo en cada extremo (diámetro 20 m), como en la figura. ¿Cuál es el perímetro (contorno) de la pista?',
+      [{ t: '\\(80+20\\pi\\) m', err: null },
+       { t: '\\(80+40\\pi\\) m', err: 'Los dos semicírculos forman UNA circunferencia de radio 10: \\(2\\pi\\cdot10=20\\pi\\), no \\(40\\pi\\).' },
+       { t: '\\(120\\) m', err: 'Los extremos son curvos, no rectos. Juntos suman una circunferencia: \\(2\\pi\\cdot10=20\\pi\\). Total \\(80+20\\pi\\).' },
+       { t: '\\(80+20\\) m', err: 'Los extremos son semicírculos: su contorno es \\(20\\pi\\) (no 20). Total \\(80+20\\pi\\).' }],
+      'Correcto. El contorno son los dos lados rectos (\\(2\\cdot40=80\\)) más los dos semicírculos, que juntos forman una circunferencia de radio 10: \\(2\\pi\\cdot10=20\\pi\\). Total \\(80+20\\pi\\) m.');
+    e7.fig = '<svg viewBox="0 0 240 140" width="230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pista con extremos semicirculares"><title>Pista</title><desc>Pista formada por un rectángulo de 40 por 20 con un semicírculo en cada extremo.</desc><path d="M60,40 L180,40 A30,30 0 0,1 180,100 L60,100 A30,30 0 0,1 60,40 Z" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="60" y1="40" x2="60" y2="100" stroke="#38388e" stroke-width="1.1" stroke-dasharray="3 3"/><text x="120" y="32" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">40</text><text x="52" y="74" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="end">20</text></svg>';
+    E.push(e7);
+
+    // P8 · de área a perímetro del cuadrado (Representar)
+    E.push(armar('Representar', 'El área de un cuadrado es 289 cm². ¿Cuánto mide su perímetro?',
+      [{ t: '\\(68\\) cm', err: null },
+       { t: '\\(72\\) cm', err: 'El lado es \\(\\sqrt{289}=17\\); el perímetro es \\(4\\cdot17=68\\), no 72.' },
+       { t: '\\(60\\) cm', err: '\\(\\sqrt{289}=17\\), así que el perímetro es \\(4\\cdot17=68\\).' },
+       { t: '\\(17\\) cm', err: '17 es el lado del cuadrado. El perímetro es \\(4\\cdot17=68\\).' }],
+      'Correcto. El lado es \\(\\sqrt{289}=17\\); el perímetro es \\(4\\cdot17=68\\) cm.');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

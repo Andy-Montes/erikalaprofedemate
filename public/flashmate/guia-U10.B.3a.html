@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U10.B.3a · Área y perímetro: conceptos y figuras básicas</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U10.B.3a', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U10', unidadNum: '10', subunidad: 'B', nivel: 'a',
+  titulo: 'Área y perímetro: conceptos y figuras básicas',
+  sub: 'Perímetro vs área · rectángulo · cuadrado · triángulo · círculo',
+  HAB_E: ['Representar', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Modelar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · perímetro vs área (Representar)
+    E.push(armar('Representar', '¿Cuál afirmación describe correctamente el perímetro de una figura plana?',
+      [{ t: 'Es la medida de su contorno; se expresa en unidades de longitud (por ejemplo, cm).', err: null },
+       { t: 'Es la medida de su superficie; se expresa en unidades cuadradas (cm²).', err: 'Eso es el área. El perímetro mide el contorno (una longitud).' },
+       { t: 'Es el largo multiplicado por el ancho.', err: 'Ese es el área de un rectángulo. El perímetro es la suma de los lados (el contorno).' },
+       { t: 'Es la cantidad de lados de la figura.', err: 'El perímetro es la longitud total del contorno, no el número de lados.' }],
+      'Correcto. El perímetro es la medida del contorno y se expresa en unidades de longitud (cm, m). El área mide la superficie (cm²).');
+
+    // P2 · área del rectángulo (Resolver) · FIGURA RECT
+    var e2 = armar('Resolver problemas', '¿Cuál es el área del rectángulo de la figura?',
+      [{ t: '\\(40\\)', err: null },
+       { t: '\\(26\\)', err: '\\(26\\) es el perímetro (\\(2\\cdot8+2\\cdot5\\)). El área es \\(base\\times altura=8\\cdot5\\).' },
+       { t: '\\(13\\)', err: 'Sumaste base y altura (\\(8+5\\)). El área multiplica: \\(8\\cdot5=40\\).' },
+       { t: '\\(80\\)', err: 'Multiplicaste de más. El área es \\(8\\cdot5=40\\), no el doble.' }],
+      'Correcto. Área del rectángulo \\(=base\\times altura=8\\cdot5=40\\).');
+    e2.fig = RECT({ base: 8, height: 5, baseL: { t: '8', role: 'dato' }, heightL: { t: '5', role: 'dato' }, inner: { t: 'A=?', role: 'incog' }, desc: 'Rectángulo de base 8 y altura 5; área desconocida.' });
+    E.push(e2);
+
+    // P3 · despejar el lado del cuadrado desde el área (Resolver) · FIGURA RECT
+    var e3 = armar('Resolver problemas', 'El cuadrado de la figura tiene área 49 cm². ¿Cuánto mide su lado \\(x\\)?',
+      [{ t: '\\(7\\) cm', err: null },
+       { t: '\\(24{,}5\\) cm', err: 'Dividiste por 2. En el cuadrado \\(A=x^2\\), así que \\(x=\\sqrt{49}=7\\).' },
+       { t: '\\(12{,}25\\) cm', err: 'Dividiste por 4 (eso sería con el perímetro). Como \\(A=x^2\\), \\(x=\\sqrt{49}=7\\).' },
+       { t: '\\(98\\) cm', err: 'Multiplicaste por 2. El lado cumple \\(x^2=49\\Rightarrow x=7\\).' }],
+      'Correcto. En el cuadrado \\(A=x^2\\); si \\(x^2=49\\), entonces \\(x=\\sqrt{49}=7\\) cm.');
+    e3.fig = RECT({ base: 5, height: 5, inner: { t: 'A=49', role: 'dato' }, baseL: { t: 'x', role: 'incog' }, desc: 'Cuadrado de área 49; lado x.' });
+    E.push(e3);
+
+    // P4 · identificar el error en el paralelogramo (Argumentar) · FIGURA a mano
+    var e4 = armar('Argumentar', 'Para hallar el área del paralelogramo de la figura (base 8, lado inclinado 6, altura 5), Camila hace:\nPaso 1: \\(A=base\\times lado\\)\nPaso 2: \\(A=8\\cdot6\\)\nPaso 3: \\(A=48\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: el área usa la altura, no el lado inclinado: \\(A=base\\times altura\\).', err: null },
+       { t: 'En el Paso 2: \\(8\\cdot6\\) está mal multiplicado.', err: '\\(8\\cdot6=48\\) está bien multiplicado; el problema es qué se multiplica: debe ser base por altura.' },
+       { t: 'No hay error; \\(A=48\\).', err: 'Sí hay error: usó el lado (6) en vez de la altura (5). El área es \\(8\\cdot5=40\\).' },
+       { t: 'En el Paso 3: faltó dividir por 2.', err: 'El paralelogramo no divide por 2 (eso es el triángulo). El error es usar el lado en vez de la altura.' }],
+      'Correcto. El área del paralelogramo es \\(base\\times altura=8\\cdot5=40\\). La altura (5) es perpendicular a la base; el lado inclinado (6) no sirve para el área.');
+    e4.fig = '<svg viewBox="0 0 210 148" width="205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Paralelogramo con altura"><title>Paralelogramo</title><desc>Paralelogramo de base 8, lado inclinado 6 y altura 5.</desc><polygon points="40,112 160,112 190,42 70,42" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="70" y1="42" x2="70" y2="112" stroke="#38388e" stroke-width="1.5" stroke-dasharray="4 3"/><polyline points="70,102 80,102 80,112" fill="none" stroke="#1a1a1a" stroke-width="1.2"/><text x="100" y="128" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">8</text><text x="80" y="82" font-family="sans-serif" font-size="13" font-weight="600" fill="#38388e" text-anchor="start">5</text><text x="44" y="74" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="end">6</text></svg>';
+    E.push(e4);
+
+    // P5 · área del triángulo (Resolver) · FIGURA a mano
+    var e5 = armar('Resolver problemas', '¿Cuál es el área del triángulo de la figura?',
+      [{ t: '\\(20\\)', err: null },
+       { t: '\\(40\\)', err: 'Olvidaste dividir por 2. El área del triángulo es \\(\\tfrac{base\\times altura}{2}=\\tfrac{10\\cdot4}{2}=20\\).' },
+       { t: '\\(14\\)', err: 'Sumaste base y altura (\\(10+4\\)). El área es \\(\\tfrac{10\\cdot4}{2}=20\\).' },
+       { t: '\\(7\\)', err: 'Dividiste la suma por 2. El área usa el producto: \\(\\tfrac{10\\cdot4}{2}=20\\).' }],
+      'Correcto. Área del triángulo \\(=\\tfrac{base\\times altura}{2}=\\tfrac{10\\cdot4}{2}=20\\).');
+    e5.fig = '<svg viewBox="0 0 210 150" width="205" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangulo con altura"><title>Triángulo</title><desc>Triángulo de base 10 y altura 4.</desc><polygon points="35,115 175,115 110,30" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="110" y1="30" x2="110" y2="115" stroke="#38388e" stroke-width="1.5" stroke-dasharray="4 3"/><polyline points="110,105 120,105 120,115" fill="none" stroke="#1a1a1a" stroke-width="1.2"/><text x="105" y="131" font-family="sans-serif" font-size="13" font-weight="600" fill="#0187f3" text-anchor="middle">10</text><text x="120" y="78" font-family="sans-serif" font-size="13" font-weight="600" fill="#38388e" text-anchor="start">4</text></svg>';
+    E.push(e5);
+
+    // P6 · elementos de la circunferencia (Representar) · FIGURA CIRC
+    var e6 = armar('Representar', 'En la circunferencia de centro \\(O\\), ¿cómo se llama el segmento que une el centro con un punto de la circunferencia, como el de la figura?',
+      [{ t: 'Radio', err: null },
+       { t: 'Diámetro', err: 'El diámetro une dos puntos de la circunferencia pasando por el centro; mide el doble del radio.' },
+       { t: 'Cuerda', err: 'La cuerda une dos puntos cualesquiera de la circunferencia, sin pasar necesariamente por el centro.' },
+       { t: 'Arco', err: 'El arco es una parte de la circunferencia (una curva), no un segmento.' }],
+      'Correcto. El radio une el centro con un punto de la circunferencia. El diámetro es una cuerda que pasa por el centro y mide \\(2r\\).');
+    e6.fig = CIRC({ mode: 'radio', segL: { t: 'r', role: 'dato' }, oLabel: true, desc: 'Circunferencia de centro O con un radio r.' });
+    E.push(e6);
+
+    // P7 · cercar un terreno = perímetro (Modelar)
+    E.push(armar('Modelar', 'Se quiere cercar un terreno rectangular de 12 m de largo y 8 m de ancho. ¿Cuántos metros de cerca se necesitan?',
+      [{ t: '\\(40\\) m', err: null },
+       { t: '\\(96\\) m', err: '\\(96\\) es el área (\\(12\\cdot8\\), en m²). La cerca rodea el contorno: perímetro \\(=2\\cdot12+2\\cdot8\\).' },
+       { t: '\\(20\\) m', err: 'Sumaste solo un largo y un ancho. El perímetro los cuenta dos veces: \\(2\\cdot12+2\\cdot8=40\\).' },
+       { t: '\\(24\\) m', err: 'Contaste solo los dos largos. Falta sumar los dos anchos: \\(24+16=40\\).' }],
+      'Correcto. La cerca rodea el terreno: perímetro \\(=2\\cdot12+2\\cdot8=24+16=40\\) m.');
+
+    // P8 · pintar una pared = área (Modelar)
+    E.push(armar('Modelar', 'Una pared rectangular mide 5 m de ancho y 3 m de alto. ¿Cuántos \\(m^2\\) hay que pintar?',
+      [{ t: '\\(15\\) m²', err: null },
+       { t: '\\(16\\) m²', err: '\\(16\\) es el perímetro (\\(2\\cdot5+2\\cdot3\\), en m). La superficie a pintar es el área: \\(5\\cdot3\\).' },
+       { t: '\\(8\\) m²', err: 'Sumaste ancho y alto (\\(5+3\\)). El área multiplica: \\(5\\cdot3=15\\).' },
+       { t: '\\(30\\) m²', err: 'Multiplicaste de más. El área es \\(5\\cdot3=15\\) m².' }],
+      'Correcto. La superficie a pintar es el área \\(=5\\cdot3=15\\) m².');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

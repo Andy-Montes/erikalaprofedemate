@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U05.A.3c · Proporcionalidad</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U05.A.3c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U05', unidadNum: '05', subunidad: 'A', nivel: 'c',
+  titulo: 'Proporcionalidad',
+  sub: 'Reparto proporcional · directa e inversa tipo PAES',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Modelar', 'Representar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · reparto premio (Resolver)
+    E.push(armar('Resolver problemas', 'Tres amigos ganan un premio de 3.285.000 pesos que se reparte en la razón \\(1:3:5\\). ¿Cuánto recibe el que más gana?',
+      [{ t: '1.825.000 pesos', err: null },
+       { t: '1.095.000 pesos', err: 'Ese es la parte de en medio (3). El mayor (5) recibe \\(5\\cdot365000=1.825.000\\).' },
+       { t: '1.750.000 pesos', err: 'La constante es \\(k=\\tfrac{3.285.000}{9}=365.000\\); el mayor recibe \\(5\\cdot365000=1.825.000\\).' },
+       { t: '365.000 pesos', err: 'Ese es el valor de \\(k\\) (la parte del 1). El mayor recibe \\(5k=1.825.000\\).' }],
+      'Correcto. \\(k=\\tfrac{3.285.000}{1+3+5}=365.000\\); el mayor (5) recibe \\(5\\cdot365.000=1.825.000\\) pesos.'));
+
+    // P2 · quinta arboles (Resolver)
+    E.push(armar('Resolver problemas', 'En una quinta hay 300 árboles en total: naranjos, manzanos y duraznos. Si hay 120 naranjos y la razón entre duraznos y manzanos es \\(7:3\\), ¿cuántos duraznos hay?',
+      [{ t: '126', err: null },
+       { t: '84', err: 'El resto \\(300-120=180\\) se reparte \\(7:3\\); \\(k=18\\), duraznos \\(=7\\cdot18=126\\).' },
+       { t: '54', err: 'Ese es la cantidad de manzanos (\\(3\\cdot18\\)). Los duraznos son \\(7\\cdot18=126\\).' },
+       { t: '77', err: 'Reparte el resto 180 en \\(7:3\\): \\(k=\\tfrac{180}{10}=18\\); duraznos \\(=126\\).' }],
+      'Correcto. Resto \\(=300-120=180\\); en \\(7:3\\), \\(k=\\tfrac{180}{10}=18\\); duraznos \\(=7\\cdot18=126\\).'));
+
+    // P3 · razon con conversion (Resolver)
+    E.push(armar('Resolver problemas', 'Un mapa indica una distancia real de 0,8 km entre dos puntos, y en el mapa mide 200 m equivalentes... ¿cuál es la razón entre \\(0{,}8\\) km y \\(500\\) m?',
+      [{ t: '\\(8:5\\)', err: null },
+       { t: '\\(0{,}8:500\\)', err: 'Usa la misma unidad: \\(0{,}8\\) km \\(=800\\) m; \\(800:500=8:5\\).' },
+       { t: '\\(5:8\\)', err: 'El primero va primero: \\(800:500=8:5\\), no \\(5:8\\).' },
+       { t: '\\(4:25\\)', err: 'Convierte y simplifica: \\(800:500=\\tfrac{800}{500}=\\tfrac{8}{5}\\), es decir \\(8:5\\).' }],
+      'Correcto. \\(0{,}8\\) km \\(=800\\) m; \\(800:500=\\tfrac{8}{5}=8:5\\).'));
+
+    // P4 · forman proporcion (Argumentar)
+    E.push(armar('Argumentar', '¿Cuál de estas parejas de razones SÍ forma una proporción?',
+      [{ t: '\\(\\tfrac{12}{27}\\) y \\(\\tfrac{4}{9}\\)', err: null },
+       { t: '\\(\\tfrac{2}{3}\\) y \\(\\tfrac{6}{18}\\)', err: '\\(2\\cdot18=36\\) y \\(3\\cdot6=18\\): distintos, no forman proporción.' },
+       { t: '\\(\\tfrac{5}{8}\\) y \\(\\tfrac{10}{14}\\)', err: '\\(5\\cdot14=70\\) y \\(8\\cdot10=80\\): distintos, no es proporción.' },
+       { t: '\\(\\tfrac{5}{3}\\) y \\(\\tfrac{6}{10}\\)', err: '\\(5\\cdot10=50\\) y \\(3\\cdot6=18\\): distintos, no es proporción.' }],
+      'Correcto. \\(12\\cdot9=108=27\\cdot4\\): los productos cruzados coinciden, así que \\(\\tfrac{12}{27}=\\tfrac{4}{9}\\).'));
+
+    // P5 · inversa PAES (Resolver)
+    E.push(armar('Resolver problemas', '12 máquinas iguales producen un lote en 15 días. ¿En cuántos días producen el mismo lote 20 máquinas?',
+      [{ t: '9 días', err: null },
+       { t: '25 días', err: 'Es INVERSA: más máquinas ⇒ menos días. \\(12\\cdot15=180=20\\cdot x\\Rightarrow x=9\\).' },
+       { t: '16 días', err: 'El producto se conserva: \\(20\\cdot x=180\\Rightarrow x=9\\).' },
+       { t: '11 días', err: 'Revisa: \\(12\\cdot15=180\\), y \\(180:20=9\\) días.' }],
+      'Correcto. Inversa: \\(12\\cdot15=180\\); \\(20\\cdot x=180\\Rightarrow x=9\\) días.'));
+
+    // P6 · modelar receta (Modelar)
+    E.push(armar('Modelar', 'Una receta para 4 personas usa 300 g de harina. Manteniendo la proporción, ¿cuánta harina se necesita para 10 personas?',
+      [{ t: '750 g', err: null },
+       { t: '600 g', err: 'Es directa: \\(\\tfrac{300}{4}=75\\) g por persona; \\(75\\cdot10=750\\) g.' },
+       { t: '120 g', err: 'A más personas, más harina (directa): \\(75\\cdot10=750\\) g.' },
+       { t: '3.000 g', err: 'Eso multiplica por 10 el total; por persona son 75 g, y \\(75\\cdot10=750\\) g.' }],
+      'Correcto. Directa: \\(\\tfrac{300}{4}=75\\) g por persona; \\(75\\cdot10=750\\) g.'));
+
+    // P7 · grafico directa (Representar) · OPCIONES-FIGURA (PC) — leer el gráfico, no la palabra
+    var e7 = armar('Representar', '¿Cuál de los siguientes gráficos representa dos magnitudes directamente proporcionales?',
+      [{ t: PC('line0', 'Recta que pasa por el origen.'), err: null },
+       { t: PC('hyper', 'Curva decreciente que se acerca a los ejes.'), err: 'Esa curva decreciente es la proporcionalidad INVERSA (una hipérbola). La directa es una recta por el origen.' },
+       { t: PC('hconst', 'Recta horizontal.'), err: 'Una recta horizontal indica un valor constante, no proporcionalidad. La directa pasa por el origen con pendiente \\(k\\).' },
+       { t: PC('parab', 'Parábola.'), err: 'La directa es lineal (\\(y=kx\\)): una recta por el origen, no una parábola.' }],
+      'Correcto. En proporcionalidad directa \\(y=kx\\): una recta que pasa por el origen, con pendiente \\(k\\).');
+    e7.rawOpts = true;
+    E.push(e7);
+
+    // P8 · inversa duplicar (Argumentar)
+    E.push(armar('Argumentar', 'Si dos magnitudes son inversamente proporcionales y una de ellas se duplica, la otra:',
+      [{ t: 'Se reduce a la mitad', err: null },
+       { t: 'También se duplica', err: 'En la inversa el producto es constante: si una se duplica, la otra debe reducirse a la mitad para mantener \\(a\\cdot b=k\\).' },
+       { t: 'Queda igual', err: 'Debe cambiar: si \\(a\\) se duplica y \\(a\\cdot b=k\\), entonces \\(b\\) se reduce a la mitad.' },
+       { t: 'Se reduce a la tercera parte', err: 'Al duplicar una, la otra se divide por 2 (no por 3) para conservar el producto.' }],
+      'Correcto. Como \\(a\\cdot b=k\\) es constante, si \\(a\\) se duplica, \\(b\\) se reduce a la mitad.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

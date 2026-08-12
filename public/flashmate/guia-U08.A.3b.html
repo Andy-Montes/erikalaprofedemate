@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U08.A.3b · Lineal, afín y constante</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U08.A.3b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U08', unidadNum: '08', subunidad: 'A', nivel: 'b',
+  titulo: 'Función lineal, afín y constante',
+  sub: 'Identificar el tipo por la fórmula · creciente/decreciente · identidad',
+  HAB_E: ['Representar', 'Argumentar', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · forma afín (Representar)
+    E.push(armar('Representar', '¿Cuál es la forma general de una función AFÍN?',
+      [{ t: '\\(f(x)=mx+n\\), con \\(m\\neq0\\) y \\(n\\neq0\\)', err: null },
+       { t: '\\(f(x)=mx\\), con \\(m\\neq0\\)', err: 'Esa es la función LINEAL (pasa por el origen). La afín tiene \\(n\\neq0\\): \\(mx+n\\).' },
+       { t: '\\(f(x)=n\\)', err: 'Esa es la función CONSTANTE. La afín es \\(mx+n\\) con \\(m\\neq0\\).' },
+       { t: '\\(f(x)=x^2\\)', err: 'Esa es cuadrática. La afín es de primer grado: \\(mx+n\\).' }],
+      'Correcto. La afín es \\(f(x)=mx+n\\) con \\(m\\neq0\\) y \\(n\\neq0\\): recta que NO pasa por el origen.'));
+
+    // P2 · lineal por origen (Argumentar)
+    E.push(armar('Argumentar', '¿Qué distingue al gráfico de una función LINEAL \\(f(x)=mx\\)?',
+      [{ t: 'Es una recta que pasa por el origen.', err: null },
+       { t: 'Es una recta paralela al eje X.', err: 'Esa es la función CONSTANTE. La lineal pasa por el origen con pendiente \\(m\\neq0\\).' },
+       { t: 'Es una recta que NO pasa por el origen.', err: 'Esa es la afín. La lineal SÍ pasa por el origen (no tiene término \\(n\\)).' },
+       { t: 'Es una curva.', err: 'Es una recta (primer grado), no una curva; y pasa por el origen.' }],
+      'Correcto. La lineal \\(f(x)=mx\\) es una recta que pasa por el origen.'));
+
+    // P3 · clasificar f(x)=3x (Resolver)
+    E.push(armar('Resolver problemas', '¿Qué tipo de función es \\(f(x)=3x\\)?',
+      [{ t: 'Lineal (pasa por el origen).', err: null },
+       { t: 'Afín.', err: 'La afín tiene término independiente \\(n\\neq0\\). Aquí \\(n=0\\): es LINEAL (pasa por el origen).' },
+       { t: 'Constante.', err: 'La constante es \\(f(x)=n\\) (sin \\(x\\)). Aquí hay \\(x\\) con pendiente 3: es lineal.' },
+       { t: 'Cuadrática.', err: 'No hay \\(x^2\\): es de primer grado. Como \\(n=0\\), es lineal.' }],
+      'Correcto. \\(f(x)=3x\\) tiene \\(n=0\\): es lineal (recta por el origen).'));
+
+    // P4 · constante (Representar)
+    E.push(armar('Representar', 'El gráfico de \\(f(x)=7\\) es:',
+      [{ t: 'Una recta horizontal (paralela al eje X).', err: null },
+       { t: 'Una recta que pasa por el origen.', err: 'No: \\(f(x)=7\\) corta el eje Y en 7 y es horizontal; no pasa por el origen.' },
+       { t: 'Una recta vertical.', err: 'Una recta vertical no es función. \\(f(x)=7\\) es horizontal (\\(y=7\\) siempre).' },
+       { t: 'Una recta con pendiente 7.', err: 'La pendiente de una constante es 0; el 7 es el valor fijo de \\(y\\).' }],
+      'Correcto. \\(f(x)=7\\) es una recta horizontal (pendiente 0), con \\(y=7\\) siempre.'));
+
+    // P5 · creciente/decreciente (Argumentar)
+    E.push(armar('Argumentar', 'En \\(f(x)=mx+n\\), si \\(m<0\\), la función es:',
+      [{ t: 'Decreciente.', err: null },
+       { t: 'Creciente.', err: 'Creciente es cuando \\(m>0\\). Con \\(m<0\\) la recta BAJA: decreciente.' },
+       { t: 'Constante.', err: 'Constante es \\(m=0\\). Aquí \\(m<0\\): decreciente.' },
+       { t: 'Depende de \\(n\\).', err: 'El crecimiento lo decide el signo de \\(m\\) (la pendiente), no \\(n\\): \\(m<0\\Rightarrow\\) decreciente.' }],
+      'Correcto. El signo de \\(m\\) decide: \\(m<0\\) ⇒ decreciente (la recta baja).'));
+
+    // P6 · identidad (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es la función identidad?',
+      [{ t: '\\(f(x)=x\\)', err: null },
+       { t: '\\(f(x)=1\\)', err: 'Esa es constante. La identidad devuelve el mismo valor: \\(f(x)=x\\) (pendiente 1).' },
+       { t: '\\(f(x)=0\\)', err: 'Esa vale siempre 0. La identidad es \\(f(x)=x\\).' },
+       { t: '\\(f(x)=-x\\)', err: 'Esa refleja el valor. La identidad lo deja igual: \\(f(x)=x\\).' }],
+      'Correcto. La identidad es \\(f(x)=x\\): función lineal con pendiente 1.'));
+
+    // P7 · modelar constante (Modelar)
+    E.push(armar('Modelar', 'Un estanque tiene siempre 500 litros (no cambia con el tiempo). La función que da el volumen según el tiempo \\(x\\) es:',
+      [{ t: 'Constante: \\(f(x)=500\\).', err: null },
+       { t: 'Lineal: \\(f(x)=500x\\).', err: 'Si fuera \\(500x\\), el volumen crecería con el tiempo. Como NO cambia, es constante: \\(f(x)=500\\).' },
+       { t: 'Afín: \\(f(x)=x+500\\).', err: 'El \\(+x\\) haría que aumente; aquí es fijo: \\(f(x)=500\\).' },
+       { t: 'No es función.', err: 'Sí lo es: a cada tiempo le corresponde el mismo volumen 500. Es constante.' }],
+      'Correcto. El volumen no cambia con el tiempo: función constante \\(f(x)=500\\).'));
+
+    // P8 · afín vs lineal (Argumentar)
+    E.push(armar('Argumentar', 'Dos rectas tienen la misma pendiente, pero una pasa por el origen y la otra no. ¿Qué son?',
+      [{ t: 'La que pasa por el origen es lineal; la otra es afín.', err: null },
+       { t: 'Ambas son lineales.', err: 'Solo la que pasa por el origen es lineal; la que NO pasa (tiene \\(n\\neq0\\)) es afín.' },
+       { t: 'Ambas son afines.', err: 'La que pasa por el origen tiene \\(n=0\\): es lineal, no afín.' },
+       { t: 'Ambas son constantes.', err: 'Constante es pendiente 0; estas tienen pendiente igual y distinta de 0.' }],
+      'Correcto. Pasar por el origen (\\(n=0\\)) ⇒ lineal; no pasar (\\(n\\neq0\\)) ⇒ afín.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

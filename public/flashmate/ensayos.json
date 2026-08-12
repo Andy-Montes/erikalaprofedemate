@@ -1,13 +1,53 @@
-{
-  "actualizado": "2026-08-11",
-  "ensayos": [
-    {
-      "cod": "E01",
-      "nombre": "Diagnostico PAES-2016 D2601",
-      "archivo": "ensayo-E01.html",
-      "preguntas": 65,
-      "duracion": "2 horas 20 minutos",
-      "disp": true
-    }
-  ]
+﻿{
+    "actualizado":  "2026-08-11",
+    "ensayos":  [
+                    {
+                        "cod":  "E01",
+                        "nombre":  "Ensayo PAES M1 N°1 - Folleto del estudiante",
+                        "archivo":  "ensayo-E01.html",
+                        "preguntas":  65,
+                        "duracion":  "2 horas 20 minutos",
+                        "disp":  true
+                    },
+                    {
+                        "cod":  "E02",
+                        "nombre":  "Ensayo PAES M1 N°2 - Folleto del estudiante",
+                        "archivo":  "ensayo-E02.html",
+                        "preguntas":  65,
+                        "duracion":  "2 horas 20 minutos",
+                        "disp":  true
+                    },
+                    {
+                        "cod":  "E03",
+                        "nombre":  "Ensayo PAES M1 N°3 - Folleto del estudiante",
+                        "archivo":  "ensayo-E03.html",
+                        "preguntas":  65,
+                        "duracion":  "2 horas 20 minutos",
+                        "disp":  true
+                    },
+                    {
+                        "cod":  "E04",
+                        "nombre":  "Ensayo PAES M1 N°4 - Folleto del estudiante",
+                        "archivo":  "ensayo-E04.html",
+                        "preguntas":  65,
+                        "duracion":  "2 horas 20 minutos",
+                        "disp":  true
+                    },
+                    {
+                        "cod":  "E05",
+                        "nombre":  "Ensayo PAES M1 N°5 - Folleto del estudiante",
+                        "archivo":  "ensayo-E05.html",
+                        "preguntas":  65,
+                        "duracion":  "2 horas 20 minutos",
+                        "disp":  true
+                    },
+                    {
+                        "cod":  "E06",
+                        "nombre":  "Ensayo PAES M1 N°6 - Folleto del estudiante",
+                        "archivo":  "ensayo-E06.html",
+                        "preguntas":  65,
+                        "duracion":  "2 horas 20 minutos",
+                        "disp":  true
+                    }
+                ]
 }

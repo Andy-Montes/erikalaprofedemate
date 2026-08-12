@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U08.A.4c · Pendiente y coeficiente de posición</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U08.A.4c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U08', unidadNum: '08', subunidad: 'A', nivel: 'c',
+  titulo: 'Pendiente y coeficiente de posición',
+  sub: 'Interpretar m y n · leer la recta desde el gráfico',
+  HAB_E: ['Representar', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Representar', 'Modelar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · qué es n (Representar)
+    E.push(armar('Representar', 'En \\(f(x)=mx+n\\), el coeficiente de posición \\(n\\) indica:',
+      [{ t: 'Dónde la recta corta al eje Y.', err: null },
+       { t: 'La inclinación de la recta.', err: 'Esa es la pendiente \\(m\\). El \\(n\\) es dónde corta el eje Y (cuando \\(x=0\\)).' },
+       { t: 'Dónde corta al eje X.', err: 'El corte con Y es \\(n\\) (en \\(x=0\\), \\(y=n\\)). El corte con X se calcula aparte.' },
+       { t: 'El valor de \\(x\\).', err: '\\(n\\) es un valor fijo de \\(y\\) (el corte con el eje Y), no de \\(x\\).' }],
+      'Correcto. \\(n\\) es el corte con el eje Y: cuando \\(x=0\\), \\(f(0)=n\\).'));
+
+    // P2 · leer n desde gráfico (Resolver) · FIGURA PCL
+    var e2 = armar('Resolver problemas', 'La recta del gráfico corresponde a una función afín. ¿Cuál es su coeficiente de posición \\(n\\)?',
+      [{ t: '\\(2\\)', err: null },
+       { t: '\\(0\\)', err: 'La recta NO pasa por el origen: corta el eje Y en 2, así que \\(n=2\\).' },
+       { t: '\\(1\\)', err: '\\(n\\) es dónde corta el eje Y (el 2), no la pendiente.' },
+       { t: '\\(-2\\)', err: 'El corte está por ARRIBA del origen, en \\(+2\\): \\(n=2\\).' }],
+      'Correcto. La recta corta el eje Y en 2: \\(n=2\\).');
+    e2.fig = PCL({ m: 1, n: 2, marks: [[0, 2, '2']], desc: 'Recta creciente que corta el eje Y en 2.' });
+    E.push(e2);
+
+    // P3 · creciente/decreciente desde gráfico (Representar) · FIGURA PCL
+    var e3 = armar('Representar', 'Observa el gráfico. ¿La función es creciente o decreciente?',
+      [{ t: 'Decreciente (baja de izquierda a derecha).', err: null },
+       { t: 'Creciente (sube de izquierda a derecha).', err: 'La recta BAJA al avanzar hacia la derecha: es decreciente (pendiente negativa).' },
+       { t: 'Constante.', err: 'No es horizontal: la recta cambia de altura, y baja: es decreciente.' },
+       { t: 'No se puede saber.', err: 'Sí: como la recta baja hacia la derecha, es decreciente.' }],
+      'Correcto. La recta baja hacia la derecha: función decreciente (\\(m<0\\)).');
+    e3.fig = PCL({ m: -1, n: 1, marks: [], desc: 'Recta que baja de izquierda a derecha.' });
+    E.push(e3);
+
+    // P4 · signo de m (Argumentar)
+    E.push(armar('Argumentar', 'Una recta SUBE de izquierda a derecha. ¿Qué signo tiene su pendiente \\(m\\)?',
+      [{ t: 'Positivo (\\(m>0\\)).', err: null },
+       { t: 'Negativo (\\(m<0\\)).', err: 'Negativa haría BAJAR la recta. Como SUBE, \\(m>0\\).' },
+       { t: 'Cero.', err: 'Pendiente cero es una recta horizontal. Aquí sube: \\(m>0\\).' },
+       { t: 'No tiene pendiente.', err: 'Toda recta no vertical tiene pendiente; como sube, es positiva.' }],
+      'Correcto. Si la recta sube hacia la derecha, la pendiente es positiva (\\(m>0\\)).'));
+
+    // P5 · pendiente entre dos puntos (Resolver)
+    E.push(armar('Resolver problemas', 'Una recta pasa por \\((0,3)\\) y \\((2,7)\\). ¿Cuál es su pendiente \\(m\\)?',
+      [{ t: '\\(2\\)', err: null },
+       { t: '\\(4\\)', err: 'Falta dividir por la diferencia de \\(x\\): \\(m=\\tfrac{7-3}{2-0}=\\tfrac{4}{2}=2\\).' },
+       { t: '\\(\\tfrac12\\)', err: 'La fórmula es \\(\\tfrac{\\Delta y}{\\Delta x}=\\tfrac{4}{2}=2\\), no al revés.' },
+       { t: '\\(3\\)', err: '\\(3\\) es el corte con Y (\\(n\\)); la pendiente es \\(\\tfrac{7-3}{2-0}=2\\).' }],
+      'Correcto. \\(m=\\tfrac{7-3}{2-0}=\\tfrac{4}{2}=2\\).'));
+
+    // P6 · leer ecuación desde gráfico (Representar) · FIGURA PCL
+    var e6 = armar('Representar', 'La recta del gráfico corta el eje Y en \\(-3\\) y sube con pendiente 1 (por cada 1 a la derecha, sube 1). ¿Cuál es su ecuación?',
+      [{ t: '\\(f(x)=x-3\\)', err: null },
+       { t: '\\(f(x)=x+3\\)', err: 'La recta corta el eje Y por DEBAJO del origen, en \\(-3\\): \\(n=-3\\), no \\(+3\\).' },
+       { t: '\\(f(x)=-3x\\)', err: 'El \\(-3\\) es el corte con Y (\\(n\\)), no la pendiente. La pendiente es 1: \\(f(x)=x-3\\).' },
+       { t: '\\(f(x)=3x-1\\)', err: 'La pendiente es 1 (sube 1 por cada 1) y el corte es \\(-3\\): \\(f(x)=x-3\\).' }],
+      'Correcto. Pendiente 1 y corte \\(-3\\): \\(f(x)=x-3\\).');
+    e6.fig = PCL({ m: 1, n: -3, marks: [[0, -3, '-3']], desc: 'Recta creciente que corta el eje Y en -3.' });
+    E.push(e6);
+
+    // P7 · monto fijo inicial (Modelar)
+    E.push(armar('Modelar', 'En un problema lineal se menciona un "monto fijo inicial". ¿A qué parte de \\(f(x)=mx+n\\) corresponde?',
+      [{ t: 'Al coeficiente de posición \\(n\\).', err: null },
+       { t: 'A la pendiente \\(m\\).', err: 'La pendiente es la tasa de cambio (lo que varía). El monto fijo inicial es \\(n\\).' },
+       { t: 'A la variable \\(x\\).', err: '\\(x\\) es la cantidad que varía. El fijo inicial es el término independiente \\(n\\).' },
+       { t: 'No aparece en la fórmula.', err: 'Sí: el monto fijo inicial es el coeficiente de posición \\(n\\) (valor cuando \\(x=0\\)).' }],
+      'Correcto. El monto fijo inicial es \\(n\\), el valor cuando \\(x=0\\).'));
+
+    // P8 · hallar n dado m y un punto (Resolver)
+    E.push(armar('Resolver problemas', 'Una recta tiene pendiente \\(m=2\\) y pasa por el punto \\((3,5)\\). ¿Cuál es su coeficiente de posición \\(n\\)?',
+      [{ t: '\\(-1\\)', err: null },
+       { t: '\\(5\\)', err: '\\(5\\) es el valor de \\(y\\) en \\(x=3\\), no en \\(x=0\\). Despeja: \\(5=2\\cdot3+n\\Rightarrow n=-1\\).' },
+       { t: '\\(11\\)', err: 'Sumaste: \\(5=6+n\\Rightarrow n=5-6=-1\\).' },
+       { t: '\\(2\\)', err: '\\(2\\) es la pendiente. El coef de posición sale de \\(5=2\\cdot3+n\\Rightarrow n=-1\\).' }],
+      'Correcto. \\(5=2\\cdot3+n\\Rightarrow n=5-6=-1\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

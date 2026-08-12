@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U07.A.3b · Igualación y sustitución</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U07.A.3b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U07', unidadNum: '07', subunidad: 'A', nivel: 'b',
+  titulo: 'Métodos de igualación y sustitución',
+  sub: 'Despejar la misma variable · sustituir · comparar métodos',
+  HAB_E: ['Argumentar', 'Argumentar', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · concepto igualación (Argumentar)
+    E.push(armar('Argumentar', '¿En qué consiste el método de igualación?',
+      [{ t: 'En despejar la MISMA incógnita en ambas ecuaciones y luego igualar las dos expresiones.', err: null },
+       { t: 'En despejar una incógnita en una ecuación y reemplazarla en la otra.', err: 'Eso es SUSTITUCIÓN. En igualación se despeja la misma incógnita en las DOS y se igualan.' },
+       { t: 'En sumar o restar las ecuaciones.', err: 'Eso es REDUCCIÓN. Igualación despeja la misma variable en ambas y las iguala.' },
+       { t: 'En probar valores hasta acertar.', err: 'No es tanteo: se despeja la misma incógnita en ambas y se igualan las expresiones.' }],
+      'Correcto. Igualación: despejar la misma incógnita en las dos ecuaciones y luego igualar.'));
+
+    // P2 · concepto sustitución (Argumentar)
+    E.push(armar('Argumentar', '¿En qué consiste el método de sustitución?',
+      [{ t: 'En despejar una incógnita en una ecuación y reemplazar esa expresión en la otra.', err: null },
+       { t: 'En despejar la misma incógnita en ambas e igualarlas.', err: 'Eso es IGUALACIÓN. En sustitución se despeja en UNA y se reemplaza en la otra.' },
+       { t: 'En sumar las dos ecuaciones.', err: 'Eso es REDUCCIÓN. Sustitución reemplaza una expresión despejada en la otra ecuación.' },
+       { t: 'En multiplicar ambas ecuaciones.', err: 'No: se despeja una incógnita y se sustituye su expresión en la otra ecuación.' }],
+      'Correcto. Sustitución: despejar en una ecuación y reemplazar esa expresión en la otra.'));
+
+    // P3 · sustitución (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve por sustitución \\(y=2x-1\\) y \\(3x+y=9\\).',
+      [{ t: '\\((2,3)\\)', err: null },
+       { t: '\\((3,2)\\)', err: 'Reemplazando: \\(3x+(2x-1)=9\\Rightarrow5x=10\\Rightarrow x=2\\); \\(y=3\\). Par \\((2,3)\\).' },
+       { t: '\\((2,5)\\)', err: '\\(y=2\\cdot2-1=3\\), no 5. Solución \\((2,3)\\).' },
+       { t: '\\((1,1)\\)', err: '\\(5x=10\\Rightarrow x=2\\), no 1.' }],
+      'Correcto. \\(3x+(2x-1)=9\\Rightarrow5x=10\\Rightarrow x=2\\); \\(y=2\\cdot2-1=3\\).'));
+
+    // P4 · sustitución (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve por sustitución \\(x=y+2\\) y \\(2x+y=10\\).',
+      [{ t: '\\((4,2)\\)', err: null },
+       { t: '\\((2,4)\\)', err: 'Reemplazando: \\(2(y+2)+y=10\\Rightarrow3y=6\\Rightarrow y=2\\); \\(x=4\\). Par \\((4,2)\\).' },
+       { t: '\\((6,4)\\)', err: '\\(3y=6\\Rightarrow y=2\\), no 4; \\(x=y+2=4\\).' },
+       { t: '\\((4,4)\\)', err: '\\(y=2\\) (no 4): \\(x=2+2=4\\). Par \\((4,2)\\).' }],
+      'Correcto. \\(2(y+2)+y=10\\Rightarrow3y=6\\Rightarrow y=2\\); \\(x=4\\).'));
+
+    // P5 · despejar (Representar) — PDF
+    E.push(armar('Representar', 'Al despejar \\(x\\) en la ecuación \\(4x+3y=10\\), ¿qué expresión se obtiene?',
+      [{ t: '\\(x=\\tfrac{10-3y}{4}\\)', err: null },
+       { t: '\\(x=\\tfrac{10+3y}{4}\\)', err: 'El \\(3y\\) pasa RESTANDO al otro lado: \\(4x=10-3y\\Rightarrow x=\\tfrac{10-3y}{4}\\).' },
+       { t: '\\(x=10-3y\\)', err: 'Falta dividir por el coeficiente 4: \\(x=\\tfrac{10-3y}{4}\\).' },
+       { t: '\\(x=\\tfrac{10-3y}{3}\\)', err: 'Se divide por el coeficiente de \\(x\\) (que es 4), no por 3.' }],
+      'Correcto. \\(4x=10-3y\\Rightarrow x=\\tfrac{10-3y}{4}\\).'));
+
+    // P6 · resolver completo (Resolver) — PDF
+    E.push(armar('Resolver problemas', 'Resuelve el sistema \\(4x+3y=10\\) y \\(5x-6y=-7\\).',
+      [{ t: '\\((1,2)\\)', err: null },
+       { t: '\\((2,1)\\)', err: 'Da \\(x=1\\), \\(y=2\\): el par es \\((1,2)\\), con \\(x\\) primero.' },
+       { t: '\\((1,-2)\\)', err: 'El valor de \\(y\\) es \\(+2\\): \\(4\\cdot1+3\\cdot2=10\\) ✓.' },
+       { t: '\\((-1,2)\\)', err: '\\(x=1\\) (positivo): \\(4\\cdot1+3\\cdot2=10\\) ✓.' }],
+      'Correcto. Despejando \\(x=\\tfrac{10-3y}{4}\\) y sustituyendo: \\(y=2\\), \\(x=1\\). Solución \\((1,2)\\).'));
+
+    // P7 · sustitución (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve por sustitución \\(y=3x\\) y \\(x+y=8\\).',
+      [{ t: '\\((2,6)\\)', err: null },
+       { t: '\\((6,2)\\)', err: 'Reemplazando: \\(x+3x=8\\Rightarrow4x=8\\Rightarrow x=2\\); \\(y=3\\cdot2=6\\). Par \\((2,6)\\).' },
+       { t: '\\((2,3)\\)', err: '\\(y=3x=3\\cdot2=6\\), no 3.' },
+       { t: '\\((8,24)\\)', err: 'Falta resolver: \\(4x=8\\Rightarrow x=2\\); \\(y=6\\).' }],
+      'Correcto. \\(x+3x=8\\Rightarrow4x=8\\Rightarrow x=2\\); \\(y=6\\). Solución \\((2,6)\\).'));
+
+    // P8 · modelar (Modelar)
+    E.push(armar('Modelar', 'Un número \\(x\\) es el doble de otro \\(y\\). Si al primero le sumamos el triple del segundo, se obtiene \\(15\\). ¿Cuáles son los números?',
+      [{ t: '\\((6,3)\\)', err: null },
+       { t: '\\((3,6)\\)', err: 'El sistema es \\(x=2y\\), \\(x+3y=15\\); \\(5y=15\\Rightarrow y=3\\), \\(x=6\\). Par \\((6,3)\\).' },
+       { t: '\\((10,5)\\)', err: '\\(5y=15\\Rightarrow y=3\\), no 5; \\(x=2\\cdot3=6\\).' },
+       { t: '\\((6,6)\\)', err: '\\(y=3\\) (no 6): \\(x=2\\cdot3=6\\). Par \\((6,3)\\).' }],
+      'Correcto. \\(x=2y\\) y \\(x+3y=15\\); \\(2y+3y=15\\Rightarrow y=3\\), \\(x=6\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

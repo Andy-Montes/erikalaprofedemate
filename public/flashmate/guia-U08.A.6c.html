@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U08.A.6c · Función lineal y afín (integrador)</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U08.A.6c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U08', unidadNum: '08', subunidad: 'A', nivel: 'c',
+  titulo: 'Función lineal y afín · integrador tipo PAES',
+  sub: 'Elegir el gráfico · leer la recta · puntos, cortes y tasa',
+  HAB_E: ['Representar', 'Representar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Modelar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · elegir el gráfico lineal (Representar) · OPCIONES-FIGURA PCL
+    var e1 = armar('Representar', '¿Cuál de los siguientes gráficos representa una función LINEAL (recta que pasa por el origen)?',
+      [{ t: PCL({ m: 1, n: 0, w: 120, desc: 'Recta que pasa por el origen.' }), err: null },
+       { t: PCL({ m: 1, n: 3, w: 120, desc: 'Recta que corta el eje Y en 3.' }), err: 'Esa recta NO pasa por el origen (corta el eje Y fuera de él): es afín, no lineal.' },
+       { t: PCL({ m: 0, n: 2, w: 120, desc: 'Recta horizontal.' }), err: 'Esa recta es horizontal (pendiente 0): es constante, no lineal.' },
+       { t: PCL({ m: -1, n: 2, w: 120, desc: 'Recta decreciente que no pasa por el origen.' }), err: 'Esa recta no pasa por el origen: es afín. La lineal pasa por el origen.' }],
+      'Correcto. La función lineal \\(f(x)=mx\\) es la recta que pasa por el origen.');
+    e1.rawOpts = true;
+    E.push(e1);
+
+    // P2 · elegir la recta por dos puntos (Representar) · OPCIONES-FIGURA PCL
+    var e2 = armar('Representar', '¿Cuál gráfico representa la recta que pasa por los puntos \\((-5,-6)\\) y \\((10,3)\\)? (pendiente \\(m=\\tfrac{9}{15}=\\tfrac35\\), corte \\(n=-3\\))',
+      [{ t: PCL({ m: 0.6, n: -3, w: 120, desc: 'Recta creciente que corta el eje Y en -3.' }), err: null },
+       { t: PCL({ m: 0.6, n: 3, w: 120, desc: 'Recta creciente que corta el eje Y en 3.' }), err: 'La recta corta el eje Y en \\(-3\\) (bajo el origen), no en \\(+3\\).' },
+       { t: PCL({ m: -0.6, n: 3, w: 120, desc: 'Recta decreciente.' }), err: 'La pendiente es positiva (\\(\\tfrac{3-(-6)}{10-(-5)}=\\tfrac{9}{15}>0\\)): la recta SUBE.' },
+       { t: PCL({ m: 0.6, n: 0, w: 120, desc: 'Recta creciente por el origen.' }), err: 'No pasa por el origen: corta el eje Y en \\(-3\\).' }],
+      'Correcto. \\(m=\\tfrac{9}{15}=\\tfrac35>0\\) (sube) y \\(n=-3\\) (corta el eje Y en \\(-3\\)).');
+    e2.rawOpts = true;
+    E.push(e2);
+
+    // P3 · punto que pertenece (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál de estos puntos pertenece a la recta \\(f(x)=2x-1\\)?',
+      [{ t: '\\((3,5)\\)', err: null },
+       { t: '\\((3,7)\\)', err: '\\(f(3)=2\\cdot3-1=5\\), no 7.' },
+       { t: '\\((0,1)\\)', err: '\\(f(0)=-1\\), no 1: el punto es \\((0,-1)\\).' },
+       { t: '\\((1,3)\\)', err: '\\(f(1)=2\\cdot1-1=1\\), no 3.' }],
+      'Correcto. \\(f(3)=2\\cdot3-1=5\\): el punto \\((3,5)\\) pertenece.'));
+
+    // P4 · rectas paralelas (Argumentar)
+    E.push(armar('Argumentar', 'Dos rectas son paralelas. ¿Qué tienen en común?',
+      [{ t: 'La misma pendiente \\(m\\).', err: null },
+       { t: 'El mismo coeficiente de posición \\(n\\).', err: 'Si tuvieran el mismo \\(n\\) serían la misma recta. Paralelas ⇒ misma pendiente, distinto \\(n\\).' },
+       { t: 'Que ambas pasan por el origen.', err: 'No necesariamente; las paralelas comparten la PENDIENTE.' },
+       { t: 'Nada en particular.', err: 'Sí: las rectas paralelas tienen la misma pendiente.' }],
+      'Correcto. Rectas paralelas tienen la misma pendiente \\(m\\) (y distinto \\(n\\)).'));
+
+    // P5 · corte con eje X (Resolver)
+    E.push(armar('Resolver problemas', '¿En qué punto la recta \\(f(x)=2x-6\\) corta al eje X?',
+      [{ t: '\\((3,0)\\)', err: null },
+       { t: '\\((0,-6)\\)', err: 'Ese es el corte con el eje Y (\\(n=-6\\)). El corte con X es donde \\(y=0\\): \\(x=3\\).' },
+       { t: '\\((6,0)\\)', err: '\\(2x-6=0\\Rightarrow x=3\\), no 6.' },
+       { t: '\\((0,3)\\)', err: 'El corte con X tiene \\(y=0\\): es \\((3,0)\\).' }],
+      'Correcto. \\(2x-6=0\\Rightarrow x=3\\): corta el eje X en \\((3,0)\\).'));
+
+    // P6 · leer recta por el origen (Representar) · FIGURA PCL
+    var e6 = armar('Representar', 'La recta del gráfico pasa por el origen y por el punto \\((1,2)\\). ¿Cuál es su ecuación?',
+      [{ t: '\\(f(x)=2x\\)', err: null },
+       { t: '\\(f(x)=2x+1\\)', err: 'Pasa por el origen, así que \\(n=0\\): \\(f(x)=2x\\), sin \\(+1\\).' },
+       { t: '\\(f(x)=\\tfrac12x\\)', err: 'Sube 2 por cada 1 (punto \\((1,2)\\)): pendiente 2, \\(f(x)=2x\\).' },
+       { t: '\\(f(x)=x+2\\)', err: 'La pendiente es 2 y pasa por el origen: \\(f(x)=2x\\).' }],
+      'Correcto. Pasa por el origen (\\(n=0\\)) y sube 2 por cada 1: \\(f(x)=2x\\).');
+    e6.fig = PCL({ m: 2, n: 0, marks: [[1, 2, '(1,2)']], desc: 'Recta por el origen que pasa por (1,2).' });
+    E.push(e6);
+
+    // P7 · modelar y evaluar (Modelar)
+    E.push(armar('Modelar', 'Una piscina tiene 100 L y se llena a 25 L por minuto. ¿Cuántos litros hay a los 6 minutos?',
+      [{ t: '\\(250\\) L', err: null },
+       { t: '\\(150\\) L', err: 'Suma el inicial: \\(25\\cdot6+100=150+100=250\\).' },
+       { t: '\\(750\\) L', err: 'Solo el caudal se multiplica: \\(25\\cdot6=150\\), más 100: \\(250\\).' },
+       { t: '\\(125\\) L', err: 'Son 6 minutos: \\(25\\cdot6=150\\); \\(150+100=250\\).' }],
+      'Correcto. \\(f(6)=25\\cdot6+100=150+100=250\\) L.'));
+
+    // P8 · interpretar la tasa (Argumentar)
+    E.push(armar('Argumentar', 'En \\(f(x)=25x+100\\) (litros en una piscina según los minutos \\(x\\)), ¿qué representa el 25?',
+      [{ t: 'La rapidez de llenado: 25 litros por minuto.', err: null },
+       { t: 'La cantidad inicial de agua.', err: 'La inicial es el 100 (cuando \\(x=0\\)). El 25 es la tasa por minuto (la pendiente).' },
+       { t: 'El total de litros.', err: 'El total depende de los minutos; el 25 es cuántos litros entran por minuto.' },
+       { t: 'Los minutos transcurridos.', err: 'Los minutos son \\(x\\); el 25 es la tasa de llenado (pendiente).' }],
+      'Correcto. El 25 es la pendiente: la tasa de llenado, 25 L por minuto.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

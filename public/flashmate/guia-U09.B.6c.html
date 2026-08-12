@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U09.B.6c · Ceros y discriminante</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U09.B.6c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U09', unidadNum: '09', subunidad: 'B', nivel: 'c',
+  titulo: 'Ceros y discriminante',
+  sub: 'Ceros · intersección con el eje X · el discriminante y el número de cortes',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Representar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · ceros (Resolver)
+    E.push(armar('Resolver problemas', 'Los ceros (soluciones de \\(f(x)=0\\)) de \\(f(x)=x^2-x-6\\) son:',
+      [{ t: '\\(x=3\\) y \\(x=-2\\)', err: null },
+       { t: '\\(x=-3\\) y \\(x=2\\)', err: '\\(x^2-x-6=(x-3)(x+2)=0\\Rightarrow x=3\\lor x=-2\\).' },
+       { t: '\\(x=6\\) y \\(x=-1\\)', err: 'Producto \\(-6\\), suma \\(1\\): \\(3\\) y \\(-2\\).' },
+       { t: '\\(x=-6\\)', err: 'El \\(-6\\) es \\(c\\); los ceros son \\(3\\) y \\(-2\\).' }],
+      'Correcto. \\(x^2-x-6=(x-3)(x+2)=0\\Rightarrow x=3\\lor x=-2\\).'));
+
+    // P2 · discriminante de función factorizada (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', 'El discriminante de \\(f(x)=(x-3)(x+2)\\) es:',
+      [{ t: '\\(25\\)', err: null },
+       { t: '\\(-25\\)', err: '\\(\\Delta=(-1)^2-4\\cdot1\\cdot(-6)=1+24=25\\) (positivo).' },
+       { t: '\\(-2\\)', err: 'Primero desarrolla: \\(f(x)=x^2-x-6\\); \\(\\Delta=1+24=25\\).' },
+       { t: '\\(3\\)', err: 'Usa \\(a=1,\\,b=-1,\\,c=-6\\): \\(\\Delta=b^2-4ac=25\\).' }],
+      'Correcto. \\(f(x)=x^2-x-6\\); \\(\\Delta=(-1)^2-4\\cdot1\\cdot(-6)=25\\).'));
+
+    // P3 · número de cortes con eje X (Resolver)
+    E.push(armar('Resolver problemas', '¿En cuántos puntos la parábola \\(f(x)=x^2+2x+5\\) corta al eje X?',
+      [{ t: 'En ningún punto (\\(\\Delta<0\\)).', err: null },
+       { t: 'En dos puntos.', err: 'Dos puntos requiere \\(\\Delta>0\\). Aquí \\(\\Delta=4-20=-16<0\\): no corta.' },
+       { t: 'En un punto.', err: 'Un punto es \\(\\Delta=0\\); aquí \\(\\Delta<0\\): no corta el eje X.' },
+       { t: 'En tres puntos.', err: 'Una parábola corta el eje X en 0, 1 o 2 puntos. Aquí \\(\\Delta<0\\): 0.' }],
+      'Correcto. \\(\\Delta=2^2-4\\cdot1\\cdot5=-16<0\\): no corta el eje X.'));
+
+    // P4 · tangente al eje X (Representar) · FIGURA PCU
+    var e4 = armar('Representar', 'La parábola del gráfico es tangente al eje X. ¿Cuántas soluciones reales tiene \\(f(x)=0\\)?',
+      [{ t: 'Una solución (raíz doble, \\(\\Delta=0\\)).', err: null },
+       { t: 'Dos soluciones distintas.', err: 'Solo TOCA el eje en un punto: es una raíz doble (\\(\\Delta=0\\)), una sola solución.' },
+       { t: 'Ninguna solución.', err: 'Sí toca el eje X (en el vértice): una solución (raíz doble).' },
+       { t: 'Infinitas.', err: 'Una parábola corta el eje X a lo más en 2 puntos; tangente ⇒ 1 (raíz doble).' }],
+      'Correcto. Tangente al eje X ⇒ raíz doble: una solución (\\(\\Delta=0\\)).');
+    e4.fig = PCU({ a: 1, h: 1, k: 0, desc: 'Parábola tangente al eje X en x=1.' });
+    E.push(e4);
+
+    // P5 · relación discriminante-cortes (Argumentar)
+    E.push(armar('Argumentar', '¿Qué relación hay entre el discriminante \\(\\Delta\\) y los cortes con el eje X?',
+      [{ t: 'Si \\(\\Delta>0\\) corta en 2 puntos; si \\(\\Delta=0\\), en 1; si \\(\\Delta<0\\), en ninguno.', err: null },
+       { t: 'Si \\(\\Delta>0\\), no corta.', err: 'Al revés: \\(\\Delta>0\\Rightarrow\\) 2 cortes; \\(\\Delta<0\\Rightarrow\\) ninguno.' },
+       { t: 'El discriminante no influye en el gráfico.', err: 'Sí: \\(\\Delta\\) determina cuántas veces la parábola corta el eje X.' },
+       { t: 'Siempre corta en 2 puntos.', err: 'Solo si \\(\\Delta>0\\). Con \\(\\Delta=0\\) toca en 1; con \\(\\Delta<0\\), en ninguno.' }],
+      'Correcto. \\(\\Delta>0\\Rightarrow2\\); \\(\\Delta=0\\Rightarrow1\\); \\(\\Delta<0\\Rightarrow0\\).'));
+
+    // P6 · ceros (Resolver)
+    E.push(armar('Resolver problemas', 'Los ceros de \\(f(x)=x^2-4x+3\\) son:',
+      [{ t: '\\(x=1\\) y \\(x=3\\)', err: null },
+       { t: '\\(x=-1\\) y \\(x=-3\\)', err: '\\((x-1)(x-3)=0\\Rightarrow x=1\\lor x=3\\) (positivos).' },
+       { t: '\\(x=4\\) y \\(x=3\\)', err: 'Producto \\(3\\), suma \\(4\\): \\(1\\) y \\(3\\).' },
+       { t: '\\(x=3\\)', err: 'Hay dos ceros: \\(1\\) y \\(3\\).' }],
+      'Correcto. \\(x^2-4x+3=(x-1)(x-3)=0\\Rightarrow x=1\\lor x=3\\).'));
+
+    // P7 · pelota al suelo (Modelar)
+    E.push(armar('Modelar', 'La altura de una pelota es \\(h(x)=-x^2+5x-6\\) (con \\(x\\) en segundos). ¿En qué instantes toca el suelo (\\(h=0\\))?',
+      [{ t: '\\(x=2\\) y \\(x=3\\)', err: null },
+       { t: '\\(x=-2\\) y \\(x=-3\\)', err: 'Multiplica por \\(-1\\): \\(x^2-5x+6=(x-2)(x-3)=0\\Rightarrow x=2\\lor x=3\\).' },
+       { t: '\\(x=6\\) y \\(x=1\\)', err: 'Producto \\(6\\), suma \\(5\\): \\(2\\) y \\(3\\).' },
+       { t: '\\(x=5\\)', err: 'Los ceros son \\(2\\) y \\(3\\); \\(x=2{,}5\\) sería el vértice.' }],
+      'Correcto. \\(-x^2+5x-6=0\\Rightarrow x^2-5x+6=(x-2)(x-3)=0\\Rightarrow x=2\\lor x=3\\).'));
+
+    // P8 · no toca el eje X (Representar) · FIGURA PCU
+    var e8 = armar('Representar', 'La parábola del gráfico no toca el eje X. ¿Qué se puede afirmar de \\(f(x)=0\\)?',
+      [{ t: 'No tiene soluciones reales (\\(\\Delta<0\\)).', err: null },
+       { t: 'Tiene dos soluciones reales.', err: 'Como NO corta el eje X, no hay soluciones reales (\\(\\Delta<0\\)).' },
+       { t: 'Tiene una solución (raíz doble).', err: 'Una raíz doble tocaría el eje; aquí no lo toca: sin soluciones reales.' },
+       { t: 'La función no está definida.', err: 'Sí está definida (dominio \\(\\mathbb{R}\\)); solo que \\(f(x)=0\\) no tiene solución real.' }],
+      'Correcto. No corta el eje X ⇒ \\(\\Delta<0\\): sin soluciones reales.');
+    e8.fig = PCU({ a: 1, h: 0, k: 2, desc: 'Parábola sobre el eje X, no lo intersecta.' });
+    E.push(e8);
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

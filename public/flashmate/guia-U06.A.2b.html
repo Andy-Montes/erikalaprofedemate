@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.A.2b · Ecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.A.2b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'A', nivel: 'b',
+  titulo: 'Ecuaciones de primer grado',
+  sub: 'Reducción · fracciones · decimales · paréntesis',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Modelar', 'Modelar', 'Representar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · incógnita a ambos lados (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la ecuación \\(5x-3=2x+9\\).',
+      [{ t: '\\(x=4\\)', err: null },
+       { t: '\\(x=2\\)', err: 'Revisa la reducción: \\(5x-2x=9+3\\Rightarrow 3x=12\\Rightarrow x=4\\).' },
+       { t: '\\(x=6\\)', err: 'Pasaste el 3 con signo equivocado. El \\(-3\\) pasa sumando: \\(3x=12\\Rightarrow x=4\\).' },
+       { t: '\\(x=12\\)', err: 'Ese es \\(3x\\), falta dividir por 3: \\(x=4\\).' }],
+      'Correcto. Junto las \\(x\\): \\(5x-2x=9+3\\Rightarrow 3x=12\\Rightarrow x=4\\).'));
+
+    // P2 · con paréntesis (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la ecuación \\(3(x-2)=x+4\\).',
+      [{ t: '\\(x=5\\)', err: null },
+       { t: '\\(x=1\\)', err: 'Al distribuir es \\(3x-6\\), no \\(3x+6\\). Queda \\(2x=10\\Rightarrow x=5\\).' },
+       { t: '\\(x=3\\)', err: 'Olvidaste multiplicar el \\(x\\) del paréntesis. \\(3(x-2)=3x-6\\Rightarrow x=5\\).' },
+       { t: '\\(x=10\\)', err: 'Ese es \\(2x\\); falta dividir por 2: \\(x=5\\).' }],
+      'Correcto. Distribuyo: \\(3x-6=x+4\\Rightarrow 2x=10\\Rightarrow x=5\\).'));
+
+    // P3 · decimales (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la ecuación \\(0{,}3+10x=0{,}5\\).',
+      [{ t: '\\(x=0{,}02\\)', err: null },
+       { t: '\\(x=0{,}08\\)', err: 'Restaste mal: \\(0{,}5-0{,}3=0{,}2\\), y \\(0{,}2:10=0{,}02\\).' },
+       { t: '\\(x=4\\)', err: 'Dividiste al revés. \\(10x=0{,}2\\Rightarrow x=0{,}2:10=0{,}02\\).' },
+       { t: '\\(x=8\\)', err: 'Revisa las comas: \\(10x=0{,}2\\Rightarrow x=0{,}02\\).' }],
+      'Correcto. \\(10x=0{,}5-0{,}3=0{,}2\\); divido por 10: \\(x=0{,}02\\).'));
+
+    // P4 · fracción con la incógnita (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la ecuación \\(\\tfrac{x}{3}-2x=5\\).',
+      [{ t: '\\(x=-3\\)', err: null },
+       { t: '\\(x=3\\)', err: 'Cuidado con el signo: al amplificar por 3 queda \\(x-6x=15\\Rightarrow -5x=15\\Rightarrow x=-3\\).' },
+       { t: '\\(x=-15\\)', err: 'Ese es \\(15\\) sin dividir. \\(-5x=15\\Rightarrow x=-3\\).' },
+       { t: '\\(x=15\\)', err: 'Falta dividir por \\(-5\\): \\(-5x=15\\Rightarrow x=-3\\).' }],
+      'Correcto. Amplifico por 3: \\(x-6x=15\\Rightarrow -5x=15\\Rightarrow x=-3\\).'));
+
+    // P5 · planteamiento tabla (Modelar)
+    E.push(armar('Modelar', 'Una tabla de 50 cm se corta en dos partes. La parte mayor mide el doble de la menor más 5 cm. ¿Cuánto mide la parte MENOR?',
+      [{ t: '15 cm', err: null },
+       { t: '35 cm', err: 'Esa es la parte MAYOR. Con \\(x+(2x+5)=50\\Rightarrow x=15\\), la menor es 15 cm.' },
+       { t: '20 cm', err: 'Esa es la diferencia entre las partes, no la menor. La menor es \\(x=15\\) cm.' },
+       { t: '18 cm', err: 'Plantea \\(x+(2x+5)=50\\Rightarrow 3x=45\\Rightarrow x=15\\) cm.' }],
+      'Correcto. Menor \\(=x\\), mayor \\(=2x+5\\): \\(x+2x+5=50\\Rightarrow 3x=45\\Rightarrow x=15\\) cm.'));
+
+    // P6 · planteamiento números (Modelar)
+    E.push(armar('Modelar', 'Al doble de 108 se le resta \\(m\\) y se obtiene \\(n\\). Si el triple de \\(n\\) es 123, ¿cuál es el valor de \\(m\\)?',
+      [{ t: '175', err: null },
+       { t: '93', err: 'Confundiste el orden: \\(n=123:3=41\\), y \\(216-m=41\\Rightarrow m=175\\).' },
+       { t: '67', err: 'Revisa: \\(2\\cdot108=216\\) y \\(216-41=175\\).' },
+       { t: '-175', err: 'El signo: \\(216-m=41\\Rightarrow m=216-41=175\\) (positivo).' }],
+      'Correcto. \\(n=123:3=41\\); \\(2\\cdot108-m=n\\Rightarrow 216-m=41\\Rightarrow m=175\\).'));
+
+    // P7 · traducir a ecuación sin resolver (Representar)
+    E.push(armar('Representar', '¿Qué ecuación representa "el triple de un número, disminuido en 4, es igual a 20"?',
+      [{ t: '\\(3x-4=20\\)', err: null },
+       { t: '\\(3(x-4)=20\\)', err: 'Eso es "el triple de (un número disminuido en 4)". Aquí primero el triple y luego se resta 4: \\(3x-4=20\\).' },
+       { t: '\\(3x+4=20\\)', err: '"Disminuido en 4" resta, no suma: \\(3x-4=20\\).' },
+       { t: '\\(\\tfrac{x}{3}-4=20\\)', err: '"El triple" multiplica por 3, no divide: \\(3x-4=20\\).' }],
+      'Correcto. "El triple de un número" es \\(3x\\); "disminuido en 4" resta 4: \\(3x-4=20\\).'));
+
+    // P8 · trampa: parece cuadrática, es lineal (Argumentar)
+    E.push(armar('Argumentar', 'La ecuación \\(x^2+2x=(x+2)^2\\), ¿qué solución tiene?',
+      [{ t: '\\(x=-2\\)', err: null },
+       { t: 'No se puede: es de segundo grado.', err: 'Al desarrollar \\((x+2)^2=x^2+4x+4\\), los \\(x^2\\) se cancelan y queda lineal: \\(x=-2\\).' },
+       { t: '\\(x=2\\)', err: 'Cuidado con el signo: \\(-2x=4\\Rightarrow x=-2\\).' },
+       { t: '\\(x=0\\)', err: 'Reemplaza: \\(0\\neq4\\). Al cancelar \\(x^2\\) queda \\(-2x=4\\Rightarrow x=-2\\).' }],
+      'Correcto. \\((x+2)^2=x^2+4x+4\\); al igualar, \\(x^2\\) se cancela y queda \\(2x=4x+4\\Rightarrow -2x=4\\Rightarrow x=-2\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

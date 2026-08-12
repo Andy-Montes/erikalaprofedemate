@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U05.B.4b · Proporcionalidad Compuesta</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U05.B.4b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U05', unidadNum: '05', subunidad: 'B', nivel: 'b',
+  titulo: 'Proporcionalidad Compuesta',
+  sub: 'Clasificar relaciones · directa, inversa y mixta',
+  HAB_E: ['Representar', 'Representar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Resolver problemas', 'Resolver problemas', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · clasificar inversa (Representar)
+    E.push(armar('Representar', 'El tiempo que tarda una piscina en vaciarse y la cantidad de desagües que tiene son magnitudes:',
+      [{ t: 'Inversamente proporcionales', err: null },
+       { t: 'Directamente proporcionales', err: 'Con MÁS desagües se vacía en MENOS tiempo: al aumentar una, la otra disminuye. Es inversa.' },
+       { t: 'No proporcionales', err: 'El producto (volumen a vaciar) es constante: \\(a\\cdot b=k\\). Es inversa.' },
+       { t: 'Ninguna de las anteriores', err: 'Sí lo son: a más desagües, menos tiempo. Proporcionalidad inversa.' }],
+      'Correcto. Más desagües ⇒ menos tiempo: al aumentar una, la otra disminuye. Es inversa.'));
+
+    // P2 · clasificar inversa (Representar)
+    E.push(armar('Representar', 'La cantidad de trabajadores y el tiempo para terminar una misma obra son magnitudes:',
+      [{ t: 'Inversamente proporcionales', err: null },
+       { t: 'Directamente proporcionales', err: 'Con MÁS trabajadores se termina en MENOS tiempo: es inversa.' },
+       { t: 'Iguales', err: 'No son iguales: se compensan (más trabajadores, menos tiempo). Es inversa.' },
+       { t: 'No relacionadas', err: 'Sí se relacionan: su producto (el trabajo total) es constante. Es inversa.' }],
+      'Correcto. Más trabajadores ⇒ menos tiempo: es proporcionalidad inversa.'));
+
+    // P3 · clasificar directa (Argumentar)
+    E.push(armar('Argumentar', 'El consumo de electricidad de una casa y el valor de la cuenta son magnitudes:',
+      [{ t: 'Directamente proporcionales', err: null },
+       { t: 'Inversamente proporcionales', err: 'A MÁS consumo, MÁS valor: ambas aumentan juntas. Es directa.' },
+       { t: 'No proporcionales', err: 'El precio por kWh es fijo, así que el cociente valor/consumo es constante. Es directa.' },
+       { t: 'Constantes', err: 'El valor no es fijo: crece con el consumo. Es directa.' }],
+      'Correcto. A mayor consumo, mayor valor: ambas aumentan juntas. Es directa (\\(\\tfrac{valor}{consumo}=k\\)).'));
+
+    // P4 · compuesta directa (Resolver)
+    E.push(armar('Resolver problemas', '3 obreros en 4 días levantan 6 m de muro. ¿Cuántos metros levantan 6 obreros en 8 días (al mismo ritmo)?',
+      [{ t: '24 m', err: null },
+       { t: '12 m', err: 'Ambos factores son directos: \\(6\\cdot\\tfrac{6}{3}\\cdot\\tfrac{8}{4}=6\\cdot2\\cdot2=24\\) m.' },
+       { t: '18 m', err: 'Falta un factor: al doblar obreros Y doblar días, el muro se cuadruplica: \\(6\\cdot4=24\\) m.' },
+       { t: '48 m', err: 'Los factores son \\(\\tfrac{6}{3}=2\\) y \\(\\tfrac{8}{4}=2\\): \\(6\\cdot2\\cdot2=24\\) m.' }],
+      'Correcto. Directa con obreros y con días: \\(6\\cdot\\tfrac{6}{3}\\cdot\\tfrac{8}{4}=6\\cdot2\\cdot2=24\\) m.'));
+
+    // P5 · modelar pasteleros (Modelar)
+    E.push(armar('Modelar', '5 pasteleros fabrican en 8 horas 10 tortas. ¿Cuántos pasteleros se necesitan para fabricar 3 tortas en 6 horas?',
+      [{ t: '2 pasteleros', err: null },
+       { t: '3 pasteleros', err: 'Directa con tortas (\\(\\tfrac{3}{10}\\)) e inversa con horas (\\(\\tfrac{8}{6}\\)): \\(5\\cdot\\tfrac{3}{10}\\cdot\\tfrac{8}{6}=2\\).' },
+       { t: '4 pasteleros', err: 'Menos tortas ⇒ menos pasteleros: \\(5\\cdot\\tfrac{3}{10}\\cdot\\tfrac{8}{6}=2\\).' },
+       { t: '5 pasteleros', err: 'Como se piden menos tortas, hacen falta menos pasteleros: el cálculo da 2.' }],
+      'Correcto. Directa con tortas e inversa con horas: \\(5\\cdot\\tfrac{3}{10}\\cdot\\tfrac{8}{6}=2\\) pasteleros.'));
+
+    // P6 · inversa (Resolver)
+    E.push(armar('Resolver problemas', '4 llaves iguales llenan un estanque en 6 horas. ¿En cuántas horas lo llenan 3 llaves?',
+      [{ t: '8 horas', err: null },
+       { t: '\\(4{,}5\\) horas', err: 'Es INVERSA: menos llaves ⇒ más tiempo. \\(4\\cdot6=24=3\\cdot x\\Rightarrow x=8\\).' },
+       { t: '\\(2\\) horas', err: 'Al reducir las llaves el tiempo AUMENTA: \\(24:3=8\\) horas.' },
+       { t: '\\(18\\) horas', err: 'El producto es \\(4\\cdot6=24\\): \\(3\\cdot x=24\\Rightarrow x=8\\).' }],
+      'Correcto. Inversa: \\(4\\cdot6=24\\); \\(3\\cdot x=24\\Rightarrow x=8\\) horas.'));
+
+    // P7 · compuesta mixta (Resolver)
+    E.push(armar('Resolver problemas', '4 personas en 6 días construyen 2 muros. ¿Cuántos días necesitan 3 personas para construir 3 muros (al mismo ritmo)?',
+      [{ t: '12 días', err: null },
+       { t: '9 días', err: 'Inversa con personas (\\(\\tfrac{4}{3}\\)) y directa con muros (\\(\\tfrac{3}{2}\\)): \\(6\\cdot\\tfrac{4}{3}\\cdot\\tfrac{3}{2}=12\\).' },
+       { t: '4 días', err: 'Menos personas y más muros ⇒ MÁS días: \\(6\\cdot\\tfrac43\\cdot\\tfrac32=12\\).' },
+       { t: '8 días', err: 'Aplica ambos factores: \\(6\\cdot\\tfrac{4}{3}=8\\) y luego \\(\\cdot\\tfrac{3}{2}=12\\) días.' }],
+      'Correcto. Inversa con personas y directa con muros: \\(6\\cdot\\tfrac{4}{3}\\cdot\\tfrac{3}{2}=12\\) días.'));
+
+    // P8 · concepto compuesta (Argumentar)
+    E.push(armar('Argumentar', 'En un problema de proporcionalidad compuesta, si una de las magnitudes es INVERSA respecto de la incógnita y esa magnitud aumenta, la incógnita:',
+      [{ t: 'Disminuye', err: null },
+       { t: 'Aumenta', err: 'En una relación inversa, si la magnitud aumenta, la incógnita DISMINUYE (su producto se mantiene).' },
+       { t: 'Queda igual', err: 'No queda igual: al ser inversa, un aumento en la magnitud reduce la incógnita.' },
+       { t: 'Se duplica', err: 'No necesariamente se duplica; solo se sabe que disminuye al ser inversa.' }],
+      'Correcto. En una relación inversa, al aumentar esa magnitud la incógnita disminuye (el factor entra invertido).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

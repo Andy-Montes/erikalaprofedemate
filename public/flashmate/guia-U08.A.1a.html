@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U08.A.1a · Concepto de función</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U08.A.1a', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U08', unidadNum: '08', subunidad: 'A', nivel: 'a',
+  titulo: 'Concepto de función',
+  sub: 'Relación · variable independiente y dependiente · evaluar · imagen y preimagen',
+  HAB_E: ['Argumentar', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Resolver problemas', 'Argumentar', 'Modelar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · definición (Argumentar)
+    E.push(armar('Argumentar', '¿Qué caracteriza a una función?',
+      [{ t: 'A cada valor de \\(x\\) le asocia un ÚNICO valor de \\(y\\).', err: null },
+       { t: 'A cada \\(x\\) le asocia dos o más valores de \\(y\\).', err: 'Si un \\(x\\) tuviera dos imágenes NO sería función: cada \\(x\\) debe tener un único \\(y\\).' },
+       { t: 'Relaciona números solo si son positivos.', err: 'No hay restricción de signo; una función asocia a cada \\(x\\) un único \\(y\\).' },
+       { t: 'A cada \\(y\\) le corresponde un único \\(x\\).', err: 'Es al revés: a cada \\(x\\) (entrada) un único \\(y\\) (salida). Varias \\(x\\) sí pueden compartir un mismo \\(y\\).' }],
+      'Correcto. Una función asocia a cada valor de \\(x\\) un único valor de \\(y\\).'));
+
+    // P2 · evaluar f(x)=2x (Resolver) — PDF
+    E.push(armar('Resolver problemas', 'Si \\(f(x)=2x\\), ¿cuál es el valor de \\(f(5)\\)?',
+      [{ t: '\\(10\\)', err: null },
+       { t: '\\(7\\)', err: 'No se suma: \\(f(5)=2\\cdot5=10\\).' },
+       { t: '\\(2{,}5\\)', err: 'No se divide: \\(f(5)=2\\cdot5=10\\).' },
+       { t: '\\(25\\)', err: '\\(2\\cdot5=10\\), no \\(5^2\\).' }],
+      'Correcto. \\(f(5)=2\\cdot5=10\\).'));
+
+    // P3 · evaluar con negativo (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(f(x)=2x-1\\), ¿cuál es el valor de \\(f(-3)\\)?',
+      [{ t: '\\(-7\\)', err: null },
+       { t: '\\(-5\\)', err: '\\(2\\cdot(-3)=-6\\), y \\(-6-1=-7\\), no \\(-5\\).' },
+       { t: '\\(5\\)', err: 'El resultado es negativo: \\(-6-1=-7\\).' },
+       { t: '\\(-6\\)', err: 'Falta restar el 1: \\(2\\cdot(-3)-1=-7\\).' }],
+      'Correcto. \\(f(-3)=2\\cdot(-3)-1=-6-1=-7\\).'));
+
+    // P4 · variable independiente (Representar)
+    E.push(armar('Representar', 'En \\(f(x)=2x\\), ¿cuál es la variable INDEPENDIENTE?',
+      [{ t: '\\(x\\)', err: null },
+       { t: '\\(y\\)', err: '\\(y\\) (o \\(f(x)\\)) es la DEPENDIENTE: su valor depende del de \\(x\\).' },
+       { t: '\\(2\\)', err: 'El 2 es un coeficiente, no una variable.' },
+       { t: 'Ninguna, no hay variables.', err: 'La independiente es \\(x\\) (la entrada) y la dependiente es \\(y\\).' }],
+      'Correcto. \\(x\\) es la variable independiente (la entrada); \\(y\\) depende de ella.'));
+
+    // P5 · evaluar afín (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(f(x)=3x+2\\), ¿cuál es el valor de \\(f(4)\\)?',
+      [{ t: '\\(14\\)', err: null },
+       { t: '\\(9\\)', err: '\\(3\\cdot4=12\\), y \\(12+2=14\\), no 9.' },
+       { t: '\\(24\\)', err: 'No se multiplica todo: \\(3\\cdot4+2=14\\).' },
+       { t: '\\(20\\)', err: 'Revisa: \\(3\\cdot4=12\\); \\(12+2=14\\).' }],
+      'Correcto. \\(f(4)=3\\cdot4+2=14\\).'));
+
+    // P6 · ¿es función? (Argumentar)
+    E.push(armar('Argumentar', 'Una relación asigna al número \\(3\\) los valores \\(5\\) y \\(8\\). ¿Es una función?',
+      [{ t: 'No: un mismo \\(x\\) no puede tener dos imágenes.', err: null },
+       { t: 'Sí, siempre es función.', err: 'No: si \\(x=3\\) tiene dos \\(y\\) (5 y 8) se rompe la regla de "un único \\(y\\)".' },
+       { t: 'Sí, porque usa números.', err: 'Usar números no basta: para ser función, cada \\(x\\) debe tener UN solo \\(y\\).' },
+       { t: 'Depende de cuál se elija.', err: 'No se elige: como \\(x=3\\) ya tiene dos imágenes, no es función.' }],
+      'Correcto. Un mismo \\(x\\) con dos imágenes rompe la definición: no es función.'));
+
+    // P7 · modelar (Modelar)
+    E.push(armar('Modelar', 'Un plan de datos cobra un cargo fijo de 5.000 pesos más 100 pesos por cada GB. ¿Qué función da el costo por \\(x\\) GB?',
+      [{ t: '\\(f(x)=100x+5000\\)', err: null },
+       { t: '\\(f(x)=5000x+100\\)', err: 'El cargo fijo (5.000) no depende de los GB; lo variable es \\(100x\\): \\(f(x)=100x+5000\\).' },
+       { t: '\\(f(x)=5100x\\)', err: 'No se juntan el fijo y el variable en un solo coeficiente: el fijo va aparte: \\(100x+5000\\).' },
+       { t: '\\(f(x)=100+5000x\\)', err: 'El 5.000 es fijo (no se multiplica por los GB): \\(100x+5000\\).' }],
+      'Correcto. Variable: \\(100x\\); fijo: \\(5000\\): \\(f(x)=100x+5000\\).'));
+
+    // P8 · preimagen (Resolver)
+    E.push(armar('Resolver problemas', 'En \\(f(x)=2x-1\\), ¿para qué valor de \\(x\\) se tiene \\(f(x)=7\\)?',
+      [{ t: '\\(x=4\\)', err: null },
+       { t: '\\(x=13\\)', err: 'Resuelve \\(2x-1=7\\Rightarrow2x=8\\Rightarrow x=4\\), no 13.' },
+       { t: '\\(x=3\\)', err: '\\(2x=7+1=8\\Rightarrow x=4\\).' },
+       { t: '\\(x=7\\)', err: '\\(7\\) es el valor de \\(f(x)\\), no de \\(x\\): \\(x=4\\).' }],
+      'Correcto. \\(2x-1=7\\Rightarrow2x=8\\Rightarrow x=4\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

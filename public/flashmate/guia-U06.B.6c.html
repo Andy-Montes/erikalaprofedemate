@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.B.6c · Inecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.B.6c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'B', nivel: 'c',
+  titulo: 'Inecuaciones de primer grado',
+  sub: 'Intervalos · error · literales · pertinencia',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Representar', 'Modelar', 'Argumentar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · resolver a intervalo (Resolver) — PDF Ej1
+    E.push(armar('Resolver problemas', 'El conjunto solución de \\(2x+3<-x+12\\) es:',
+      [{ t: '\\(]-\\infty,\\,3[\\)', err: null },
+       { t: '\\([3,\\,\\infty[\\)', err: 'Ese es \\(x\\geq3\\). Aquí \\(3x<9\\Rightarrow x<3\\): \\(]-\\infty,3[\\).' },
+       { t: '\\(]-3,\\,\\infty[\\)', err: 'Revisa: \\(2x+x<12-3\\Rightarrow x<3\\), no \\(x>-3\\).' },
+       { t: '\\(]-\\infty,\\,3]\\)', err: 'El \\(<\\) es estricto: el 3 no se incluye, corchete abierto: \\(]-\\infty,3[\\).' }],
+      'Correcto. \\(3x<9\\Rightarrow x<3\\), es decir \\(]-\\infty,3[\\).'));
+
+    // P2 · resolver a intervalo con fracción (Resolver) — PDF Ej5
+    E.push(armar('Resolver problemas', 'El conjunto solución de \\(48+8x\\geq6(3x+5)\\) es:',
+      [{ t: '\\(]-\\infty,\\,\\tfrac{9}{5}]\\)', err: null },
+       { t: '\\([\\tfrac{9}{5},\\,\\infty[\\)', err: 'El sentido es \\(x\\leq\\tfrac{9}{5}\\), no \\(\\geq\\): \\(]-\\infty,\\tfrac{9}{5}]\\).' },
+       { t: '\\(]-\\infty,\\,9]\\)', err: 'Falta dividir por 5: \\(18\\geq10x\\Rightarrow x\\leq\\tfrac{9}{5}\\).' },
+       { t: '\\([9,\\,\\infty[\\)', err: 'Revisa: \\(48+8x\\geq18x+30\\Rightarrow18\\geq10x\\Rightarrow x\\leq\\tfrac{9}{5}\\).' }],
+      'Correcto. \\(48+8x\\geq18x+30\\Rightarrow18\\geq10x\\Rightarrow x\\leq\\tfrac{9}{5}\\): \\(]-\\infty,\\tfrac{9}{5}]\\).'));
+
+    // P3 · identificar error (Argumentar) — PDF Ej2
+    E.push(armar('Argumentar', 'Al resolver \\(-8x+5>7x+20\\), un estudiante llega a \\(-15x>15\\) y concluye \\(x>-1\\). ¿Es correcto?',
+      [{ t: 'No: lo correcto es \\(x<-1\\).', err: null },
+       { t: 'Sí, está bien.', err: 'Al dividir \\(-15x>15\\) por \\(-15\\) (negativo) hay que INVERTIR: \\(x<-1\\), no \\(x>-1\\).' },
+       { t: 'No: es \\(x>1\\).', err: 'El valor es \\(15:(-15)=-1\\), y el signo se invierte: \\(x<-1\\).' },
+       { t: 'No: es \\(x<1\\).', err: 'El resultado es \\(-1\\) (negativo): al invertir queda \\(x<-1\\).' }],
+      'Correcto. Al dividir por \\(-15\\) (negativo) se invierte la desigualdad: \\(x<-1\\).'));
+
+    // P4 · resolver y ELEGIR la recta (Resolver) · OPCIONES-FIGURA (e.rawOpts) — PDF Ej3
+    var e4 = armar('Resolver problemas', 'Resuelve \\(2(x+5)>4(x+7)+6\\) y elige la recta numérica que representa su solución.',
+      [{ t: RN({ min: -18, max: 6, ticks: [-12, -6, 0], bx: -12, dir: 'left', closed: false, desc: 'Punto abierto en -12, sombreado a la izquierda.' }), err: null },
+       { t: RN({ min: -18, max: 6, ticks: [-12, -6, 0], bx: -12, dir: 'right', closed: false, desc: 'Punto abierto en -12, sombreado a la derecha.' }), err: 'Esa es \\(x>-12\\). Al dividir \\(-2x>24\\) por \\(-2\\) se INVIERTE el signo: \\(x<-12\\) (flecha a la izquierda).' },
+       { t: RN({ min: -18, max: 6, ticks: [-12, -6, 0], bx: -12, dir: 'left', closed: true, desc: 'Punto cerrado en -12, sombreado a la izquierda.' }), err: 'El \\(>\\) es estricto: el punto va ABIERTO (hueco), no relleno.' },
+       { t: RN({ min: -18, max: 6, ticks: [-12, -6, 0], bx: -6, dir: 'left', closed: false, desc: 'Punto abierto en -6, sombreado a la izquierda.' }), err: 'El valor frontera es \\(-12\\), no \\(-6\\).' }],
+      'Correcto. \\(2x+10>4x+34\\Rightarrow-2x>24\\Rightarrow x<-12\\): punto ABIERTO en \\(-12\\) y flecha hacia la izquierda.');
+    e4.rawOpts = true;
+    E.push(e4);
+
+    // P5 · literal (Representar) — PDF Ej4
+    E.push(armar('Representar', 'El conjunto solución de \\(ax+c<x+\\tfrac{a}{b}\\), con \\(a,b,c\\) reales positivos y \\(a\\neq1\\) (\\(a>1\\)), es:',
+      [{ t: '\\(x<\\tfrac{a-bc}{b(a-1)}\\)', err: null },
+       { t: '\\(x<\\tfrac{a-c}{b(a-1)}\\)', err: 'Al juntar constantes, \\(\\tfrac{a}{b}-c=\\tfrac{a-bc}{b}\\) (no \\(a-c\\)). El numerador es \\(a-bc\\).' },
+       { t: '\\(x<\\tfrac{a-c}{ab}\\)', err: 'El factor al despejar es \\((a-1)\\), no \\(a\\): \\(x(a-1)<\\tfrac{a-bc}{b}\\).' },
+       { t: '\\(x<\\tfrac{c}{b}\\)', err: 'Faltan términos: agrupa \\(x\\): \\((a-1)x<\\tfrac{a-bc}{b}\\Rightarrow x<\\tfrac{a-bc}{b(a-1)}\\).' }],
+      'Correcto. \\((a-1)x<\\tfrac{a}{b}-c=\\tfrac{a-bc}{b}\\); como \\(a-1>0\\) no se invierte: \\(x<\\tfrac{a-bc}{b(a-1)}\\).'));
+
+    // P6 · modelar compra (Modelar)
+    E.push(armar('Modelar', 'Tengo 10.000 pesos. Ya gasté 2.500 pesos y quiero comprar cuadernos de 1.500 pesos cada uno. ¿Cuántos cuadernos \\(x\\) puedo comprar?',
+      [{ t: '\\(x\\leq5\\)', err: null },
+       { t: '\\(x\\leq6\\)', err: 'No olvides lo ya gastado: \\(2500+1500x\\leq10000\\Rightarrow x\\leq5\\).' },
+       { t: '\\(x\\geq5\\)', err: 'El dinero es un tope: se gasta a lo MÁS 10.000 pesos, así que \\(x\\leq5\\).' },
+       { t: '\\(x\\leq8\\)', err: 'Descontaste mal: \\(1500x\\leq10000-2500=7500\\Rightarrow x\\leq5\\).' }],
+      'Correcto. \\(2500+1500x\\leq10000\\Rightarrow1500x\\leq7500\\Rightarrow x\\leq5\\) cuadernos.'));
+
+    // P7 · pertinencia de la solución (Argumentar)
+    E.push(armar('Argumentar', 'Al resolver un problema, la cantidad de personas \\(x\\) que caben cumple \\(x\\leq5{,}5\\). ¿Cuál es la mayor cantidad de personas posible?',
+      [{ t: '5 personas.', err: null },
+       { t: '5,5 personas.', err: 'No existen "media persona": la cantidad debe ser un entero. El mayor entero \\(\\leq5{,}5\\) es 5.' },
+       { t: '6 personas.', err: '6 no cumple \\(x\\leq5{,}5\\). El máximo entero permitido es 5.' },
+       { t: 'Infinitas.', err: 'El contexto limita: \\(x\\) es un entero no negativo y \\(\\leq5{,}5\\); el máximo es 5.' }],
+      'Correcto. La solución matemática es \\(x\\leq5{,}5\\), pero como \\(x\\) cuenta personas (entero), el máximo pertinente es 5.'));
+
+    // P8 · con negativo y paréntesis (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(-2(x-3)\\geq4\\).',
+      [{ t: '\\(x\\leq1\\)', err: null },
+       { t: '\\(x\\geq1\\)', err: 'Al dividir por \\(-2\\) (negativo) se invierte \\(\\geq\\) a \\(\\leq\\): \\(x\\leq1\\).' },
+       { t: '\\(x\\leq-1\\)', err: 'Revisa: \\(-2x\\geq-2\\Rightarrow x\\leq1\\) (positivo).' },
+       { t: '\\(x\\geq5\\)', err: 'Distribuye bien: \\(-2x+6\\geq4\\Rightarrow-2x\\geq-2\\Rightarrow x\\leq1\\).' }],
+      'Correcto. \\(-2x+6\\geq4\\Rightarrow-2x\\geq-2\\); divido por \\(-2\\) (invierte): \\(x\\leq1\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

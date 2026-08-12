@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.A.3c · Ecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.A.3c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'A', nivel: 'c',
+  titulo: 'Ecuaciones de primer grado',
+  sub: 'Literales · fraccionarias · planteamiento tipo PAES',
+  HAB_E: ['Representar', 'Representar', 'Resolver problemas', 'Modelar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · literal ax+b=3 (Representar / despeje simbólico)
+    E.push(armar('Representar', 'Si \\(ax+b=3\\), con \\(a\\neq0\\) y \\(b\\neq0\\), entonces \\(x\\) vale:',
+      [{ t: '\\(x=\\tfrac{3-b}{a}\\)', err: null },
+       { t: '\\(x=\\tfrac{b-3}{a}\\)', err: 'El \\(b\\) pasa restando: \\(ax=3-b\\), no \\(b-3\\). Queda \\(x=\\tfrac{3-b}{a}\\).' },
+       { t: '\\(x=\\tfrac{a-3}{b}\\)', err: 'Se despeja \\(x\\), que está multiplicado por \\(a\\): se divide por \\(a\\), no por \\(b\\).' },
+       { t: '\\(x=-\\tfrac{3-b}{a}\\)', err: 'Sobra el signo negativo: de \\(ax=3-b\\) se divide por \\(a\\) sin invertir: \\(x=\\tfrac{3-b}{a}\\).' }],
+      'Correcto. Resto \\(b\\): \\(ax=3-b\\); divido por \\(a\\): \\(x=\\tfrac{3-b}{a}\\).'));
+
+    // P2 · literal general ax+b=c (Representar)
+    E.push(armar('Representar', 'La solución de la ecuación literal \\(ax+b=c\\) (con \\(a\\neq0\\)) es:',
+      [{ t: '\\(x=\\tfrac{c-b}{a}\\)', err: null },
+       { t: '\\(x=\\tfrac{c+b}{a}\\)', err: 'El \\(b\\) pasa restando, no sumando: \\(ax=c-b\\Rightarrow x=\\tfrac{c-b}{a}\\).' },
+       { t: '\\(x=\\tfrac{b-c}{a}\\)', err: 'Invertiste el orden: \\(ax=c-b\\), así que \\(x=\\tfrac{c-b}{a}\\).' },
+       { t: '\\(x=(c-b)\\cdot a\\)', err: 'Como \\(a\\) multiplica a \\(x\\), se DIVIDE por \\(a\\), no se multiplica: \\(x=\\tfrac{c-b}{a}\\).' }],
+      'Correcto. Resto \\(b\\): \\(ax=c-b\\); divido por \\(a\\): \\(x=\\tfrac{c-b}{a}\\).'));
+
+    // P3 · literal con factorización (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve para \\(x\\) la ecuación literal \\(2ax-a=a+2x\\) (con \\(a\\neq1\\)).',
+      [{ t: '\\(x=\\tfrac{a}{a-1}\\)', err: null },
+       { t: '\\(x=\\tfrac{2a}{2a-2}\\)', err: 'Vas bien, pero falta simplificar: \\(\\tfrac{2a}{2(a-1)}=\\tfrac{a}{a-1}\\).' },
+       { t: '\\(x=a\\)', err: 'No puedes despejar sin factorizar: agrupa las \\(x\\): \\(x(2a-2)=2a\\Rightarrow x=\\tfrac{a}{a-1}\\).' },
+       { t: '\\(x=\\tfrac{a-1}{a}\\)', err: 'Está invertido: de \\(x(2a-2)=2a\\) se obtiene \\(x=\\tfrac{a}{a-1}\\).' }],
+      'Correcto. Agrupo: \\(2ax-2x=a+a\\Rightarrow x(2a-2)=2a\\Rightarrow x=\\tfrac{2a}{2(a-1)}=\\tfrac{a}{a-1}\\).'));
+
+    // P4 · fracción del total (Modelar)
+    E.push(armar('Modelar', 'En un curso de 30 estudiantes, el número de niñas es el doble del de niños, más 3. ¿Qué fracción del total son los niños?',
+      [{ t: '\\(\\tfrac{3}{10}\\)', err: null },
+       { t: '\\(\\tfrac{7}{10}\\)', err: 'Esa es la fracción de NIÑAS. Los niños son \\(x=9\\), o sea \\(\\tfrac{9}{30}=\\tfrac{3}{10}\\).' },
+       { t: '\\(\\tfrac{1}{3}\\)', err: 'Sin plantear da 10; pero \\(x+(2x+3)=30\\Rightarrow x=9\\), y \\(\\tfrac{9}{30}=\\tfrac{3}{10}\\).' },
+       { t: '\\(\\tfrac{2}{7}\\)', err: 'Plantea con el total 30: \\(3x+3=30\\Rightarrow x=9\\Rightarrow \\tfrac{9}{30}=\\tfrac{3}{10}\\).' }],
+      'Correcto. Niños \\(=x\\), niñas \\(=2x+3\\): \\(x+2x+3=30\\Rightarrow x=9\\); fracción \\(=\\tfrac{9}{30}=\\tfrac{3}{10}\\).'));
+
+    // P5 · lenguaje algebraico compuesto: sucesor/antecesor (Argumentar)
+    E.push(armar('Argumentar', 'Al triple del sucesor de \\(n\\) se le resta el antecesor del antecesor de \\(n\\), y se le suma el cuádruplo de \\(n\\). El resultado es:',
+      [{ t: '\\(6n+5\\)', err: null },
+       { t: '\\(6n+1\\)', err: 'El antecesor del antecesor es \\(n-2\\), y se RESTA: \\(-(n-2)=-n+2\\). Suma bien: \\(6n+5\\).' },
+       { t: '\\(6n+3\\)', err: 'Cuidado con el sucesor: \\(3(n+1)=3n+3\\). Total: \\(3n+3-(n-2)+4n=6n+5\\).' },
+       { t: '\\(8n+5\\)', err: 'Revisa la reducción de las \\(n\\): \\(3n-n+4n=6n\\), no \\(8n\\). Es \\(6n+5\\).' }],
+      'Correcto. \\(3(n+1)-(n-2)+4n=3n+3-n+2+4n=6n+5\\).'));
+
+    // P6 · fraccionaria con incógnita en denominador (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve \\(\\tfrac{x+2}{x-5}=3\\) (con \\(x\\neq5\\)).',
+      [{ t: '\\(x=\\tfrac{17}{2}\\)', err: null },
+       { t: '\\(x=5\\)', err: 'Justo \\(x=5\\) está prohibido (anula el denominador). Multiplicando: \\(x+2=3(x-5)\\Rightarrow x=\\tfrac{17}{2}\\).' },
+       { t: '\\(x=\\tfrac{13}{2}\\)', err: 'Revisa el signo al distribuir: \\(3(x-5)=3x-15\\Rightarrow x+2=3x-15\\Rightarrow x=\\tfrac{17}{2}\\).' },
+       { t: '\\(x=17\\)', err: 'Falta dividir por 2: \\(2x=17\\Rightarrow x=\\tfrac{17}{2}\\).' }],
+      'Correcto. Multiplico por \\((x-5)\\): \\(x+2=3x-15\\Rightarrow 17=2x\\Rightarrow x=\\tfrac{17}{2}\\). (Y \\(\\tfrac{17}{2}\\neq5\\), es válido.)'));
+
+    // P7 · planteamiento consecutivos (Modelar)
+    E.push(armar('Modelar', 'La suma de tres números naturales consecutivos es 72. ¿Cuál es el MAYOR de ellos?',
+      [{ t: '25', err: null },
+       { t: '24', err: 'Ese es el del medio. Con \\(x+(x+1)+(x+2)=72\\Rightarrow x=23\\), el mayor es \\(x+2=25\\).' },
+       { t: '23', err: 'Ese es el menor \\(x\\). El mayor es \\(x+2=25\\).' },
+       { t: '26', err: 'Revisa: \\(3x+3=72\\Rightarrow x=23\\), y el mayor \\(=25\\) (\\(23+24+25=72\\)).' }],
+      'Correcto. \\(x+(x+1)+(x+2)=72\\Rightarrow 3x+3=72\\Rightarrow x=23\\); el mayor es \\(25\\).'));
+
+    // P8 · infinitas soluciones / identidad (Argumentar)
+    E.push(armar('Argumentar', '¿Cuántas soluciones tiene la ecuación \\(2(x+3)=2x+6\\)?',
+      [{ t: 'Infinitas: cualquier número la cumple.', err: null },
+       { t: 'Una: \\(x=0\\).', err: 'Al desarrollar, ambos lados son idénticos (\\(2x+6=2x+6\\)); no solo \\(x=0\\), TODO \\(x\\) sirve.' },
+       { t: 'Una: \\(x=3\\).', err: 'Ambos lados quedan iguales: \\(2x+6=2x+6\\). Cualquier \\(x\\) la cumple, no solo 3.' },
+       { t: 'Ninguna.', err: 'No es imposible: al desarrollar queda \\(2x+6=2x+6\\), verdadero siempre: infinitas soluciones.' }],
+      'Correcto. \\(2(x+3)=2x+6\\) es una identidad: ambos lados son iguales, así que todo número real es solución.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

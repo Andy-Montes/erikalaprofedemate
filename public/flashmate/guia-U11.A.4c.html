@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U11.A.4c · Cuerpos geométricos: área, volumen y contextos PAES</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U11.A.4c', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U11', unidadNum: '11', subunidad: 'A', nivel: 'c',
+  titulo: 'Cuerpos geométricos: área, volumen y contextos PAES',
+  sub: 'Cuerpos de cubos · pecera sin tapa · afirmaciones · trasvasije',
+  HAB_E: ['Resolver problemas', 'Modelar', 'Resolver problemas', 'Argumentar', 'Modelar', 'Resolver problemas', 'Representar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · cuerpo de cubos: volumen -> arista -> área (Resolver) · CUBES
+    var e1 = armar('Resolver problemas', 'El cuerpo de la figura está formado por 4 cubos iguales. Si su volumen total es 500 cm³, ¿cuál es su área de superficie?',
+      [{ t: '\\(450\\) cm²', err: null },
+       { t: '\\(500\\) cm²', err: '500 es el volumen. El área es la suma de las caras expuestas.' },
+       { t: '\\(600\\) cm²', err: 'Contaste 6 caras por cubo (\\(6\\cdot4=24\\)) sin descontar las caras pegadas. Las expuestas son 18: \\(18\\cdot25=450\\).' },
+       { t: '\\(250\\) cm²', err: 'Contaste solo las caras visibles desde un lado. Hay 18 caras expuestas: \\(18\\cdot25=450\\).' }],
+      'Correcto. Cada cubo mide \\(500\\div4=125\\), así que la arista es \\(\\sqrt[3]{125}=5\\). El cuerpo tiene 18 caras expuestas: \\(18\\cdot5^2=18\\cdot25=450\\) cm².');
+    e1.fig = CUBES([[0,0,0],[1,0,0],[2,0,0],[1,0,1]], { desc: 'Cuerpo formado por 4 cubos iguales.' });
+    E.push(e1);
+
+    // P2 · pecera sin tapa: costo del vidrio (Modelar) · BOX
+    var e2 = armar('Modelar', 'Una pecera sin tapa mide 20 cm × 30 cm de base y 15 cm de alto (figura). Se construye con vidrio que cuesta $60.000 el m² (1 m² = 10.000 cm²). ¿Cuánto cuesta el vidrio?',
+      [{ t: '\\$12.600', err: null },
+       { t: '\\$9.300', err: 'Contaste mal las caras. Sin tapa: base \\(600\\) + 4 paredes \\(1500\\) = 2100 cm² = 0,21 m² → \\(0{,}21\\cdot60000=\\$12.600\\).' },
+       { t: '\\$16.200', err: 'Incluiste la tapa. La pecera no tiene tapa: solo 5 caras = 2100 cm² → \\$12.600.' },
+       { t: '\\$54.000', err: 'Revisa la conversión: 2100 cm² = 0,21 m² (no 0,9). Costo \\(=0{,}21\\cdot60000=\\$12.600\\).' }],
+      'Correcto. Sin tapa: base \\(20\\cdot30=600\\), más 4 paredes \\(2(20\\cdot15)+2(30\\cdot15)=1500\\); total \\(2100\\) cm² \\(=0{,}21\\) m². Costo \\(=0{,}21\\cdot60000=\\$12.600\\).');
+    e2.fig = BOX({ a: 20, b: 30, c: 15, aL: { t: '20', role: 'dato' }, bL: { t: '30', role: 'dato' }, cL: { t: '15', role: 'dato' }, desc: 'Pecera sin tapa 20 x 30 x 15.' });
+    E.push(e2);
+
+    // P3 · dos cubos apilados: diagonal -> arista -> área (Resolver) · CUBES
+    var e3 = armar('Resolver problemas', 'El cuerpo de la figura son dos cubos iguales apilados. Si la distancia entre los vértices opuestos \\(A\\) y \\(C\\) es \\(2\\sqrt{6}\\) cm, ¿cuál es el área del cuerpo?',
+      [{ t: '\\(40\\) cm²', err: null },
+       { t: '\\(48\\) cm²', err: 'Usaste 12 caras (6 por cubo) sin descontar las 2 pegadas. Son 10 caras de \\(a^2=4\\): \\(40\\).' },
+       { t: '\\(240\\) cm²', err: 'Revisa la arista: \\(a=2\\). Área \\(=10a^2=10\\cdot4=40\\).' },
+       { t: '\\(288\\) cm²', err: 'La diagonal del cuerpo \\(1\\times1\\times2\\) es \\(a\\sqrt{6}=2\\sqrt{6}\\Rightarrow a=2\\); área \\(=10a^2=40\\).' }],
+      'Correcto. El cuerpo mide \\(a\\times a\\times 2a\\); su diagonal es \\(\\sqrt{a^2+a^2+(2a)^2}=a\\sqrt{6}\\). Como \\(a\\sqrt{6}=2\\sqrt{6}\\), \\(a=2\\). Área \\(=2a^2+4\\cdot2a^2=10a^2=40\\) cm².');
+    e3.fig = CUBES([[0,0,0],[0,0,1]], { desc: 'Dos cubos iguales apilados.' });
+    E.push(e3);
+
+    // P4 · afirmaciones sobre el paralelepípedo (Argumentar) · BOX
+    var e4 = armar('Argumentar', 'El paralelepípedo de la figura tiene aristas 2, 3 y 6. ¿Cuál(es) de estas afirmaciones es (son) verdadera(s)?\nI) Su área total es 72 cm².\nII) Su volumen es 36 cm³.\nIII) La mayor distancia entre dos vértices es 7 cm.',
+      [{ t: 'I, II y III', err: null },
+       { t: 'Solo I', err: 'II y III también: \\(V=2\\cdot3\\cdot6=36\\) y \\(D=\\sqrt{4+9+36}=7\\).' },
+       { t: 'Solo I y II', err: 'III también es verdadera: \\(D=\\sqrt{2^2+3^2+6^2}=\\sqrt{49}=7\\).' },
+       { t: 'Solo I y III', err: 'II también: \\(V=2\\cdot3\\cdot6=36\\) cm³.' }],
+      'Correcto. \\(A=2(2\\cdot3+2\\cdot6+3\\cdot6)=2(6+12+18)=72\\); \\(V=2\\cdot3\\cdot6=36\\); \\(D=\\sqrt{2^2+3^2+6^2}=\\sqrt{49}=7\\). Las tres son verdaderas.');
+    e4.fig = BOX({ a: 6, b: 2, c: 3, aL: { t: '6', role: 'dato' }, bL: { t: '2', role: 'dato' }, cL: { t: '3', role: 'dato' }, desc: 'Paralelepípedo de aristas 2, 3 y 6.' });
+    E.push(e4);
+
+    // P5 · pintar cuerpo de cubos (Modelar) · CUBES
+    var e5 = armar('Modelar', 'El cuerpo de la figura está formado por 5 cubos de arista 3 cm. Se sumerge en pintura. ¿Cuántos \\(cm^2\\) quedan pintados (área total)?',
+      [{ t: '\\(180\\) cm²', err: null },
+       { t: '\\(270\\) cm²', err: 'Contaste 6 caras por cubo (\\(6\\cdot5=30\\)) sin descontar las pegadas. Las expuestas son 20: \\(20\\cdot9=180\\).' },
+       { t: '\\(45\\) cm²', err: 'Eso es una cara por cubo. La superficie expuesta son 20 caras: \\(20\\cdot9=180\\).' },
+       { t: '\\(135\\) cm²', err: 'Contaste solo un lado. Hay 20 caras expuestas: \\(20\\cdot9=180\\).' }],
+      'Correcto. El cuerpo tiene 20 caras expuestas (las pegadas entre cubos no se pintan). Cada cara mide \\(3^2=9\\): \\(20\\cdot9=180\\) cm².');
+    e5.fig = CUBES([[0,0,0],[1,0,0],[0,1,0],[1,1,0],[0,0,1]], { desc: 'Cuerpo formado por 5 cubos.' });
+    E.push(e5);
+
+    // P6 · prisma con cubo extraído: volumen -> área (Resolver) · CUBES ghost
+    var e6 = armar('Resolver problemas', 'El cuerpo de la figura se formó con cubos de arista 4 cm; a un bloque se le extrajo un cubo (marcado con línea punteada). Si el volumen del cuerpo es 512 cm³, ¿cuál es su área de superficie?',
+      [{ t: '\\(448\\) cm²', err: null },
+       { t: '\\(512\\) cm²', err: '512 es el volumen. El área es la suma de las caras expuestas.' },
+       { t: '\\(768\\) cm²', err: 'Contaste 6 caras por cubo (\\(6\\cdot8\\)) sin descontar las pegadas. Las expuestas son 28: \\(28\\cdot16=448\\).' },
+       { t: '\\(384\\) cm²', err: 'Olvidaste las caras del hueco: al extraer el cubo se agrega superficie. Total 28 caras: \\(28\\cdot16=448\\).' }],
+      'Correcto. Con volumen 512 y cubos de \\(4^3=64\\), hay \\(512\\div64=8\\) cubos. Contando las 28 caras expuestas (incluidas las del hueco): \\(28\\cdot4^2=28\\cdot16=448\\) cm².');
+    e6.fig = CUBES([[0,0,0],[1,0,0],[2,0,0],[0,1,0],[1,1,0],[2,1,0],[0,0,1],[1,0,1]], { ghost: [[2,0,1]], desc: 'Bloque de cubos con un cubo extraído.' });
+    E.push(e6);
+
+    // P7 · efecto de duplicar la arista (Representar)
+    E.push(armar('Representar', 'Si se duplica la arista de un cubo, su volumen queda multiplicado por…',
+      [{ t: '\\(8\\)', err: null },
+       { t: '\\(2\\)', err: 'El volumen es \\(a^3\\); con arista \\(2a\\): \\((2a)^3=8a^3\\). Se multiplica por 8, no por 2.' },
+       { t: '\\(4\\)', err: 'Por 4 se multiplica el ÁREA (\\(a^2\\)). El volumen (\\(a^3\\)) se multiplica por 8.' },
+       { t: '\\(6\\)', err: '\\((2a)^3=8a^3\\): el volumen se multiplica por 8.' }],
+      'Correcto. \\(V=a^3\\); con arista \\(2a\\): \\((2a)^3=8a^3\\). El volumen se multiplica por 8.');
+
+    // P8 · trasvasije de agua (Modelar)
+    E.push(armar('Modelar', 'Una pecera A (prisma recto) mide 20 × 12 × 5 cm y está llena de agua. Se vierte todo su contenido en una pecera B de base 25 × 6 cm. ¿Qué altura \\(h\\) alcanza el agua en B?',
+      [{ t: '\\(8\\) cm', err: null },
+       { t: '\\(6\\) cm', err: 'El volumen de A es \\(20\\cdot12\\cdot5=1200\\). En B: \\(150\\cdot h=1200\\Rightarrow h=8\\).' },
+       { t: '\\(7\\) cm', err: 'El agua no cambia de volumen: \\(1200\\div150=8\\).' },
+       { t: '\\(10\\) cm', err: 'Divide el volumen por la base de B: \\(h=\\tfrac{1200}{25\\cdot6}=8\\).' }],
+      'Correcto. El volumen se conserva: \\(V_A=20\\cdot12\\cdot5=1200\\). En B, base \\(25\\cdot6=150\\), así que \\(h=\\tfrac{1200}{150}=8\\) cm.');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

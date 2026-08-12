@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U09.A.2b · Completación de cuadrados y fórmula general</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U09.A.2b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U09', unidadNum: '09', subunidad: 'A', nivel: 'b',
+  titulo: 'Completación de cuadrados y fórmula general',
+  sub: 'Resolver por ambos métodos · ordenar e identificar a, b, c',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Modelar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · qué sumar para completar (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', '¿Qué número debe sumarse a ambos lados de \\(x^2-8x+12=0\\) para resolver por completación de cuadrado?',
+      [{ t: '\\(16\\)', err: null },
+       { t: '\\(4\\)', err: 'Se suma el CUADRADO de la mitad del coeficiente de \\(x\\): \\(\\left(\\tfrac{-8}{2}\\right)^2=(-4)^2=16\\).' },
+       { t: '\\(-16\\)', err: 'El cuadrado siempre es positivo: \\((-4)^2=16\\).' },
+       { t: '\\(64\\)', err: 'La mitad de \\(-8\\) es \\(-4\\); \\((-4)^2=16\\), no \\((-8)^2\\).' }],
+      'Correcto. Mitad de \\(-8\\) es \\(-4\\); \\((-4)^2=16\\).'));
+
+    // P2 · resolver por completación (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve \\(x^2+6x-16=0\\) por completación de cuadrado.',
+      [{ t: '\\(x=2\\) y \\(x=-8\\)', err: null },
+       { t: '\\(x=-2\\) y \\(x=8\\)', err: '\\((x+3)^2=25\\Rightarrow x+3=\\pm5\\Rightarrow x=2\\lor x=-8\\).' },
+       { t: '\\(x=2\\) y \\(x=8\\)', err: '\\(x+3=-5\\Rightarrow x=-8\\) (negativo). Soluciones: 2 y \\(-8\\).' },
+       { t: '\\(x=5\\) y \\(x=-5\\)', err: 'Tras la raíz \\(x+3=\\pm5\\), se despeja \\(x\\): \\(x=2\\lor x=-8\\).' }],
+      'Correcto. \\(x^2+6x+9=25\\Rightarrow(x+3)^2=25\\Rightarrow x=2\\lor x=-8\\).'));
+
+    // P3 · ordenar e identificar a,b,c (Representar)
+    E.push(armar('Representar', 'Al ordenar \\(2x^2+5=x-8\\) en la forma \\(ax^2+bx+c=0\\), ¿cuáles son \\(a,\\,b,\\,c\\)?',
+      [{ t: '\\(a=2,\\;b=-1,\\;c=13\\)', err: null },
+       { t: '\\(a=2,\\;b=1,\\;c=-3\\)', err: 'Todo a un lado: \\(2x^2-x+13=0\\). El término en \\(x\\) es \\(-x\\) y el libre \\(+13\\).' },
+       { t: '\\(a=2,\\;b=0,\\;c=13\\)', err: 'Sí hay término en \\(x\\): el \\(x\\) del lado derecho pasa como \\(-x\\), así \\(b=-1\\).' },
+       { t: '\\(a=2,\\;b=-1,\\;c=-3\\)', err: '\\(5-(-8)=13\\): el término libre queda \\(+13\\).' }],
+      'Correcto. \\(2x^2-x+13=0\\): \\(a=2,\\;b=-1,\\;c=13\\).'));
+
+    // P4 · fórmula general (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve \\(x^2-x-20=0\\) con la fórmula general.',
+      [{ t: '\\(x=5\\) y \\(x=-4\\)', err: null },
+       { t: '\\(x=-5\\) y \\(x=4\\)', err: '\\(x=\\tfrac{1\\pm9}{2}\\): \\(\\tfrac{10}{2}=5\\) y \\(\\tfrac{-8}{2}=-4\\).' },
+       { t: '\\(x=4\\) y \\(x=-5\\)', err: 'Con \\(-b\\): \\(x=\\tfrac{-(-1)\\pm\\sqrt{81}}{2}=\\tfrac{1\\pm9}{2}\\Rightarrow5,\\,-4\\).' },
+       { t: '\\(x=9\\) y \\(x=-9\\)', err: '\\(\\pm9=\\sqrt{81}\\), pero falta el resto: \\(\\tfrac{1\\pm9}{2}=5\\lor-4\\).' }],
+      'Correcto. \\(x=\\tfrac{1\\pm\\sqrt{81}}{2}=\\tfrac{1\\pm9}{2}\\Rightarrow x=5\\lor x=-4\\).'));
+
+    // P5 · simplificar antes de resolver (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve \\(2x^2-4x-6=0\\).',
+      [{ t: '\\(x=3\\) y \\(x=-1\\)', err: null },
+       { t: '\\(x=-3\\) y \\(x=1\\)', err: 'Divide por 2: \\(x^2-2x-3=(x-3)(x+1)=0\\Rightarrow x=3\\lor x=-1\\).' },
+       { t: '\\(x=6\\) y \\(x=-2\\)', err: 'Simplifica primero por 2: \\(x^2-2x-3=0\\Rightarrow x=3\\lor x=-1\\).' },
+       { t: '\\(x=2\\) y \\(x=-3\\)', err: '\\(x^2-2x-3=0\\): factores \\((x-3)(x+1)\\Rightarrow x=3,\\,-1\\).' }],
+      'Correcto. \\(\\div2\\Rightarrow x^2-2x-3=(x-3)(x+1)=0\\Rightarrow x=3\\lor x=-1\\).'));
+
+    // P6 · elegir el método más rápido (Argumentar)
+    E.push(armar('Argumentar', '¿Cómo conviene resolver más rápido \\((x-5)^2=9\\)?',
+      [{ t: 'Sacando raíz a ambos lados: \\(x-5=\\pm3\\).', err: null },
+       { t: 'Con la fórmula general desarrollando todo.', err: 'Funciona, pero es más largo. Como ya es un cuadrado, conviene sacar raíz: \\(x-5=\\pm3\\).' },
+       { t: 'No se puede resolver.', err: 'Sí: \\(x-5=\\pm3\\Rightarrow x=8\\lor x=2\\).' },
+       { t: 'Sumando 9 a la izquierda.', err: 'Se aplica raíz: \\((x-5)^2=9\\Rightarrow x-5=\\pm3\\).' }],
+      'Correcto. \\((x-5)^2=9\\Rightarrow x-5=\\pm3\\Rightarrow x=8\\lor x=2\\).'));
+
+    // P7 · altura de un objeto (Modelar)
+    E.push(armar('Modelar', 'La altura (m) de un objeto es \\(h=-x^2+4x\\), con \\(x\\) en segundos. ¿En qué instantes está a nivel del suelo (\\(h=0\\))?',
+      [{ t: '\\(x=0\\) y \\(x=4\\)', err: null },
+       { t: 'Solo \\(x=4\\)', err: 'Factoriza \\(x(4-x)=0\\): también \\(x=0\\) (el lanzamiento).' },
+       { t: '\\(x=0\\) y \\(x=-4\\)', err: '\\(-x+4=0\\Rightarrow x=4\\) (positivo).' },
+       { t: '\\(x=2\\)', err: '\\(x=2\\) es el vértice (altura máxima), no el suelo. Suelo: \\(x=0\\) y \\(x=4\\).' }],
+      'Correcto. \\(-x^2+4x=x(4-x)=0\\Rightarrow x=0\\lor x=4\\).'));
+
+    // P8 · fórmula/factorización (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve \\(x^2+2x-8=0\\).',
+      [{ t: '\\(x=2\\) y \\(x=-4\\)', err: null },
+       { t: '\\(x=-2\\) y \\(x=4\\)', err: 'Producto \\(-8\\), suma \\(2\\): \\((x+4)(x-2)\\Rightarrow x=-4\\lor x=2\\).' },
+       { t: '\\(x=8\\) y \\(x=-1\\)', err: 'Deben sumar \\(-2\\) y multiplicar \\(-8\\): son \\(-4\\) y \\(2\\).' },
+       { t: '\\(x=1\\) y \\(x=-8\\)', err: 'Busca raíces con suma \\(-2\\) y producto \\(-8\\): \\(2\\) y \\(-4\\).' }],
+      'Correcto. \\(x^2+2x-8=(x+4)(x-2)=0\\Rightarrow x=-4\\lor x=2\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

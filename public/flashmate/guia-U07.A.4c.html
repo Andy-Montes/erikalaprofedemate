@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U07.A.4c · Naturaleza de las soluciones</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U07.A.4c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U07', unidadNum: '07', subunidad: 'A', nivel: 'c',
+  titulo: 'Naturaleza de las soluciones',
+  sub: 'Única · infinitas · sin solución · criterio ae vs bd',
+  HAB_E: ['Argumentar', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Representar', 'Modelar'],
+  generar: function () {
+    var E = [];
+    var TABLA = '<table style="border-collapse:collapse;margin:6px auto;font-size:13px">'
+      + '<tr><th style="border:1px solid #38388e;padding:5px 12px;background:#eeedfe;color:#38388e">Condición</th><th style="border:1px solid #38388e;padding:5px 12px;background:#eeedfe;color:#38388e">Tipo de solución</th></tr>'
+      + '<tr><td style="border:1px solid #b9b9dd;padding:5px 12px;text-align:center">ae ≠ bd</td><td style="border:1px solid #b9b9dd;padding:5px 12px;text-align:center">Única solución</td></tr>'
+      + '<tr><td style="border:1px solid #b9b9dd;padding:5px 12px;text-align:center">ae = bd &nbsp;y&nbsp; bf = ce</td><td style="border:1px solid #b9b9dd;padding:5px 12px;text-align:center">Infinitas soluciones</td></tr>'
+      + '<tr><td style="border:1px solid #b9b9dd;padding:5px 12px;text-align:center">ae = bd &nbsp;y&nbsp; bf ≠ ce</td><td style="border:1px solid #b9b9dd;padding:5px 12px;text-align:center">Sin solución</td></tr>'
+      + '</table>';
+
+    // P1 · cuántas soluciones puede tener (Argumentar)
+    E.push(armar('Argumentar', '¿Cuántas soluciones puede tener un sistema de ecuaciones de primer grado con dos incógnitas?',
+      [{ t: 'Una única, infinitas o ninguna.', err: null },
+       { t: 'Siempre exactamente una.', err: 'No siempre: si las ecuaciones son proporcionales puede haber infinitas o ninguna.' },
+       { t: 'Siempre infinitas.', err: 'Solo cuando una ecuación es múltiplo exacto de la otra. En general puede ser una única.' },
+       { t: 'Puede tener exactamente dos.', err: 'Un sistema lineal nunca tiene exactamente dos: es una, ninguna o infinitas.' }],
+      'Correcto. Un sistema lineal 2×2 tiene una única solución, infinitas o ninguna.'));
+
+    // P2 · leer la tabla (Representar) · FIGURA (tabla nativa)
+    var e2 = armar('Representar', 'La tabla resume los tres casos de un sistema \\(ax+by=c\\); \\(dx+ey=f\\). Según ella, ¿qué condición garantiza una ÚNICA solución?',
+      [{ t: 'Cuando ae ≠ bd.', err: null },
+       { t: 'Cuando ae = bd y bf = ce.', err: 'Esa fila corresponde a INFINITAS soluciones, no a una única.' },
+       { t: 'Cuando ae = bd y bf ≠ ce.', err: 'Esa fila es SIN solución. La única solución exige ae ≠ bd.' },
+       { t: 'Siempre hay una única solución.', err: 'No siempre: también puede haber infinitas o ninguna, como muestra la tabla.' }],
+      'Correcto. La única solución se garantiza cuando ae ≠ bd.');
+    e2.fig = TABLA;
+    E.push(e2);
+
+    // P3 · clasificar única (Resolver) — PDF
+    E.push(armar('Resolver problemas', 'Clasifica el sistema \\(4x-2y=2\\); \\(x+3y=18\\) con \\(a=4,\\,b=-2,\\,d=1,\\,e=3\\).',
+      [{ t: 'Tiene una única solución.', err: null },
+       { t: 'Tiene infinitas soluciones.', err: 'Para infinitas se necesita \\(ae=bd\\). Aquí \\(ae=12\\) y \\(bd=-2\\) son distintos: única.' },
+       { t: 'No tiene solución.', err: 'Sin solución exige \\(ae=bd\\). Aquí \\(12\\neq-2\\): tiene única solución.' },
+       { t: 'No se puede clasificar.', err: 'Sí se puede: como \\(ae=12\\neq bd=-2\\), la solución es única.' }],
+      'Correcto. \\(ae=4\\cdot3=12\\), \\(bd=(-2)\\cdot1=-2\\); como \\(12\\neq-2\\), solución única.'));
+
+    // P4 · clasificar infinitas (Resolver) — PDF
+    E.push(armar('Resolver problemas', 'Clasifica \\(4x-3y=6\\); \\(8x-6y=12\\) con \\(a=4,\\,b=-3,\\,c=6,\\,d=8,\\,e=-6,\\,f=12\\).',
+      [{ t: 'Tiene infinitas soluciones.', err: null },
+       { t: 'Tiene una única solución.', err: 'Aquí \\(ae=-24=bd\\): NO es única. Como además \\(bf=ce=-36\\), hay infinitas.' },
+       { t: 'No tiene solución.', err: 'Sin solución pide \\(bf\\neq ce\\). Aquí \\(bf=ce=-36\\): son infinitas.' },
+       { t: 'Tiene exactamente dos soluciones.', err: 'Nunca hay exactamente dos: aquí \\(ae=bd\\) y \\(bf=ce\\), infinitas.' }],
+      'Correcto. \\(ae=bd=-24\\) y \\(bf=ce=-36\\): infinitas (la 2ª es el doble de la 1ª).'));
+
+    // P5 · clasificar sin solución (Resolver) — PDF
+    E.push(armar('Resolver problemas', 'Clasifica \\(4x-2y=2\\); \\(12x-6y=18\\) con \\(a=4,\\,b=-2,\\,c=2,\\,d=12,\\,e=-6,\\,f=18\\).',
+      [{ t: 'No tiene solución.', err: null },
+       { t: 'Tiene infinitas soluciones.', err: 'Infinitas pide \\(bf=ce\\). Aquí \\(bf=-36\\) y \\(ce=-12\\): distintos, NO tiene solución.' },
+       { t: 'Tiene una única solución.', err: 'Única pide \\(ae\\neq bd\\). Aquí \\(ae=bd=-24\\): no es única.' },
+       { t: 'Tiene la solución \\((1,1)\\).', err: 'No hay solución: \\(ae=bd\\) pero \\(bf\\neq ce\\); las condiciones son incompatibles.' }],
+      'Correcto. \\(ae=bd=-24\\) pero \\(bf=-36\\neq ce=-12\\): sin solución.'));
+
+    // P6 · interpretación proporcionalidad (Argumentar)
+    E.push(armar('Argumentar', 'Si al multiplicar TODA la primera ecuación por un número se obtiene exactamente la segunda (ambos lados), ¿cuántas soluciones tiene el sistema?',
+      [{ t: 'Infinitas soluciones.', err: null },
+       { t: 'Una única solución.', err: 'Si son la misma ecuación (una múltiplo exacto de la otra), representan lo mismo: hay INFINITAS soluciones.' },
+       { t: 'Ninguna solución.', err: 'Sin solución ocurre cuando los coeficientes son proporcionales pero los términos NO. Aquí TODO es proporcional: infinitas.' },
+       { t: 'Exactamente dos soluciones.', err: 'Un sistema lineal nunca tiene exactamente dos: una, ninguna o infinitas. Aquí, infinitas.' }],
+      'Correcto. Si una ecuación es múltiplo exacto de la otra, es la misma condición: infinitas soluciones.'));
+
+    // P7 · reconocer sin solución (Representar)
+    E.push(armar('Representar', 'Observa \\(2x+y=5\\) y \\(4x+2y=9\\). El lado izquierdo de la 2ª es el doble del de la 1ª, pero \\(9\\neq2\\cdot5\\). ¿Qué tipo de sistema es?',
+      [{ t: 'Sin solución.', err: null },
+       { t: 'Infinitas soluciones.', err: 'Para infinitas también el lado derecho debe ser el doble: \\(9\\neq10\\). Por eso NO tiene solución.' },
+       { t: 'Única solución.', err: 'Los coeficientes son proporcionales (\\(4,2\\) es el doble de \\(2,1\\)): no es única.' },
+       { t: 'Tiene la solución \\((1,3)\\).', err: 'No hay solución: coeficientes proporcionales pero distinto resultado (rectas incompatibles).' }],
+      'Correcto. Coeficientes proporcionales pero términos no (\\(9\\neq10\\)): sistema sin solución.'));
+
+    // P8 · modelar (Modelar)
+    E.push(armar('Modelar', 'Dos estudiantes modelan el mismo problema. La ecuación del segundo resulta ser EXACTAMENTE el doble de la del primero (ambos lados). ¿Cuántas soluciones tiene el sistema que forman?',
+      [{ t: 'Infinitas soluciones.', err: null },
+       { t: 'Una única solución.', err: 'Son la misma ecuación escrita distinto: no aporta información nueva, hay INFINITAS soluciones.' },
+       { t: 'Ninguna solución.', err: 'Sin solución sería si el resultado NO fuera el doble. Aquí todo es el doble: infinitas.' },
+       { t: 'Depende de los números.', err: 'No depende: si una es múltiplo exacto de la otra en TODO, siempre hay infinitas.' }],
+      'Correcto. Una ecuación múltiplo exacto de la otra: infinitas soluciones.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

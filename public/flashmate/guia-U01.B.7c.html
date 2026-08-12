@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flash Mate · Guía U01.B.7c · Números Enteros</title>
-<link rel="icon" href="/flashmate/logo-erika.png" type="image/png">
+<title>Flash Mate · Guía U01.B.7c · Números enteros</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:100vh;padding:16px 12px 80px}
@@ -85,19 +88,22 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
 </style>
 </head>
 <body>
-<div class="fm-wrap"><div class="fm-card">
+<div class="fm-wrap">
+<div class="fm-card">
+
   <div class="fm-hdr">
     <div class="fm-hdr-top">
       <div class="fm-hdr-left">
         <span class="fm-badge">Flash Mate · Guía U01.B.7c</span>
-        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01</div>
-        <div class="fm-titulo">Números Enteros</div>
-        <div class="fm-sub">Razonamiento algebraico · Recta numérica · Argumentación</div>
+        <div class="fm-eje">EJE: NÚMEROS · UNIDAD 01 · NIVEL c</div>
+        <div class="fm-titulo">Números enteros</div>
+        <div class="fm-sub">Operatoria · Sustitución · Orden · Contexto</div>
       </div>
-      <img class="fm-hdr-logo" src="/flashmate/logo-erika.png" alt="Erika la Profe de Mate" onerror="this.style.display='none'">
+      <img class="fm-hdr-logo" src="https://emerinoo.github.io/flashmate/logo-erika.png" alt="Erika la Profe de Mate" onerror="this.style.display='none'">
     </div>
     <div class="prog-bg"><div class="prog-bar" id="barra" style="width:0%"></div></div>
   </div>
+
   <div class="fm-ident" id="zona-ident">
     <div class="fm-ident-titulo">ANTES DE COMENZAR</div>
     <input class="fm-input" type="text" id="inp-nombre" placeholder="Tu nombre completo">
@@ -105,6 +111,7 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
     <div id="error-ident" style="font-size:12px;color:#E24B4A;margin-bottom:6px;display:none">Por favor completa tu nombre y correo.</div>
     <button class="fm-btn-start" onclick="iniciar()">Comenzar guía →</button>
   </div>
+
   <div class="fm-body" id="zona-q">
     <div class="fm-qnum" id="qnum">Pregunta 1 de 8</div>
     <div id="htag"></div>
@@ -116,184 +123,299 @@ body{font-family:'Poppins',system-ui,sans-serif;background:#f5f5f7;min-height:10
       <button class="btn-s" id="btns" onclick="siguiente()">Siguiente →</button>
     </div>
   </div>
+
   <div class="fm-body final" id="zona-final">
     <div class="pje-big" id="pje"></div>
     <div class="pje-sub" id="pmsg"></div>
     <div class="alerta" id="alerta"></div>
     <div class="dots" id="dots"></div>
-    <div class="resumen"><div class="res-titulo">Detalle por pregunta</div><div id="reslista" class="res-fila"></div></div>
-    <div class="btns" style="justify-content:center"><button class="btn-p" id="btn-rep" onclick="reiniciar()">Repetir con valores nuevos</button></div>
+    <div class="resumen">
+      <div class="res-titulo">Detalle por pregunta</div>
+      <div id="reslista" class="res-fila"></div>
+    </div>
+    <div class="btns" style="justify-content:center">
+      <button class="btn-p" id="btn-rep" onclick="reiniciar()">Repetir con valores nuevos</button>
+      <button class="btn-s" id="btn-portal" onclick="volverPortal()" style="display:inline-block;margin-top:8px">← Volver al portal</button>
+    </div>
   </div>
+
   <div class="fm-footer">
     <span class="fm-footer-copy">© 2026 Erika la Profe de Mate</span>
     <a href="https://www.erikalaprofedemate.com" class="fm-footer-link" target="_blank">www.erikalaprofedemate.com</a>
   </div>
-</div></div>
 
-<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.B.7c%20(N%C3%BAmeros%20Enteros%2C%20Nivel%20c)" class="fm-wa" target="_blank">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</div>
+</div>
+
+<a href="https://wa.me/56997439227?text=Hola%20Erika%2C%20tengo%20una%20consulta%20sobre%20la%20Gu%C3%ADa%20U01.B.7c" class="fm-wa" target="_blank" title="Contactar a Erika">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
-const NLS=4,LETRAS=['A','B','C','D','E'];
-let nombreEstudiante='',EJ=[],actual=0,resp=[],sel=null;
+const NLS=4;
+const LETRAS=['A','B','C','D','E'];
+let nombreEstudiante='';
+let EJ=[],actual=0,resp=[],sel=null;
+
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
-function hcss(h){if(h==='Resolver problemas')return 'hab-rp';if(h==='Modelar')return 'hab-m';if(h==='Representar')return 'hab-r';return 'hab-a';}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(s){return esc(s).replace(/\n/g,'<br>');}
+function mathify(el){ if(el&&window.renderMathInElement){ try{ renderMathInElement(el,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false}); }catch(e){} } }
+
+function armar(hab, txt, opciones, fb_ok){
+  const sh = shuffle(opciones);
+  const ok = sh.findIndex(o => o.err === null);
+  return {hab, txt, opts:sh, ok, fb_ok};
+}
 
 function generarEjercicios(){
-  const EJ=[];
+  const E=[];
 
-  // P1 — Argumentar: tres proposiciones sobre signos y potencias
-  EJ.push({hab:'Argumentar',
-    txt:'¿Cuál o cuáles de las siguientes proposiciones sobre enteros son VERDADERAS?\nI.  Si a·b < 0 y b > 0, entonces a < 0.\nII. Si a² > b², entonces |a| > |b|.\nIII. Si a < b < 0, entonces a·b < 0.',
-    ops:['Solo I','I y II','Solo III','I, II y III'],ok:1,
-    fb_ok:'Correcto. I: a·b<0 con b>0 implica a<0 ✓. II: a²>b² equivale a |a|>|b| ✓. III: FALSA — dos negativos multiplicados dan positivo. Solo I y II son verdaderas.',
-    fb_mal:'I: verdadera. II: verdadera. III: falsa — a<b<0 implica ambos negativos, su producto es positivo, no negativo. Correctas: I y II.'
-  });
+  // ── P1 · Operatoria combinada (Resolver) ──
+  const OC1=[
+    {q:'(−5) · 2 + (−12) ÷ (−3) − 4',c:'−10',d:[['−18','(−12) ÷ (−3) = +4 (menos entre menos da más), no −4: da −10.'],['10','(−5) · 2 = −10, no +10: da −10.'],['−6','Falta restar 4 al final: −10 + 4 − 4 = −10.']]},
+    {q:'6 ÷ (−2) − 4 · (−3) + (−5)',c:'4',d:[['−20','Restar (−12) es SUMAR 12: −3 + 12 − 5 = 4.'],['10','6 ÷ (−2) = −3, no +3: da 4.'],['9','Falta sumar el (−5) del final: da 4.']]}
+  ];
+  const c1=rnd(OC1);
+  E.push(armar('Resolver problemas',`¿Cuál es el resultado de ${c1.q}?`,
+    [{t:c1.c,err:null},{t:c1.d[0][0],err:c1.d[0][1]},{t:c1.d[1][0],err:c1.d[1][1]},{t:c1.d[2][0],err:c1.d[2][1]}],
+    `Correcto. Primero multiplicaciones y divisiones, luego sumas y restas: ${c1.q} = ${c1.c}.`));
 
-  // P2 — Modelar: pirámide de sumas
-  const base=[rnd([-4,-3,-5,-6]),rnd([-2,-1,-3]),rnd([1,2,3,4])];
-  const niv2=[base[0]+base[1],base[1]+base[2]];
-  const cima=niv2[0]+niv2[1];
-  const wC=shuffle([cima+2,cima-1,cima+3,cima-2]).slice(0,3);
-  const opsC=shuffle([cima,...wC]).map(String);
-  EJ.push({hab:'Resolver problemas',
-    txt:`En una pirámide numérica, cada casilla es la suma de las dos casillas inferiores. La base tiene los valores ${base[0]}, ${base[1]} y ${base[2]}. ¿Cuál es el valor de la cima?`,
-    ops:opsC,ok:opsC.indexOf(String(cima)),
-    fb_ok:`Correcto. Nivel 2: ${base[0]}+${base[1]}=${niv2[0]} y ${base[1]}+${base[2]}=${niv2[1]}. Cima: ${niv2[0]}+${niv2[1]}=${cima}.`,
-    fb_mal:`Nivel 2 izq: ${base[0]}+${base[1]}=${niv2[0]}. Nivel 2 der: ${base[1]}+${base[2]}=${niv2[1]}. Cima: ${niv2[0]}+${niv2[1]}=${cima}.`
-  });
+  // ── P2 · Edificio con subterráneos (Modelar) ──
+  const EDI=[
+    {ini:'−3',a:5,b:4,c:6,r:'4',allup:'12',om:'−2'},
+    {ini:'−2',a:6,b:5,c:3,r:'2',allup:'12',om:'−1'},
+    {ini:'−5',a:4,b:2,c:6,r:'3',allup:'17',om:'−3'}
+  ];
+  const c2=rnd(EDI);
+  E.push(armar('Modelar',`Un auto está en el piso ${c2.ini} (subterráneo). Sube ${c2.a} pisos, baja ${c2.b} y sube ${c2.c}. ¿En qué piso queda?`,
+    [{t:c2.r,err:null},
+     {t:c2.allup,err:`"Bajar" resta: ${c2.ini} + ${c2.a} − ${c2.b} + ${c2.c} = ${c2.r}.`},
+     {t:c2.om,err:`Falta la última subida de ${c2.c} pisos: el resultado es ${c2.r}.`},
+     {t:'0',err:'No queda en el piso 0: los movimientos no se cancelan.'}],
+    `Correcto. ${c2.ini} + ${c2.a} − ${c2.b} + ${c2.c} = ${c2.r}.`));
 
-  // P3 — Modelar: paréntesis anidados
-  const a3=rnd([2,3,4]),b3=rnd([5,6,7]),c3=rnd([1,2,3,4]);
-  const inner3=b3-c3;const mid3=a3-inner3;const res3=-mid3;
-  const w3=shuffle([res3+2,res3-1,res3+3,res3-2]).slice(0,3);
-  const ops3=shuffle([res3,...w3]).map(String);
-  EJ.push({hab:'Modelar',
-    txt:`Calcula el valor de la expresión: −[${a3} − (${b3} − ${c3})]`,
-    ops:ops3,ok:ops3.indexOf(String(res3)),
-    fb_ok:`Correcto. Adentro: ${b3}−${c3}=${inner3}. Luego: ${a3}−(${inner3})=${mid3}. Finalmente: −[${mid3}]=${res3}. Siempre operar de adentro hacia afuera.`,
-    fb_mal:`De adentro hacia afuera: (${b3}−${c3})=${inner3}; ${a3}−${inner3}=${mid3}; −${mid3}=${res3}.`
-  });
+  // ── P3 · Identificar el error en regla de signos (Argumentar) ──
+  const ERR=[
+    {en:'Una persona calcula (−4) · (−3) − 10 ÷ (−2), cometiendo un error.\nPaso 1: multiplica: (−4) · (−3) = −12.\nPaso 2: divide: 10 ÷ (−2) = −5.\nPaso 3: resta: −12 − (−5) = −12 + 5 = −7.\nPaso 4: concluye que el resultado es −7.\n¿En qué paso está el error?',fb:'(−4) · (−3) = +12 (menos por menos da más), no −12. El resultado correcto es 17.'},
+    {en:'Una persona calcula (−6) ÷ (−2) + 3 · (−4), cometiendo un error.\nPaso 1: divide: (−6) ÷ (−2) = −3.\nPaso 2: multiplica: 3 · (−4) = −12.\nPaso 3: suma: −3 + (−12) = −15.\nPaso 4: concluye que el resultado es −15.\n¿En qué paso está el error?',fb:'(−6) ÷ (−2) = +3 (menos entre menos da más), no −3. El resultado correcto es −9.'}
+  ];
+  const c3=rnd(ERR);
+  E.push(armar('Argumentar',c3.en,
+    [{t:'En el Paso 1',err:null},
+     {t:'En el Paso 2',err:'El Paso 2 está bien: el signo de esa operación es correcto.'},
+     {t:'En el Paso 3',err:'La resta del negativo del Paso 3 está bien hecha; el error viene antes.'},
+     {t:'En el Paso 4',err:'El Paso 4 solo copia el resultado; el error es antes.'}],
+    `Correcto. El error está en el Paso 1: ${c3.fb}`));
 
-  // P4 — Argumentar: variación de número de 3 cifras
-  EJ.push({hab:'Argumentar',
-    txt:'¿En cuánto varía un número de tres cifras si se aumenta en 1 la cifra de las centenas y se disminuye en 2 la cifra de las unidades?',
-    ops:['102','98','100','198'],ok:1,
-    fb_ok:'Correcto. +1 en centenas suma 100. −2 en unidades resta 2. Cambio neto: 100 − 2 = 98. Independiente del número original.',
-    fb_mal:'Aumentar la centena suma 100. Disminuir las unidades en 2 resta 2. Cambio neto: 100 − 2 = 98.'
-  });
+  // ── P4 · Sustitución de valores (Resolver) ──
+  const SUS=[
+    {a:'−3',b:'4',r:'−9',ab:'−12',d1:'−15',d2:'−12',d3:'9'},
+    {a:'−2',b:'5',r:'−8',ab:'−10',d1:'−12',d2:'−10',d3:'8'}
+  ];
+  const c4=rnd(SUS);
+  E.push(armar('Resolver problemas',`Si a = ${c4.a} y b = ${c4.b}, ¿cuánto vale a · b − a?`,
+    [{t:c4.r,err:null},
+     {t:c4.d1,err:`Restar a = restar (${c4.a}) = sumar ${c4.a.replace('−','')}: ${c4.ab} + ${c4.a.replace('−','')} = ${c4.r}.`},
+     {t:c4.d2,err:`Falta restar a: ${c4.ab} − (${c4.a}) = ${c4.r}.`},
+     {t:c4.d3,err:`Error de signo: a · b = ${c4.ab}, y menos a suma; da ${c4.r}.`}],
+    `Correcto. Con a = ${c4.a} y b = ${c4.b}: a · b − a = ${c4.ab} − (${c4.a}) = ${c4.r}.`));
 
-  // P5 — Representar: recta numérica con x<y<0<z, |x|>|z|
-  EJ.push({hab:'Representar',
-    txt:'En la recta numérica: x < y < 0 < z, con |x| > |z|. ¿Cuál expresión tiene valor NEGATIVO con certeza?',
-    ops:['x · y','x + z','y · z','(−x) · z'],ok:1,
-    fb_ok:'Correcto. x<0 y |x|>|z|, entonces x+z<0 con certeza (el negativo supera al positivo). x·y=pos. y·z=neg también, pero x+z es el más directo con la condición |x|>|z|.',
-    fb_mal:'Con |x|>|z| y x<0: x+z<0 porque el valor absoluto de x supera al de z. Esa es la expresión negativa con certeza.'
-  });
+  // ── P5 · Ordenar resultados de menor a mayor (Representar) ──
+  const ORD=[
+    {p:'−7',q:'0',r:'−3',order:'P, R, Q',ineq:'−7 < −3 < 0',d:[['Q, R, P','Ese orden es de MAYOR a menor.'],['R, P, Q','El menor es P = −7; va primero.'],['P, Q, R','R = −3 es menor que Q = 0; va antes.']]},
+    {p:'−2',q:'−8',r:'3',order:'Q, P, R',ineq:'−8 < −2 < 3',d:[['R, P, Q','Ese orden es de mayor a menor.'],['P, Q, R','El menor es Q = −8; va primero.'],['Q, R, P','R = 3 es el mayor; va al final.']]}
+  ];
+  const c5=rnd(ORD);
+  E.push(armar('Representar',`Se calculan tres resultados: P = ${c5.p}, Q = ${c5.q}, R = ${c5.r}. ¿Cuál es el orden de MENOR a MAYOR?`,
+    [{t:c5.order,err:null},{t:c5.d[0][0],err:c5.d[0][1]},{t:c5.d[1][0],err:c5.d[1][1]},{t:c5.d[2][0],err:c5.d[2][1]}],
+    `Correcto. De menor a mayor: ${c5.order} (${c5.ineq}).`));
 
-  // P6 — Modelar: sistema hidráulico con presiones
-  const pIni6=rnd([-4,-6,-8,-5]);
-  const cambios=[rnd([10,12,14]),...shuffle([rnd([-3,-4,-5]),rnd([2,3,4]),rnd([-6,-7,-8]),rnd([3,4,5])])];
-  let acum=pIni6,primerPositivo=-1;
-  for(let i=0;i<cambios.length;i++){acum+=cambios[i];if(acum>0&&primerPositivo===-1){primerPositivo=i+1;break;}}
-  const labels=['Primer','Segundo','Tercer','Cuarto','Quinto'];
-  const respuesta=primerPositivo>0?`Después del ${labels[primerPositivo-1].toLowerCase()} cambio`:'Nunca supera 0';
-  const ops6=[`Después del ${labels[0].toLowerCase()} cambio`,`Después del ${labels[1].toLowerCase()} cambio`,`Después del ${labels[2].toLowerCase()} cambio`,'Nunca supera 0'];
-  const ok6=ops6.findIndex(o=>o===respuesta);
-  EJ.push({hab:'Modelar',
-    txt:`Sistema de presiones: estado inicial ${pIni6}. Variaciones: ${cambios.slice(0,primerPositivo||4).map((v,i)=>'cambio '+(i+1)+': '+(v>0?'+':'')+v).join(', ')}. ¿Cuándo la presión supera 0 por primera vez?`,
-    ops:ops6,ok:ok6>=0?ok6:3,
-    fb_ok:`Correcto. Operando paso a paso: ${pIni6}+${cambios[0]}=${pIni6+cambios[0]}. ${primerPositivo>0?'Ya supera 0 en el primer cambio.':'Continuar calculando.'}`,
-    fb_mal:`Trazar paso a paso: ${pIni6}+${cambios[0]}=${pIni6+cambios[0]}. ${primerPositivo>0?`La presión supera 0 después del ${labels[primerPositivo-1].toLowerCase()} cambio.`:''}`
-  });
+  // ── P6 · Afirmación sobre opuestos (Argumentar) ──
+  E.push(armar('Argumentar','¿Cuál de las siguientes afirmaciones es correcta?',
+    [{t:'El opuesto de un número negativo es positivo.',err:null},
+     {t:'El opuesto de 0 es un número positivo.',err:'Falso: el opuesto de 0 es 0.'},
+     {t:'Un número y su opuesto suman siempre un número positivo.',err:'Falso: suman 0, por ejemplo 5 + (−5) = 0.'},
+     {t:'El opuesto de un número siempre es menor que él.',err:'Falso: el opuesto de −4 es 4, que es mayor.'}],
+    'Correcto. El opuesto de un negativo es positivo (por ejemplo, el opuesto de −7 es 7).'));
 
-  // P7 — Resolver problemas: enteros consecutivos con producto dado
-  const pares7=[[12,13],[13,14],[14,15],[-13,-12],[-14,-13]];
-  const par7=rnd(pares7);
-  const prod7=par7[0]*par7[1];
-  const suma7=par7[0]+par7[1];
-  const w7=shuffle([suma7+2,suma7-2,-suma7+1,-suma7-1]).filter(x=>x!==suma7).slice(0,3);
-  const ops7=shuffle([suma7,...w7,String(-suma7)]).slice(0,4).map(String);
-  EJ.push({hab:'Resolver problemas',
-    txt:`El producto de dos enteros consecutivos es ${prod7}. ¿Cuál es la suma de esos dos enteros?`,
-    ops:ops7,ok:ops7.includes(String(suma7))?ops7.indexOf(String(suma7)):0,
-    fb_ok:`Correcto. Los pares son ${par7[0]} y ${par7[1]} (o sus negativos). Suma: ${par7[0]}+${par7[1]}=${suma7}. En enteros, los consecutivos negativos también son solución.`,
-    fb_mal:`${prod7}=${par7[0]}×${par7[1]}. Suma=${suma7}. También (${-par7[1]})×(${-par7[0]})=${prod7} con suma ${-suma7}.`
-  });
+  // ── P7 · Variación neta de una cuenta (Modelar) ──
+  E.push(armar('Modelar','Durante una semana, una cuenta registró estos movimientos: −$3.000, +$5.000, −$4.000 y +$1.000. ¿Cuál fue la variación NETA de la semana?',
+    [{t:'−$1.000',err:null},
+     {t:'+$1.000',err:'El neto quedó negativo: −3.000 + 5.000 − 4.000 + 1.000 = −1.000.'},
+     {t:'−$13.000',err:'No se suman las magnitudes; se respetan los signos: el neto es −1.000.'},
+     {t:'+$6.000',err:'Hay que incluir los movimientos negativos: el neto es −1.000.'}],
+    'Correcto. −3.000 + 5.000 − 4.000 + 1.000 = −1.000: la cuenta bajó $1.000 en la semana.'));
 
-  // P8 — Argumentar: cociente de dos negativos
-  EJ.push({hab:'Argumentar',
-    txt:`Andrés afirma: "El cociente de dos enteros negativos siempre es un número natural". ¿Qué tan correcta es esta afirmación?`,
-    ops:[
-      'Correcta: neg÷neg=positivo y todo positivo es natural',
-      'Incorrecta: el resultado es positivo pero no siempre natural ni entero',
-      'Correcta solo si los valores son iguales',
-      'Incorrecta: neg÷neg siempre da negativo'
-    ],ok:1,
-    fb_ok:'Correcto. neg÷neg=positivo ✓, pero no siempre natural. Ejemplo: (−3)÷(−2)=1,5 (no entero). (−1)÷(−3)=1/3 (no natural). La afirmación es incorrecta.',
-    fb_mal:'neg÷neg=positivo, pero no todo positivo es natural. (−3)÷(−2)=1,5 no es natural. La afirmación sobreafirma: el resultado es positivo, no necesariamente natural.'
-  });
+  // ── P8 · Traducir una situación a una expresión (Representar) ──
+  const TRA=[
+    {v:'t',ok:'t − 6 + 4',d:[['t + 6 − 4','Baja 6 (se resta) y sube 4 (se suma): t − 6 + 4.'],['t − 6 − 4','Subir SUMA: el término final es + 4.'],['6 − 4 − t','La temperatura inicial es t: t − 6 + 4.']]},
+    {v:'m',ok:'m − 8 + 5',d:[['m + 8 − 5','Baja 8 (se resta) y sube 5 (se suma): m − 8 + 5.'],['m − 8 − 5','Subir SUMA: el término final es + 5.'],['8 − 5 − m','La altura inicial es m: m − 8 + 5.']]}
+  ];
+  const c8=rnd(TRA);
+  const ctx8 = c8.v==='t'
+    ? 'La temperatura de una ciudad es t °C. Durante la noche baja 6° y en la mañana sube 4°. ¿Cuál expresión representa la temperatura final?'
+    : 'Un dron está a m metros de altura. Baja 8 m y luego sube 5 m. ¿Cuál expresión representa su altura final?';
+  E.push(armar('Representar',ctx8,
+    [{t:c8.ok,err:null},{t:c8.d[0][0],err:c8.d[0][1]},{t:c8.d[1][0],err:c8.d[1][1]},{t:c8.d[2][0],err:c8.d[2][1]}],
+    `Correcto. Se resta lo que baja y se suma lo que sube: ${c8.ok}.`));
 
-  return EJ;
+  return E;
 }
 
-function validarCorreo(c){if(c.indexOf('@')===-1)return false;var p=c.split('@');if(p.length!==2||!p[0].length)return false;if(p[1].indexOf('.')===-1)return false;var d=p[1].split('.');return d[0].length>0&&d[d.length-1].length>=2;}
+function hcss(h){
+  if(h==='Resolver problemas')return 'hab-rp';
+  if(h==='Modelar')return 'hab-m';
+  if(h==='Representar')return 'hab-r';
+  return 'hab-a';
+}
+
+function validarCorreo(correo){
+  if(correo.indexOf('@')===-1) return false;
+  var partes=correo.split('@');
+  if(partes.length!==2) return false;
+  if(partes[0].length===0) return false;
+  if(partes[1].indexOf('.')===-1) return false;
+  var dominio=partes[1].split('.');
+  if(dominio[0].length===0) return false;
+  if(dominio[dominio.length-1].length<2) return false;
+  return true;
+}
 function iniciar(){
-  const nom=document.getElementById('inp-nombre').value.trim(),cor=document.getElementById('inp-correo').value.trim();
+  const nom=document.getElementById('inp-nombre').value.trim();
+  const cor=document.getElementById('inp-correo').value.trim();
   if(!nom||!cor){document.getElementById('error-ident').style.display='block';return;}
-  if(!validarCorreo(cor)){document.getElementById('error-ident').textContent='Correo inválido.';document.getElementById('error-ident').style.display='block';return;}
-  nombreEstudiante=nom;document.getElementById('zona-ident').style.display='none';document.getElementById('zona-q').style.display='block';
-  EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
+  if(!validarCorreo(cor)){document.getElementById('error-ident').textContent='Por favor ingresa un correo válido. Ejemplo: nombre@gmail.com';document.getElementById('error-ident').style.display='block';return;}
+  document.getElementById('error-ident').textContent='Por favor completa tu nombre y correo.';
+  nombreEstudiante=nom;
+  document.getElementById('zona-ident').style.display='none';
+  document.getElementById('zona-q').style.display='block';
+  EJ=generarEjercicios();
+  resp=new Array(8).fill(null);
+  actual=0;sel=null;
+  render();
 }
+
 function render(){
   const e=EJ[actual];
   document.getElementById('qnum').textContent=`Pregunta ${actual+1} de 8`;
   document.getElementById('barra').style.width=((actual+1)/8*100)+'%';
   document.getElementById('htag').innerHTML=`<span class="hab-tag ${hcss(e.hab)}">${e.hab}</span>`;
-  document.getElementById('qtxt').textContent=e.txt;sel=null;
-  const od=document.getElementById('opts');od.innerHTML='';
-  e.ops.forEach((o,i)=>{const d=document.createElement('div');d.className='opt';d.id='op'+i;d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${o}</span>`;d.onclick=()=>elegir(i);od.appendChild(d);});
-  const nls=document.createElement('div');nls.className='opt nls';nls.id='op4';nls.innerHTML=`<div class="letra" style="border-style:dashed">E</div><span class="otxt">No lo sé</span>`;nls.onclick=()=>elegir(4);od.appendChild(nls);
-  document.getElementById('fb').style.display='none';document.getElementById('btnc').style.display='inline-block';document.getElementById('btnc').disabled=true;document.getElementById('btns').style.display='none';
+  document.getElementById('qtxt').innerHTML=fmt(e.txt);
+  sel=null;
+  const od=document.getElementById('opts');
+  od.innerHTML='';
+  e.opts.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='opt';d.id='op'+i;
+    d.innerHTML=`<div class="letra">${LETRAS[i]}</div><span class="otxt">${fmt(o.t)}</span>`;
+    d.onclick=()=>elegir(i);
+    od.appendChild(d);
+  });
+  const nls=document.createElement('div');
+  nls.className='opt nls';nls.id='op4';
+  nls.innerHTML=`<div class="letra" style="border-style:dashed">E</div><span class="otxt">No lo sé</span>`;
+  nls.onclick=()=>elegir(4);
+  od.appendChild(nls);
+  mathify(document.getElementById('qtxt'));mathify(document.getElementById('opts'));
+  document.getElementById('fb').style.display='none';
+  document.getElementById('btnc').style.display='inline-block';
+  document.getElementById('btnc').disabled=true;
+  document.getElementById('btns').style.display='none';
 }
-function elegir(i){if(document.getElementById('btnc').style.display==='none')return;document.querySelectorAll('.opt').forEach(d=>d.classList.remove('sel'));document.getElementById('op'+i).classList.add('sel');sel=i;document.getElementById('btnc').disabled=false;}
+
+function elegir(i){
+  if(document.getElementById('btnc').style.display==='none')return;
+  document.querySelectorAll('.opt').forEach(d=>d.classList.remove('sel'));
+  document.getElementById('op'+i).classList.add('sel');
+  sel=i;document.getElementById('btnc').disabled=false;
+}
+
 function confirmar(){
-  if(sel===null)return;const e=EJ[actual];resp[actual]=sel;const esNls=sel===NLS,esOk=!esNls&&sel===e.ok;
-  document.querySelectorAll('.opt').forEach((d,i)=>{d.onclick=null;if(i===NLS){d.className='opt nls dis';return;}if(i===e.ok)d.className='opt '+(esOk?'ok':'show');else if(i===sel&&!esOk&&!esNls)d.className='opt mal';else d.className='opt dis';});
+  if(sel===null)return;
+  const e=EJ[actual];resp[actual]=sel;
+  const esNls=sel===NLS;
+  const esOk=!esNls&&sel===e.ok;
+  document.querySelectorAll('.opt').forEach((d,i)=>{
+    d.onclick=null;
+    if(i===NLS){d.className='opt nls dis';return;}
+    if(i===e.ok)d.className='opt '+(esOk?'ok':'show');
+    else if(i===sel&&!esOk&&!esNls)d.className='opt mal';
+    else d.className='opt dis';
+  });
   const fb=document.getElementById('fb');
-  if(esNls){fb.className='fb nls';fb.textContent=`La respuesta correcta es ${LETRAS[e.ok]}: ${e.ops[e.ok]}. ${e.fb_mal}`;}
-  else{fb.className='fb '+(esOk?'ok':'mal');fb.textContent=esOk?e.fb_ok:e.fb_mal;}
-  fb.style.display='block';document.getElementById('btnc').style.display='none';
-  const bs=document.getElementById('btns');bs.style.display='inline-block';bs.textContent=actual<7?'Siguiente →':'Ver resultados →';
+  if(esNls){
+    fb.className='fb nls';
+    fb.innerHTML=fmt(`La respuesta correcta es ${LETRAS[e.ok]}: ${e.opts[e.ok].t}. ${e.fb_ok.replace(/^Correcto\. /,'')}`);
+  } else if(esOk){
+    fb.className='fb ok';
+    fb.innerHTML=fmt(e.fb_ok);
+  } else {
+    fb.className='fb mal';
+    fb.innerHTML=fmt(e.opts[sel].err);
+  }
+  mathify(fb);
+  fb.style.display='block';
+  document.getElementById('btnc').style.display='none';
+  const bs=document.getElementById('btns');
+  bs.style.display='inline-block';
+  bs.textContent=actual<7?'Siguiente →':'Ver resultados →';
 }
-function siguiente(){if(actual<7){actual++;render();}else mostrarFinal();}
+
+function siguiente(){
+  if(actual<7){actual++;render();}
+  else mostrarFinal();
+}
+
 function mostrarFinal(){
-  document.getElementById('zona-q').style.display='none';document.getElementById('zona-final').style.display='block';document.getElementById('barra').style.width='100%';
-  const corr=resp.filter((r,i)=>r===EJ[i].ok).length,nlsC=resp.filter(r=>r===NLS).length,incorrectas=8-corr-nlsC,pct=Math.round(corr/8*100);
-  document.getElementById('pje').textContent=corr+' / 8 correctas';registrar(corr,incorrectas,nlsC,pct);
+  document.getElementById('zona-q').style.display='none';
+  document.getElementById('zona-final').style.display='block';
+  document.getElementById('barra').style.width='100%';
+  const corr=resp.filter((r,i)=>r===EJ[i].ok).length;
+  const nlsC=resp.filter(r=>r===NLS).length;
+  const incorrectas=8-corr-nlsC;
+  const pct=Math.round(corr/8*100);
+  document.getElementById('pje').textContent=corr+' / 8 correctas';
+  registrar(corr,incorrectas,nlsC,pct);
   document.getElementById('pmsg').textContent=pct+'% de logro'+(nlsC>0?` · ${nlsC} sin responder`:'');
   const al=document.getElementById('alerta');
-  const MSGS={alto:[{titulo:'🔥 ¡Dominaste esta guía!',txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},{titulo:'⚡ ¡Excelente nivel!',txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},{titulo:'🎯 ¡Puntazo!',txt:'Cada guía así te acerca más al puntaje que quieres.'},{titulo:'🚀 ¡Así se hace!',txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},{titulo:'🌟 ¡Brillante!',txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}],medio:[{titulo:'💪 ¡Vas bien!',txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},{titulo:'📈 Buen avance',txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},{titulo:'✨ ¡Ya casi!',txt:'Con un intento más lo dominas. El progreso ya es visible.'},{titulo:'🎯 En camino',txt:'Cada intento te acerca más. Repite sin presión, con foco.'},{titulo:'⚡ Sigue sumando',txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}],bajo:[{titulo:'💡 Esta guía te está enseñando algo importante',txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},{titulo:'🧠 Así funciona el aprendizaje real',txt:'Los errores son parte del proceso. Repite antes de avanzar.'},{titulo:'🔄 No te rindas',txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelta a intentarlo!'},{titulo:'💪 El desafío es parte del camino',txt:'Repite esta guía. Con práctica constante lo lograrás.'},{titulo:'🌱 Aquí es donde más se aprende',txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}]};
+  const MSGS={
+    alto:[{titulo:'🔥 ¡Dominaste esta guía!',txt:'Tu cerebro matemático está encendido. Puedes avanzar con confianza.'},{titulo:'⚡ ¡Excelente nivel!',txt:'Eso es exactamente el nivel PAES que necesitas. ¡Sigue así!'},{titulo:'🎯 ¡Puntazo!',txt:'Cada guía así te acerca más al puntaje que quieres.'},{titulo:'🚀 ¡Así se hace!',txt:'Estás construyendo una base sólida. Tu esfuerzo se nota.'},{titulo:'🌟 ¡Brillante!',txt:'Logro de '+pct+'%. Eso no es suerte, es práctica constante.'}],
+    medio:[{titulo:'💪 ¡Vas bien!',txt:'Una repetición más y esta guía será tuya. ¡Tú puedes!'},{titulo:'📈 Buen avance',txt:'Estás construyendo algo sólido. Repite y confirma lo que aprendiste.'},{titulo:'✨ ¡Ya casi!',txt:'Con un intento más lo dominas. El progreso ya es visible.'},{titulo:'🎯 En camino',txt:'Cada intento te acerca más. Repite sin presión, con foco.'},{titulo:'⚡ Sigue sumando',txt:''+pct+'% de logro. Repite una vez más y lo tendrás dominado.'}],
+    bajo:[{titulo:'💡 Esta guía te está enseñando algo importante',txt:'Cada error es información valiosa. Inténtalo de nuevo con calma.'},{titulo:'🧠 Así funciona el aprendizaje real',txt:'Los errores son parte del proceso. Repite antes de avanzar.'},{titulo:'🔄 No te rindas',txt:'Los conceptos nuevos necesitan más de un intento. ¡Vuelve a intentarlo!'},{titulo:'💪 El desafío es parte del camino',txt:'Repite esta guía. Con práctica constante lo lograrás.'},{titulo:'🌱 Aquí es donde más se aprende',txt:'Revisa las retroalimentaciones y vuelve a intentarlo. ¡Confía en el proceso!'}]
+  };
   const nivel_msg=pct>=75?'alto':pct>=50?'medio':'bajo';
   const lista=MSGS[nivel_msg];
   const msg=lista[Math.floor(Math.random()*lista.length)];
   if(nivel_msg==='alto'){al.className='alerta bien';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir para afianzar';}
   else if(nivel_msg==='medio'){al.className='alerta bien';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}!</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir con valores nuevos';}
   else{al.className='alerta rep';al.innerHTML=`<strong>${msg.titulo}, ${nombreEstudiante}.</strong><br>${msg.txt}`;document.getElementById('btn-rep').textContent='Repetir con valores nuevos';}
-  const dots=document.getElementById('dots');dots.innerHTML='';
-  resp.forEach((r,i)=>{const d=document.createElement('div');d.className='dot '+(r===EJ[i].ok?'ok':r===NLS?'nls':'mal');dots.appendChild(d);});
-  document.getElementById('reslista').innerHTML=resp.map((r,i)=>{const ok=r===EJ[i].ok,nls=r===NLS;const color=ok?'#085041':nls?'#5F5E5A':'#791F1F';const icono=ok?'✓':nls?'?':'✗';const txt=ok?'Correcta':nls?`No lo sé — correcta: ${LETRAS[EJ[i].ok]}`:`Incorrecta — correcta: ${LETRAS[EJ[i].ok]}`;return `<div style="color:${color}">${icono} P${i+1} (${EJ[i].hab}): ${txt}</div>`;}).join('');
+  const dots=document.getElementById('dots');
+  dots.innerHTML='';
+  resp.forEach((r,i)=>{
+    const d=document.createElement('div');
+    const ok=r===EJ[i].ok,nls=r===NLS;
+    d.className='dot '+(ok?'ok':nls?'nls':'mal');
+    dots.appendChild(d);
+  });
+  document.getElementById('reslista').innerHTML=resp.map((r,i)=>{
+    const ok=r===EJ[i].ok,nls=r===NLS;
+    const color=ok?'#085041':nls?'#5F5E5A':'#791F1F';
+    const icono=ok?'✓':nls?'?':'✗';
+    const txt=ok?'Correcta':nls?`No lo sé — correcta: ${LETRAS[EJ[i].ok]}`:`Incorrecta — correcta: ${LETRAS[EJ[i].ok]}`;
+    return `<div style="color:${color}">${icono} P${i+1} (${EJ[i].hab}): ${txt}</div>`;
+  }).join('');
 }
+
 function registrar(corr,incorr,nls,pct){
   if (window._modoDocente) return;
   var fecha=new Date().toLocaleDateString('es-CL',{timeZone:'America/Santiago'});
   var correo=document.getElementById('inp-correo').value.trim();
-  var HAB_E=["Argumentar", "Resolver problemas", "Modelar", "Argumentar", "Representar", "Modelar", "Resolver problemas", "Argumentar"];
+  var HAB_E=["Resolver problemas","Modelar","Argumentar","Resolver problemas","Representar","Argumentar","Modelar","Representar"];
   var ejercicios=resp.map(function(r,i){return r===4?2:(r===EJ[i].ok?1:0);});
-  var falladas=[];resp.forEach(function(r,i){if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1)falladas.push(EJ[i].hab);});
-  // ── CÁLCULO LOGRO POR HABILIDAD ──────────────────────
+  var falladas=[];
+  resp.forEach(function(r,i){if(r!==EJ[i].ok&&falladas.indexOf(EJ[i].hab)===-1)falladas.push(EJ[i].hab);});
   var HAB_MAP={e1:HAB_E[0],e2:HAB_E[1],e3:HAB_E[2],e4:HAB_E[3],e5:HAB_E[4],e6:HAB_E[5],e7:HAB_E[6],e8:HAB_E[7]};
   var habCorr={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
   var habTot={'Resolver problemas':0,'Modelar':0,'Representar':0,'Argumentar':0};
@@ -302,80 +424,54 @@ function registrar(corr,incorr,nls,pct){
     habTot[h]=(habTot[h]||0)+1;
     if(ejercicios[i]===1) habCorr[h]=(habCorr[h]||0)+1;
   });
-  var logroResolver=habTot['Resolver problemas']>0?Math.round(habCorr['Resolver problemas']/habTot['Resolver problemas']*100)/100:null;
-  var logroModelar=habTot['Modelar']>0?Math.round(habCorr['Modelar']/habTot['Modelar']*100)/100:null;
-  var logroRepresentar=habTot['Representar']>0?Math.round(habCorr['Representar']/habTot['Representar']*100)/100:null;
-  var logroArgumentar=habTot['Argumentar']>0?Math.round(habCorr['Argumentar']/habTot['Argumentar']*100)/100:null;
-  var params=['fecha='+encodeURIComponent(fecha),'nombre='+encodeURIComponent(nombreEstudiante),'correo='+encodeURIComponent(correo),'tipo=individual','grupo=NA','guia=guia-U01.B.7c','eje=E1','unidad=U01','subunidad=B','nivel=c','correctas='+corr,'incorrectas='+incorr,'nls='+nls,'logro='+(pct/100),'e1='+ejercicios[0],'e2='+ejercicios[1],'e3='+ejercicios[2],'e4='+ejercicios[3],'e5='+ejercicios[4],'e6='+ejercicios[5],'e7='+ejercicios[6],'e8='+ejercicios[7],'habilidades='+encodeURIComponent(falladas.join('|'))].join('&');
-  var img=new Image();img.src='https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec?'+params;
+  var lg=function(h){return habTot[h]>0?Math.round(habCorr[h]/habTot[h]*100)/100:'';};
+  var params=[
+    'fecha='+encodeURIComponent(fecha),'nombre='+encodeURIComponent(nombreEstudiante),'correo='+encodeURIComponent(correo),
+    'tipo=individual','grupo=NA','guia=guia-U01.B.7c','eje=E1','unidad=U01','subunidad=B','nivel=c',
+    'correctas='+corr,'incorrectas='+incorr,'nls='+nls,'logro='+(pct/100),
+    'e1='+ejercicios[0],'e2='+ejercicios[1],'e3='+ejercicios[2],'e4='+ejercicios[3],'e5='+ejercicios[4],'e6='+ejercicios[5],'e7='+ejercicios[6],'e8='+ejercicios[7],
+    'habilidades='+encodeURIComponent(falladas.join('|')),
+    'logro_resolver='+lg('Resolver problemas'),'logro_modelar='+lg('Modelar'),'logro_representar='+lg('Representar'),'logro_argumentar='+lg('Argumentar')
+  ].join('&');
+  var img=new Image();
+  img.src='https://script.google.com/macros/s/AKfycbzsGCpwyNNFC03rbCLUwnPLTHBAn5FZxEJrqq1JX0LrDAY7jmJRQ58bcdaQ8XtS6MM3/exec?'+params;
 }
 
 function volverPortal(){
   const params=new URLSearchParams(window.location.search);
   const nombre=params.get('nombre');
   const correo=params.get('correo');
-  if(nombre&&correo){
-    window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);
-  } else {
-    window.location.href='portal-estudiante.html';
-  }
+  if(nombre&&correo){window.location.href='portal-estudiante.html?nombre='+encodeURIComponent(nombre)+'&correo='+encodeURIComponent(correo);}
+  else{window.location.href='portal-estudiante.html';}
 }
-function reiniciar(){EJ=generarEjercicios();actual=0;resp=new Array(8).fill(null);sel=null;document.getElementById('zona-final').style.display='none';document.getElementById('zona-q').style.display='block';render();}
-
-// ── AUTO-IDENTIFICACIÓN DESDE PORTAL ──────────────────
-// Si el estudiante llega desde el portal, nombre y correo
-// vienen en la URL y se saltan el formulario
-function autoIdentificar() {
-  const params = new URLSearchParams(window.location.search);
-  const nombre = params.get('nombre');
-  const correo = params.get('correo');
-  if (nombre && correo) {
-    document.getElementById('inp-nombre').value = nombre;
-    document.getElementById('inp-correo').value = correo;
-    // Ocultar formulario y arrancar directo
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    nombreEstudiante = nombre;
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
-  }
+function reiniciar(){
+  EJ=generarEjercicios();actual=0;resp=new Array(8).fill(null);sel=null;
+  document.getElementById('zona-final').style.display='none';
+  document.getElementById('zona-q').style.display='block';
+  render();
 }
 
-// ── AUTO-LOGIN Y MODO DOCENTE ──────────────────────────
 window.addEventListener('load', function() {
-  const params = new URLSearchParams(window.location.search);
-  const modo   = params.get('modo');
-  const nombre = params.get('nombre');
-  const correo = params.get('correo');
-
-  if (modo === 'docente') {
-    // Modo docente: saltar formulario, no registrar
-    window._modoDocente = true;
-    nombreEstudiante = 'Vista docente';
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
-    return; // no continuar con autoIdentificar
+  const params=new URLSearchParams(window.location.search);
+  const modo=params.get('modo');
+  const nombre=params.get('nombre');
+  const correo=params.get('correo');
+  if(modo==='docente'){
+    window._modoDocente=true;nombreEstudiante='Vista docente';
+    document.getElementById('zona-ident').style.display='none';
+    document.getElementById('zona-q').style.display='block';
+    EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
+    return;
   }
-
-  if (nombre && correo) {
-    // Auto-login desde portal: saltar formulario con datos reales
-    document.getElementById('inp-nombre').value = nombre;
-    document.getElementById('inp-correo').value = correo;
-    document.getElementById('zona-ident').style.display = 'none';
-    document.getElementById('zona-q').style.display = 'block';
-    nombreEstudiante = nombre;
-    EJ = generarEjercicios();
-    resp = new Array(8).fill(null);
-    actual = 0; sel = null;
-    render();
+  if(nombre&&correo){
+    document.getElementById('inp-nombre').value=nombre;
+    document.getElementById('inp-correo').value=correo;
+    document.getElementById('zona-ident').style.display='none';
+    document.getElementById('zona-q').style.display='block';
+    nombreEstudiante=nombre;
+    EJ=generarEjercicios();resp=new Array(8).fill(null);actual=0;sel=null;render();
   }
 });
-
 </script>
-</body></html>
+</body>
+</html>

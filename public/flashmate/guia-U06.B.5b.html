@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.B.5b · Inecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.B.5b', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'B', nivel: 'b',
+  titulo: 'Inecuaciones de primer grado',
+  sub: 'Transposición · el negativo invierte · paréntesis',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Representar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // Componente RECTA NUMÉRICA (paleta semántica: eje negro = figura, rayo/punto azul = dato).
+    // B/N-safe: abierto/cerrado por relleno, sentido por flecha, valor rotulado. viewBox, title/desc.
+    function RN(cfg) {
+      var L = 26, R = 314, y = 30, H = 58;
+      function px(v) { return Math.round((L + (v - cfg.min) / (cfg.max - cfg.min) * (R - L)) * 10) / 10; }
+      var bx = px(cfg.bx);
+      var s = '<svg viewBox="0 0 340 ' + H + '" width="320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Recta numerica">';
+      s += '<title>Recta numérica</title><desc>' + (cfg.desc || '') + '</desc>';
+      s += '<line x1="' + (L - 10) + '" y1="' + y + '" x2="' + (R + 10) + '" y2="' + y + '" stroke="#1a1a1a" stroke-width="1.6"/>';
+      s += '<polygon points="' + (L - 10) + ',' + y + ' ' + (L - 2) + ',' + (y - 4) + ' ' + (L - 2) + ',' + (y + 4) + '" fill="#1a1a1a"/>';
+      s += '<polygon points="' + (R + 10) + ',' + y + ' ' + (R + 2) + ',' + (y - 4) + ' ' + (R + 2) + ',' + (y + 4) + '" fill="#1a1a1a"/>';
+      cfg.ticks.forEach(function (t) {
+        var tx = px(t);
+        s += '<line x1="' + tx + '" y1="' + (y - 4) + '" x2="' + tx + '" y2="' + (y + 4) + '" stroke="#1a1a1a" stroke-width="1.4"/>';
+        s += '<text x="' + tx + '" y="' + (y + 18) + '" font-family="sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">' + t + '</text>';
+      });
+      var end = cfg.dir === 'right' ? (R + 2) : (L - 2);
+      s += '<line x1="' + bx + '" y1="' + y + '" x2="' + end + '" y2="' + y + '" stroke="#0187f3" stroke-width="4"/>';
+      if (cfg.dir === 'right') s += '<polygon points="' + (R + 10) + ',' + y + ' ' + (R + 1) + ',' + (y - 5) + ' ' + (R + 1) + ',' + (y + 5) + '" fill="#0187f3"/>';
+      else s += '<polygon points="' + (L - 10) + ',' + y + ' ' + (L - 1) + ',' + (y - 5) + ' ' + (L - 1) + ',' + (y + 5) + '" fill="#0187f3"/>';
+      if (cfg.closed) s += '<circle cx="' + bx + '" cy="' + y + '" r="6" fill="#0187f3" stroke="#0187f3" stroke-width="2"/>';
+      else s += '<circle cx="' + bx + '" cy="' + y + '" r="6" fill="#ffffff" stroke="#0187f3" stroke-width="2.4"/>';
+      return s + '</svg>';
+    }
+
+    // P1 · resolver reuniendo términos (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(2x+3<-x+12\\).',
+      [{ t: '\\(x<3\\)', err: null },
+       { t: '\\(x>3\\)', err: 'No se invierte: agrupamos sin dividir por negativos. \\(3x<9\\Rightarrow x<3\\).' },
+       { t: '\\(x<9\\)', err: 'Ese es \\(3x\\); falta dividir por 3: \\(x<3\\).' },
+       { t: '\\(x<5\\)', err: 'Revisa: \\(2x+x<12-3\\Rightarrow 3x<9\\Rightarrow x<3\\).' }],
+      'Correcto. \\(2x+x<12-3\\Rightarrow 3x<9\\Rightarrow x<3\\).'));
+
+    // P2 · con paréntesis, negativo invierte (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(2(x+5)>4(x+7)+6\\).',
+      [{ t: '\\(x<-12\\)', err: null },
+       { t: '\\(x>-12\\)', err: 'Al dividir por \\(-2\\) se INVIERTE el signo: \\(-2x>24\\Rightarrow x<-12\\).' },
+       { t: '\\(x<12\\)', err: 'El resultado es negativo: \\(-2x>24\\Rightarrow x<-12\\).' },
+       { t: '\\(x>-24\\)', err: 'Falta dividir por 2 e invertir: \\(-2x>24\\Rightarrow x<-12\\).' }],
+      'Correcto. \\(2x+10>4x+34\\Rightarrow -2x>24\\); divido por \\(-2\\) (invierte): \\(x<-12\\).'));
+
+    // P3 · LEER la recta numérica (Representar) · FIGURA DE ENUNCIADO (e.fig)
+    var e3 = armar('Representar', 'La recta numérica de abajo muestra un conjunto solución. ¿Qué inecuación lo representa?',
+      [{ t: '\\(x\\geq2\\)', err: null },
+       { t: '\\(x>2\\)', err: 'El punto está RELLENO: el 2 SÍ se incluye, así que es \\(\\geq\\), no \\(>\\).' },
+       { t: '\\(x\\leq2\\)', err: 'La flecha apunta a la DERECHA (los mayores que 2): es \\(\\geq\\), no \\(\\leq\\).' },
+       { t: '\\(x<2\\)', err: 'Punto relleno y flecha a la derecha significan \\(x\\geq2\\).' }],
+      'Correcto. Punto RELLENO en 2 (incluye el 2) y flecha hacia la derecha (los mayores): \\(x\\geq2\\).');
+    e3.fig = RN({ min: -4, max: 8, ticks: [-2, 0, 2, 4, 6], bx: 2, dir: 'right', closed: true, desc: 'Recta numérica con punto relleno en 2 y sombreado hacia la derecha.' });
+    E.push(e3);
+
+    // P4 · identificar el error de signo (Argumentar)
+    E.push(armar('Argumentar', 'Javier resolvió \\(-8x+5>7x+20\\) así:\nPaso 1: \\(-8x-7x>20-5\\)\nPaso 2: \\(-15x>15\\)\nPaso 3: \\(x>-1\\)\n¿En cuál paso se equivocó?',
+      [{ t: 'En el Paso 3.', err: null },
+       { t: 'En el Paso 1.', err: 'El Paso 1 está bien: pasó \\(7x\\) restando y el \\(5\\) restando. El error viene después.' },
+       { t: 'En el Paso 2.', err: 'El Paso 2 está bien: \\(-8x-7x=-15x\\) y \\(20-5=15\\). El error está en el Paso 3.' },
+       { t: 'No hay errores.', err: 'Sí lo hay: al dividir \\(-15x>15\\) por \\(-15\\) (negativo) debe invertirse: \\(x<-1\\), no \\(x>-1\\).' }],
+      'Correcto. En el Paso 3, al dividir por \\(-15\\) (negativo) debía INVERTIR: lo correcto es \\(x<-1\\).'));
+
+    // P5 · resolver con negativo (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(-3x+7\\leq1\\).',
+      [{ t: '\\(x\\geq2\\)', err: null },
+       { t: '\\(x\\leq2\\)', err: 'Al dividir por \\(-3\\) (negativo) se invierte \\(\\leq\\) a \\(\\geq\\): \\(x\\geq2\\).' },
+       { t: '\\(x\\geq-2\\)', err: '\\(-6:(-3)=2\\), positivo: \\(x\\geq2\\).' },
+       { t: '\\(x\\leq-2\\)', err: 'Dos errores: el valor es \\(2\\) y el signo se invierte a \\(\\geq\\). Queda \\(x\\geq2\\).' }],
+      'Correcto. \\(-3x\\leq-6\\); divido por \\(-3\\) (invierte): \\(x\\geq2\\).'));
+
+    // P6 · situación con presupuesto (Modelar)
+    E.push(armar('Modelar', 'Un taxi cobra 300 pesos de base más 200 pesos por kilómetro. Con 2.500 pesos, ¿cuántos kilómetros \\(x\\) como máximo puedo recorrer?',
+      [{ t: '\\(x\\leq11\\)', err: null },
+       { t: '\\(x\\leq14\\)', err: 'Restaste mal la base: \\(200x\\leq2500-300=2200\\Rightarrow x\\leq11\\).' },
+       { t: '\\(x\\geq11\\)', err: 'El presupuesto es un tope: se gasta a lo MÁS 2.500 pesos, así que \\(x\\leq11\\).' },
+       { t: '\\(x\\leq12{,}5\\)', err: 'Olvidaste la base fija de 300 pesos: \\(300+200x\\leq2500\\Rightarrow x\\leq11\\).' }],
+      'Correcto. \\(300+200x\\leq2500\\Rightarrow200x\\leq2200\\Rightarrow x\\leq11\\) kilómetros.'));
+
+    // P7 · ELEGIR la recta correcta (Representar) · OPCIONES-FIGURA (e.rawOpts)
+    var e7 = armar('Representar', 'La solución de una inecuación es \\(x>-12\\). ¿Cuál recta numérica la representa?',
+      [{ t: RN({ min: -16, max: 14, ticks: [-12, 0, 12], bx: -12, dir: 'right', closed: false, desc: 'Punto abierto en -12, sombreado a la derecha.' }), err: null },
+       { t: RN({ min: -16, max: 14, ticks: [-12, 0, 12], bx: -12, dir: 'right', closed: true, desc: 'Punto cerrado en -12, sombreado a la derecha.' }), err: 'El \\(>\\) es estricto: el \\(-12\\) NO se incluye, así que el punto va ABIERTO (hueco), no relleno.' },
+       { t: RN({ min: -16, max: 14, ticks: [-12, 0, 12], bx: -12, dir: 'left', closed: false, desc: 'Punto abierto en -12, sombreado a la izquierda.' }), err: 'La flecha debe ir hacia la DERECHA (los mayores que \\(-12\\)), no a la izquierda.' },
+       { t: RN({ min: -16, max: 14, ticks: [-12, 0, 12], bx: 12, dir: 'right', closed: false, desc: 'Punto abierto en 12, sombreado a la derecha.' }), err: 'El valor frontera es \\(-12\\), no \\(12\\): el punto va en \\(-12\\).' }],
+      'Correcto. \\(x>-12\\): punto ABIERTO en \\(-12\\) (no incluido) y flecha hacia la DERECHA (los mayores).');
+    e7.rawOpts = true;
+    E.push(e7);
+
+    // P8 · con fracción de constante (Resolver)
+    E.push(armar('Resolver problemas', 'Resuelve la inecuación \\(\\tfrac{x}{2}+1>4\\).',
+      [{ t: '\\(x>6\\)', err: null },
+       { t: '\\(x>3\\)', err: 'Falta multiplicar por 2: \\(\\tfrac{x}{2}>3\\Rightarrow x>6\\).' },
+       { t: '\\(x>10\\)', err: 'El \\(+1\\) pasa restando, no sumando: \\(\\tfrac{x}{2}>3\\Rightarrow x>6\\).' },
+       { t: '\\(x<6\\)', err: 'No se invierte: multiplicamos por 2 (positivo). Queda \\(x>6\\).' }],
+      'Correcto. \\(\\tfrac{x}{2}>3\\); multiplico por 2 (positivo, no invierte): \\(x>6\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

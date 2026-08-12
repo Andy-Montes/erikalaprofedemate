@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U10.A.1b · Teorema de Pitágoras: aplicar el teorema</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U10.A.1b', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U10', unidadNum: '10', subunidad: 'A', nivel: 'b',
+  titulo: 'Teorema de Pitágoras: aplicar el teorema',
+  sub: 'Catetos e hipotenusa · despejar un lado · tríos · caso isósceles',
+  HAB_E: ['Representar', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Modelar', 'Representar', 'Resolver problemas', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · figura → fórmula correcta (Representar) · FIGURA TRI
+    var e1 = armar('Representar', 'Observa el triángulo rectángulo. Según el Teorema de Pitágoras, ¿cuál igualdad es correcta?',
+      [{ t: '\\(r^2=p^2+q^2\\)', err: null },
+       { t: '\\(p^2=q^2+r^2\\)', err: '\\(p\\) es un cateto, no la hipotenusa. El cuadrado de la hipotenusa (\\(r\\)) es la suma de los cuadrados de los catetos.' },
+       { t: '\\(r=p+q\\)', err: 'Ahí sumas los lados sin elevarlos al cuadrado. Pitágoras relaciona los cuadrados: \\(r^2=p^2+q^2\\).' },
+       { t: '\\(r^2=p^2-q^2\\)', err: 'Es suma, no resta. La hipotenusa cumple \\(r^2=p^2+q^2\\).' }],
+      'Correcto. \\(r\\) es la hipotenusa (el lado opuesto al ángulo recto), así que \\(r^2=p^2+q^2\\).');
+    e1.fig = TRI({ base: 4, height: 3, baseL: { t: 'q', role: 'fig' }, vertL: { t: 'p', role: 'fig' }, hipL: { t: 'r', role: 'fig' }, desc: 'Triángulo rectángulo con catetos p y q e hipotenusa r.' });
+    E.push(e1);
+
+    // P2 · hallar hipotenusa (Resolver) · FIGURA TRI
+    var e2 = armar('Resolver problemas', 'En el triángulo rectángulo de la figura, ¿cuánto mide la hipotenusa \\(x\\)?',
+      [{ t: '\\(15\\)', err: null },
+       { t: '\\(21\\)', err: 'Sumaste los catetos (\\(12+9\\)). Pitágoras usa los cuadrados: \\(x=\\sqrt{12^2+9^2}\\).' },
+       { t: '\\(225\\)', err: '\\(12^2+9^2=225\\), pero falta sacar la raíz: \\(x=\\sqrt{225}=15\\).' },
+       { t: '\\(\\sqrt{63}\\)', err: 'Restaste (\\(144-81\\)). Como \\(x\\) es la hipotenusa, los cuadrados se suman: \\(144+81=225\\).' }],
+      'Correcto. \\(x=\\sqrt{12^2+9^2}=\\sqrt{144+81}=\\sqrt{225}=15\\).');
+    e2.fig = TRI({ base: 12, height: 9, baseL: { t: '12', role: 'dato' }, vertL: { t: '9', role: 'dato' }, hipL: { t: 'x', role: 'incog' }, desc: 'Triángulo rectángulo con catetos 12 y 9, hipotenusa x.' });
+    E.push(e2);
+
+    // P3 · hallar un cateto (Resolver) · FIGURA TRI
+    var e3 = armar('Resolver problemas', 'En el triángulo rectángulo de la figura, ¿cuánto mide el cateto \\(x\\)?',
+      [{ t: '\\(12\\)', err: null },
+       { t: '\\(\\sqrt{194}\\)', err: 'Sumaste (\\(169+25\\)). Como \\(x\\) es un cateto, se resta: \\(13^2-5^2\\).' },
+       { t: '\\(8\\)', err: 'Restaste los lados (\\(13-5\\)) sin los cuadrados. Lo correcto: \\(x=\\sqrt{13^2-5^2}\\).' },
+       { t: '\\(18\\)', err: 'Sumaste \\(13+5\\). Aquí buscas un cateto: \\(x=\\sqrt{169-25}=12\\).' }],
+      'Correcto. \\(x=\\sqrt{13^2-5^2}=\\sqrt{169-25}=\\sqrt{144}=12\\). Es el trío \\(5,12,13\\).');
+    e3.fig = TRI({ base: 12, height: 5, baseL: { t: 'x', role: 'incog' }, vertL: { t: '5', role: 'dato' }, hipL: { t: '13', role: 'dato' }, desc: 'Triángulo rectángulo con cateto 5, hipotenusa 13 y cateto x.' });
+    E.push(e3);
+
+    // P4 · identificar el error (Argumentar) · pasos en líneas nuevas
+    E.push(armar('Argumentar', 'Beatriz busca el cateto \\(b\\) de un triángulo rectángulo de hipotenusa 15 y otro cateto 9. Revisa su desarrollo:\nPaso 1: \\(b^2+9^2=15^2\\)\nPaso 2: \\(b^2+81=225\\)\nPaso 3: \\(b^2=225+81\\)\nPaso 4: \\(b^2=306\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 3: debía restar, \\(b^2=225-81\\).', err: null },
+       { t: 'En el Paso 1: la igualdad está mal planteada.', err: 'El planteo es correcto: 9 y \\(b\\) son catetos y 15 es la hipotenusa, así que \\(b^2+9^2=15^2\\).' },
+       { t: 'En el Paso 2: \\(15^2\\) no es 225.', err: '\\(15^2=225\\) está bien. El error aparece después.' },
+       { t: 'No hay error.', err: 'Sí lo hay: en el Paso 3 sumó en vez de restar. Debe ser \\(b^2=225-81\\).' }],
+      'Correcto. Para despejar un cateto se resta: \\(b^2=225-81=144\\), luego \\(b=12\\). Sumar en el Paso 3 es el error más típico.');
+
+    // P5 · contexto poste y cable (Modelar) · FIGURA TRI
+    var e5 = armar('Modelar', 'Un cable recto sujeta un poste vertical. El poste mide 8 m y el cable se ancla en el suelo a 6 m de la base del poste. ¿Cuánto mide el cable \\(x\\)?',
+      [{ t: '\\(10\\) m', err: null },
+       { t: '\\(14\\) m', err: 'Sumaste \\(8+6\\). El cable es la hipotenusa: \\(x=\\sqrt{8^2+6^2}\\).' },
+       { t: '\\(\\sqrt{28}\\) m', err: 'Restaste (\\(64-36\\)). El cable es la hipotenusa, así que se suman: \\(64+36=100\\).' },
+       { t: '\\(100\\) m', err: '\\(8^2+6^2=100\\), pero falta la raíz: \\(x=\\sqrt{100}=10\\).' }],
+      'Correcto. El cable es la hipotenusa: \\(x=\\sqrt{8^2+6^2}=\\sqrt{64+36}=\\sqrt{100}=10\\) m. Es el trío \\(6,8,10\\).');
+    e5.fig = TRI({ base: 6, height: 8, baseL: { t: '6 m', role: 'dato' }, vertL: { t: '8 m', role: 'dato' }, hipL: { t: 'x', role: 'incog' }, desc: 'Poste vertical de 8 m, base de 6 m y cable x como hipotenusa.' });
+    E.push(e5);
+
+    // P6 · tríos pitagóricos amplificados (Representar)
+    E.push(armar('Representar', 'Los lados \\(3,4,5\\) forman un triángulo rectángulo (es un trío pitagórico). ¿Cuál de estos conjuntos también forma un triángulo rectángulo, por ser proporcional a \\(3,4,5\\)?',
+      [{ t: '\\(9,\\ 12,\\ 15\\)', err: null },
+       { t: '\\(6,\\ 7,\\ 8\\)', err: 'No es proporcional a \\(3,4,5\\) ni cumple Pitágoras: \\(6^2+7^2=85\\neq8^2\\).' },
+       { t: '\\(5,\\ 6,\\ 7\\)', err: 'No cumple: \\(5^2+6^2=61\\neq7^2=49\\).' },
+       { t: '\\(4,\\ 5,\\ 6\\)', err: 'No cumple: \\(4^2+5^2=41\\neq6^2=36\\).' }],
+      'Correcto. \\(9,12,15\\) es \\(3,4,5\\) amplificado por 3, y cumple \\(9^2+12^2=81+144=225=15^2\\).');
+
+    // P7 · caso isósceles 45-45-90 (Resolver) · FIGURA TRI
+    var e7 = armar('Resolver problemas', 'El triángulo de la figura es rectángulo isósceles (sus dos catetos miden 5). ¿Cuánto mide la hipotenusa \\(x\\)?',
+      [{ t: '\\(5\\sqrt{2}\\)', err: null },
+       { t: '\\(10\\)', err: 'Duplicaste el cateto. Por Pitágoras: \\(x=\\sqrt{5^2+5^2}=\\sqrt{50}=5\\sqrt{2}\\).' },
+       { t: '\\(5\\)', err: 'La hipotenusa es mayor que cada cateto. \\(x=\\sqrt{5^2+5^2}=5\\sqrt{2}\\approx7{,}07\\).' },
+       { t: '\\(25\\)', err: '\\(5^2+5^2=50\\) (no 25), y falta la raíz: \\(x=\\sqrt{50}=5\\sqrt{2}\\).' }],
+      'Correcto. \\(x=\\sqrt{5^2+5^2}=\\sqrt{50}=5\\sqrt{2}\\). Atajo: en el triángulo rectángulo isósceles la hipotenusa es un cateto por \\(\\sqrt{2}\\).');
+    e7.fig = TRI({ base: 5, height: 5, baseL: { t: '5', role: 'dato' }, vertL: { t: '5', role: 'dato' }, hipL: { t: 'x', role: 'incog' }, angB: { t: '45°', role: 'dato' }, desc: 'Triángulo rectángulo isósceles con catetos 5 y ángulo de 45 grados; hipotenusa x.' });
+    E.push(e7);
+
+    // P8 · diagonal de un rectángulo (Modelar)
+    E.push(armar('Modelar', 'Una cancha rectangular mide 40 m de largo y 30 m de ancho. ¿Cuánto mide la diagonal que la cruza de esquina a esquina?',
+      [{ t: '\\(50\\) m', err: null },
+       { t: '\\(70\\) m', err: 'Sumaste largo y ancho (\\(40+30\\)). La diagonal es la hipotenusa: \\(d=\\sqrt{40^2+30^2}\\).' },
+       { t: '\\(\\sqrt{700}\\) m', err: 'Restaste (\\(1600-900\\)). La diagonal es la hipotenusa: se suman \\(1600+900=2500\\).' },
+       { t: '\\(2500\\) m', err: '\\(40^2+30^2=2500\\), pero falta la raíz: \\(d=\\sqrt{2500}=50\\).' }],
+      'Correcto. La diagonal es la hipotenusa de un triángulo de catetos 40 y 30: \\(d=\\sqrt{40^2+30^2}=\\sqrt{2500}=50\\) m. Es el trío \\(3,4,5\\) por 10.');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

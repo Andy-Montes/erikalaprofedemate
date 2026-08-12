@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U11.A.3b · Cilindro: área y volumen</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U11.A.3b', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U11', unidadNum: '11', subunidad: 'A', nivel: 'b',
+  titulo: 'Cilindro: área y volumen',
+  sub: 'Volumen \\(\\pi r^2 h\\) · manto \\(2\\pi r h\\) · área total \\(2\\pi r(h+r)\\)',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Modelar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · volumen (Resolver) · CYL
+    var e1 = armar('Resolver problemas', 'El cilindro de la figura tiene radio 3 y altura 5. ¿Cuál es su volumen?',
+      [{ t: '\\(45\\pi\\)', err: null },
+       { t: '\\(30\\pi\\)', err: '\\(30\\pi\\) es el área del manto (\\(2\\pi r h\\)). El volumen es \\(\\pi r^2 h=\\pi\\cdot9\\cdot5\\).' },
+       { t: '\\(15\\pi\\)', err: 'Falta elevar el radio al cuadrado: \\(\\pi\\cdot3^2\\cdot5=45\\pi\\).' },
+       { t: '\\(90\\pi\\)', err: 'Multiplicaste de más (usaste el diámetro). Con \\(r=3\\): \\(\\pi\\cdot9\\cdot5=45\\pi\\).' }],
+      'Correcto. Volumen \\(=\\pi r^2 h=\\pi\\cdot3^2\\cdot5=\\pi\\cdot9\\cdot5=45\\pi\\).');
+    e1.fig = CYL({ rL: { t: '3', role: 'dato' }, hL: { t: '5', role: 'dato' }, desc: 'Cilindro r=3, h=5.' });
+    E.push(e1);
+
+    // P2 · área del manto (Resolver) · CYL
+    var e2 = armar('Resolver problemas', 'El cilindro de la figura tiene radio 2 y altura 5. ¿Cuál es el área de su manto (superficie lateral)?',
+      [{ t: '\\(20\\pi\\)', err: null },
+       { t: '\\(10\\pi\\)', err: 'Falta el 2: el manto es \\(2\\pi r h=2\\pi\\cdot2\\cdot5=20\\pi\\).' },
+       { t: '\\(40\\pi\\)', err: 'Multiplicaste de más. El manto es \\(2\\pi r h=2\\pi\\cdot2\\cdot5=20\\pi\\).' },
+       { t: '\\(4\\pi\\)', err: 'Ese es el área de una tapa (\\(\\pi r^2\\)). El manto es \\(2\\pi r h=20\\pi\\).' }],
+      'Correcto. Manto \\(=2\\pi r h=2\\pi\\cdot2\\cdot5=20\\pi\\).');
+    e2.fig = CYL({ rL: { t: '2', role: 'dato' }, hL: { t: '5', role: 'dato' }, desc: 'Cilindro r=2, h=5.' });
+    E.push(e2);
+
+    // P3 · área total (Resolver) · CYL
+    var e3 = armar('Resolver problemas', 'El cilindro de la figura tiene radio 3 y altura 4. ¿Cuál es su área total (manto + dos tapas)?',
+      [{ t: '\\(42\\pi\\)', err: null },
+       { t: '\\(24\\pi\\)', err: 'Ese es solo el manto (\\(2\\pi r h\\)). Falta sumar las dos tapas \\(2\\pi r^2=18\\pi\\): total \\(42\\pi\\).' },
+       { t: '\\(18\\pi\\)', err: 'Esas son solo las dos tapas (\\(2\\pi r^2\\)). Falta el manto \\(24\\pi\\): total \\(42\\pi\\).' },
+       { t: '\\(21\\pi\\)', err: 'Es la mitad del total. Área total \\(=2\\pi r(h+r)=2\\pi\\cdot3\\cdot7=42\\pi\\).' }],
+      'Correcto. Área total \\(=2\\pi r h+2\\pi r^2=2\\pi r(h+r)=2\\pi\\cdot3\\cdot(4+3)=6\\pi\\cdot7=42\\pi\\).');
+    e3.fig = CYL({ rL: { t: '3', role: 'dato' }, hL: { t: '4', role: 'dato' }, desc: 'Cilindro r=3, h=4.' });
+    E.push(e3);
+
+    // P4 · reconocer la fórmula del volumen (Representar)
+    E.push(armar('Representar', '¿Cuál expresión representa el volumen de un cilindro de radio \\(r\\) y altura \\(h\\)?',
+      [{ t: '\\(\\pi r^2 h\\)', err: null },
+       { t: '\\(2\\pi r h\\)', err: 'Ese es el área del manto (una superficie), no el volumen.' },
+       { t: '\\(\\pi r h\\)', err: 'Falta elevar el radio al cuadrado: el volumen es \\(\\pi r^2 h\\).' },
+       { t: '\\(\\tfrac{4}{3}\\pi r^3\\)', err: 'Ese es el volumen de una esfera, no de un cilindro.' }],
+      'Correcto. El volumen del cilindro es \\(\\pi r^2 h\\) (área de la base \\(\\pi r^2\\) por la altura \\(h\\)).');
+
+    // P5 · identificar el error: olvidar elevar el radio (Argumentar)
+    E.push(armar('Argumentar', 'Para el volumen de un cilindro de radio 3 y altura 5, Sofía escribe:\nPaso 1: \\(V=\\pi\\cdot r\\cdot h\\)\nPaso 2: \\(V=\\pi\\cdot3\\cdot5=15\\pi\\)\n¿Dónde está el error?',
+      [{ t: 'En el Paso 1: el radio va al cuadrado: \\(V=\\pi r^2 h\\).', err: null },
+       { t: 'En el Paso 2: \\(3\\cdot5\\) no es 15.', err: '\\(3\\cdot5=15\\) está bien; el error es que faltó elevar el radio: \\(\\pi\\cdot3^2\\cdot5\\).' },
+       { t: 'No hay error; \\(V=15\\pi\\).', err: 'Falta el cuadrado del radio: \\(V=\\pi\\cdot3^2\\cdot5=45\\pi\\).' },
+       { t: 'En el Paso 1: sobra el \\(\\pi\\).', err: 'El \\(\\pi\\) es correcto (base circular). Falta \\(r^2\\): \\(V=\\pi r^2 h\\).' }],
+      'Correcto. El volumen es \\(\\pi r^2 h\\); el radio va al cuadrado. \\(V=\\pi\\cdot3^2\\cdot5=45\\pi\\).');
+
+    // P6 · despejar la altura (Resolver)
+    E.push(armar('Resolver problemas', 'Un cilindro de radio 2 tiene volumen \\(32\\pi\\). ¿Cuánto mide su altura?',
+      [{ t: '\\(8\\)', err: null },
+       { t: '\\(16\\)', err: 'De \\(\\pi\\cdot2^2\\cdot h=32\\pi\\Rightarrow 4h=32\\Rightarrow h=8\\), no 16.' },
+       { t: '\\(4\\)', err: 'Divide por el área de la base (\\(4\\pi\\)): \\(h=\\tfrac{32\\pi}{4\\pi}=8\\).' },
+       { t: '\\(2\\)', err: 'Revisa: \\(\\pi\\cdot4\\cdot h=32\\pi\\Rightarrow h=8\\).' }],
+      'Correcto. \\(\\pi r^2 h=32\\pi\\Rightarrow \\pi\\cdot4\\cdot h=32\\pi\\Rightarrow h=\\tfrac{32}{4}=8\\).');
+
+    // P7 · lata cilíndrica, capacidad (Modelar) · CYL
+    var e7 = armar('Modelar', 'Una lata cilíndrica tiene radio 4 cm y altura 10 cm (figura). ¿Cuánto líquido cabe en ella (volumen)?',
+      [{ t: '\\(160\\pi\\) cm³', err: null },
+       { t: '\\(80\\pi\\) cm³', err: 'Ese es el manto (\\(2\\pi r h\\)). El líquido ocupa el volumen: \\(\\pi r^2 h=\\pi\\cdot16\\cdot10\\).' },
+       { t: '\\(40\\pi\\) cm³', err: 'Falta elevar el radio al cuadrado: \\(\\pi\\cdot4^2\\cdot10=160\\pi\\).' },
+       { t: '\\(640\\pi\\) cm³', err: 'Usaste el diámetro (8) al cuadrado. Con \\(r=4\\): \\(\\pi\\cdot16\\cdot10=160\\pi\\).' }],
+      'Correcto. Volumen \\(=\\pi r^2 h=\\pi\\cdot4^2\\cdot10=\\pi\\cdot16\\cdot10=160\\pi\\) cm³.');
+    e7.fig = CYL({ rL: { t: '4', role: 'dato' }, hL: { t: '10', role: 'dato' }, desc: 'Lata r=4, h=10.' });
+    E.push(e7);
+
+    // P8 · cilindro dado por diámetro (Modelar) · CYL diametro
+    var e8 = armar('Modelar', 'Un tubo cilíndrico tiene diámetro 6 cm y altura 10 cm (figura). ¿Cuál es su volumen?',
+      [{ t: '\\(90\\pi\\) cm³', err: null },
+       { t: '\\(360\\pi\\) cm³', err: 'Usaste el diámetro como radio. El radio es \\(6\\div2=3\\): \\(\\pi\\cdot3^2\\cdot10=90\\pi\\).' },
+       { t: '\\(30\\pi\\) cm³', err: 'Falta elevar el radio al cuadrado: \\(\\pi\\cdot3^2\\cdot10=90\\pi\\).' },
+       { t: '\\(60\\pi\\) cm³', err: 'El radio es 3 (mitad del diámetro): \\(\\pi\\cdot9\\cdot10=90\\pi\\).' }],
+      'Correcto. El radio es \\(6\\div2=3\\): \\(V=\\pi r^2 h=\\pi\\cdot3^2\\cdot10=90\\pi\\) cm³.');
+    e8.fig = CYL({ mode: 'diametro', rL: { t: '6', role: 'dato' }, hL: { t: '10', role: 'dato' }, desc: 'Cilindro de diámetro 6, altura 10.' });
+    E.push(e8);
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

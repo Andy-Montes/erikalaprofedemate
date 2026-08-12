@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U12.A.1b · Vectores en el plano</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U12.A.1b', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U12', unidadNum: '12', subunidad: 'A', nivel: 'b',
+  titulo: 'Vectores en el plano',
+  sub: 'Coordenadas · módulo · vector opuesto · suma, resta y escalar',
+  HAB_E: ['Representar', 'Resolver problemas', 'Representar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Argumentar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · coordenadas de un vector (Representar) · GRID
+    var e1 = armar('Representar', 'El vector \\(v\\) de la figura tiene su origen en \\((0,0)\\). ¿Cuáles son sus coordenadas?',
+      [{ t: '\\((4,3)\\)', err: null },
+       { t: '\\((3,4)\\)', err: 'Invertiste las coordenadas. El extremo está 4 a la derecha y 3 arriba: \\((4,3)\\).' },
+       { t: '\\((-4,3)\\)', err: 'El extremo está a la derecha (x positivo): \\((4,3)\\).' },
+       { t: '\\((4,-3)\\)', err: 'El extremo está arriba (y positivo): \\((4,3)\\).' }],
+      'Correcto. Con origen en \\((0,0)\\), el vector queda determinado por su extremo: \\((4,3)\\).');
+    e1.fig = GRID({ xmin: -2, xmax: 6, ymin: -2, ymax: 5, unit: 16, vectors: [{ to: [4, 3], role: 'dato', t: 'v' }], desc: 'Vector v desde el origen al punto (4,3).' });
+    E.push(e1);
+
+    // P2 · módulo (Resolver) · GRID
+    var e2 = armar('Resolver problemas', 'El vector de la figura es \\(v=(3,4)\\). ¿Cuál es su módulo (longitud) \\(|v|\\)?',
+      [{ t: '\\(5\\)', err: null },
+       { t: '\\(7\\)', err: 'Sumaste las componentes (\\(3+4\\)). El módulo usa los cuadrados: \\(\\sqrt{3^2+4^2}\\).' },
+       { t: '\\(25\\)', err: 'Te faltó la raíz: \\(3^2+4^2=25\\), y \\(\\sqrt{25}=5\\).' },
+       { t: '\\(\\sqrt{7}\\)', err: 'Se suman los cuadrados, no las componentes: \\(\\sqrt{9+16}=5\\).' }],
+      'Correcto. \\(|v|=\\sqrt{x^2+y^2}=\\sqrt{3^2+4^2}=\\sqrt{25}=5\\).');
+    e2.fig = GRID({ xmin: -2, xmax: 5, ymin: -2, ymax: 5, unit: 16, vectors: [{ to: [3, 4], role: 'dato', t: 'v' }], desc: 'Vector v=(3,4).' });
+    E.push(e2);
+
+    // P3 · vector opuesto (Representar)
+    E.push(armar('Representar', 'El vector opuesto de \\(v=(2,-5)\\) es:',
+      [{ t: '\\((-2,5)\\)', err: null },
+       { t: '\\((5,-2)\\)', err: 'El opuesto cambia el signo de cada componente, no las intercambia: \\((-2,5)\\).' },
+       { t: '\\((2,5)\\)', err: 'También cambia el signo de la primera componente: \\((-2,5)\\).' },
+       { t: '\\((-2,-5)\\)', err: 'La segunda componente era \\(-5\\); su opuesto es \\(+5\\): \\((-2,5)\\).' }],
+      'Correcto. El vector opuesto \\(-v\\) cambia el signo de ambas componentes: \\((-2,5)\\).');
+
+    // P4 · suma (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(a=(3,1)\\) y \\(b=(-1,4)\\), ¿cuál es \\(a+b\\)?',
+      [{ t: '\\((2,5)\\)', err: null },
+       { t: '\\((4,-3)\\)', err: 'Eso es \\(a-b\\). La suma es componente a componente: \\((3+(-1),\\,1+4)\\).' },
+       { t: '\\((-3,4)\\)', err: 'Multiplicaste o confundiste. \\(a+b=(3-1,\\,1+4)=(2,5)\\).' },
+       { t: '\\((3,5)\\)', err: 'La primera componente es \\(3+(-1)=2\\), no 3.' }],
+      'Correcto. \\(a+b=(3+(-1),\\,1+4)=(2,5)\\).');
+
+    // P5 · resta (Resolver)
+    E.push(armar('Resolver problemas', 'Si \\(a=(5,2)\\) y \\(b=(1,6)\\), ¿cuál es \\(a-b\\)?',
+      [{ t: '\\((4,-4)\\)', err: null },
+       { t: '\\((6,8)\\)', err: 'Eso es \\(a+b\\). La resta es \\((5-1,\\,2-6)\\).' },
+       { t: '\\((4,4)\\)', err: 'La segunda componente es \\(2-6=-4\\), no 4.' },
+       { t: '\\((-4,4)\\)', err: 'Restaste al revés: \\(a-b=(5-1,\\,2-6)=(4,-4)\\).' }],
+      'Correcto. \\(a-b=(5-1,\\,2-6)=(4,-4)\\).');
+
+    // P6 · escalar (Resolver)
+    E.push(armar('Resolver problemas', '¿Cuál es el vector \\(3\\cdot(2,-1)\\)?',
+      [{ t: '\\((6,-3)\\)', err: null },
+       { t: '\\((5,2)\\)', err: 'El escalar multiplica cada componente, no se suma: \\((3\\cdot2,\\,3\\cdot(-1))\\).' },
+       { t: '\\((6,-1)\\)', err: 'También multiplica la segunda componente: \\(3\\cdot(-1)=-3\\).' },
+       { t: '\\((2,-3)\\)', err: 'La primera componente es \\(3\\cdot2=6\\), no 2.' }],
+      'Correcto. \\(3\\cdot(2,-1)=(3\\cdot2,\\,3\\cdot(-1))=(6,-3)\\).');
+
+    // P7 · identificar el error: módulo (Argumentar)
+    E.push(armar('Argumentar', 'Para el módulo de \\(v=(6,8)\\), Ana escribe: Paso 1: \\(|v|=6+8\\) · Paso 2: \\(|v|=14\\). ¿Dónde está el error?',
+      [{ t: 'En el Paso 1: el módulo es \\(\\sqrt{6^2+8^2}\\), no la suma.', err: null },
+       { t: 'En el Paso 2: \\(6+8\\) no es 14.', err: '\\(6+8=14\\) está bien; el error es la fórmula: \\(|v|=\\sqrt{6^2+8^2}\\).' },
+       { t: 'No hay error; \\(|v|=14\\).', err: '\\(14\\) es la suma. El módulo es \\(\\sqrt{36+64}=\\sqrt{100}=10\\).' },
+       { t: 'En el Paso 1: faltó restar.', err: 'No se resta: el módulo es \\(\\sqrt{6^2+8^2}=10\\).' }],
+      'Correcto. El módulo es \\(\\sqrt{x^2+y^2}=\\sqrt{6^2+8^2}=\\sqrt{100}=10\\), no la suma.');
+
+    // P8 · contexto: distancia = módulo (Modelar) · GRID
+    var e8 = armar('Modelar', 'Un dron parte del origen y su posición está dada por el vector \\((12,5)\\) (en metros). ¿A qué distancia del origen se encuentra?',
+      [{ t: '\\(13\\) m', err: null },
+       { t: '\\(17\\) m', err: 'Sumaste las componentes (\\(12+5\\)). La distancia es \\(\\sqrt{12^2+5^2}\\).' },
+       { t: '\\(169\\) m', err: '\\(12^2+5^2=169\\), pero falta la raíz: \\(\\sqrt{169}=13\\).' },
+       { t: '\\(\\sqrt{17}\\) m', err: 'Se suman los cuadrados: \\(\\sqrt{144+25}=\\sqrt{169}=13\\).' }],
+      'Correcto. La distancia es el módulo: \\(\\sqrt{12^2+5^2}=\\sqrt{169}=13\\) m.');
+    e8.fig = GRID({ xmin: -2, xmax: 13, ymin: -2, ymax: 6, unit: 12, vectors: [{ to: [12, 5], role: 'dato', t: 'v' }], desc: 'Vector posición del dron (12,5).' });
+    E.push(e8);
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

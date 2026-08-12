@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U06.B.7c · Inecuaciones de primer grado</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U06.B.7c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U06', unidadNum: '06', subunidad: 'B', nivel: 'c',
+  titulo: 'Inecuaciones de primer grado',
+  sub: 'Modelar situaciones · intervalos · decisiones',
+  HAB_E: ['Modelar', 'Modelar', 'Modelar', 'Resolver problemas', 'Representar', 'Argumentar', 'Resolver problemas', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · presupuesto de fiesta (Modelar)
+    E.push(armar('Modelar', 'Organizar una fiesta cuesta 50.000 pesos fijos más 3.000 pesos por invitado. Con un presupuesto de 80.000 pesos, ¿cuántos invitados \\(x\\) como máximo se pueden tener?',
+      [{ t: '\\(x\\leq10\\)', err: null },
+       { t: '\\(x\\leq26\\)', err: 'No dividiste solo el gasto variable: \\(3000x\\leq80000-50000=30000\\Rightarrow x\\leq10\\).' },
+       { t: '\\(x\\geq10\\)', err: 'El presupuesto es un tope: se gasta a lo MÁS 80.000 pesos, así que \\(x\\leq10\\).' },
+       { t: '\\(x\\leq43\\)', err: 'Olvidaste el costo fijo: \\(50000+3000x\\leq80000\\Rightarrow x\\leq10\\).' }],
+      'Correcto. \\(50000+3000x\\leq80000\\Rightarrow3000x\\leq30000\\Rightarrow x\\leq10\\) invitados.'));
+
+    // P2 · promedio de notas (Modelar)
+    E.push(armar('Modelar', 'Tienes notas 4,0 y 5,0. ¿Qué nota \\(n\\) necesitas en la tercera prueba para que el promedio de las tres sea al menos 5,0?',
+      [{ t: '\\(n\\geq6\\)', err: null },
+       { t: '\\(n\\geq5\\)', err: 'El promedio pide compensar las notas bajas: \\(\\tfrac{4+5+n}{3}\\geq5\\Rightarrow n\\geq6\\).' },
+       { t: '\\(n\\geq15\\)', err: 'Ese es \\(4+5+n\\); falta despejar \\(n\\): \\(9+n\\geq15\\Rightarrow n\\geq6\\).' },
+       { t: '\\(n\\leq6\\)', err: '"Al menos 5,0" es \\(\\geq\\): necesitas 6 o más, \\(n\\geq6\\).' }],
+      'Correcto. \\(\\tfrac{4+5+n}{3}\\geq5\\Rightarrow9+n\\geq15\\Rightarrow n\\geq6\\).'));
+
+    // P3 · ascensor, pertinencia entera (Modelar)
+    E.push(armar('Modelar', 'Un ascensor soporta como máximo 500 kg. Ya hay 320 kg dentro y cada persona pesa aproximadamente 70 kg. ¿Cuántas personas \\(p\\) más pueden subir?',
+      [{ t: '2 personas.', err: null },
+       { t: '3 personas.', err: '\\(70\\cdot3=210\\) y \\(320+210=530>500\\): se pasa. La solución \\(p\\leq2{,}57\\) da máximo 2.' },
+       { t: '2,57 personas.', err: 'No hay fracciones de persona: se toma el mayor entero \\(\\leq2{,}57\\), que es 2.' },
+       { t: '11 personas.', err: 'Olvidaste el peso ya presente: \\(320+70p\\leq500\\Rightarrow p\\leq2{,}57\\Rightarrow 2\\).' }],
+      'Correcto. \\(320+70p\\leq500\\Rightarrow70p\\leq180\\Rightarrow p\\leq2{,}57\\); como \\(p\\) es entero, suben 2 personas.'));
+
+    // P4 · resolver a intervalo (Resolver)
+    E.push(armar('Resolver problemas', 'El conjunto solución de \\(5x-2>2x+7\\) es:',
+      [{ t: '\\(]3,\\,\\infty[\\)', err: null },
+       { t: '\\(]-\\infty,\\,3[\\)', err: 'No se invierte (no dividimos por negativos): \\(3x>9\\Rightarrow x>3\\), o sea \\(]3,\\infty[\\).' },
+       { t: '\\([3,\\,\\infty[\\)', err: 'El \\(>\\) es estricto: el 3 no se incluye, corchete abierto: \\(]3,\\infty[\\).' },
+       { t: '\\(]9,\\,\\infty[\\)', err: 'Ese es \\(3x\\); falta dividir por 3: \\(x>3\\).' }],
+      'Correcto. \\(5x-2x>7+2\\Rightarrow3x>9\\Rightarrow x>3\\): \\(]3,\\infty[\\).'));
+
+    // P5 · representar intervalo cerrado negativo (Representar)
+    E.push(armar('Representar', 'La solución \\(x\\leq-1\\) escrita como intervalo es:',
+      [{ t: '\\(]-\\infty,\\,-1]\\)', err: null },
+       { t: '\\([-1,\\,\\infty[\\)', err: 'Ese es \\(x\\geq-1\\). Aquí son los menores o iguales a \\(-1\\): \\(]-\\infty,-1]\\).' },
+       { t: '\\(]-\\infty,\\,-1[\\)', err: 'El \\(\\leq\\) incluye al \\(-1\\): corchete cerrado, \\(]-\\infty,-1]\\).' },
+       { t: '\\(]-\\infty,\\,1]\\)', err: 'Es \\(-1\\), no \\(1\\): \\(]-\\infty,-1]\\).' }],
+      'Correcto. \\(x\\leq-1\\) incluye al \\(-1\\) y sigue hacia \\(-\\infty\\): \\(]-\\infty,-1]\\).'));
+
+    // P6 · error de signo (Argumentar)
+    E.push(armar('Argumentar', 'Camila resuelve \\(-2x>6\\) dividiendo por \\(-2\\) y escribe \\(x>-3\\). ¿Es correcto?',
+      [{ t: 'No: lo correcto es \\(x<-3\\).', err: null },
+       { t: 'Sí, está bien.', err: 'Al dividir por \\(-2\\) (negativo) se INVIERTE el signo: \\(x<-3\\), no \\(x>-3\\).' },
+       { t: 'No: es \\(x>3\\).', err: 'El valor es \\(6:(-2)=-3\\); con inversión queda \\(x<-3\\).' },
+       { t: 'No: es \\(x<3\\).', err: 'El resultado es negativo: al invertir, \\(x<-3\\).' }],
+      'Correcto. Al dividir por \\(-2\\) (negativo) se invierte: \\(x<-3\\).'));
+
+    // P7 · resolver con paréntesis (Resolver)
+    E.push(armar('Resolver problemas', 'El conjunto solución de \\(3(x-1)\\leq x+5\\) es:',
+      [{ t: '\\(]-\\infty,\\,4]\\)', err: null },
+       { t: '\\([4,\\,\\infty[\\)', err: 'No se invierte (no dividimos por negativos): \\(2x\\leq8\\Rightarrow x\\leq4\\): \\(]-\\infty,4]\\).' },
+       { t: '\\(]-\\infty,\\,4[\\)', err: 'El \\(\\leq\\) incluye el 4: corchete cerrado, \\(]-\\infty,4]\\).' },
+       { t: '\\(]-\\infty,\\,2]\\)', err: 'Distribuye bien: \\(3x-3\\leq x+5\\Rightarrow2x\\leq8\\Rightarrow x\\leq4\\).' }],
+      'Correcto. \\(3x-3\\leq x+5\\Rightarrow2x\\leq8\\Rightarrow x\\leq4\\): \\(]-\\infty,4]\\).'));
+
+    // P8 · pertinencia de solución (Argumentar)
+    E.push(armar('Argumentar', 'Para un evento, la cantidad de entradas \\(x\\) que se pueden comprar cumple \\(x<7{,}5\\). ¿Cuál es la mayor cantidad de entradas posible?',
+      [{ t: '7 entradas.', err: null },
+       { t: '7,5 entradas.', err: 'No se venden fracciones de entrada: el mayor entero menor que 7,5 es 7.' },
+       { t: '8 entradas.', err: '8 no cumple \\(x<7{,}5\\). El máximo entero permitido es 7.' },
+       { t: 'Infinitas.', err: 'El contexto limita: \\(x\\) es entero y \\(<7{,}5\\); el máximo es 7.' }],
+      'Correcto. La solución es \\(x<7{,}5\\), pero como \\(x\\) cuenta entradas (entero), el máximo pertinente es 7.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U05.B.5c · Proporcionalidad Compuesta</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U05.B.5c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U05', unidadNum: '05', subunidad: 'B', nivel: 'c',
+  titulo: 'Proporcionalidad Compuesta',
+  sub: 'Tres magnitudes · directa-inversa tipo PAES',
+  HAB_E: ['Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Modelar', 'Resolver problemas', 'Argumentar', 'Resolver problemas', 'Argumentar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · pasteleros (Resolver)
+    E.push(armar('Resolver problemas', '5 pasteleros fabrican en 8 horas 10 tortas. ¿Cuántos pasteleros se necesitan para fabricar 3 tortas en 6 horas?',
+      [{ t: '2', err: null },
+       { t: '3', err: 'Directa con tortas (\\(\\tfrac{3}{10}\\)) e inversa con horas (\\(\\tfrac{8}{6}\\)): \\(5\\cdot\\tfrac{3}{10}\\cdot\\tfrac{8}{6}=2\\).' },
+       { t: '4', err: 'Menos tortas ⇒ menos pasteleros: el resultado es 2.' },
+       { t: '6', err: 'Revisa los factores: \\(5\\cdot\\tfrac{3}{10}\\cdot\\tfrac{8}{6}=2\\).' }],
+      'Correcto. Directa con tortas e inversa con horas: \\(5\\cdot\\tfrac{3}{10}\\cdot\\tfrac{8}{6}=2\\).'));
+
+    // P2 · muro (Resolver)
+    E.push(armar('Resolver problemas', '8 obreros en 6 días construyen 40 m de muro. ¿Cuántos metros construyen 12 obreros en 9 días?',
+      [{ t: '90 m', err: null },
+       { t: '60 m', err: 'Ambos factores son directos: \\(40\\cdot\\tfrac{12}{8}\\cdot\\tfrac{9}{6}=40\\cdot1{,}5\\cdot1{,}5=90\\) m.' },
+       { t: '80 m', err: 'Falta un factor: \\(\\tfrac{12}{8}=1{,}5\\) y \\(\\tfrac{9}{6}=1{,}5\\); \\(40\\cdot1{,}5\\cdot1{,}5=90\\) m.' },
+       { t: '120 m', err: 'Revisa: \\(40\\cdot1{,}5\\cdot1{,}5=90\\) m, no 120.' }],
+      'Correcto. Directa con obreros y con días: \\(40\\cdot\\tfrac{12}{8}\\cdot\\tfrac{9}{6}=90\\) m.'));
+
+    // P3 · piezas (Resolver)
+    E.push(armar('Resolver problemas', '15 máquinas en 8 horas producen 1200 piezas. ¿Cuántas piezas producen 10 máquinas en 12 horas?',
+      [{ t: '1200 piezas', err: null },
+       { t: '800 piezas', err: 'Directa con máquinas (\\(\\tfrac{10}{15}\\)) y con horas (\\(\\tfrac{12}{8}\\)): \\(1200\\cdot\\tfrac23\\cdot\\tfrac32=1200\\).' },
+       { t: '1800 piezas', err: 'Los factores se compensan: \\(\\tfrac{10}{15}\\cdot\\tfrac{12}{8}=\\tfrac23\\cdot\\tfrac32=1\\); quedan 1200.' },
+       { t: '900 piezas', err: 'Multiplica ambos factores: \\(\\tfrac23\\cdot\\tfrac32=1\\); \\(1200\\cdot1=1200\\).' }],
+      'Correcto. \\(1200\\cdot\\tfrac{10}{15}\\cdot\\tfrac{12}{8}=1200\\cdot\\tfrac23\\cdot\\tfrac32=1200\\) piezas.'));
+
+    // P4 · modelar forraje (Modelar)
+    E.push(armar('Modelar', 'Para alimentar 20 vacas durante 30 días se necesitan 600 kg de forraje. ¿Cuántos kg se necesitan para 25 vacas durante 40 días?',
+      [{ t: '1000 kg', err: null },
+       { t: '750 kg', err: 'Faltó el factor de los días: \\(600\\cdot\\tfrac{25}{20}\\cdot\\tfrac{40}{30}=750\\cdot\\tfrac43=1000\\) kg.' },
+       { t: '800 kg', err: 'Directa con vacas y con días: \\(600\\cdot\\tfrac{25}{20}\\cdot\\tfrac{40}{30}=1000\\) kg.' },
+       { t: '600 kg', err: 'Aumentan las vacas Y los días, así que se necesita más: \\(1000\\) kg.' }],
+      'Correcto. Directa con vacas y con días: \\(600\\cdot\\tfrac{25}{20}\\cdot\\tfrac{40}{30}=1000\\) kg.'));
+
+    // P5 · grifos (Resolver)
+    E.push(armar('Resolver problemas', '6 grifos iguales llenan una piscina en 8 horas. ¿Cuántos grifos se necesitan para llenarla en 3 horas?',
+      [{ t: '16 grifos', err: null },
+       { t: '9 grifos', err: 'Es INVERSA: menos tiempo ⇒ más grifos. \\(6\\cdot8=48=x\\cdot3\\Rightarrow x=16\\).' },
+       { t: '2 grifos', err: 'Para llenar en menos tiempo hacen falta MÁS grifos: \\(48:3=16\\).' },
+       { t: '24 grifos', err: 'El producto es \\(6\\cdot8=48\\): \\(x\\cdot3=48\\Rightarrow x=16\\).' }],
+      'Correcto. Inversa: \\(6\\cdot8=48\\); \\(x\\cdot3=48\\Rightarrow x=16\\) grifos.'));
+
+    // P6 · identificar relaciones (Argumentar)
+    E.push(armar('Argumentar', 'En "más obreros terminan la obra en menos días, y una obra más grande necesita más días", ¿cómo se relaciona el número de días con los obreros y con el tamaño de la obra, respectivamente?',
+      [{ t: 'Inversa con los obreros y directa con el tamaño de la obra', err: null },
+       { t: 'Directa con ambos', err: 'Con más obreros los días DISMINUYEN: eso es inverso, no directo.' },
+       { t: 'Inversa con ambos', err: 'Una obra más grande necesita MÁS días: eso es directo con el tamaño de la obra.' },
+       { t: 'Directa con los obreros e inversa con la obra', err: 'Es al revés: inversa con obreros (más obreros, menos días) y directa con la obra.' }],
+      'Correcto. Días: inverso con obreros (más obreros ⇒ menos días) y directo con el tamaño de la obra (más obra ⇒ más días).'));
+
+    // P7 · zanja mixta (Resolver)
+    E.push(armar('Resolver problemas', '10 trabajadores en 5 días cavan 200 m de zanja. ¿Cuántos días necesitan 8 trabajadores para cavar 240 m?',
+      [{ t: '\\(7{,}5\\) días', err: null },
+       { t: '6 días', err: 'Faltó un factor: inversa con trabajadores (\\(\\tfrac{10}{8}\\)) y directa con metros (\\(\\tfrac{240}{200}\\)): \\(5\\cdot\\tfrac{10}{8}\\cdot\\tfrac{240}{200}=7{,}5\\).' },
+       { t: '\\(4\\) días', err: 'Menos trabajadores y más zanja ⇒ MÁS días: \\(5\\cdot\\tfrac{10}{8}\\cdot\\tfrac{240}{200}=7{,}5\\).' },
+       { t: '\\(10\\) días', err: 'Aplica ambos factores: \\(5\\cdot1{,}25\\cdot1{,}2=7{,}5\\) días.' }],
+      'Correcto. Inversa con trabajadores y directa con metros: \\(5\\cdot\\tfrac{10}{8}\\cdot\\tfrac{240}{200}=7{,}5\\) días.'));
+
+    // P8 · pertinencia (Argumentar)
+    E.push(armar('Argumentar', 'Al resolver un problema, el número de trabajadores necesarios da \\(6{,}2\\). Como no puede haber fracciones de trabajador y el trabajo debe alcanzar, ¿cuántos se contratan?',
+      [{ t: '7 trabajadores', err: null },
+       { t: '6 trabajadores', err: 'Con 6 no alcanza (faltaría una fracción de trabajo). Para asegurar la tarea se redondea hacia ARRIBA: 7.' },
+       { t: '\\(6{,}2\\) trabajadores', err: 'No existen fracciones de persona: la cantidad debe ser un entero.' },
+       { t: '6 y se deja incompleto', err: 'El trabajo debe alcanzar: se redondea hacia arriba a 7 para cubrir la tarea.' }],
+      'Correcto. La cantidad debe ser entera y el trabajo debe alcanzar, así que se redondea hacia arriba: 7 trabajadores.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

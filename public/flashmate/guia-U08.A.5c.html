@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U08.A.5c · Modelar situaciones lineales</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U08.A.5c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U08', unidadNum: '08', subunidad: 'A', nivel: 'c',
+  titulo: 'Modelar situaciones lineales',
+  sub: 'Monto fijo y tasa · punto-pendiente · variable dependiente',
+  HAB_E: ['Modelar', 'Modelar', 'Resolver problemas', 'Argumentar', 'Modelar', 'Resolver problemas', 'Representar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · Uber (Modelar) — PDF
+    E.push(armar('Modelar', 'Juan cobra 480 pesos por bajada de bandera y 150 pesos por cada tramo recorrido. Si \\(x\\) es el número de tramos, ¿qué función da el costo del viaje?',
+      [{ t: '\\(f(x)=150x+480\\)', err: null },
+       { t: '\\(f(x)=480x+150\\)', err: 'La bajada de bandera (480) es FIJA, no por tramo; lo variable es \\(150x\\): \\(f(x)=150x+480\\).' },
+       { t: '\\(f(x)=630x\\)', err: 'No se juntan fijo y variable en un coeficiente: \\(150x+480\\).' },
+       { t: '\\(f(x)=150+480x\\)', err: 'El 480 es fijo (bajada de bandera); los 150 van por tramo: \\(150x+480\\).' }],
+      'Correcto. Variable \\(150x\\), fijo \\(480\\): \\(f(x)=150x+480\\).'));
+
+    // P2 · técnico (Modelar) — DEMRE
+    E.push(armar('Modelar', 'Un técnico cobra un cargo fijo de 17.000 pesos más 1.500 pesos por hora. ¿Qué función modela el cobro por \\(n\\) horas?',
+      [{ t: '\\(f(n)=1500n+17000\\)', err: null },
+       { t: '\\(f(n)=17000n+1500\\)', err: 'El cargo fijo (17.000) no depende de las horas; lo variable es \\(1500n\\): \\(f(n)=1500n+17000\\).' },
+       { t: '\\(f(n)=18500n\\)', err: 'No se suman fijo y variable en un coeficiente: van separados, \\(1500n+17000\\).' },
+       { t: '\\(f(n)=17000\\cdot1500n\\)', err: 'No se multiplican; se suma el fijo al variable: \\(1500n+17000\\).' }],
+      'Correcto. Fijo 17.000, variable \\(1500n\\): \\(f(n)=1500n+17000\\).'));
+
+    // P3 · evaluar el modelo (Resolver)
+    E.push(armar('Resolver problemas', 'Con \\(f(x)=150x+480\\), ¿cuánto cuesta un viaje de \\(4\\) tramos?',
+      [{ t: '\\(1080\\) pesos', err: null },
+       { t: '\\(600\\) pesos', err: 'No olvides el fijo: \\(150\\cdot4+480=600+480=1080\\).' },
+       { t: '\\(2520\\) pesos', err: 'Solo se multiplican los tramos por 150: \\(600+480=1080\\), no \\((150+480)\\cdot4\\).' },
+       { t: '\\(630\\) pesos', err: 'Son 4 tramos: \\(150\\cdot4=600\\), más 480: \\(1080\\).' }],
+      'Correcto. \\(150\\cdot4+480=600+480=1080\\) pesos.'));
+
+    // P4 · monto fijo = n (Argumentar)
+    E.push(armar('Argumentar', 'En el modelo del técnico \\(f(n)=1500n+17000\\), ¿qué representa el 17.000?',
+      [{ t: 'El cobro cuando aún no se trabaja ninguna hora (\\(n=0\\)).', err: null },
+       { t: 'El cobro por cada hora.', err: 'Eso es el 1.500 (la pendiente). El 17.000 es el cargo fijo, con \\(n=0\\).' },
+       { t: 'El total del trabajo.', err: 'El total depende de \\(n\\); el 17.000 es solo el cargo fijo inicial.' },
+       { t: 'La cantidad de horas.', err: '\\(n\\) es la cantidad de horas; 17.000 es el monto fijo (coef de posición).' }],
+      'Correcto. El 17.000 es el coeficiente de posición: el cobro cuando \\(n=0\\).'));
+
+    // P5 · vela que decrece (Modelar)
+    E.push(armar('Modelar', 'Una vela mide 20 cm y se consume 4 cm por hora. ¿Qué función da su largo \\(f(x)\\) tras \\(x\\) horas?',
+      [{ t: '\\(f(x)=20-4x\\)', err: null },
+       { t: '\\(f(x)=4x+20\\)', err: 'La vela DISMINUYE: la pendiente es negativa: \\(f(x)=20-4x\\).' },
+       { t: '\\(f(x)=20x-4\\)', err: 'El largo inicial (20) es fijo; lo que cambia por hora es \\(-4x\\): \\(20-4x\\).' },
+       { t: '\\(f(x)=-4x\\)', err: 'Falta el largo inicial de 20 cm: \\(f(x)=20-4x\\).' }],
+      'Correcto. Inicial 20, baja 4 por hora: \\(f(x)=20-4x\\) (pendiente negativa).'));
+
+    // P6 · pendiente entre dos puntos (Resolver)
+    E.push(armar('Resolver problemas', 'Una recta pasa por \\((2,5)\\) y \\((4,9)\\). ¿Cuál es su pendiente \\(m\\)?',
+      [{ t: '\\(2\\)', err: null },
+       { t: '\\(4\\)', err: 'Falta dividir por \\(\\Delta x\\): \\(m=\\tfrac{9-5}{4-2}=\\tfrac{4}{2}=2\\).' },
+       { t: '\\(1\\)', err: 'Revisa: \\(\\tfrac{9-5}{4-2}=\\tfrac{4}{2}=2\\).' },
+       { t: '\\(7\\)', err: 'No se suman los valores; se usa \\(\\tfrac{\\Delta y}{\\Delta x}=2\\).' }],
+      'Correcto. \\(m=\\tfrac{9-5}{4-2}=\\tfrac{4}{2}=2\\).'));
+
+    // P7 · variable dependiente en contexto (Representar)
+    E.push(armar('Representar', 'En "el costo de un viaje según los kilómetros recorridos", ¿cuál es la variable DEPENDIENTE?',
+      [{ t: 'El costo del viaje.', err: null },
+       { t: 'Los kilómetros recorridos.', err: 'Los km son la variable INDEPENDIENTE (la entrada); el costo DEPENDE de ellos.' },
+       { t: 'El precio por kilómetro.', err: 'Ese es un coeficiente fijo (la pendiente), no la variable dependiente.' },
+       { t: 'No hay variable dependiente.', err: 'Sí: el costo es la variable dependiente (depende de los km).' }],
+      'Correcto. El costo depende de los km: es la variable dependiente.'));
+
+    // P8 · función completa desde dos puntos (Modelar)
+    E.push(armar('Modelar', 'Una recta pasa por \\((2,5)\\) y \\((4,9)\\). ¿Cuál es su función \\(f(x)=mx+n\\)?',
+      [{ t: '\\(f(x)=2x+1\\)', err: null },
+       { t: '\\(f(x)=2x-1\\)', err: 'De \\(5=2\\cdot2+n\\): \\(n=5-4=1\\), no \\(-1\\).' },
+       { t: '\\(f(x)=2x+5\\)', err: 'El 5 es \\(y\\) en \\(x=2\\), no el corte \\(n\\): \\(n=1\\).' },
+       { t: '\\(f(x)=4x+1\\)', err: 'La pendiente es \\(\\tfrac{9-5}{4-2}=2\\), no 4.' }],
+      'Correcto. \\(m=2\\); \\(5=2\\cdot2+n\\Rightarrow n=1\\): \\(f(x)=2x+1\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

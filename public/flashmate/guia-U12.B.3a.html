@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U12.B.3a · Isometrías: traslación y reflexión</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U12.B.3a', eje: 'E3', ejeNombre: 'GEOMETRÍA', unidad: 'U12', unidadNum: '12', subunidad: 'B', nivel: 'a',
+  titulo: 'Isometrías: traslación y reflexión',
+  sub: 'Concepto · traslación de un punto · reflexión en los ejes · ejes de simetría',
+  HAB_E: ['Representar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Representar', 'Representar', 'Argumentar', 'Modelar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · concepto de isometría (Representar)
+    E.push(armar('Representar', '¿Qué caracteriza a una transformación isométrica (traslación, rotación o reflexión)?',
+      [{ t: 'Conserva la forma y el tamaño; la imagen es congruente con la figura original.', err: null },
+       { t: 'Conserva la forma pero cambia el tamaño (la agranda o achica).', err: 'Eso es una semejanza. La isometría mantiene el tamaño (figuras congruentes).' },
+       { t: 'Cambia la forma de la figura.', err: 'La isometría conserva la forma; la imagen es congruente con la original.' },
+       { t: 'Solo cambia el color de la figura.', err: 'Es un movimiento en el plano que conserva forma y tamaño.' }],
+      'Correcto. Las isometrías son movimientos que conservan forma y tamaño: la imagen es congruente con la figura original.');
+
+    // P2 · traslación de un punto (Resolver) · GRID
+    var e2 = armar('Resolver problemas', 'El punto \\(P(2,3)\\) se traslada por el vector \\((4,-1)\\). ¿Cuáles son las coordenadas de su imagen \\(P\\,'\\)?',
+      [{ t: '\\((6,2)\\)', err: null },
+       { t: '\\((6,4)\\)', err: 'La segunda componente baja 1: \\(3+(-1)=2\\).' },
+       { t: '\\((-2,4)\\)', err: 'La traslación suma el vector: \\((2+4,\\,3-1)\\).' },
+       { t: '\\((8,-3)\\)', err: 'Multiplicaste. La traslación suma: \\((2+4,\\,3+(-1))=(6,2)\\).' }],
+      'Correcto. \\(P\\,'=(x+a,\\,y+b)=(2+4,\\,3+(-1))=(6,2)\\).');
+    e2.fig = GRID({ xmin: -2, xmax: 7, ymin: -2, ymax: 5, unit: 15, points: [{ at: [2, 3], role: 'dato', t: 'P' }, { at: [6, 2], role: 'incog', t: "P'" }], vectors: [{ from: [2, 3], to: [6, 2], role: 'aux' }], desc: 'Traslación de P(2,3) por el vector (4,-1).' });
+    E.push(e2);
+
+    // P3 · reflexión respecto al eje X (Resolver) · GRID
+    var e3 = armar('Resolver problemas', '¿Cuál es la imagen de \\(P(3,5)\\) al reflejarlo respecto del eje X?',
+      [{ t: '\\((3,-5)\\)', err: null },
+       { t: '\\((-3,5)\\)', err: 'Ese es respecto del eje Y. El eje X cambia el signo de \\(y\\): \\((3,-5)\\).' },
+       { t: '\\((-3,-5)\\)', err: 'Eso es la simetría central. El eje X cambia solo \\(y\\): \\((3,-5)\\).' },
+       { t: '\\((5,3)\\)', err: 'No se intercambian las coordenadas: solo cambia el signo de \\(y\\).' }],
+      'Correcto. Reflexión respecto del eje X: \\((a,b)\\to(a,-b)=(3,-5)\\).');
+    e3.fig = GRID({ xmin: -6, xmax: 6, ymin: -6, ymax: 6, unit: 12, points: [{ at: [3, 5], role: 'dato', t: 'P' }, { at: [3, -5], role: 'incog', t: "P'" }], desc: 'Reflexión de P(3,5) respecto del eje X.' });
+    E.push(e3);
+
+    // P4 · reflexión respecto al eje Y (Resolver) · GRID
+    var e4 = armar('Resolver problemas', '¿Cuál es la imagen de \\(P(-2,4)\\) al reflejarlo respecto del eje Y?',
+      [{ t: '\\((2,4)\\)', err: null },
+       { t: '\\((-2,-4)\\)', err: 'Ese es respecto del eje X. El eje Y cambia el signo de \\(x\\): \\((2,4)\\).' },
+       { t: '\\((2,-4)\\)', err: 'Eso es la simetría central. El eje Y cambia solo \\(x\\): \\((2,4)\\).' },
+       { t: '\\((4,-2)\\)', err: 'No se intercambian las coordenadas: solo cambia el signo de \\(x\\).' }],
+      'Correcto. Reflexión respecto del eje Y: \\((a,b)\\to(-a,b)=(2,4)\\).');
+    e4.fig = GRID({ xmin: -6, xmax: 6, ymin: -2, ymax: 6, unit: 14, points: [{ at: [-2, 4], role: 'dato', t: 'P' }, { at: [2, 4], role: 'incog', t: "P'" }], desc: 'Reflexión de P(-2,4) respecto del eje Y.' });
+    E.push(e4);
+
+    // P5 · ejes de simetría del cuadrado (Representar) · figura
+    var e5 = armar('Representar', '¿Cuántos ejes de simetría tiene un cuadrado (como el de la figura)?',
+      [{ t: '\\(4\\)', err: null },
+       { t: '\\(2\\)', err: 'El cuadrado tiene 4: las 2 diagonales y las 2 rectas que unen puntos medios de lados opuestos.' },
+       { t: '\\(1\\)', err: 'Tiene 4 ejes de simetría, no 1.' },
+       { t: '\\(0\\)', err: 'El cuadrado sí tiene ejes de simetría: 4 en total.' }],
+      'Correcto. El cuadrado tiene 4 ejes de simetría: sus 2 diagonales y las 2 rectas que unen los puntos medios de lados opuestos.');
+    e5.fig = '<svg viewBox="0 0 140 140" width="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuadrado y ejes de simetria"><title>Ejes de simetría del cuadrado</title><desc>Cuadrado con sus 4 ejes de simetría punteados.</desc><rect x="35" y="35" width="70" height="70" fill="none" stroke="#1a1a1a" stroke-width="1.8"/><line x1="70" y1="24" x2="70" y2="116" stroke="#38388e" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="24" y1="70" x2="116" y2="70" stroke="#38388e" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="28" y1="28" x2="112" y2="112" stroke="#38388e" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="112" y1="28" x2="28" y2="112" stroke="#38388e" stroke-width="1.1" stroke-dasharray="4 3"/></svg>';
+    E.push(e5);
+
+    // P6 · ejes de simetría del triángulo equilátero (Representar)
+    E.push(armar('Representar', '¿Cuántos ejes de simetría tiene un triángulo equilátero?',
+      [{ t: '\\(3\\)', err: null },
+       { t: '\\(1\\)', err: '1 eje tiene el isósceles. El equilátero tiene 3 (uno por cada vértice).' },
+       { t: '\\(0\\)', err: 'Sin ejes es el escaleno. El equilátero tiene 3.' },
+       { t: '\\(6\\)', err: 'Un polígono regular tiene tantos ejes como lados: el triángulo tiene 3.' }],
+      'Correcto. Un polígono regular tiene tantos ejes de simetría como lados: el equilátero tiene 3.');
+
+    // P7 · identificar el error: reflexión eje X (Argumentar)
+    E.push(armar('Argumentar', 'María refleja \\(P(4,1)\\) respecto del eje X y escribe \\(P\\,'=(-4,1)\\). ¿Dónde está el error?',
+      [{ t: 'La reflexión respecto del eje X cambia el signo de \\(y\\): \\(P\\,'=(4,-1)\\).', err: null },
+       { t: 'No hay error; \\(P\\,'=(-4,1)\\).', err: '\\((-4,1)\\) es la reflexión respecto del eje Y. Respecto del eje X es \\((4,-1)\\).' },
+       { t: 'Debió cambiar el signo de ambas coordenadas.', err: 'Cambiar ambas es la simetría central. Respecto del eje X cambia solo \\(y\\).' },
+       { t: 'Debió intercambiar las coordenadas.', err: 'No se intercambian: respecto del eje X, \\((a,b)\\to(a,-b)\\).' }],
+      'Correcto. Respecto del eje X cambia el signo de \\(y\\): \\((4,1)\\to(4,-1)\\). María cambió \\(x\\) (eso es el eje Y).');
+
+    // P8 · contexto: traslación de una ficha (Modelar)
+    E.push(armar('Modelar', 'Una ficha está en la casilla \\((1,2)\\) y se mueve 5 casillas a la derecha y 3 hacia arriba. ¿En qué casilla queda?',
+      [{ t: '\\((6,5)\\)', err: null },
+       { t: '\\((6,2)\\)', err: 'También sube 3: la segunda coordenada es \\(2+3=5\\).' },
+       { t: '\\((1,5)\\)', err: 'También avanza 5 a la derecha: la primera coordenada es \\(1+5=6\\).' },
+       { t: '\\((-4,-1)\\)', err: 'Derecha y arriba suman: \\((1+5,\\,2+3)=(6,5)\\).' }],
+      'Correcto. Traslación por \\((5,3)\\): \\((1+5,\\,2+3)=(6,5)\\).');
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

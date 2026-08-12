@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U09.A.3c · Discriminante y raíces</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U09.A.3c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U09', unidadNum: '09', subunidad: 'A', nivel: 'c',
+  titulo: 'Discriminante y raíces',
+  sub: 'Naturaleza de las soluciones · suma y producto · armar ecuación · parámetros',
+  HAB_E: ['Resolver problemas', 'Argumentar', 'Resolver problemas', 'Resolver problemas', 'Resolver problemas', 'Modelar', 'Resolver problemas', 'Representar'],
+  generar: function () {
+    var E = [];
+
+    // P1 · discriminante = 0 (Resolver)
+    E.push(armar('Resolver problemas', 'Usando \\(\\Delta=b^2-4ac\\), ¿cuál es la naturaleza de las soluciones de \\(x^2-4x+4=0\\)?',
+      [{ t: 'Dos soluciones reales e iguales (\\(\\Delta=0\\)).', err: null },
+       { t: 'Dos soluciones reales distintas.', err: '\\(\\Delta=(-4)^2-4\\cdot1\\cdot4=16-16=0\\): las soluciones son reales e IGUALES.' },
+       { t: 'No tiene soluciones reales.', err: '\\(\\Delta=0\\) (no negativo): sí hay solución, real y doble.' },
+       { t: 'Una solución imaginaria.', err: '\\(\\Delta=0\\Rightarrow\\) una raíz real doble (\\(x=2\\)), no imaginaria.' }],
+      'Correcto. \\(\\Delta=16-16=0\\): dos soluciones reales e iguales.'));
+
+    // P2 · discriminante < 0 (Argumentar)
+    E.push(armar('Argumentar', '¿Cuál es la naturaleza de las soluciones de \\(x^2+x+3=0\\)?',
+      [{ t: 'No tiene soluciones reales (\\(\\Delta<0\\)).', err: null },
+       { t: 'Dos soluciones reales distintas.', err: '\\(\\Delta=1-12=-11<0\\): NO hay soluciones reales.' },
+       { t: 'Dos soluciones iguales.', err: '\\(\\Delta=0\\) daría iguales; aquí \\(\\Delta=-11<0\\): sin solución real.' },
+       { t: 'Una solución real.', err: 'Con \\(\\Delta<0\\) no hay raíces reales.' }],
+      'Correcto. \\(\\Delta=1^2-4\\cdot1\\cdot3=-11<0\\): sin soluciones reales.'));
+
+    // P3 · parámetro para raíces iguales (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', 'Para que las raíces de \\(4x^2+12x-k=0\\) sean reales e iguales, ¿cuál debe ser el valor de \\(k\\)?',
+      [{ t: '\\(k=-9\\)', err: null },
+       { t: '\\(k=9\\)', err: '\\(\\Delta=12^2-4\\cdot4\\cdot(-k)=144+16k=0\\Rightarrow k=-9\\).' },
+       { t: '\\(k=-6\\)', err: '\\(144+16k=0\\Rightarrow16k=-144\\Rightarrow k=-9\\).' },
+       { t: '\\(k=6\\)', err: 'Cuidado con el signo de \\(c=-k\\): \\(144+16k=0\\Rightarrow k=-9\\).' }],
+      'Correcto. Raíces iguales \\(\\Rightarrow\\Delta=0\\): \\(144+16k=0\\Rightarrow k=-9\\).'));
+
+    // P4 · suma y producto (Resolver)
+    E.push(armar('Resolver problemas', 'Sin resolver, ¿cuál es la suma y el producto de las raíces de \\(x^2-7x+12=0\\)?',
+      [{ t: 'Suma \\(7\\), producto \\(12\\).', err: null },
+       { t: 'Suma \\(-7\\), producto \\(12\\).', err: 'Suma \\(=\\tfrac{-b}{a}=\\tfrac{-(-7)}{1}=7\\) (positiva).' },
+       { t: 'Suma \\(12\\), producto \\(7\\).', err: 'Suma \\(=\\tfrac{-b}{a}=7\\); producto \\(=\\tfrac{c}{a}=12\\).' },
+       { t: 'Suma \\(7\\), producto \\(-12\\).', err: 'Producto \\(=\\tfrac{c}{a}=\\tfrac{12}{1}=12\\) (positivo).' }],
+      'Correcto. Suma \\(=\\tfrac{-b}{a}=7\\); producto \\(=\\tfrac{c}{a}=12\\).'));
+
+    // P5 · diferencia producto - suma (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', 'En \\(3x^2+2x=5\\), ¿cuál es la diferencia entre el producto y la suma de las soluciones?',
+      [{ t: '\\(-1\\)', err: null },
+       { t: '\\(1\\)', err: 'Producto \\(-\\tfrac53\\) menos suma \\(-\\tfrac23\\): \\(-\\tfrac53-(-\\tfrac23)=-\\tfrac33=-1\\).' },
+       { t: '\\(-\\tfrac83\\)', err: 'Es producto MENOS suma: \\(-\\tfrac53+\\tfrac23=-1\\), no \\(-\\tfrac53-\\tfrac23\\).' },
+       { t: '\\(\\tfrac83\\)', err: 'Ordena a 0: \\(3x^2+2x-5=0\\); suma \\(-\\tfrac23\\), producto \\(-\\tfrac53\\); la resta da \\(-1\\).' }],
+      'Correcto. \\(3x^2+2x-5=0\\): suma \\(-\\tfrac23\\), producto \\(-\\tfrac53\\); \\(-\\tfrac53-(-\\tfrac23)=-1\\).'));
+
+    // P6 · armar ecuación desde raíces (Modelar) — DEMRE
+    E.push(armar('Modelar', 'La ecuación cuadrática cuyas raíces son \\(x_1=4\\) y \\(x_2=-6\\) es:',
+      [{ t: '\\(x^2+2x-24=0\\)', err: null },
+       { t: '\\(x^2-2x-24=0\\)', err: 'La ecuación es \\(x^2-(\\text{suma})x+\\text{producto}\\). Suma \\(=-2\\), así el término es \\(-(-2)x=+2x\\).' },
+       { t: '\\(x^2+2x+24=0\\)', err: 'Producto \\(=4\\cdot(-6)=-24\\) (negativo): \\(x^2+2x-24\\).' },
+       { t: '\\(x^2-4x-6=0\\)', err: 'No se copian las raíces: usa suma \\(-2\\) y producto \\(-24\\): \\(x^2+2x-24\\).' }],
+      'Correcto. Suma \\(-2\\), producto \\(-24\\): \\(x^2-(-2)x+(-24)=x^2+2x-24=0\\).'));
+
+    // P7 · hallar coeficiente dado una raíz (Resolver) — DEMRE
+    E.push(armar('Resolver problemas', 'Una de las raíces de \\(ax^2-2x-3=0\\) es \\(-3\\). ¿Cuál es el valor de \\(a\\)?',
+      [{ t: '\\(a=-\\tfrac13\\)', err: null },
+       { t: '\\(a=\\tfrac13\\)', err: '\\(9a+6-3=0\\Rightarrow9a=-3\\Rightarrow a=-\\tfrac13\\) (negativo).' },
+       { t: '\\(a=-\\tfrac19\\)', err: '\\(9a=-3\\Rightarrow a=\\tfrac{-3}{9}=-\\tfrac13\\), no \\(-\\tfrac19\\).' },
+       { t: '\\(a=\\tfrac19\\)', err: 'Reemplaza \\(x=-3\\): \\(9a+6-3=0\\Rightarrow a=-\\tfrac13\\).' }],
+      'Correcto. \\(a(-3)^2-2(-3)-3=0\\Rightarrow9a+3=0\\Rightarrow a=-\\tfrac13\\).'));
+
+    // P8 · condición para dos soluciones distintas (Representar)
+    E.push(armar('Representar', '¿Qué condición del discriminante \\(\\Delta\\) corresponde a que una ecuación cuadrática tenga dos soluciones reales DISTINTAS?',
+      [{ t: '\\(\\Delta>0\\)', err: null },
+       { t: '\\(\\Delta=0\\)', err: '\\(\\Delta=0\\) da dos soluciones reales IGUALES (una doble). Para distintas: \\(\\Delta>0\\).' },
+       { t: '\\(\\Delta<0\\)', err: '\\(\\Delta<0\\) no da soluciones reales. Para dos distintas: \\(\\Delta>0\\).' },
+       { t: '\\(\\Delta=1\\)', err: 'No es un valor fijo: basta con \\(\\Delta>0\\) (positivo).' }],
+      'Correcto. \\(\\Delta>0\\Rightarrow\\) dos soluciones reales distintas.'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>

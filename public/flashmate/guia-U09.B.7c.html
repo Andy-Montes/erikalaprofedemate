@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flash Mate · U09.B.7c · Función cuadrática (integrador)</title>
+<link rel="icon" href="https://emerinoo.github.io/flashmate/logo-erika.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+</head>
+<body>
+<script>
+window.FLASHMATE = {
+  guia: 'guia-U09.B.7c', eje: 'E2', ejeNombre: 'ÁLGEBRA Y FUNCIONES', unidad: 'U09', unidadNum: '09', subunidad: 'B', nivel: 'c',
+  titulo: 'Función cuadrática · integrador tipo PAES',
+  sub: 'Afirmaciones · leer el gráfico · vértice, cortes y aplicaciones',
+  HAB_E: ['Argumentar', 'Argumentar', 'Resolver problemas', 'Argumentar', 'Representar', 'Modelar', 'Argumentar', 'Resolver problemas'],
+  generar: function () {
+    var E = [];
+
+    // P1 · afirmaciones (Argumentar) — DEMRE
+    E.push(armar('Argumentar', 'Con respecto a \\(f(x)=3x^2+13x-10\\): I) su concavidad está orientada hacia arriba; II) corta el eje Y en \\((0,-10)\\); III) \\(f(-5)=0\\). ¿Cuáles son verdaderas?',
+      [{ t: 'I, II y III.', err: null },
+       { t: 'Solo I.', err: 'También II (\\(c=-10\\)) y III (\\(f(-5)=75-65-10=0\\)) son verdaderas.' },
+       { t: 'Solo I y II.', err: 'III también: \\(f(-5)=3\\cdot25-65-10=0\\).' },
+       { t: 'Solo I y III.', err: 'II también: la parábola corta el eje Y en \\((0,c)=(0,-10)\\).' }],
+      'Correcto. \\(a=3>0\\) (I), \\(c=-10\\) (II), \\(f(-5)=0\\) (III): las tres.'));
+
+    // P2 · coeficiente desde gráfico (Argumentar) · FIGURA PCU — DEMRE
+    var e2 = armar('Argumentar', 'La parábola del gráfico corresponde a \\(f(x)=(q-5)x^2+bx+c\\). Como abre hacia arriba, se cumple:',
+      [{ t: '\\(q>5\\)', err: null },
+       { t: '\\(q=5\\)', err: 'Si \\(q=5\\), \\(a=q-5=0\\) y no sería parábola. Abre hacia arriba \\(\\Rightarrow a>0\\Rightarrow q>5\\).' },
+       { t: '\\(q<5\\)', err: 'Abrir hacia arriba exige \\(a=q-5>0\\Rightarrow q>5\\).' },
+       { t: '\\(q\\neq0\\)', err: 'La condición del gráfico es \\(a>0\\): \\(q-5>0\\Rightarrow q>5\\).' }],
+      'Correcto. Abre hacia arriba \\(\\Rightarrow a=q-5>0\\Rightarrow q>5\\).');
+    e2.fig = PCU({ a: 0.4, h: -1, k: -2, desc: 'Parábola cóncava hacia arriba.' });
+    E.push(e2);
+
+    // P3 · intersección con eje X (Resolver)
+    E.push(armar('Resolver problemas', '¿En qué puntos la parábola \\(f(x)=x^2-2x-8\\) corta al eje X?',
+      [{ t: '\\((4,0)\\) y \\((-2,0)\\)', err: null },
+       { t: '\\((0,4)\\) y \\((0,-2)\\)', err: 'Las intersecciones con X tienen \\(y=0\\): \\((4,0)\\) y \\((-2,0)\\).' },
+       { t: '\\((0,-8)\\)', err: 'Ese es el corte con el eje Y. Con X: \\((x-4)(x+2)=0\\Rightarrow(4,0),(-2,0)\\).' },
+       { t: '\\((2,0)\\)', err: 'El \\(2\\) es \\(x_v\\); los ceros son \\(4\\) y \\(-2\\).' }],
+      'Correcto. \\(x^2-2x-8=(x-4)(x+2)=0\\Rightarrow(4,0)\\) y \\((-2,0)\\).'));
+
+    // P4 · afirmaciones vértice/eje/cero (Argumentar) — DEMRE (respuesta corregida)
+    E.push(armar('Argumentar', 'Con respecto a \\(f(x)=x^2-x-6\\): I) \\(x=3\\) es un cero; II) el eje de simetría es \\(x=\\tfrac12\\); III) el vértice es \\(\\left(\\tfrac12,-\\tfrac{25}{4}\\right)\\). ¿Cuáles son verdaderas?',
+      [{ t: 'I, II y III.', err: null },
+       { t: 'Solo I.', err: 'También II (\\(x=\\tfrac{-b}{2a}=\\tfrac12\\)) y III (\\(f(\\tfrac12)=-\\tfrac{25}{4}\\)).' },
+       { t: 'Solo I y II.', err: 'III también: \\(f(\\tfrac12)=\\tfrac14-\\tfrac12-6=-\\tfrac{25}{4}\\).' },
+       { t: 'Solo I y III.', err: 'II también: \\(x=\\tfrac{-(-1)}{2\\cdot1}=\\tfrac12\\) es el eje de simetría.' }],
+      'Correcto. \\(x=3\\) cero (I); eje \\(x=\\tfrac12\\) (II); vértice \\(\\left(\\tfrac12,-\\tfrac{25}{4}\\right)\\) (III): las tres.'));
+
+    // P5 · vértice desde gráfico (Representar) · FIGURA PCU
+    var e5 = armar('Representar', 'Según el gráfico, ¿cuál es el vértice de la parábola?',
+      [{ t: '\\((-1,-4)\\)', err: null },
+       { t: '\\((-4,-1)\\)', err: 'La primera coordenada es \\(x=-1\\) (eje de simetría) y la segunda \\(y=-4\\): \\((-1,-4)\\).' },
+       { t: '\\((1,-4)\\)', err: 'El vértice está a la IZQUIERDA del eje Y, en \\(x=-1\\).' },
+       { t: '\\((-1,4)\\)', err: 'El vértice está DEBAJO del eje X, en \\(y=-4\\).' }],
+      'Correcto. El vértice del gráfico está en \\((-1,-4)\\).');
+    e5.fig = PCU({ a: 1, h: -1, k: -4, axis: true, marks: [[-1, -4, '']], desc: 'Parábola con vértice en x=-1, y=-4.' });
+    E.push(e5);
+
+    // P6 · área máxima (Modelar)
+    E.push(armar('Modelar', 'Un huerto rectangular de perímetro 20 m tiene área \\(A(x)=x(10-x)\\). ¿Qué valor de \\(x\\) da el área MÁXIMA?',
+      [{ t: '\\(x=5\\)', err: null },
+       { t: '\\(x=10\\)', err: 'El área máxima está en el vértice: \\(x_v=\\tfrac{-10}{2(-1)}=5\\).' },
+       { t: '\\(x=0\\)', err: '\\(x=0\\) da área 0; el máximo está en el vértice \\(x=5\\).' },
+       { t: '\\(x=20\\)', err: 'El vértice de \\(A(x)=10x-x^2\\) está en \\(x=5\\).' }],
+      'Correcto. \\(A(x)=10x-x^2\\); \\(x_v=\\tfrac{-10}{2(-1)}=5\\) (un cuadrado de \\(5\\times5\\)).'));
+
+    // P7 · a>0 y Δ<0 (Argumentar)
+    E.push(armar('Argumentar', 'Una función cuadrática tiene \\(a>0\\) y \\(\\Delta<0\\). ¿Cómo es su gráfico respecto al eje X?',
+      [{ t: 'Abre hacia arriba y queda completamente SOBRE el eje X.', err: null },
+       { t: 'Abre hacia arriba y corta el eje X en dos puntos.', err: '\\(\\Delta<0\\) significa que NO corta el eje X; queda por encima.' },
+       { t: 'Abre hacia abajo y no corta el eje X.', err: '\\(a>0\\) abre hacia ARRIBA; con \\(\\Delta<0\\) queda sobre el eje X.' },
+       { t: 'Es tangente al eje X.', err: 'Tangente sería \\(\\Delta=0\\). Con \\(\\Delta<0\\) no toca: queda sobre el eje.' }],
+      'Correcto. \\(a>0\\) (abre arriba) y \\(\\Delta<0\\) (no corta) ⇒ toda sobre el eje X.'));
+
+    // P8 · corte con eje X, raíz doble (Resolver)
+    E.push(armar('Resolver problemas', '¿En qué punto(s) corta la parábola \\(f(x)=x^2-6x+9\\) al eje X?',
+      [{ t: 'Un solo punto: \\((3,0)\\).', err: null },
+       { t: 'Dos puntos: \\((3,0)\\) y \\((-3,0)\\).', err: '\\(x^2-6x+9=(x-3)^2\\): raíz doble, un solo punto \\((3,0)\\).' },
+       { t: 'No lo corta.', err: '\\(\\Delta=36-36=0\\): es tangente, lo toca en \\((3,0)\\).' },
+       { t: 'En \\((0,9)\\).', err: 'Ese es el corte con el eje Y. Con X: \\((x-3)^2=0\\Rightarrow(3,0)\\).' }],
+      'Correcto. \\((x-3)^2=0\\Rightarrow x=3\\) (raíz doble): tangente en \\((3,0)\\).'));
+
+    return E;
+  }
+};
+</script>
+<script defer src="../flashmate-engine.js"></script>
+</body>
+</html>
