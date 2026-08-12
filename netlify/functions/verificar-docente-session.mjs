@@ -19,6 +19,17 @@ export default async (req) => {
     return json({ error: "JSON invalido." }, 400);
   }
 
+  const clave = String(payload.clave || "");
+  const adminKey = globalThis.Netlify?.env?.get?.("FLASHMATE_ADMIN_KEY") || process.env.FLASHMATE_ADMIN_KEY || "MateFlash_1976";
+  if (clave && clave === adminKey) {
+    const token = createSession("teacher", { email: "docente@flashmate.local", nombre: "Docente" });
+    return json(
+      { ok: true, email: "docente@flashmate.local", nombre: "Docente" },
+      200,
+      { "Set-Cookie": setSessionCookie("fm_teacher", token) },
+    );
+  }
+
   try {
     const user = await verifyGoogleCredential(String(payload.credential || ""));
     if (!docentesAutorizados().includes(user.email)) {

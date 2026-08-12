@@ -1687,13 +1687,26 @@ async function onGoogleLoginDocente(resp) {
   }
 }
 
-function verificarClave() {
+async function verificarClave() {
   const val = document.getElementById('inp-clave').value;
   const err = document.getElementById('clave-error');
   if (val === CLAVE_HASH) {
-    const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
-    localStorage.setItem('fm_doc_auth', expira);
-    mostrarPanel();
+    try {
+      const r = await fetch('/.netlify/functions/verificar-docente-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clave: val })
+      });
+      const data = await r.json();
+      if (!data.ok) throw new Error(data.error || 'No se pudo crear sesiÃ³n docente.');
+      const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
+      localStorage.setItem('fm_doc_auth', expira);
+      localStorage.setItem('fm_doc_email', data.email || 'docente@flashmate.local');
+      mostrarPanel();
+    } catch (e) {
+      err.textContent = 'No se pudo crear la sesiÃ³n docente. Intenta nuevamente.';
+      err.style.display = 'block';
+    }
   } else {
     err.style.display = 'block';
     document.getElementById('inp-clave').value = '';
