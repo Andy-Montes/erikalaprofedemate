@@ -1455,18 +1455,28 @@ document.getElementById('modal-overlay').addEventListener('click', e => {
 // ══════════════════════════════════════════
 // ENSAYOS
 // ══════════════════════════════════════════
-const ENSAYOS_CATALOGO = [
+let ENSAYOS_CATALOGO = [
   {cod:'E01', nombre:'Diagnóstico PAES-2016 D2601'},
-  {cod:'E02', nombre:'Ensayo PAES 2017'},
-  {cod:'E03', nombre:'Ensayo PAES 2018'},
-  {cod:'E04', nombre:'Ensayo PAES 2019'},
-  {cod:'E05', nombre:'Ensayo PAES 2020'},
-  {cod:'E06', nombre:'Ensayo PAES 2021'},
-  {cod:'E07', nombre:'Ensayo PAES 2022'},
-  {cod:'E08', nombre:'Ensayo PAES 2023'},
-  {cod:'E09', nombre:'Ensayo PAES 2024'},
-  {cod:'E10', nombre:'Ensayo PAES 2025'},
 ];
+
+async function cargarCatalogoEnsayos() {
+  try {
+    const r = await fetch('/flashmate/ensayos.json?t=' + Date.now());
+    if (!r.ok) return;
+    const data = await r.json();
+    if (!data.ensayos || !data.ensayos.length) return;
+    ENSAYOS_CATALOGO = data.ensayos
+      .filter(e => e.disp !== false)
+      .map(e => ({
+        cod: e.cod,
+        nombre: e.nombre || e.cod,
+        archivo: e.archivo || ('ensayo-' + e.cod + '.html'),
+        preguntas: e.preguntas || 65,
+        duracion: e.duracion || '2 horas 20 minutos'
+      }))
+      .sort((a, b) => a.cod.localeCompare(b.cod, 'es', { numeric: true }));
+  } catch(e) { /* respaldo: lista embebida */ }
+}
 
 // planEnsayos[correo] = { ensayo, fecha, estado }
 let planEnsayos = {};
@@ -1715,6 +1725,7 @@ function chequearAcceso() {
 
 window.addEventListener('load', async function(){
   await cargarCatalogoRemoto();
+  await cargarCatalogoEnsayos();
   chequearAcceso();
 });
 

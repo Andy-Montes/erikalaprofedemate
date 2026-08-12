@@ -1,0 +1,13 @@
+{
+  "actualizado": "2026-08-11",
+  "ensayos": [
+    {
+      "cod": "E01",
+      "nombre": "Diagnostico PAES-2016 D2601",
+      "archivo": "ensayo-E01.html",
+      "preguntas": 65,
+      "duracion": "2 horas 20 minutos",
+      "disp": true
+    }
+  ]
+}

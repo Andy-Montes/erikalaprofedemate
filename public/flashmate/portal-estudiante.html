@@ -569,6 +569,7 @@ async function verificarAcceso() {
 // Arma el estado del estudiante y entra al portal (reusado por login por
 // correo y por login con Google). dataVerif viene de accion=verificar.
 async function entrarConDatos(dataVerif) {
+  await cargarCatalogoEnsayos();
   const correo = dataVerif.correo;
   let dataRes = { resultados: {} };
   try {
@@ -595,6 +596,24 @@ async function entrarConDatos(dataVerif) {
 
 // ── LOGIN CON GOOGLE ──
 const GOOGLE_CLIENT_ID = '568804580001-snpipfnntq0u828f8fdjjfqov2l36rq1.apps.googleusercontent.com';
+let ENSAYOS_CATALOGO = [];
+
+async function cargarCatalogoEnsayos() {
+  try {
+    const r = await fetch('/flashmate/ensayos.json?t=' + Date.now());
+    if (!r.ok) return;
+    const data = await r.json();
+    ENSAYOS_CATALOGO = (data.ensayos || [])
+      .filter(e => e.disp !== false)
+      .map(e => ({
+        cod: e.cod,
+        nombre: e.nombre || e.cod,
+        archivo: e.archivo || ('ensayo-' + e.cod + '.html'),
+        preguntas: e.preguntas || 65,
+        duracion: e.duracion || '2 horas 20 minutos'
+      }));
+  } catch (e) { ENSAYOS_CATALOGO = []; }
+}
 
 function initGoogleLoginEstudiante() {
   (function render() {
@@ -890,9 +909,31 @@ function renderEnsayo() {
   const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
   const labelDia = dias[fechaObj.getDay()] + ' ' + fechaObj.getDate();
   const labelMes = meses[fechaObj.getMonth()] + ' ' + fechaObj.getFullYear();
+  const ensayoInfo = ENSAYOS_CATALOGO.find(e => e.cod === ensayo.ensayo);
 
-  const urlEnsayo = '/flashmate/ensayo-' + ensayo.ensayo +
-    '.html?nombre=' + encodeURIComponent(estudiante.nombre) +
+  if (!ensayoInfo) {
+    contenedor.innerHTML = `
+      <div class="ensayo-card" style="border-color:var(--amarillo);border-width:2px;">
+        <div class="ensayo-top">
+          <div>
+            <div class="ensayo-badge fecha">Ensayo pendiente de subir</div>
+            <div class="ensayo-titulo">${ensayo.ensayo_nombre || ensayo.ensayo || 'Ensayo PAES M1'}</div>
+            <div class="ensayo-sub">Fecha asignada: ${labelDia} ${labelMes}</div>
+          </div>
+          <div class="ensayo-fecha-grande">
+            <div class="ensayo-dia" style="color:var(--amarillo);">${fechaObj.getDate()}</div>
+            <div class="ensayo-mes">${labelMes}</div>
+          </div>
+        </div>
+        <div class="ensayo-action">
+          <span class="ensayo-hint">Tu profesora aun no ha subido el HTML de este ensayo. Revisa mas tarde o avisa a Erika.</span>
+        </div>
+      </div>`;
+    return;
+  }
+
+  const urlEnsayo = '/flashmate/' + ensayoInfo.archivo +
+    '?nombre=' + encodeURIComponent(estudiante.nombre) +
     '&correo=' + encodeURIComponent(estudiante.correo);
 
   if (completado) {
