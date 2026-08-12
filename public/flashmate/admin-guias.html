@@ -98,7 +98,7 @@ label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05
         <div class="t">Arrastra el archivo .html aquí</div>
         <div class="s">o haz clic para seleccionarlo</div>
       </div>
-      <input id="file" type="file" accept=".html,text/html" style="display:none">
+      <input id="file" type="file" accept=".html,.htm,text/html,text/plain,application/octet-stream" style="display:none">
       <div id="file-ok" class="file-ok"><span>✓</span><span id="file-name"></span></div>
     </div>
 
@@ -207,23 +207,49 @@ drop.addEventListener('drop', e=>{
 fileInput.addEventListener('change', e=>{ if(e.target.files.length) leerArchivo(e.target.files[0]); });
 
 let HTML_GUIA = '';
+function normalizarCod(v){
+  const s = String(v || '').trim();
+  const m = s.match(/^u?(\d{2})\.?([a-c])\.?(\d{1,2})([a-c])$/i);
+  if(!m) return s;
+  const [,uu,sub,num,niv] = m;
+  return `U${uu}.${sub.toUpperCase()}.${num}${niv.toLowerCase()}`;
+}
 function leerArchivo(file){
-  if(!/\.html?$/i.test(file.name)){ alert('Debe ser un archivo .html'); return; }
+  const nombre = String(file?.name || '').trim();
+  const tipo = String(file?.type || '').trim().toLowerCase();
+  const pareceHtmlPorNombre = /\.html?$/i.test(nombre);
+  const pareceTexto = !tipo || ['text/html','text/plain','application/octet-stream'].includes(tipo);
+
+  if(!pareceHtmlPorNombre && !pareceTexto){
+    alert('El archivo debe ser HTML (.html o .htm).');
+    return;
+  }
   const reader = new FileReader();
   reader.onload = ev => {
-    HTML_GUIA = ev.target.result;
+    const contenido = String(ev.target.result || '');
+    const pareceHtmlPorContenido = /<!doctype\s+html|<html[\s>]|<head[\s>]|<body[\s>]/i.test(contenido);
+
+    if(!pareceHtmlPorNombre && !pareceHtmlPorContenido){
+      HTML_GUIA = '';
+      document.getElementById('file-ok').style.display='none';
+      alert('Formato incorrecto. El archivo no parece ser una guía HTML válida.');
+      return;
+    }
+
+    HTML_GUIA = contenido;
     document.getElementById('file-name').textContent = file.name + ' (' + Math.round(file.size/1024) + ' KB)';
     document.getElementById('file-ok').style.display='flex';
     // Autodetectar código desde el nombre: guia-U04.A.1a.html
     const m = file.name.match(/U\d{2}\.[A-C]\.\d{1,2}[a-c]/i);
-    if(m){ document.getElementById('f-cod').value = m[0].toUpperCase(); onCod(); }
+    if(m){ document.getElementById('f-cod').value = normalizarCod(m[0]); onCod(); }
   };
   reader.readAsText(file, 'UTF-8');
 }
 
 // ── Autocompletar campos desde el código ──
 function onCod(){
-  const cod = document.getElementById('f-cod').value.trim().toUpperCase();
+  const cod = normalizarCod(document.getElementById('f-cod').value);
+  document.getElementById('f-cod').value = cod;
   const m = cod.match(/^U(\d{2})\.([A-C])\.(\d{1,2})([a-c])$/);
   if(!m) return;
   const [,uu,sub,,niv] = m;
@@ -248,7 +274,8 @@ async function publicar(){
   exito.style.display='none';
   estado.className='estado'; estado.textContent='';
 
-  const cod = document.getElementById('f-cod').value.trim().toUpperCase();
+  const cod = normalizarCod(document.getElementById('f-cod').value);
+  document.getElementById('f-cod').value = cod;
   if(!HTML_GUIA){ estado.className='estado bad'; estado.textContent='Falta el archivo de la guía.'; return; }
   if(!/^U\d{2}\.[A-C]\.\d{1,2}[a-c]$/.test(cod)){ estado.className='estado bad'; estado.textContent='Código inválido (ej: U04.A.1a).'; return; }
 
