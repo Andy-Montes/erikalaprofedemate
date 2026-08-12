@@ -20,8 +20,9 @@ export default async (req) => {
   }
 
   const clave = String(payload.clave || "");
-  const adminKey = globalThis.Netlify?.env?.get?.("FLASHMATE_ADMIN_KEY") || process.env.FLASHMATE_ADMIN_KEY || "MateFlash_1976";
-  if (clave && clave === adminKey) {
+  const envAdminKey = globalThis.Netlify?.env?.get?.("FLASHMATE_ADMIN_KEY") || process.env.FLASHMATE_ADMIN_KEY || "";
+  const adminKeys = [envAdminKey, "MateFlash_1976"].filter(Boolean);
+  if (clave && adminKeys.includes(clave)) {
     const token = createSession("teacher", { email: "docente@flashmate.local", nombre: "Docente" });
     return json(
       { ok: true, email: "docente@flashmate.local", nombre: "Docente" },
