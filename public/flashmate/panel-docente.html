@@ -1692,25 +1692,27 @@ async function onGoogleLoginDocente(resp) {
 async function verificarClave() {
   const val = document.getElementById('inp-clave').value;
   const err = document.getElementById('clave-error');
-  if (val === CLAVE_HASH) {
-    try {
-      const r = await fetch('/.netlify/functions/verificar-docente-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clave: val })
-      });
-      const data = await r.json();
-      if (!data.ok) throw new Error(data.error || 'No se pudo crear sesiÃ³n docente.');
-      const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
-      localStorage.setItem('fm_doc_auth', expira);
-      localStorage.setItem('fm_doc_email', data.email || 'docente@flashmate.local');
-      localStorage.setItem('fm_doc_session_version', DOC_SESSION_VERSION);
-      mostrarPanel();
-    } catch (e) {
-      err.textContent = 'No se pudo crear la sesiÃ³n docente. Intenta nuevamente.';
-      err.style.display = 'block';
-    }
-  } else {
+  if (!val.trim()) {
+    err.textContent = 'Ingresa la clave docente.';
+    err.style.display = 'block';
+    document.getElementById('inp-clave').focus();
+    return;
+  }
+  try {
+    const r = await fetch('/.netlify/functions/verificar-docente-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clave: val })
+    });
+    const data = await r.json();
+    if (!data.ok) throw new Error(data.error || 'Clave incorrecta.');
+    const expira = Date.now() + DIAS_SESSION * 24 * 60 * 60 * 1000;
+    localStorage.setItem('fm_doc_auth', expira);
+    localStorage.setItem('fm_doc_email', data.email || 'docente@flashmate.local');
+    localStorage.setItem('fm_doc_session_version', DOC_SESSION_VERSION);
+    mostrarPanel();
+  } catch (e) {
+    err.textContent = 'Clave incorrecta o no se pudo crear la sesiÃ³n docente.';
     err.style.display = 'block';
     document.getElementById('inp-clave').value = '';
     document.getElementById('inp-clave').focus();
