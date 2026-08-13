@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -78,6 +78,48 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 }
 .btn-guardar:hover{opacity:.88;}
 .btn-guardar:disabled{opacity:.5;cursor:not-allowed;}
+
+.nuevo-alumno-card{
+  background:var(--card);border:1.5px solid var(--borde);
+  border-radius:14px;padding:14px 16px;margin-bottom:16px;
+}
+.nuevo-alumno-hdr{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;cursor:pointer;
+}
+.nuevo-alumno-title{font-size:13px;font-weight:700;color:var(--azul);}
+.nuevo-alumno-sub{font-size:11px;color:var(--suave);margin-top:2px;}
+.btn-nuevo-alumno{
+  background:var(--rojo);color:#fff;border:none;border-radius:9px;
+  padding:8px 14px;font-family:'Poppins',sans-serif;font-size:12px;
+  font-weight:700;cursor:pointer;white-space:nowrap;
+}
+.nuevo-alumno-form{
+  display:none;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;margin-top:14px;
+}
+.nuevo-alumno-form.abierto{display:grid;}
+.nuevo-alumno-form label{font-size:11px;color:var(--suave);display:block;margin-bottom:4px;}
+.nuevo-alumno-form input,.nuevo-alumno-form select{
+  width:100%;padding:9px 11px;border:1.5px solid var(--borde);
+  border-radius:8px;font-family:'Poppins',sans-serif;font-size:12px;
+  color:var(--texto);outline:none;background:#fff;
+}
+.nuevo-alumno-form input:focus,.nuevo-alumno-form select:focus{border-color:var(--celeste);}
+.nuevo-alumno-actions{
+  grid-column:1/-1;display:flex;align-items:center;justify-content:flex-end;gap:8px;
+}
+.btn-cancelar-alumno{
+  background:transparent;border:1.5px solid var(--borde);border-radius:8px;
+  padding:8px 13px;font-family:'Poppins',sans-serif;font-size:12px;
+  color:var(--suave);cursor:pointer;
+}
+.btn-guardar-alumno{
+  background:var(--azul);color:#fff;border:none;border-radius:8px;
+  padding:9px 16px;font-family:'Poppins',sans-serif;font-size:12px;
+  font-weight:700;cursor:pointer;
+}
+.btn-guardar-alumno:disabled{opacity:.55;cursor:not-allowed;}
 
 /* Bloque estudiante */
 .estudiante-bloque{
@@ -540,6 +582,52 @@ body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--texto);mi
 
   <!-- BUSCADOR Y RESUMEN -->
 
+  <div class="nuevo-alumno-card">
+    <div class="nuevo-alumno-hdr" onclick="toggleNuevoAlumno()">
+      <div>
+        <div class="nuevo-alumno-title">Nuevo alumno</div>
+        <div class="nuevo-alumno-sub">Crea el acceso del estudiante y luego asignale guias o ensayos.</div>
+      </div>
+      <button class="btn-nuevo-alumno" type="button" onclick="event.stopPropagation();toggleNuevoAlumno()">+ Crear alumno</button>
+    </div>
+    <div class="nuevo-alumno-form" id="nuevo-alumno-form">
+      <div>
+        <label>Nombre</label>
+        <input id="nuevo-alumno-nombre" type="text" placeholder="Ej: Martina Perez">
+      </div>
+      <div>
+        <label>Correo</label>
+        <input id="nuevo-alumno-correo" type="email" placeholder="correo@ejemplo.com">
+      </div>
+      <div>
+        <label>Curso</label>
+        <select id="nuevo-alumno-curso" onchange="sincronizarPlanAlumno()">
+          <option value="3° medio">3° medio</option>
+          <option value="4° medio">4° medio</option>
+        </select>
+      </div>
+      <div>
+        <label>Plan</label>
+        <select id="nuevo-alumno-plan">
+          <option value="3ero">3ero</option>
+          <option value="4to - Egresado">4to - Egresado</option>
+        </select>
+      </div>
+      <div>
+        <label>Fecha inicio</label>
+        <input id="nuevo-alumno-inicio" type="date">
+      </div>
+      <div>
+        <label>Fecha vencimiento</label>
+        <input id="nuevo-alumno-vencimiento" type="date">
+      </div>
+      <div class="nuevo-alumno-actions">
+        <button class="btn-cancelar-alumno" type="button" onclick="limpiarNuevoAlumno()">Limpiar</button>
+        <button class="btn-guardar-alumno" id="btn-guardar-alumno" type="button" onclick="crearEstudiante()">Guardar alumno</button>
+      </div>
+    </div>
+  </div>
+
   <!-- BUSCADOR -->
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
     <div class="search-plan-wrap">
@@ -735,10 +823,13 @@ const ALUMNOS_3M = [
 ];
 
 function cursoDe(est) {
-  // Preferir el curso que viene del Sheet (columna C: "3° Medio" / "4° Medio")
+  // Preferir curso; si no viene, inferirlo desde el plan de la hoja.
   const c = (est.curso || '').toString().trim().toLowerCase();
   if (c.indexOf('3') !== -1) return '3° medio';
   if (c.indexOf('4') !== -1) return '4° medio';
+  const p = (est.plan || '').toString().trim().toLowerCase();
+  if (p.indexOf('3') !== -1 || p.indexOf('3ero') !== -1) return '3° medio';
+  if (p.indexOf('4') !== -1 || p.indexOf('egresado') !== -1) return '4° medio';
   // Respaldo: lista de correos (por si el Sheet no trae curso para ese alumno)
   const correo = (est.correo || '').trim().toLowerCase();
   return ALUMNOS_3M.indexOf(correo) !== -1 ? '3° medio' : '4° medio';
@@ -1288,6 +1379,106 @@ async function cargarEstudiantes() {
   // Una vez cargados los estudiantes, carga el plan existente
   await cargarPlanExistente();
   renderEnsayos();
+}
+
+function fechaISO(d) {
+  return d.toISOString().slice(0, 10);
+}
+
+function prepararFormularioAlumno() {
+  const inicio = document.getElementById('nuevo-alumno-inicio');
+  const vencimiento = document.getElementById('nuevo-alumno-vencimiento');
+  if (!inicio || !vencimiento) return;
+
+  const hoy = new Date();
+  const fin = new Date(hoy);
+  fin.setMonth(fin.getMonth() + 12);
+  if (!inicio.value) inicio.value = fechaISO(hoy);
+  if (!vencimiento.value) vencimiento.value = fechaISO(fin);
+}
+
+function toggleNuevoAlumno() {
+  const form = document.getElementById('nuevo-alumno-form');
+  if (!form) return;
+  form.classList.toggle('abierto');
+  prepararFormularioAlumno();
+  sincronizarPlanAlumno();
+  if (form.classList.contains('abierto')) {
+    setTimeout(() => document.getElementById('nuevo-alumno-nombre')?.focus(), 50);
+  }
+}
+
+function sincronizarPlanAlumno() {
+  const curso = document.getElementById('nuevo-alumno-curso');
+  const plan = document.getElementById('nuevo-alumno-plan');
+  if (!curso || !plan) return;
+  plan.value = curso.value.indexOf('4') !== -1 ? '4to - Egresado' : '3ero';
+}
+
+function limpiarNuevoAlumno() {
+  ['nuevo-alumno-nombre','nuevo-alumno-correo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  const curso = document.getElementById('nuevo-alumno-curso');
+  const plan = document.getElementById('nuevo-alumno-plan');
+  if (curso) curso.value = cursoActivo || '3° medio';
+  if (plan) plan.value = (cursoActivo && cursoActivo.indexOf('4') !== -1) ? '4to - Egresado' : '3ero';
+  const inicio = document.getElementById('nuevo-alumno-inicio');
+  const vencimiento = document.getElementById('nuevo-alumno-vencimiento');
+  if (inicio) inicio.value = '';
+  if (vencimiento) vencimiento.value = '';
+  prepararFormularioAlumno();
+}
+
+async function crearEstudiante() {
+  const btn = document.getElementById('btn-guardar-alumno');
+  const nombre = document.getElementById('nuevo-alumno-nombre').value.trim();
+  const correo = document.getElementById('nuevo-alumno-correo').value.trim().toLowerCase();
+  const curso = document.getElementById('nuevo-alumno-curso').value;
+  const plan = document.getElementById('nuevo-alumno-plan').value;
+  const fechaInicio = document.getElementById('nuevo-alumno-inicio').value;
+  const fechaVencimiento = document.getElementById('nuevo-alumno-vencimiento').value;
+
+  if (!nombre || !correo) {
+    mostrarToast('Completa nombre y correo.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+    mostrarToast('El correo no parece valido.');
+    return;
+  }
+  if (ESTUDIANTES.some(e => String(e.correo).toLowerCase() === correo)) {
+    mostrarToast('Ese correo ya existe en estudiantes.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Guardando...';
+
+  try {
+    const resp = await fetch('/.netlify/functions/crear-estudiante', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, correo, curso, plan, fechaInicio, fechaVencimiento })
+    });
+    const data = await resp.json();
+
+    if (resp.ok && data.ok) {
+      mostrarToast('Alumno creado correctamente.');
+      limpiarNuevoAlumno();
+      await cargarEstudiantes();
+      renderPlanificacion();
+      renderEnsayos();
+    } else {
+      mostrarToast(data.error || data.message || 'No se pudo crear el alumno.');
+    }
+  } catch(e) {
+    mostrarToast('Error de conexion al crear alumno.');
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Guardar alumno';
 }
 
 // ── CARGAR PLAN EXISTENTE ──
