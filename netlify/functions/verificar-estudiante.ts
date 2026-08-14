@@ -1,4 +1,4 @@
-import type { Handler, HandlerEvent } from '@netlify/functions';
+﻿import type { Handler, HandlerEvent } from '@netlify/functions';
 
 // ──────────────────────────────────────────────────────────────
 // FlashMate · Verificar estudiante (login con Google)
@@ -12,7 +12,7 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 // Client ID OAuth (público, va también en el frontend).
 const GOOGLE_CLIENT_ID = '568804580001-snpipfnntq0u828f8fdjjfqov2l36rq1.apps.googleusercontent.com';
 // Apps Script del Sheet de Erika (mismo deployment que usan los paneles).
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5znp70maKSRFANfKg92ihoHfsXel-kdw9WTeNXUL_WiMhi7ZPmSHI3AcTKTciu1u8/exec';
 
 const handler: Handler = async (event: HandlerEvent) => {
   if (event.httpMethod !== 'POST') {

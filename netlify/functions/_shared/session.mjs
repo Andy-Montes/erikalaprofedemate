@@ -1,7 +1,7 @@
-import crypto from "node:crypto";
+﻿import crypto from "node:crypto";
 
 export const GOOGLE_CLIENT_ID = "568804580001-snpipfnntq0u828f8fdjjfqov2l36rq1.apps.googleusercontent.com";
-export const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec";
+export const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx5znp70maKSRFANfKg92ihoHfsXel-kdw9WTeNXUL_WiMhi7ZPmSHI3AcTKTciu1u8/exec";
 
 const FALLBACK_SECRET = "flashmate-2026-9f2acb1f-0cc1-45ce-92a9-9b6e9fe54a0d-39cb6a8e";
 const DAY = 24 * 60 * 60;

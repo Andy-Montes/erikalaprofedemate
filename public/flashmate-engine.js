@@ -1,6 +1,6 @@
-(() => {
+﻿(() => {
   const CFG = window.FLASHMATE || {};
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyBZH6XJngzYPtwC-7qtA9fIes9iH7WPDQ5aQjqbiDpnZUtK2jxpfoq97l3zaA5b1-1/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5znp70maKSRFANfKg92ihoHfsXel-kdw9WTeNXUL_WiMhi7ZPmSHI3AcTKTciu1u8/exec';
   const NLS = 4;
   const LETRAS = ['A', 'B', 'C', 'D', 'E'];
   let nombreEstudiante = '';

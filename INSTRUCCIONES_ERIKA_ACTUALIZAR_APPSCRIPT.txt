@@ -1,0 +1,30 @@
+Erika, ya está actualizado el panel de FlashMate para crear nuevos alumnos desde la web.
+
+Ahora el campo Plan usa estas opciones:
+
+- 3ero
+- 4to - Egresado
+
+Para que el botón Guardar alumno funcione y grabe en la planilla, falta actualizar el Apps Script de tu Google Sheet.
+
+Importante: para evitar errores de pegado, usa el archivo completo y reemplaza el código actual del Apps Script por ese archivo completo.
+
+Pasos:
+
+1. Abrir la planilla "Flash Mate — Registro".
+2. Ir a Extensiones > Apps Script.
+3. Borrar el código actual del editor de Apps Script.
+4. Pegar el contenido completo del archivo FlashMate_AppsScript_COMPLETO_Erika.gs.
+5. Guardar.
+6. Volver a desplegar la Web App:
+   Implementar > Administrar implementaciones > Editar implementación actual > Nueva versión > Guardar/Implementar.
+
+El archivo completo listo para compartir/abrir y pegar está en:
+
+FlashMate_AppsScript_COMPLETO_Erika.gs
+
+Después de eso, cuando se cree un alumno desde el panel docente, se agregará en la hoja Estudiantes con esta estructura:
+
+A correo · B nombre · C plan · D fecha_inicio · E fecha_vencimiento · F activo · G guias_extra · H curso
+
+Con eso el alumno quedará disponible para asignarle guías y ensayos.
