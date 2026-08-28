@@ -115,7 +115,7 @@ const Hero: React.FC<HeroProps> = ({ onOpenModal, onOpenFlashmate }) => {
               <img
                 alt="Erika Meriño - La Profe de Mate"
                 className="w-full h-full object-cover object-top brightness-[1.02] transition-transform duration-[10s] ease-linear"
-                src="/images/erika-photo.png"
+                src="/images/erika-photo.webp"
                 style={{ animation: 'breathe 8s ease-in-out infinite' }}
               />
 

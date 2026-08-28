@@ -1,0 +1,8 @@
+# erikalaprofedemate.com
+User-agent: *
+Allow: /
+# Zona privada de FlashMate (portal y guías con sesión): no indexar
+Disallow: /flashmate/
+Disallow: /protected/
+
+Sitemap: https://erikalaprofedemate.com/sitemap.xml

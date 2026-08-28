@@ -26,7 +26,7 @@ const Methodology: React.FC = () => {
               <img
                 alt="Diagnóstico Integral"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                src="/images/metodologia-1.png"
+                src="/images/metodologia-1.webp"
               />
             </div>
             <div className="flex items-center gap-3 mb-3">
@@ -56,7 +56,7 @@ const Methodology: React.FC = () => {
               <img
                 alt="Plan Personalizado"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                src="/images/metodologia-2.png"
+                src="/images/metodologia-2.webp"
               />
             </div>
             <div className="flex items-center gap-3 mb-3">
@@ -86,7 +86,7 @@ const Methodology: React.FC = () => {
               <img
                 alt="Acompañamiento y Seguimiento"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                src="/images/metodologia-3.png"
+                src="/images/metodologia-3.webp"
               />
             </div>
             <div className="flex items-center gap-3 mb-3">
