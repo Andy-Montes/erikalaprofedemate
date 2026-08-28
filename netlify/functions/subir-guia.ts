@@ -148,7 +148,21 @@ const handler: Handler = async (event: HandlerEvent) => {
     const catFile = await getFile(repo, catPath, token, branch);
     let catalogo: { actualizado?: string; guias: GuiaMeta[] } = { guias: [] };
     if (catFile) {
-      try { catalogo = JSON.parse(catFile.text); } catch { /* catálogo corrupto: se reinicia */ }
+      // Quitar un posible BOM: JSON.parse lo rechaza y reiniciaría el catálogo entero.
+      const catText = catFile.text.replace(/^﻿/, '');
+      try {
+        catalogo = JSON.parse(catText);
+      } catch (parseErr: any) {
+        // FAIL-CLOSED: si el catálogo existente no se puede leer, NO lo reiniciamos
+        // (eso borraría las guías ya publicadas). Se aborta y se conserva lo que hay.
+        return {
+          statusCode: 409,
+          body: JSON.stringify({
+            error: 'El catálogo guias.json no se pudo leer y no se reescribió para no perder las guías existentes. Avisa a soporte.',
+            detalle: String(parseErr?.message || parseErr).slice(0, 200),
+          }),
+        };
+      }
     }
     if (!Array.isArray(catalogo.guias)) catalogo.guias = [];
 

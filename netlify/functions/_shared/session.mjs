@@ -55,7 +55,7 @@ export function forbidden(title = "Acceso no autorizado", detail = "Inicia sesio
 <body style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:520px;margin:12vh auto;padding:24px;color:#1f2937">
   <h1 style="color:#38388E">${escapeHtml(title)}</h1>
   <p>${escapeHtml(detail)}</p>
-  <p><a href="/portal-estudiante.html" style="color:#0187F3">Volver al portal</a></p>
+  <p><a href="/flashmate/portal-estudiante.html" style="color:#0187F3">Volver al portal</a></p>
 </body>`, 403);
 }
 
