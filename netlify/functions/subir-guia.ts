@@ -14,7 +14,12 @@ import type { Handler, HandlerEvent } from '@netlify/functions';
 // ──────────────────────────────────────────────────────────────
 
 const GH = 'https://api.github.com';
-const FLASH_DIR = 'public/flashmate';
+// OJO: son DOS carpetas distintas y no da lo mismo.
+// El HTML de la guía va a protected/, que es de donde la lee la función
+// ver-guia (public/ está detrás de un redirect con force y no se sirve).
+// El catálogo sí vive en public/, porque el portal lo pide por fetch.
+const GUIA_DIR = 'protected/flashmate/guias';
+const CAT_PATH = 'public/flashmate/guias.json';
 const COD_RE = /^U\d{2}\.[A-C]\.\d{1,2}[a-c]$/; // ej: U04.A.1a
 
 type GuiaMeta = {
@@ -115,6 +120,28 @@ const handler: Handler = async (event: HandlerEvent) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'El archivo es demasiado grande (máx 800 KB).' }) };
   }
 
+  // ── El JS de la guía tiene que PARSEAR ──
+  // Una guía con el script roto se ve normal en el catálogo y muere al abrirla,
+  // sin avisarle a nadie: así quedaron 15 guías muertas (un `E.push(armar(...);`
+  // sin el paréntesis de cierre). Mejor rechazarla aquí que publicarla rota.
+  const bloques = html.match(/<script(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/gi) || [];
+  for (const bloque of bloques) {
+    const js = bloque.replace(/^<script[^>]*>/i, '').replace(/<\/script>$/i, '');
+    if (!js.trim()) continue;
+    try {
+      new Function(js); // solo compila: no ejecuta nada de la guía
+    } catch (err: any) {
+      return {
+        statusCode: 422,
+        body: JSON.stringify({
+          error: 'La guía tiene un error de JavaScript, así que NO se publicó. '
+            + 'Si se subía, aparecía en la lista pero no abriría. Detalle: '
+            + String(err?.message || err).slice(0, 160),
+        }),
+      };
+    }
+  }
+
   const meta: GuiaMeta = {
     cod,
     nombre: String(payload.nombre || cod).trim(),
@@ -128,8 +155,8 @@ const handler: Handler = async (event: HandlerEvent) => {
   };
 
   try {
-    const guiaPath = `${FLASH_DIR}/guia-${cod}.html`;
-    const catPath = `${FLASH_DIR}/guias.json`;
+    const guiaPath = `${GUIA_DIR}/guia-${cod}.html`;
+    const catPath = CAT_PATH;
 
     // 1) Publicar el HTML de la guía (crea o reemplaza)
     const existente = await getFile(repo, guiaPath, token, branch);
