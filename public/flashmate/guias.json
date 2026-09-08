@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-08-11",
+  "actualizado": "2026-09-08",
   "guias": [
     {
       "cod": "U01.A.1a",
@@ -79,6 +79,28 @@
       "disp": true
     },
     {
+      "cod": "U01.C.8a",
+      "nombre": "Números Racionales",
+      "desc": "Fracciones · Decimales · Operatoria básica",
+      "nivel": "a",
+      "unidad": "U01",
+      "subunidad": "C",
+      "unidadTitulo": "Unidad 01 · Números Reales",
+      "subunidadTitulo": "Subunidad C: Números Racionales",
+      "disp": true
+    },
+    {
+      "cod": "U01.C.9b",
+      "nombre": "Números Racionales",
+      "desc": "Periódicos · Comparación · Conversiones",
+      "nivel": "b",
+      "unidad": "U01",
+      "subunidad": "C",
+      "unidadTitulo": "Unidad 01 · Números Reales",
+      "subunidadTitulo": "Subunidad C: Números Racionales",
+      "disp": true
+    },
+    {
       "cod": "U01.C.10c",
       "nombre": "Números Racionales",
       "desc": "Operatoria avanzada · Racionales algebraicos",
@@ -105,28 +127,6 @@
       "nombre": "Números Racionales",
       "desc": "Fracciones complejas · Argumentación",
       "nivel": "c",
-      "unidad": "U01",
-      "subunidad": "C",
-      "unidadTitulo": "Unidad 01 · Números Reales",
-      "subunidadTitulo": "Subunidad C: Números Racionales",
-      "disp": true
-    },
-    {
-      "cod": "U01.C.8a",
-      "nombre": "Números Racionales",
-      "desc": "Fracciones · Decimales · Operatoria básica",
-      "nivel": "a",
-      "unidad": "U01",
-      "subunidad": "C",
-      "unidadTitulo": "Unidad 01 · Números Reales",
-      "subunidadTitulo": "Subunidad C: Números Racionales",
-      "disp": true
-    },
-    {
-      "cod": "U01.C.9b",
-      "nombre": "Números Racionales",
-      "desc": "Periódicos · Comparación · Conversiones",
-      "nivel": "b",
       "unidad": "U01",
       "subunidad": "C",
       "unidadTitulo": "Unidad 01 · Números Reales",
